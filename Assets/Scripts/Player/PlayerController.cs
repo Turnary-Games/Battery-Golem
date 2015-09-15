@@ -6,11 +6,13 @@ public class PlayerController : MonoBehaviour {
 	[Header("Variables (DONT ALTER)")]
 
 	public CharacterController character;
+	public Transform electricPoint;
 
 	[Header("Movement settings")]
 
 	[Tooltip("Speed in meters per second.")]
 	public float moveSpeed = 1;
+	[Tooltip("Speed in degrees per second.")]
 	public float rotSpeed = 1;
 	public float jumpHeight = 1;
 	public bool continuousJumping = true;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		Movement ();
+		Electrify ();
 	}
 
 	void Movement() {
@@ -43,28 +46,47 @@ public class PlayerController : MonoBehaviour {
 		character.Move (motion * Time.deltaTime);
 
 		// Rotate the character
-		if (motion.x != 0 || motion.z != 0)
-			character.transform.rotation = Quaternion.Lerp (character.transform.rotation, Quaternion.Euler (Vector3.up * (Mathf.Atan2 (motion.z, -motion.x) * Mathf.Rad2Deg - 90f)), Time.deltaTime * rotSpeed);
+		Rotate ();
+	}
+
+	void Rotate() {
+		//Vector3 rawAxis = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
+		Vector3 rawAxis = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical"));
+
+		if (rawAxis.x == 0 && rawAxis.z == 0)
+			return;
+
+		// Get the angles
+		Vector3 rot = character.transform.eulerAngles;
+		float angle = Mathf.Atan2 (rawAxis.z, -rawAxis.x) * Mathf.Rad2Deg - 90f;
+
+		// Change the value
+		rot.y = Mathf.MoveTowardsAngle (rot.y, angle, rotSpeed * Time.deltaTime);
+		// Set the value
+		character.transform.eulerAngles = rot;
 	}
 
 	Vector3 GetAxis() {
 		// Vector of the axis
-		Vector3 raw_axis = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
+		Vector3 inputAxis = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
 
 		// Normalize it so that all directions moves the same combined speed
-		Vector3 axis = raw_axis.normalized;
+		Vector3 axis = inputAxis.normalized;
 
 		// Restore the movement lerp that's lost in the normalization
-		axis.x *= Mathf.Abs (raw_axis.x);
-		axis.z *= Mathf.Abs (raw_axis.z);
+		axis.x *= Mathf.Abs (inputAxis.x);
+		axis.z *= Mathf.Abs (inputAxis.z);
 
 		return axis;
 	}
 
+	// Extended version of character.isGrounded
+	// This one includes the slope the controller is currently standing on
 	bool IsGrounded() {
 		return character.isGrounded && slope <= character.slopeLimit;
 	}
 
+	// This is combined with the IsGrounded() function
 	bool ShouldJump() {
 		return (continuousJumping && Input.GetButton ("Jump"))
 			|| (!continuousJumping && Input.GetButtonDown ("Jump"));
@@ -76,7 +98,6 @@ public class PlayerController : MonoBehaviour {
 		slope = Vector3.Angle (Vector3.up, hit.normal);
 
 		PushObjects (hit);
-
 	}
 
 	void PushObjects(ControllerColliderHit hit) {
@@ -89,5 +110,13 @@ public class PlayerController : MonoBehaviour {
 		
 		Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
 		body.velocity = pushDir * pushPower;
+		//body.AddForceAtPosition (pushDir * pushPower, hit.point);
+	}
+
+	// Try to electrify "something"
+	void Electrify() {
+		if (electricPoint != null && Input.GetButton ("Electrify")) {
+			ElectricListener.ElectrifyAllAt (electricPoint.position);
+		}
 	}
 }
