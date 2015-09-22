@@ -17,12 +17,15 @@ public class PlayerController : MonoBehaviour {
 	public float jumpHeight = 1;
 	public bool continuousJumping = true;
 	public float pushPower = 2.0F;
+	public float maxSlopeAngle;
+	public float slopeForce;
 
 	// Current movement velocity
 	private Vector3 motion;
 
 	// Current slope
-	private float slope;
+	private float slopeAngle;
+	private Vector3 slopePoint;
 
 	void Update () {
 		Movement ();
@@ -33,17 +36,24 @@ public class PlayerController : MonoBehaviour {
 		// Motion to apply to the character
 		motion = GetAxis () * moveSpeed + Vector3.up * motion.y;
 
-		if (IsGrounded()) {
-			// Jumping
-			if (ShouldJump())
-				motion.y = jumpHeight;
-		} else {
-			// Apply gravity
-			motion += Physics.gravity * Time.deltaTime;
+        if (IsGrounded()) {
+            // Jumping
+            if (ShouldJump())
+                motion.y = jumpHeight;
+        } else {
+            // Apply gravity
+            motion += Physics.gravity * Time.deltaTime;
+        }
+
+		// Pushed out from slopes
+		if (character.isGrounded && slopeAngle > character.slopeLimit) {
+			Vector3 delta = slopePoint - transform.position;
+			delta.y = 0;
+			motion -= delta.normalized * slopeForce;
 		}
 
-		// Move the character
-		character.Move (motion * Time.deltaTime);
+        // Move the character
+        character.Move (motion * Time.deltaTime);
 
 		// Rotate the character
 		Rotate ();
@@ -83,7 +93,7 @@ public class PlayerController : MonoBehaviour {
 	// Extended version of character.isGrounded
 	// This one includes the slope the controller is currently standing on
 	bool IsGrounded() {
-		return character.isGrounded && slope <= character.slopeLimit;
+		return character.isGrounded && slopeAngle <= character.slopeLimit;
 	}
 
 	// This is combined with the IsGrounded() function
@@ -95,7 +105,8 @@ public class PlayerController : MonoBehaviour {
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 
 		// Calculate slope angle (in degrees)
-		slope = Vector3.Angle (Vector3.up, hit.normal);
+		slopeAngle = Vector3.Angle (Vector3.up, hit.normal);
+		slopePoint = hit.point;
 
 		PushObjects (hit);
 	}
