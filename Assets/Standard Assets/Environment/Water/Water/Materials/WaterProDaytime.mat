@@ -72,7 +72,7 @@ Material:
       data:
         first:
           name: _ReflDistort
-        second: .560000002
+        second: .493999988
       data:
         first:
           name: _RefrDistort
@@ -97,7 +97,7 @@ Material:
       data:
         first:
           name: WaveSpeed
-        second: {r: 9, g: 4.5, b: -8, a: -3.5}
+        second: {r: -.25, g: -25, b: 0, a: -27}
       data:
         first:
           name: _ReflectiveColor_ST
