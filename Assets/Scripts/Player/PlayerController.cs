@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 public class PlayerController : MonoBehaviour {
 
@@ -16,22 +18,75 @@ public class PlayerController : MonoBehaviour {
 	public float rotSpeed = 1;
 	public float jumpHeight = 1;
 	public bool continuousJumping = true;
+
+	[Header("Pushing/pulling settings")]
+
 	public float pushPower = 2.0F;
+	public float pullPower = 2.0f;
+	[Tooltip("If true, the user is required to press the required keys to push " + 
+		"in the correct direction (W and D for example if you wish to push in a 45% " + 
+		"angle). If false, when holding an object while pressing the forwards key " + 
+		"(W for example) the player will push, no matter the direction of the player. ")]
+	public bool pushRelative = true;
+	[Range(0f,1f)]
+	[Tooltip("When moving any movement value below the deadzone is counted as 0.")]
+	public float pushDeadzone = 0.2f;
+	[Tooltip("If true, only grab an object when pressing the Grab button. If false, then " + 
+		"continously try to grab everything when the Grab button is held down.")]
+	public bool grabOnlyOnDown = true;
 
 	// Current movement velocity
 	private Vector3 motion;
 
-	// Current slope
-	private float slope;
+	// Object to push/pull
+	public Rigidbody grabbed;
 
 	void Update () {
-		Movement ();
+		// Check if still grabbing
+		if ((!Input.GetButton("Grab") || !IsGrounded()) && grabbed != null) {
+			// Release the grabbed object
+			grabbed = null;
+		}
+
 		Electrify ();
+		Rotate();
+	}
+
+	void FixedUpdate() {
+		Movement();
+
+		// Reset slopes list
+		
 	}
 
 	void Movement() {
-		// Motion to apply to the character
-		motion = GetAxis () * moveSpeed + Vector3.up * motion.y;
+		// Reset the motion
+		motion = Vector3.up * motion.y;
+
+		// Input axis
+		Vector3 axis = GetAxis();
+
+		// Add the push
+		if (grabbed != null) {
+			Vector3 pushDir = grabbed.worldCenterOfMass - transform.position;
+			pushDir.Normalize();
+			pushDir.y = 0;
+
+			float amount = CalcPushAmount(pushDir, axis);
+			float power = amount > 0 ? amount * pushPower : amount * pullPower;
+
+			// Move grabbed object
+			grabbed.velocity += Time.fixedDeltaTime * pushDir * power / grabbed.mass;
+
+			// Move player
+			if (pushRelative)
+				motion += axis * power / grabbed.mass;
+			else
+				motion += pushDir * power / grabbed.mass;
+		} else {
+			// Just move normally
+			motion += axis * moveSpeed;
+		}
 
 		if (IsGrounded()) {
 			// Jumping
@@ -39,14 +94,11 @@ public class PlayerController : MonoBehaviour {
 				motion.y = jumpHeight;
 		} else {
 			// Apply gravity
-			motion += Physics.gravity * Time.deltaTime;
+			motion += Physics.gravity * Time.fixedDeltaTime;
 		}
 
 		// Move the character
-		character.Move (motion * Time.deltaTime);
-
-		// Rotate the character
-		Rotate ();
+		character.Move (motion * Time.fixedDeltaTime);
 	}
 
 	void Rotate() {
@@ -81,9 +133,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	// Extended version of character.isGrounded
-	// This one includes the slope the controller is currently standing on
 	bool IsGrounded() {
-		return character.isGrounded && slope <= character.slopeLimit;
+		return (character.collisionFlags & CollisionFlags.Below) != 0;
 	}
 
 	// This is combined with the IsGrounded() function
@@ -92,25 +143,39 @@ public class PlayerController : MonoBehaviour {
 			|| (!continuousJumping && Input.GetButtonDown ("Jump"));
 	}
 
-	void OnControllerColliderHit(ControllerColliderHit hit) {
-
-		// Calculate slope angle (in degrees)
-		slope = Vector3.Angle (Vector3.up, hit.normal);
-
-		PushObjects (hit);
+	// This is combined with the IsGrounded() function
+	bool ShouldGrab() {
+		return (grabOnlyOnDown && Input.GetButtonDown("Grab"))
+			|| (!grabOnlyOnDown && Input.GetButton("Grab"));
 	}
 
-	void PushObjects(ControllerColliderHit hit) {
+	void OnControllerColliderHit(ControllerColliderHit hit) {
+
+		// Check if valid hit for grabbing
 		Rigidbody body = hit.collider.attachedRigidbody;
 		if (body == null || body.isKinematic)
 			return;
 		
 		if (hit.moveDirection.y < -0.3F)
 			return;
-		
-		Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-		body.velocity = pushDir * pushPower;
-		//body.AddForceAtPosition (pushDir * pushPower, hit.point);
+
+		// Grab onto it
+		if (ShouldGrab()) {
+			grabbed = body;
+			print("GRAB!");
+		}
+	}
+
+	// Calculated the amount (from -1 to 1) based of the players rotation
+	float CalcPushAmount(Vector3 pushDir, Vector3 axis) {
+		if (pushRelative) {
+			// Calculate relative to the pushDir, W=push if pushDir is fowards
+
+		} else {
+			// Calculate unrelative to the pushDir, W=push S=pull
+			return axis.z;
+		}
+		return 0;
 	}
 
 	// Try to electrify "something"
