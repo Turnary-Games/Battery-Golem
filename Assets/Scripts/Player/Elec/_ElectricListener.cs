@@ -3,12 +3,12 @@ using System.Collections;
 
 public sealed class ElectricMethods {
 	// Called by the listener
-	public static string OnElectrify = "OnElectrify";
-	public static string OnElectrifyStart = "OnElectrifyStart";
-	public static string OnElectrifyEnd = "OnElectrifyEnd";
+	public readonly static string OnElectrify = "OnElectrify";
+	public readonly static string OnElectrifyStart = "OnElectrifyStart";
+	public readonly static string OnElectrifyEnd = "OnElectrifyEnd";
 
 	// Called by anything else to contact the listener
-	public static string Electrify = "Electrify";
+	public readonly static string Electrify = "Electrify";
 }
 
 public class _ElectricListener : MonoBehaviour {
@@ -21,12 +21,12 @@ public class _ElectricListener : MonoBehaviour {
 	void FixedUpdate() {
 		// Electrifying stopped
 		if (electrifiedLastStep && !electrifiedThisStep) {
-			SendMessage (ElectricMethods.OnElectrifyEnd);
+			SendMessage (ElectricMethods.OnElectrifyEnd, SendMessageOptions.DontRequireReceiver);
 		}
 
 		// Electrifying continues
 		if (electrifiedThisStep)
-			SendMessage (ElectricMethods.OnElectrify);
+			SendMessage (ElectricMethods.OnElectrify, SendMessageOptions.DontRequireReceiver);
 
 		electrifiedLastStep = electrifiedThisStep;
 		electrifiedThisStep = false;
@@ -35,7 +35,7 @@ public class _ElectricListener : MonoBehaviour {
 	public void Electrify() {
 		// Electrifying starts
 		if (!electrifiedLastStep && !electrifiedThisStep)
-			SendMessage (ElectricMethods.OnElectrifyStart);
+			SendMessage (ElectricMethods.OnElectrifyStart, SendMessageOptions.DontRequireReceiver);
 
 		electrifiedThisStep = true;
 	}

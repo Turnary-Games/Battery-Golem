@@ -16,14 +16,16 @@ public class PlayerInventory : MonoBehaviour {
 	public void Pickup(GameObject obj) {
 		var item = obj.GetComponent<_Equipable>();
 
-		if (item != null) {
+		if (item != null && equipped != item) {
 			// Valid object, equip it.
 
 			// First unequip previous item
-			Drop();
+			Drop ();
 
 			// Equip the item
-			Equip(item);
+			Equip (item);
+		} else {
+			print ("INVALID PICKUP ITEM: " + obj.name);
 		}
 	}
 
@@ -40,8 +42,9 @@ public class PlayerInventory : MonoBehaviour {
 		// Move it
 		item.transform.parent = equippedParent;
 		item.transform.localPosition = Vector3.zero;
+		item.transform.localEulerAngles = Vector3.zero;
 		// Send the event
-		item.SendMessage(EquipMethods.OnEquip);
+		item.OnEquip ();
 	}
 
 	public void Unequip(bool sendToInv) {
@@ -55,7 +58,7 @@ public class PlayerInventory : MonoBehaviour {
 				equipped.transform.parent = null;
 			}
 
-			equipped.SendMessage(EquipMethods.OnUnequip);
+			equipped.OnUnequip();
 			equipped = null;
 		}
 	}
