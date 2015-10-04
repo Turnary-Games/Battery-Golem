@@ -3,10 +3,16 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	/* TODO: Add dynamic platforms! For example lilypads.
+	 * When standing on it, make it your parent.
+	 * If the lilypad moves, the player moves.
+	 */
+
 	[Header("Variables (DONT ALTER)")]
 
 	public CharacterController character;
 	public Transform electricPoint;
+	public PlayerInventory inventory;
 
 	[Header("Movement settings")]
 
@@ -115,8 +121,20 @@ public class PlayerController : MonoBehaviour {
 
 	// Try to electrify "something"
 	void Electrify() {
-		if (electricPoint != null && Input.GetButton ("Electrify")) {
-			ElectricListener.ElectrifyAllAt (electricPoint.position);
+		if (Input.GetButton("Electrify")) {
+			if (inventory.equipped != null) {
+				// Electrify the equipped item
+				inventory.equipped.SendMessage(ElectricMethods.Electrify, SendMessageOptions.DontRequireReceiver);
+			} else if (electricPoint != null) {
+				// Try to electrify at your fingertips
+				_ElectricListener.ElectrifyAllAt(electricPoint.position);
+			}
+		}
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.isTrigger) {
+			inventory.Pickup(other.gameObject);
 		}
 	}
 }
