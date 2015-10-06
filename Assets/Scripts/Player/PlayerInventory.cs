@@ -5,6 +5,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	[Header("Variables (DONT ALTER)")]
 
+	public PlayerController player;
 	public Transform equippedParent;
 
 	[Header("Inventory variables")]
@@ -25,7 +26,10 @@ public class PlayerInventory : MonoBehaviour {
 			// Equip the item
 			Equip (item);
 		} else {
-			print ("INVALID PICKUP ITEM: " + obj.name);
+			if (equipped == item)
+				print("TRYING TO PICKUP ALREADY PICKED UP ITEM: " + obj.name);
+			else
+				print ("INVALID PICKUP ITEM: " + obj.name);
 		}
 	}
 
@@ -44,7 +48,7 @@ public class PlayerInventory : MonoBehaviour {
 		item.transform.localPosition = Vector3.zero;
 		item.transform.localEulerAngles = Vector3.zero;
 		// Send the event
-		item.OnEquip ();
+		item.OnEquip (this);
 	}
 
 	public void Unequip(bool sendToInv) {

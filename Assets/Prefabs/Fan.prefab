@@ -8,9 +8,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 485918}
-  - 114: {fileID: 11424718}
-  - 114: {fileID: 11409184}
   - 135: {fileID: 13543708}
+  - 114: {fileID: 11409184}
+  - 114: {fileID: 11424718}
   m_Layer: 0
   m_Name: Fan
   m_TagString: Untagged
@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Fan
   stashable: 1
+  power: 0
 --- !u!135 &13543708
 SphereCollider:
   m_ObjectHideFlags: 1

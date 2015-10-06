@@ -1,19 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Fan : _Equipable {
 
-	/* TODO: Check if the player is standing on a lilypad,
-	 * if so, then move the lilypad and player OnElectrify.
-	 * Maybe also activate a particle system for visual feedback. 
-	 */
-
+	public float power;
+	
 	void OnElectrify() {
-		print (Time.time);
+
+		var listeners = inventory.player.GetListeners();
+		
+		listeners.ForEach(delegate (_TouchListener listener) {
+			var lilypad = listener.GetComponent<Lilypad>();
+			if (lilypad != null) {
+				// Move objects
+				Vector3 move = -transform.forward * power * Time.fixedDeltaTime;
+				lilypad.transform.Translate(move, Space.World);
+				inventory.player.transform.Translate(move, Space.World);
+			}
+		});
 	}
 
-	public override void OnEquip () {
-		base.OnEquip ();
+	public override void OnEquip (PlayerInventory inventory) {
+		base.OnEquip (inventory);
 	}
 
 }
