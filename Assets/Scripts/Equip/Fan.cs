@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 public class Fan : _Equipable {
 
-	public float power;
+	[Tooltip("Top speed the lilypad will reach.")]
+	public float speed = 1;
+	[Tooltip("Similar to acceleration.")]
+	public float power = 1;
 	
 	void OnElectrify() {
 
@@ -14,9 +17,8 @@ public class Fan : _Equipable {
 			var lilypad = listener.GetComponent<Lilypad>();
 			if (lilypad != null) {
 				// Move objects
-				Vector3 move = -transform.forward * power * Time.fixedDeltaTime;
-				lilypad.transform.Translate(move, Space.World);
-				inventory.player.transform.Translate(move, Space.World);
+				Vector3 move = -transform.forward * speed;
+				lilypad.Move(move, power);
 			}
 		});
 	}

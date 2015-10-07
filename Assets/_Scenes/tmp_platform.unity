@@ -214,6 +214,8 @@ MonoBehaviour:
   targetObj: {fileID: 0}
   speed: 5
   actionIfInvalid: 0
+  mode: 0
+  inverse: 0
   offset: {x: 0, y: 9, z: -7}
 --- !u!1001 &419322329
 Prefab:
@@ -455,9 +457,11 @@ GameObject:
   - 4: {fileID: 1849270319}
   - 33: {fileID: 1849270318}
   - 23: {fileID: 1849270317}
+  - 54: {fileID: 1849270321}
   - 64: {fileID: 1849270316}
   - 114: {fileID: 1849270315}
   - 114: {fileID: 1849270320}
+  - 114: {fileID: 1849270322}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -542,3 +546,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251efbccb54f2554981ac8a3b05c2a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rbody: {fileID: 1849270321}
+  follow: {fileID: 1849270322}
+--- !u!54 &1849270321
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1849270314}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 1
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
+--- !u!114 &1849270322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1849270314}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35f56310da2135e448172cee1d3b1300, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObj: {fileID: 0}
+  speed: 0
+  actionIfInvalid: 4
+  mode: 2
+  inverse: 1
+  offset: {x: 0, y: 0, z: 0}

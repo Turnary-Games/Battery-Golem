@@ -26,10 +26,11 @@ public class PlayerInventory : MonoBehaviour {
 			// Equip the item
 			Equip (item);
 		} else {
-			if (equipped == item)
-				print("TRYING TO PICKUP ALREADY PICKED UP ITEM: " + obj.name);
-			else
-				print ("INVALID PICKUP ITEM: " + obj.name);
+			if (equipped == item) {
+				//print("TRYING TO PICKUP ALREADY PICKED UP ITEM: " + obj.name);
+				// JUST IGNORE
+			} else
+				print("INVALID PICKUP ITEM: " + obj.name);
 		}
 	}
 
