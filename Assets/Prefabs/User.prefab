@@ -247,6 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a9ed37ad47c7742be0f0eb05b55282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 11410162}
   equippedParent: {fileID: 465668}
   equipped: {fileID: 0}
 --- !u!114 &11410162

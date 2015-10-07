@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FollowLerp : MonoBehaviour {
+public class Follow : MonoBehaviour {
 
 	[Tooltip("The object to follow")]
 	public Transform targetObj;
@@ -15,9 +15,17 @@ public class FollowLerp : MonoBehaviour {
 	         "<disableThisGameObject> Will disable the GameObject this script is assigned to.\n\n" +
 	         "<disableThisComponent> Will disable this instance of the script, but will not disable the GameObject it is assigned to.")]
 	public ActionIfInvalid actionIfInvalid;
+	[Tooltip("Following mode\n\n" +
+			 "<lerp> The script will move based on the unity lerp.\n\n" +
+			 "<direct> The script will move instantly to the targets position + the offset. The speed variable does nothing.\n\n" + 
+			 "<parent> Same as direct, but will move the delta position instead.")]
+	public FollowMode mode;
+	[Tooltip("If inverse is true, it will move the target after this one, instead of the other way around.")]
+	public bool inverse = false;
 
 	[HideInInspector]
 	public Vector3 offset;
+	private Vector3 lastPos;
 	private bool validTarget = false;
 
 	// Use this for initialization
@@ -29,17 +37,43 @@ public class FollowLerp : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		DoActionIfInvalid ();
 
 		if (validTarget) {
-			Vector3 targetPos = targetObj.position + offset;
-			transform.position = Vector3.Lerp (transform.position, targetPos, speed * Time.deltaTime);
+			Transform refObj = targetObj;
+			Transform movingObj = transform;
+			Vector3 objOffset = offset;
+
+			if (inverse) {
+				refObj = transform;
+				movingObj = targetObj;
+				objOffset = -objOffset;
+			}
+
+			switch (mode) {
+				case FollowMode.lerp:
+					Vector3 pos = refObj.position + objOffset;
+					movingObj.position = Vector3.Lerp(movingObj.position, pos, speed * Time.deltaTime);
+					break;
+
+				case FollowMode.direct:
+					movingObj.position = refObj.position + objOffset;
+					break;
+
+				case FollowMode.parent:
+					Vector3 delta = refObj.position - lastPos;
+					movingObj.position += delta;
+					lastPos = refObj.position;
+					break;
+			}
 		}
 	}
 
 	public void UpdateOffset() {
 		offset = transform.position - targetObj.position;
+
+		lastPos = inverse ? transform.position : targetObj.position;
 	}
 
 	public bool IsInvalid() {
@@ -51,24 +85,24 @@ public class FollowLerp : MonoBehaviour {
 			validTarget = false;
 
 			switch (actionIfInvalid) {
-			case ActionIfInvalid.doNothing:
-				break;
+				case ActionIfInvalid.doNothing:
+					break;
 
-			case ActionIfInvalid.destroyThisGameObject:
-				Destroy (gameObject);
-				break;
+				case ActionIfInvalid.destroyThisGameObject:
+					Destroy(gameObject);
+					break;
 
-			case ActionIfInvalid.destroyThisComponent:
-				Destroy (this);
-				break;
+				case ActionIfInvalid.destroyThisComponent:
+					Destroy(this);
+					break;
 
-			case ActionIfInvalid.disableThisGameObject:
-				gameObject.SetActive (false);
-				break;
+				case ActionIfInvalid.disableThisGameObject:
+					gameObject.SetActive(false);
+					break;
 
-			case ActionIfInvalid.disableThisComponent:
-				enabled = false;
-				break;
+				case ActionIfInvalid.disableThisComponent:
+					enabled = false;
+					break;
 			}
 		} else {
 			validTarget = true;
@@ -82,4 +116,10 @@ public class FollowLerp : MonoBehaviour {
 		disableThisGameObject,
 		disableThisComponent
 	};
+
+	public enum FollowMode {
+		lerp,
+		direct,
+		parent,
+	}
 }

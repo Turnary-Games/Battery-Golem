@@ -1,12 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
-
-	/* TODO: Add dynamic platforms! For example lilypads.
-	 * When standing on it, make it your parent.
-	 * If the lilypad moves, the player moves.
-	 */
 
 	[Header("Variables (DONT ALTER)")]
 
@@ -103,6 +99,9 @@ public class PlayerController : MonoBehaviour {
 		// Calculate slope angle (in degrees)
 		slope = Vector3.Angle (Vector3.up, hit.normal);
 
+		// Collision listener
+		hit.gameObject.SendMessage(TouchMethods.Touch, this, SendMessageOptions.DontRequireReceiver);
+
 		PushObjects (hit);
 	}
 
@@ -136,5 +135,10 @@ public class PlayerController : MonoBehaviour {
 		if (other.isTrigger) {
 			inventory.Pickup(other.gameObject);
 		}
+	}
+
+	// Get all listeners of the touching 
+	public List<_TouchListener> GetListeners() {
+		return _TouchListener.FindListeners(this);
 	}
 }
