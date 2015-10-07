@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour {
 
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 
 	public CharacterController character;
 	public Transform electricPoint;
+	public PlayerInventory inventory;
 
 	[Header("Movement settings")]
 
@@ -50,16 +52,21 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Rotate() {
-		//Vector3 rawAxis = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
-		Vector3 rawAxis = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical"));
+		// Vector of the (looking) axis
+		Vector3 rawAxis = new Vector3 (Input.GetAxisRaw ("HorizontalLook"), 0, Input.GetAxisRaw ("VerticalLook"));
+		
+		// Not using the looking axis input, try the movement axis
+		if (rawAxis.x == 0 && rawAxis.z == 0)
+			rawAxis = new Vector3 (Input.GetAxisRaw("HorizontalMove"), 0, Input.GetAxisRaw("VerticalMove"));
 
+		// Not using that one either, then dont rotate at all
 		if (rawAxis.x == 0 && rawAxis.z == 0)
 			return;
 
 		// Get the angles
 		Vector3 rot = character.transform.eulerAngles;
 		float angle = Mathf.Atan2 (rawAxis.z, -rawAxis.x) * Mathf.Rad2Deg - 90f;
-
+		
 		// Change the value
 		rot.y = Mathf.MoveTowardsAngle (rot.y, angle, rotSpeed * Time.deltaTime);
 		// Set the value
@@ -67,8 +74,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	Vector3 GetAxis() {
-		// Vector of the axis
-		Vector3 inputAxis = new Vector3 (Input.GetAxis ("Horizontal"), 0, Input.GetAxis ("Vertical"));
+		// Vector of the (movement) axis
+		Vector3 inputAxis = new Vector3 (Input.GetAxis ("HorizontalMove"), 0, Input.GetAxis ("VerticalMove"));
 
 		// Normalize it so that all directions moves the same combined speed
 		Vector3 axis = inputAxis.normalized;
@@ -97,6 +104,9 @@ public class PlayerController : MonoBehaviour {
 		// Calculate slope angle (in degrees)
 		slope = Vector3.Angle (Vector3.up, hit.normal);
 
+		// Collision listener
+		hit.gameObject.SendMessage(TouchMethods.Touch, this, SendMessageOptions.DontRequireReceiver);
+
 		PushObjects (hit);
 	}
 
@@ -115,8 +125,25 @@ public class PlayerController : MonoBehaviour {
 
 	// Try to electrify "something"
 	void Electrify() {
-		if (electricPoint != null && Input.GetButton ("Electrify")) {
-			ElectricListener.ElectrifyAllAt (electricPoint.position);
+		if (Input.GetAxis("Electrify") != 0) {
+			if (inventory.equipped != null) {
+				// Electrify the equipped item
+				inventory.equipped.SendMessage(ElectricMethods.Electrify, SendMessageOptions.DontRequireReceiver);
+			} else if (electricPoint != null) {
+				// Try to electrify at your fingertips
+				_ElectricListener.ElectrifyAllAt(electricPoint.position);
+			}
 		}
+	}
+
+	void OnTriggerEnter(Collider other) {
+		if (other.isTrigger) {
+			inventory.Pickup(other.gameObject);
+		}
+	}
+
+	// Get all listeners of the touching 
+	public List<_TouchListener> GetListeners() {
+		return _TouchListener.FindListeners(this);
 	}
 }

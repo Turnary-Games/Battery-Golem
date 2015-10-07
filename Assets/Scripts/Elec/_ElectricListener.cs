@@ -1,7 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ElectricListener : MonoBehaviour {
+public sealed class ElectricMethods {
+	// Called by the listener
+	public readonly static string OnElectrify = "OnElectrify";
+	public readonly static string OnElectrifyStart = "OnElectrifyStart";
+	public readonly static string OnElectrifyEnd = "OnElectrifyEnd";
+
+	// Called by anything else to contact the listener
+	public readonly static string Electrify = "Electrify";
+}
+
+public class _ElectricListener : MonoBehaviour {
 
 	public Collider col;
 
@@ -11,12 +21,12 @@ public class ElectricListener : MonoBehaviour {
 	void FixedUpdate() {
 		// Electrifying stopped
 		if (electrifiedLastStep && !electrifiedThisStep) {
-			SendMessage ("OnElectrifyEnd");
+			SendMessage (ElectricMethods.OnElectrifyEnd, SendMessageOptions.DontRequireReceiver);
 		}
 
 		// Electrifying continues
 		if (electrifiedThisStep)
-			SendMessage ("OnElectrify");
+			SendMessage (ElectricMethods.OnElectrify, SendMessageOptions.DontRequireReceiver);
 
 		electrifiedLastStep = electrifiedThisStep;
 		electrifiedThisStep = false;
@@ -25,7 +35,7 @@ public class ElectricListener : MonoBehaviour {
 	public void Electrify() {
 		// Electrifying starts
 		if (!electrifiedLastStep && !electrifiedThisStep)
-			SendMessage ("OnElectrifyStart");
+			SendMessage (ElectricMethods.OnElectrifyStart, SendMessageOptions.DontRequireReceiver);
 
 		electrifiedThisStep = true;
 	}
@@ -37,8 +47,8 @@ public class ElectricListener : MonoBehaviour {
 		return col.bounds.Contains (point);
 	}
 
-	public static ElectricListener GetObjectAt(Vector3 point) {
-		foreach (ElectricListener obj in FindObjectsOfType<ElectricListener>()) {
+	public static _ElectricListener GetObjectAt(Vector3 point) {
+		foreach (var obj in FindObjectsOfType<_ElectricListener>()) {
 			if (obj.IsInside(point))
 				return obj;
 		}
@@ -49,7 +59,7 @@ public class ElectricListener : MonoBehaviour {
 	public static bool ElectrifyAllAt(Vector3 point) {
 		bool success = false;
 
-		foreach (ElectricListener obj in FindObjectsOfType<ElectricListener>()) {
+		foreach (var obj in FindObjectsOfType<_ElectricListener>()) {
 			if (obj.IsInside(point)) {
 				success = true;
 				obj.Electrify();
