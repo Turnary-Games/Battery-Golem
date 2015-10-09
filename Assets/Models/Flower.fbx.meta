@@ -1,0 +1,164 @@
+fileFormatVersion: 2
+guid: 7ddf461eb36e1234c8bd0c1065adef29
+timeCreated: 1444376107
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: bend
+    100002: bend 1
+    100004: bend 2
+    100006: bend 3
+    100008: bend 4
+    100010: bend 5
+    100012: bend 6
+    100014: bend 7
+    100016: bend 8
+    100018: //RootNode
+    100020: flowerHead
+    100022: model
+    100024: model 1
+    100026: model 2
+    100028: model 3
+    100030: model 4
+    100032: model 5
+    100034: model 6
+    100036: model 7
+    100038: model 8
+    100040: petal
+    100042: petal1
+    100044: petal2
+    100046: petal3
+    100048: petal4
+    100050: petal5
+    100052: petal6
+    100054: petal7
+    100056: petals
+    100058: pSphere1
+    100060: stalk
+    400000: bend
+    400002: bend 1
+    400004: bend 2
+    400006: bend 3
+    400008: bend 4
+    400010: bend 5
+    400012: bend 6
+    400014: bend 7
+    400016: bend 8
+    400018: //RootNode
+    400020: flowerHead
+    400022: model
+    400024: model 1
+    400026: model 2
+    400028: model 3
+    400030: model 4
+    400032: model 5
+    400034: model 6
+    400036: model 7
+    400038: model 8
+    400040: petal
+    400042: petal1
+    400044: petal2
+    400046: petal3
+    400048: petal4
+    400050: petal5
+    400052: petal6
+    400054: petal7
+    400056: petals
+    400058: pSphere1
+    400060: stalk
+    2300000: model
+    2300002: model 1
+    2300004: model 2
+    2300006: model 3
+    2300008: model 4
+    2300010: model 5
+    2300012: model 6
+    2300014: model 7
+    2300016: model 8
+    2300018: pSphere1
+    3300000: model
+    3300002: model 1
+    3300004: model 2
+    3300006: model 3
+    3300008: model 4
+    3300010: model 5
+    3300012: model 6
+    3300014: model 7
+    3300016: model 8
+    3300018: pSphere1
+    4300000: model
+    4300002: model
+    4300004: model
+    4300006: model
+    4300008: model
+    4300010: model
+    4300012: model
+    4300014: model
+    4300016: pSphere1
+    4300018: model
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
