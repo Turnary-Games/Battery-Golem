@@ -798,6 +798,8 @@ MonoBehaviour:
   targetObj: {fileID: 968420245}
   speed: 5
   actionIfInvalid: 0
+  mode: 0
+  inverse: 0
   offset: {x: 0, y: 15.9500008, z: -12.9700003}
 --- !u!114 &237583047
 MonoBehaviour:

@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.Collections;
 
+/*
 [CustomEditor(typeof(FollowLerp))]
 public class _FollowLerp : Editor {
 
@@ -34,3 +35,5 @@ public class _FollowLerp : Editor {
 	}
 
 }
+
+*/
