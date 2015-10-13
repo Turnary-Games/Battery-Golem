@@ -15,10 +15,18 @@ public class _Equipable : MonoBehaviour {
 		print (itemName + " equipped");
 	}
 
-	public virtual void OnUnequip() {
+	public virtual void OnUnequip(PlayerInventory inventory) {
 		equipped = false;
 		this.inventory = null;
 		print (itemName + " unequipped");
+	}
+
+	public virtual void OnPickup(PlayerInventory inventory) {
+		// Item got picked up from ground
+	}
+
+	public virtual void OnDropped(PlayerInventory inventory) {
+		// Item dropped on ground
 	}
 
 }

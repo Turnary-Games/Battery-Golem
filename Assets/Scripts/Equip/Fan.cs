@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Fan : _Equipable {
+	
+	[Header("Settings")]
+
+	public List<EffectItem> effects = new List<EffectItem> ();
 
 	[Tooltip("Top speed the lilypad will reach.")]
 	public float speed = 1;
@@ -23,8 +27,18 @@ public class Fan : _Equipable {
 		});
 	}
 
-	public override void OnEquip (PlayerInventory inventory) {
-		base.OnEquip (inventory);
+	public override void OnPickup (PlayerInventory inventory) {
+		base.OnPickup (inventory);
+
+		// Disable all effects
+		effects.OnPickup ();
+	}
+
+	public override void OnDropped (PlayerInventory inventory) {
+		base.OnDropped (inventory);
+
+		// Enable all effects
+		effects.OnDrop ();
 	}
 
 }

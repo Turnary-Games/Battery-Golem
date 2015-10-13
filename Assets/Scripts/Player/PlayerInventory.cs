@@ -61,9 +61,10 @@ public class PlayerInventory : MonoBehaviour {
 			} else { 
 				// Drop it on the ground
 				equipped.transform.parent = null;
+				equipped.OnDropped(this);
 			}
 
-			equipped.OnUnequip();
+			equipped.OnUnequip(this);
 			equipped = null;
 		}
 	}
