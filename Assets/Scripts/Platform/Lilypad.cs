@@ -4,29 +4,28 @@ using System.Collections;
 public class Lilypad : MonoBehaviour {
 
 	public Rigidbody rbody;
-	public Follow follow;
+
+	private PlayerController player;
 
 	public void Move(Vector3 move, float power) {
-		rbody.velocity = Vector3.Lerp(rbody.velocity, move, Time.fixedDeltaTime * power) ;
+		rbody.velocity = Vector3.Lerp(rbody.velocity, move, Time.fixedDeltaTime * power);
 	}
 
 	void OnTouchStart(Touch touch) {
 		if (IsPlayer(touch)) {
-			follow.enabled = true;
-			follow.targetObj = (touch.source as PlayerController).transform;
-			follow.UpdateOffset();
+			player = touch.source as PlayerController;
 		}
 	}
 
 	void OnTouch(Touch touch) {
-		if (IsPlayer(touch)) {
-			follow.UpdateOffset();
+		if (IsPlayer (touch)) {
+			player.outsideForces = rbody.velocity;
 		}
 	}
 
 	void OnTouchEnd(Touch touch) {
 		if (IsPlayer(touch)) {
-			follow.enabled = false;
+			player = null;
 		}
 	}
 

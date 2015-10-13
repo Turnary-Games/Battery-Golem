@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour {
 	public CharacterController character;
 	public Transform electricPoint;
 	public PlayerInventory inventory;
+	public Transform userParent;
 
 	[Header("Movement settings")]
 
@@ -21,6 +22,9 @@ public class PlayerController : MonoBehaviour {
 	public float pushPower = 2.0F;
 	public float maxSlopeAngle;
 	public float slopeForce;
+
+	[HideInInspector]
+	public Vector3 outsideForces;
 
 	// Current movement velocity
 	private Vector3 motion;
@@ -37,6 +41,9 @@ public class PlayerController : MonoBehaviour {
 	void Movement() {
 		// Motion to apply to the character
 		motion = GetAxis () * moveSpeed + Vector3.up * motion.y;
+
+		// Add external forces to the calulation
+		motion += outsideForces;
 
         if (IsGrounded()) {
             // Jumping
@@ -110,13 +117,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit) {
-
 		// Calculate slope angle (in degrees)
 		slopeAngle = Vector3.Angle (Vector3.up, hit.normal);
 		slopePoint = hit.point;
 
 		// Collision listener
-		hit.gameObject.SendMessage(TouchMethods.Touch, this, SendMessageOptions.DontRequireReceiver);
+		GameObject main = hit.collider.attachedRigidbody != null ? hit.collider.attachedRigidbody.gameObject : hit.gameObject;
+		if (main != null) {
+			main.SendMessage (TouchMethods.Touch, this, SendMessageOptions.DontRequireReceiver);
+		}
 
 		PushObjects (hit);
 	}
@@ -156,5 +165,13 @@ public class PlayerController : MonoBehaviour {
 	// Get all listeners of the touching 
 	public List<_TouchListener> GetListeners() {
 		return _TouchListener.FindListeners(this);
+	}
+
+	public void ResetParent() {
+		transform.SetParent (userParent);
+	}
+
+	public void ResetParent(bool worldPositionStays) {
+		transform.SetParent (userParent, worldPositionStays);
 	}
 }

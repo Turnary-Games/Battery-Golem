@@ -45,7 +45,7 @@ public class Touch {
 public class _TouchListener : MonoBehaviour {
 
 	public static List<_TouchListener> listeners = new List<_TouchListener>();
-	protected List<Touch> touches = new List<Touch>();
+	private List<Touch> touches = new List<Touch>();
 
 	void Start() {
 		listeners.Add(this);
