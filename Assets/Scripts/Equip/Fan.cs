@@ -3,10 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Fan : _Equipable {
-	
+
 	[Header("Settings")]
 
-	public List<EffectItem> effects = new List<EffectItem> ();
+	public _EffectItem[] effects;
+
+	[Space]
 
 	[Tooltip("Top speed the lilypad will reach.")]
 	public float speed = 1;
