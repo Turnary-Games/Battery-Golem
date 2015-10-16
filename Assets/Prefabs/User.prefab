@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 467552}
   - 114: {fileID: 11400858}
+  - 114: {fileID: 11443442}
   m_Layer: 8
   m_Name: Inventory
   m_TagString: Untagged
@@ -499,7 +500,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 476934}
-  - 95: {fileID: 9562716}
+  - 95: {fileID: 9514638}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -891,7 +892,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 411782}
@@ -918,8 +919,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190482}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children:
   - {fileID: 468654}
   m_Father: {fileID: 476006}
@@ -1554,7 +1555,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175650}
   m_Mesh: {fileID: 4300028, guid: cd5e884c492d4ce46ad445e22abdb798, type: 3}
---- !u!95 &9562716
+--- !u!95 &9514638
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -1563,7 +1564,7 @@ Animator:
   m_GameObject: {fileID: 190482}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: cd5e884c492d4ce46ad445e22abdb798, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4dfaaea1d461b514b81c46a7dacd7b69, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1584,6 +1585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 11410162}
   equippedParent: {fileID: 465668}
+  gui: {fileID: 11443442}
   equipped: {fileID: 0}
 --- !u!114 &11410162
 MonoBehaviour:
@@ -1606,6 +1608,19 @@ MonoBehaviour:
   pushPower: 2
   slopeForce: 2
   outsideForces: {x: 0, y: 0, z: 0}
+--- !u!114 &11443442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ed1ddae1deef647a7f959a9bf587fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guiSkin: {fileID: 11400000, guid: 304bcc2a4ff81d948ba73766fb8774de, type: 2}
+  drawInEditMode: 0
 --- !u!143 &14336522
 CharacterController:
   m_ObjectHideFlags: 1
@@ -1616,13 +1631,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: .850000024
-  m_SlopeLimit: 45
+  m_Height: 3.5999999
+  m_Radius: 1.38999999
+  m_SlopeLimit: 35
   m_StepOffset: 0
   m_SkinWidth: .0799999982
   m_MinMoveDistance: .00100000005
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.79999995, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

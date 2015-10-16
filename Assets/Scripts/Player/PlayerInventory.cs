@@ -7,6 +7,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	public PlayerController player;
 	public Transform equippedParent;
+	public PlayerInventoryGUI gui;
 
 	[Header("Inventory variables")]
 
