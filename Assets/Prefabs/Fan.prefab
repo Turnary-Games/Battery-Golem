@@ -108,6 +108,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 422040}
+  - 114: {fileID: 11466538}
+  - 114: {fileID: 11436518}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -124,9 +126,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 485918}
   - 135: {fileID: 13543708}
-  - 114: {fileID: 11409184}
+  - 114: {fileID: 11464738}
   - 114: {fileID: 11424718}
-  - 114: {fileID: 11456278}
   m_Layer: 0
   m_Name: Fan
   m_TagString: Untagged
@@ -392,18 +393,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145488}
   m_Mesh: {fileID: 4300004, guid: 02f887affc27dea4981b0e2c91fc2174, type: 3}
---- !u!114 &11409184
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 197074}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df8a741d76b830547a807aaf25a3b2ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 0}
 --- !u!114 &11424718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,9 +406,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Fan
   stashable: 1
+  effects:
+  - type: 0
+    effect: {fileID: 11466538}
+    onPickup: 2
+    onDrop: 1
+    resetTransform: {fileID: 0}
+    resetRelativeTo: 0
+    resetOnPickup:
+      position: 0
+      rotation: 0
+      scale: 0
+    resetOnDrop:
+      position: 0
+      rotation: 0
+      scale: 0
+  - type: 0
+    effect: {fileID: 11436518}
+    onPickup: 2
+    onDrop: 1
+    resetTransform: {fileID: 0}
+    resetRelativeTo: 0
+    resetOnPickup:
+      position: 0
+      rotation: 0
+      scale: 0
+    resetOnDrop:
+      position: 0
+      rotation: 0
+      scale: 0
+  - type: 1
+    effect: {fileID: 0}
+    onPickup: 0
+    onDrop: 0
+    resetTransform: {fileID: 422040}
+    resetRelativeTo: 0
+    resetOnPickup:
+      position: 0
+      rotation: 1
+      scale: 0
+    resetOnDrop:
+      position: 0
+      rotation: 0
+      scale: 0
   speed: 5.01999998
   power: 10.54
---- !u!114 &11456278
+--- !u!114 &11436518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7ba5b0227561e45a2c1b827a0057c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 50, z: 0}
+  relativeTo: 0
+--- !u!114 &11464738
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -427,11 +472,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 197074}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74885efa56c986147ac7cd329f3ec896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 0}
+--- !u!114 &11466538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 175316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbac70de3c2cda746aa9c7331b34f7a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waveAmplitude: .400000006
   waveLength: 4
+  relativeTo: 0
 --- !u!135 &13543708
 SphereCollider:
   m_ObjectHideFlags: 1

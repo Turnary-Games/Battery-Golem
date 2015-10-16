@@ -25,6 +25,7 @@ public class PlayerInventory : MonoBehaviour {
 
 			// Equip the item
 			Equip (item);
+			item.OnPickup(this);
 		} else {
 			if (equipped == item) {
 				//print("TRYING TO PICKUP ALREADY PICKED UP ITEM: " + obj.name);

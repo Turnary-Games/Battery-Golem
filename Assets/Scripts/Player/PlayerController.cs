@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour {
 	public CharacterController character;
 	public Transform electricPoint;
 	public PlayerInventory inventory;
-	public Transform userParent;
 
 	[Header("Movement settings")]
 
@@ -156,6 +155,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	// Pickup everything on collision
 	void OnTriggerEnter(Collider other) {
 		if (other.isTrigger) {
 			inventory.Pickup(other.gameObject);
@@ -165,13 +165,5 @@ public class PlayerController : MonoBehaviour {
 	// Get all listeners of the touching 
 	public List<_TouchListener> GetListeners() {
 		return _TouchListener.FindListeners(this);
-	}
-
-	public void ResetParent() {
-		transform.SetParent (userParent);
-	}
-
-	public void ResetParent(bool worldPositionStays) {
-		transform.SetParent (userParent, worldPositionStays);
 	}
 }
