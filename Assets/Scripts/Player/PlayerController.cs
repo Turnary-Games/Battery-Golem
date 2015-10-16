@@ -17,9 +17,10 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("Speed in degrees per second.")]
 	public float rotSpeed = 1;
 	public float jumpHeight = 1;
+	[Tooltip("Should the player be able to hold space and continue jumping?")]
 	public bool continuousJumping = true;
 	public float pushPower = 2.0F;
-	public float maxSlopeAngle;
+	[Tooltip("When in a too steep hill the player will be moved away from the hill in /slopeForce/ meters per second.")]
 	public float slopeForce;
 
 	[HideInInspector]

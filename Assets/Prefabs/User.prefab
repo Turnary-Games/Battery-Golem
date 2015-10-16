@@ -1553,14 +1553,12 @@ MonoBehaviour:
   character: {fileID: 14336522}
   electricPoint: {fileID: 411782}
   inventory: {fileID: 11400858}
-  userParent: {fileID: 400788}
   moveSpeed: 5
   rotSpeed: 300
   jumpHeight: 5
   continuousJumping: 1
   pushPower: 2
-  maxSlopeAngle: 0
-  slopeForce: 0
+  slopeForce: 2
   outsideForces: {x: 0, y: 0, z: 0}
 --- !u!143 &14336522
 CharacterController:
