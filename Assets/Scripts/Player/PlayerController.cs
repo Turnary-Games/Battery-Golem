@@ -23,6 +23,13 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("When in a too steep hill the player will be moved away from the hill in /slopeForce/ meters per second.")]
 	public float slopeForce;
 
+	[Header("Inventory settings")]
+
+	[Tooltip("Range in meters")]
+	public float pickupRange;
+	[Tooltip("When calculating which item is closest should it ignore the y axis?\n(Which would count everything as on the same height)")]
+	public bool ignoreYAxis = false;
+
 	[HideInInspector]
 	public Vector3 outsideForces;
 
@@ -35,24 +42,40 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		Movement ();
-		Electrify ();
+		Interact();
 	}
 
+#if UNITY_EDITOR
+	void OnDrawGizmosSelected() {
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere(transform.position + character.center, pickupRange);
+	}
+#endif
+
+	#region Movement algorithms
 	void Movement() {
+		// Move the character
+		Move();
+
+		// Rotate the character
+		Rotate ();
+	}
+
+	void Move() {
 		// Motion to apply to the character
-		motion = GetAxis () * moveSpeed + Vector3.up * motion.y;
+		motion = GetAxis() * moveSpeed + Vector3.up * motion.y;
 
 		// Add external forces to the calulation
 		motion += outsideForces;
 
-        if (IsGrounded()) {
-            // Jumping
-            if (ShouldJump())
-                motion.y = jumpHeight;
-        } else {
-            // Apply gravity
-            motion += Physics.gravity * Time.deltaTime;
-        }
+		if (IsGrounded()) {
+			// Jumping
+			if (ShouldJump())
+				motion.y = jumpHeight;
+		} else {
+			// Apply gravity
+			motion += Physics.gravity * Time.deltaTime;
+		}
 
 		// Pushed out from slopes
 		if (character.isGrounded && slopeAngle > character.slopeLimit) {
@@ -61,11 +84,8 @@ public class PlayerController : MonoBehaviour {
 			motion -= delta.normalized * slopeForce;
 		}
 
-        // Move the character
-        character.Move (motion * Time.deltaTime);
-
-		// Rotate the character
-		Rotate ();
+		// Move the character
+		character.Move(motion * Time.deltaTime);
 	}
 
 	void Rotate() {
@@ -115,6 +135,7 @@ public class PlayerController : MonoBehaviour {
 		return (continuousJumping && Input.GetButton ("Jump"))
 			|| (!continuousJumping && Input.GetButtonDown ("Jump"));
 	}
+#endregion
 
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 		// Calculate slope angle (in degrees)
@@ -143,25 +164,55 @@ public class PlayerController : MonoBehaviour {
 		//body.AddForceAtPosition (pushDir * pushPower, hit.point);
 	}
 
-	// Try to electrify "something"
-	void Electrify() {
-		if (Input.GetAxis("Electrify") != 0) {
-			if (inventory.equipped != null) {
-				// Electrify the equipped item
-				inventory.equipped.SendMessage(ElectricMethods.Electrify, SendMessageOptions.DontRequireReceiver);
-			} else if (electricPoint != null) {
-				// Try to electrify at your fingertips
-				_ElectricListener.ElectrifyAllAt(electricPoint.position);
-			}
-		}
-	}
-
+	/* OLD PICKUP METHOD
 	// Pickup everything on collision
 	void OnTriggerEnter(Collider other) {
 		if (other.isTrigger) {
 			inventory.Pickup(other.gameObject);
 		}
 	}
+	*/
+
+#region Picking up/Dropping items & Interacting
+
+	void Interact() {
+		if (Input.GetButtonDown("GrabNDrop")) {
+			GrabNDrop();
+		}
+
+		if (Input.GetAxis("Interact") != 0) {
+			Electrify();
+		}
+	}
+
+	public _Equipable GetItemInRange() {
+		var closest = _Equipable.GetClosest(transform.position + character.center, ignoreYAxis);
+		return closest.valid && closest.dist <= pickupRange ? closest.item : null;
+	}
+
+	void GrabNDrop() {
+		if (inventory.equipped == null) {
+			// No item equipped. Try to grab the nearby item
+			var item = GetItemInRange();
+			if (item != null)
+				inventory.Pickup(item);
+		} else {
+			// Item equipped. Drop it.
+			inventory.Drop();
+		}
+	}
+
+	// Try to electrify "something"
+	void Electrify() {
+		if (inventory.equipped != null) {
+			// Electrify the equipped item
+			inventory.equipped.SendMessage(ElectricMethods.Electrify, SendMessageOptions.DontRequireReceiver);
+		} else if (electricPoint != null) {
+			// Try to electrify at your fingertips
+			_ElectricListener.ElectrifyAllAt(electricPoint.position);
+		}
+	}
+#endregion
 
 	// Get all listeners of the touching 
 	public List<_TouchListener> GetListeners() {

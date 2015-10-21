@@ -22,25 +22,27 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	#region Pickup item (from ground)
+	public void Pickup(_Equipable item) {
+		if (equipped == item)
+			return;
+
+		// First unequip previous item
+		Drop ();
+
+		// Equip the item
+		item.OnPickupBegin(this);
+		Equip (item);
+		item.OnPickup(this);
+	}
+
 	public void Pickup(GameObject obj) {
 		var item = obj.GetComponent<_Equipable>();
 
-		if (item != null && equipped != item) {
+		if (item != null) {
 			// Valid object, equip it.
-
-			// First unequip previous item
-			Drop ();
-
-			// Equip the item
-			item.OnPickupBegin(this);
-			Equip (item);
-			item.OnPickup(this);
+			Pickup(item);
 		} else {
-			if (equipped == item) {
-				//print("TRYING TO PICKUP ALREADY PICKED UP ITEM: " + obj.name);
-				// JUST IGNORE
-			} else
-				print("INVALID PICKUP ITEM: " + obj.name);
+			print("INVALID PICKUP ITEM: " + obj.name);
 		}
 	}
 
