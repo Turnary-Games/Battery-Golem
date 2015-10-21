@@ -1030,7 +1030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35f56310da2135e448172cee1d3b1300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObj: {fileID: 0}
+  targetObj: {fileID: 1870821037}
   speed: 5
   actionIfInvalid: 0
   mode: 0
@@ -1051,7 +1051,7 @@ MonoBehaviour:
   focalLength: 20.0499992
   focalSize: .0799999982
   aperture: .328999996
-  focalTransform: {fileID: 0}
+  focalTransform: {fileID: 1870821037}
   maxBlurSize: 2
   highResolution: 0
   blurType: 0
@@ -10372,6 +10372,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77de76c3b417fa045b8a74f2ad4735e9, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1870821037 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 476006, guid: 8878de9dbe4088742bad7d85a3254dda, type: 2}
+  m_PrefabInternal: {fileID: 1635393307}
 --- !u!1001 &1881199946
 Prefab:
   m_ObjectHideFlags: 0
