@@ -7,12 +7,19 @@ public class PlayerInventory : MonoBehaviour {
 
 	public PlayerController player;
 	public Transform equippedParent;
-	public PlayerInventoryGUI gui;
 
 	[Header("Inventory variables")]
 
 	public _Equipable equipped;
 
+	[Header("HUD's / GUI's")]
+
+	public HUD_Equipped hud_equipped;
+
+
+	void Start() {
+		hud_equipped.SetItem(equipped);
+	}
 
 	#region Pickup item (from ground)
 	public void Pickup(GameObject obj) {
@@ -25,6 +32,7 @@ public class PlayerInventory : MonoBehaviour {
 			Drop ();
 
 			// Equip the item
+			item.OnPickupBegin(this);
 			Equip (item);
 			item.OnPickup(this);
 		} else {
@@ -52,6 +60,7 @@ public class PlayerInventory : MonoBehaviour {
 		item.transform.localEulerAngles = Vector3.zero;
 		// Send the event
 		item.OnEquip (this);
+		hud_equipped.SetItem(equipped);
 	}
 
 	public void Unequip(bool sendToInv) {
@@ -60,14 +69,17 @@ public class PlayerInventory : MonoBehaviour {
 			if (sendToInv) {
 				// Send the item to the players inventory
 				SendToInventory(equipped);
-			} else { 
+			} else {
 				// Drop it on the ground
+				equipped.OnDroppedBegin(this);
 				equipped.transform.parent = null;
 				equipped.OnDropped(this);
 			}
 
 			equipped.OnUnequip(this);
 			equipped = null;
+
+			hud_equipped.SetItem(null);
 		}
 	}
 

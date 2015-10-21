@@ -2,7 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class _Effect : MonoBehaviour {}
+public class _Effect : MonoBehaviour {
+	public virtual void OnPickup() {}
+	public virtual void OnDrop() {}
+
+	public virtual void OnActionDisable() {}
+	public virtual void OnActionEnable() {}
+}
 
 [System.Serializable]
 public class _EffectItem {
@@ -41,10 +47,13 @@ public class _EffectItem {
 	}
 
 	public void DoEffect(EventType eventType) {
-		if (eventType == EventType.onDrop)
+		if (eventType == EventType.onDrop) {
 			DoEventAction(onDrop);
-		else if (eventType == EventType.onPickup)
+			effect.OnDrop();
+		} else if (eventType == EventType.onPickup) {
 			DoEventAction(onPickup);
+			effect.OnPickup();
+		}
 	}
 
 	public void DoEventAction(ActionOnEvent action) {
@@ -57,10 +66,12 @@ public class _EffectItem {
 				break;
 
 			case ActionOnEvent.enable:
+				effect.OnActionEnable();
 				effect.enabled = true;
 				break;
 
 			case ActionOnEvent.disable:
+				effect.OnActionDisable();
 				effect.enabled = false;
 				break;
 		}

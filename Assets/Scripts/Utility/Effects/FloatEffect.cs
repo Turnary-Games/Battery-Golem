@@ -10,7 +10,7 @@ public class FloatEffect : _Effect {
 	private Vector3 start;
 
 	void Start() {
-		start = relativeTo == Space.World ? transform.position : transform.localPosition;
+		ResetStartPosition();
 	}
 
 	void Update () {
@@ -21,4 +21,13 @@ public class FloatEffect : _Effect {
 		else
 			transform.localPosition = start + Vector3.up * y;
 	}
+
+	void ResetStartPosition() {
+		start = relativeTo == Space.World ? transform.position : transform.localPosition;
+	}
+
+	public override void OnDrop() {
+		ResetStartPosition();
+	}
+
 }

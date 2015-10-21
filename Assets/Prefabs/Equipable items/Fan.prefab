@@ -406,6 +406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Fan
   stashable: 1
+  icon: {fileID: 21300000, guid: 02fb175cef30acf4d84738e642d7f81c, type: 3}
   effects:
   - type: 0
     effect: {fileID: 11466538}
@@ -450,7 +451,7 @@ MonoBehaviour:
       rotation: 0
       scale: 0
   speed: 5.01999998
-  power: 10.54
+  power: 4
 --- !u!114 &11436518
 MonoBehaviour:
   m_ObjectHideFlags: 1
