@@ -1,0 +1,170 @@
+fileFormatVersion: 2
+guid: 3577308f2c537be4695fe54246ebfab6
+timeCreated: 1445433534
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: backFrame
+    100002: bend1Handle
+    100004: cable1
+    100006: cable2
+    100008: cables
+    100010: //RootNode
+    100012: chassi
+    100014: cog1
+    100016: cog2
+    100018: cog3
+    100020: cogG1
+    100022: cogG2
+    100024: cogG3
+    100026: frontFrame
+    100028: group2
+    100030: pCylinder1
+    100032: pCylinder2
+    100034: pCylinder3
+    100036: pCylinder4
+    100038: pCylinder5
+    100040: pPipe1
+    100042: pPipe2
+    100044: pPipe3
+    100046: pPipe4
+    100048: wheel
+    400000: backFrame
+    400002: bend1Handle
+    400004: cable1
+    400006: cable2
+    400008: cables
+    400010: //RootNode
+    400012: chassi
+    400014: cog1
+    400016: cog2
+    400018: cog3
+    400020: cogG1
+    400022: cogG2
+    400024: cogG3
+    400026: frontFrame
+    400028: group2
+    400030: pCylinder1
+    400032: pCylinder2
+    400034: pCylinder3
+    400036: pCylinder4
+    400038: pCylinder5
+    400040: pPipe1
+    400042: pPipe2
+    400044: pPipe3
+    400046: pPipe4
+    400048: wheel
+    2300000: backFrame
+    2300002: cable1
+    2300004: cable2
+    2300006: cog1
+    2300008: cog2
+    2300010: cog3
+    2300012: frontFrame
+    2300014: pCylinder1
+    2300016: pCylinder2
+    2300018: pCylinder3
+    2300020: pCylinder4
+    2300022: pCylinder5
+    2300024: pPipe1
+    2300026: pPipe2
+    2300028: pPipe3
+    2300030: pPipe4
+    3300000: backFrame
+    3300002: cable1
+    3300004: cable2
+    3300006: cog1
+    3300008: cog2
+    3300010: cog3
+    3300012: frontFrame
+    3300014: pCylinder1
+    3300016: pCylinder2
+    3300018: pCylinder3
+    3300020: pCylinder4
+    3300022: pCylinder5
+    3300024: pPipe1
+    3300026: pPipe2
+    3300028: pPipe3
+    3300030: pPipe4
+    4300000: pCylinder1
+    4300002: cog1
+    4300004: pCylinder2
+    4300006: cog2
+    4300008: pCylinder3
+    4300010: cog3
+    4300012: backFrame
+    4300014: frontFrame
+    4300016: cable1
+    4300018: cable2
+    4300020: pCylinder4
+    4300022: pCylinder5
+    4300024: pPipe1
+    4300026: pPipe2
+    4300028: pPipe3
+    4300030: pPipe4
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
