@@ -747,7 +747,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 130712}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: .939999998, z: 1.94000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 476006}
@@ -912,7 +912,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 4.76000023, z: .370000005}
+  m_LocalPosition: {x: 0, y: .939999998, z: 1.94000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 476006}
@@ -1747,8 +1747,8 @@ Light:
   serializedVersion: 6
   m_Type: 0
   m_Color: {r: .556660891, g: .79349488, b: .860294104, a: 1}
-  m_Intensity: 1.99000001
-  m_Range: 2.02999997
+  m_Intensity: 2
+  m_Range: 3
   m_SpotAngle: 91.1999969
   m_CookieSize: 10
   m_Shadows:
@@ -1831,6 +1831,8 @@ MonoBehaviour:
   continuousJumping: 1
   pushPower: 2
   slopeForce: 2
+  pickupRange: 0
+  ignoreYAxis: 0
   outsideForces: {x: 0, y: 0, z: 0}
 --- !u!114 &11433410
 MonoBehaviour:
@@ -1980,7 +1982,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
