@@ -11,6 +11,7 @@ GameObject:
   - 54: {fileID: 5469462}
   - 114: {fileID: 11400698}
   - 114: {fileID: 11436890}
+  - 114: {fileID: 11476898}
   m_Layer: 0
   m_Name: Lilypad platform
   m_TagString: Untagged
@@ -128,11 +129,11 @@ Rigidbody:
   m_GameObject: {fileID: 101266}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!64 &6456410
@@ -170,7 +171,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rbody: {fileID: 5469462}
-  follow: {fileID: 0}
+--- !u!114 &11476898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0819a0d84823493428b5d8abdd64b29e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rbody: {fileID: 5469462}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

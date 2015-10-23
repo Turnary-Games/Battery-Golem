@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &447604
 Transform:
   m_ObjectHideFlags: 1
@@ -132,7 +132,7 @@ Rigidbody:
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &6522492
@@ -159,9 +159,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Missing cog
-  stashable: 0
   icon: {fileID: 21300000, guid: 3ccd8e57ab209ca49a2cd60f39aa35c2, type: 3}
-  effects: []
+  stashable: 0
+  rbody: {fileID: 5443594}
+  rbodyOnStart: 2
+  effects:
+  - type: 1
+    effect: {fileID: 0}
+    effectOnPickup: 0
+    effectOnDrop: 0
+    toggleGameObject: {fileID: 186612}
+    toggleOnPickup: 2
+    toggleOnDrop: 1
+    resetTransform: {fileID: 0}
+    resetRelativeTo: 0
+    resetOnPickup:
+      position: 0
+      rotation: 0
+      scale: 0
+    resetOnDrop:
+      position: 0
+      rotation: 0
+      scale: 0
+  - type: 2
+    effect: {fileID: 0}
+    effectOnPickup: 0
+    effectOnDrop: 0
+    toggleGameObject: {fileID: 186612}
+    toggleOnPickup: 2
+    toggleOnDrop: 1
+    resetTransform: {fileID: 447604}
+    resetRelativeTo: 1
+    resetOnPickup:
+      position: 1
+      rotation: 1
+      scale: 0
+    resetOnDrop:
+      position: 0
+      rotation: 0
+      scale: 0
 --- !u!114 &11414868
 MonoBehaviour:
   m_ObjectHideFlags: 1

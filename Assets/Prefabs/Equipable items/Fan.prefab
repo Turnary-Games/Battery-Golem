@@ -141,9 +141,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 485918}
+  - 54: {fileID: 5482988}
   - 114: {fileID: 11464738}
   - 114: {fileID: 11424718}
-  - 54: {fileID: 5482988}
   m_Layer: 0
   m_Name: Fan
   m_TagString: Untagged
@@ -461,13 +461,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Fan
-  stashable: 1
   icon: {fileID: 21300000, guid: 02fb175cef30acf4d84738e642d7f81c, type: 3}
+  stashable: 1
+  rbody: {fileID: 5482988}
+  rbodyOnStart: 0
   effects:
+  - type: 1
+    effect: {fileID: 11466538}
+    effectOnPickup: 0
+    effectOnDrop: 0
+    toggleGameObject: {fileID: 125630}
+    toggleOnPickup: 2
+    toggleOnDrop: 1
+    resetTransform: {fileID: 0}
+    resetRelativeTo: 0
+    resetOnPickup:
+      position: 0
+      rotation: 0
+      scale: 0
+    resetOnDrop:
+      position: 0
+      rotation: 0
+      scale: 0
   - type: 0
     effect: {fileID: 11466538}
-    onPickup: 2
-    onDrop: 1
+    effectOnPickup: 2
+    effectOnDrop: 1
+    toggleGameObject: {fileID: 0}
+    toggleOnPickup: 0
+    toggleOnDrop: 0
     resetTransform: {fileID: 0}
     resetRelativeTo: 0
     resetOnPickup:
@@ -480,8 +502,11 @@ MonoBehaviour:
       scale: 0
   - type: 0
     effect: {fileID: 11436518}
-    onPickup: 2
-    onDrop: 1
+    effectOnPickup: 2
+    effectOnDrop: 1
+    toggleGameObject: {fileID: 0}
+    toggleOnPickup: 0
+    toggleOnDrop: 0
     resetTransform: {fileID: 0}
     resetRelativeTo: 0
     resetOnPickup:
@@ -492,12 +517,15 @@ MonoBehaviour:
       position: 0
       rotation: 0
       scale: 0
-  - type: 1
+  - type: 2
     effect: {fileID: 0}
-    onPickup: 0
-    onDrop: 0
+    effectOnPickup: 0
+    effectOnDrop: 0
+    toggleGameObject: {fileID: 0}
+    toggleOnPickup: 0
+    toggleOnDrop: 0
     resetTransform: {fileID: 422040}
-    resetRelativeTo: 0
+    resetRelativeTo: 1
     resetOnPickup:
       position: 0
       rotation: 1

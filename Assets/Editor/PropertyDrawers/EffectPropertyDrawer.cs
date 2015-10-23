@@ -17,11 +17,14 @@ public class EffectPropertyDrawer : PropertyDrawer {
 		_EffectItem.Type type = (_EffectItem.Type)property.FindPropertyRelative("type").enumValueIndex;
 
         switch (type) {
-			case _EffectItem.Type.reset:
+			case _EffectItem.Type.resetTransform:
 				return 3f;
 
 			case _EffectItem.Type.effect:
 				return 2f;
+
+            case _EffectItem.Type.gameObject:
+                return 2f;
 
 			default:
 				return 1f;
@@ -51,7 +54,7 @@ public class EffectPropertyDrawer : PropertyDrawer {
 		EditorGUI.PropertyField(typeEnum, typeProperty, GUIContent.none);
 		EditorGUI.EndProperty();
 
-		if (type == _EffectItem.Type.reset) {
+		if (type == _EffectItem.Type.resetTransform) {
 			// Calculate relativeto rect
 			var relProperty = property.FindPropertyRelative("resetRelativeTo");
 			var relContent = new GUIContent("Relative To");
@@ -72,46 +75,52 @@ public class EffectPropertyDrawer : PropertyDrawer {
 		EditorGUI.indentLevel = 0;
 
 
-		if (type == _EffectItem.Type.effect) {
-			// Calculate rects
-			var halfw = position.width / 2f;
+		if (type == _EffectItem.Type.effect || type == _EffectItem.Type.gameObject) {
+            // What
+            string objectRef = type == _EffectItem.Type.effect ? "effect" : "toggleGameObject";
+            string pickUpRef = type == _EffectItem.Type.effect ? "effectOnPickup" : "toggleOnPickup";
+            string dropRef = type == _EffectItem.Type.effect ? "effectOnDrop" : "toggleOnDrop";
+            float labelWidth = type == _EffectItem.Type.effect ? 45f : 80f;
+
+            // Calculate rects
+            var halfw = position.width / 2f;
 			var height = EditorGUIUtility.singleLineHeight;
 
 			// Effect object
-			var effectProperty = property.FindPropertyRelative("effect");
-			var effectRect = new Rect(position.x, position.y, position.width, height);
-			var effectLabel = new Rect(effectRect.x, effectRect.y, 45f, effectRect.height);
-			var effectObj = new Rect(effectRect.x + 45f, effectRect.y, effectRect.width - 45f, effectRect.height);
+			var objProperty = property.FindPropertyRelative(objectRef);
+			var objRect = new Rect(position.x, position.y, position.width, height);
+			var objLabel = new Rect(objRect.x, objRect.y, labelWidth, objRect.height);
+			var objObj = new Rect(objRect.x + objLabel.width, objRect.y, objRect.width - objLabel.width, objRect.height);
 
 			// Pickup
-			var onPickupProperty = property.FindPropertyRelative("onPickup");
+			var onPickupProperty = property.FindPropertyRelative(pickUpRef);
             var onPickupRect = new Rect(position.x, position.y + height, halfw, height);
 			var onPickupLabel = new Rect(onPickupRect.x, onPickupRect.y, 60f, onPickupRect.height);
 			var onPickupEnum = new Rect(onPickupRect.x + 60f, onPickupRect.y, onPickupRect.width - 60f, onPickupRect.height);
 
 			// Drop
-			var onDropProperty = property.FindPropertyRelative("onDrop");
+			var onDropProperty = property.FindPropertyRelative(dropRef);
             var onDropRect = new Rect(position.x + halfw, position.y + height, halfw, height);
 			var onDropLabel = new Rect(onDropRect.x, onDropRect.y, 55f, onDropRect.height);
 			var onDropEnum = new Rect(onDropRect.x + 55f, onDropRect.y, onDropRect.width - 55f, onDropRect.height);
 
 			// Draw fields - passs GUIContent.none to each so they are drawn without labels
-			EditorGUI.BeginProperty(effectRect, new GUIContent("effect"), effectProperty);
-			EditorGUI.LabelField(effectLabel, "effect:");
-			EditorGUI.PropertyField(effectObj, effectProperty, GUIContent.none);
+			EditorGUI.BeginProperty(objRect, new GUIContent(objectRef), objProperty);
+			EditorGUI.LabelField(objLabel, type == _EffectItem.Type.effect ? "effect:" : "gameobject:");
+			EditorGUI.PropertyField(objObj, objProperty, GUIContent.none);
 			EditorGUI.EndProperty();
 
-			EditorGUI.BeginProperty(onPickupRect, new GUIContent("onPickup"), onPickupProperty);
+			EditorGUI.BeginProperty(onPickupRect, new GUIContent(pickUpRef), onPickupProperty);
 			EditorGUI.LabelField(onPickupLabel, "onPickup:");
 			EditorGUI.PropertyField(onPickupEnum, onPickupProperty, GUIContent.none);
 			EditorGUI.EndProperty();
 
-			EditorGUI.BeginProperty(onDropRect, new GUIContent("onDrop"), onDropProperty);
+			EditorGUI.BeginProperty(onDropRect, new GUIContent(dropRef), onDropProperty);
 			EditorGUI.LabelField(onDropLabel, " onDrop:");
 			EditorGUI.PropertyField(onDropEnum, onDropProperty, GUIContent.none);
 			EditorGUI.EndProperty();
 
-		} else if (type == _EffectItem.Type.reset) {
+		} else if (type == _EffectItem.Type.resetTransform) {
 
 			// Calculate rects
 			var height = EditorGUIUtility.singleLineHeight;

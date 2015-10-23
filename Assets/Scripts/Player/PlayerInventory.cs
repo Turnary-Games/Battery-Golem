@@ -46,14 +46,24 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
-	public void Drop() {
-		Unequip(false);
+    public void Drop() {
+        Unequip(false);
 	}
-	#endregion
+    #endregion
+
+    #region Dropoff at station
+    // Dropoff at dropoff-station
+    public void Dropoff(DropoffStation station) {
+        _Equipable item = equipped;
+        UnequipRaw();
+
+        station.OnDropoff(item);
+    }
+    #endregion
 
 
-	#region Equipping
-	public void Equip(_Equipable item) {
+    #region Equipping
+    public void Equip(_Equipable item) {
 		// Equip it
 		equipped = item;
 		// Move it
@@ -64,6 +74,13 @@ public class PlayerInventory : MonoBehaviour {
 		item.OnEquip (this);
 		hud_equipped.SetItem(equipped);
 	}
+
+    public void UnequipRaw() {
+        equipped.OnUnequip(this);
+        equipped = null;
+
+        hud_equipped.SetItem(null);
+    }
 
 	public void Unequip(bool sendToInv) {
 		if (equipped != null) {
@@ -78,10 +95,7 @@ public class PlayerInventory : MonoBehaviour {
 				equipped.OnDropped(this);
 			}
 
-			equipped.OnUnequip(this);
-			equipped = null;
-
-			hud_equipped.SetItem(null);
+            UnequipRaw();
 		}
 	}
 

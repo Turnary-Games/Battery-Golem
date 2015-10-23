@@ -17,8 +17,13 @@ public class _EffectItem {
 
 	// Effect
 	public _Effect effect;
-	public ActionOnEvent onPickup;
-	public ActionOnEvent onDrop;
+	public ActionOnEvent effectOnPickup;
+	public ActionOnEvent effectOnDrop;
+
+    // Toggle gameobject
+    public GameObject toggleGameObject;
+    public ActionOnEvent toggleOnPickup;
+    public ActionOnEvent toggleOnDrop;
 
 	// Reset transform
 	public Transform resetTransform;
@@ -34,50 +39,85 @@ public class _EffectItem {
 		OnEvent(EventType.onDrop);
 	}
 
-	public void OnEvent(EventType eventType) {
+	void OnEvent(EventType eventType) {
 		switch (type) {
 			case Type.effect:
-				DoEffect(eventType);
-				break;
+                if (eventType == EventType.onDrop) {
+                    DoEffectAction(effectOnDrop);
+                    effect.OnDrop();
+                } else if (eventType == EventType.onPickup) {
+                    DoEffectAction(effectOnPickup);
+                    effect.OnPickup();
+                }
+                break;
 
-			case Type.reset:
+			case Type.resetTransform:
 				DoReset(eventType);
 				break;
+
+            case Type.gameObject:
+                if (eventType == EventType.onDrop) {
+                    DoGameObjectAction(toggleOnDrop);
+                } else if (eventType == EventType.onPickup) {
+                    DoGameObjectAction(toggleOnPickup);
+                }
+                break;
 		}
 	}
 
-	public void DoEffect(EventType eventType) {
-		if (eventType == EventType.onDrop) {
-			DoEventAction(onDrop);
-			effect.OnDrop();
-		} else if (eventType == EventType.onPickup) {
-			DoEventAction(onPickup);
-			effect.OnPickup();
-		}
-	}
+    void DoEffectAction(ActionOnEvent action) {
+        if (effect == null)
+            return;
 
-	public void DoEventAction(ActionOnEvent action) {
-		if (effect == null)
-			return;
+        switch (action) {
+            case ActionOnEvent.doNothing:
+                // Do nothing
+                break;
 
-		switch (action) {
-			case ActionOnEvent.doNothing:
-				// Do nothing
-				break;
+            case ActionOnEvent.enable:
+                effect.OnActionEnable();
+                effect.enabled = true;
+                break;
 
-			case ActionOnEvent.enable:
-				effect.OnActionEnable();
-				effect.enabled = true;
-				break;
+            case ActionOnEvent.disable:
+                effect.OnActionDisable();
+                effect.enabled = false;
+                break;
 
-			case ActionOnEvent.disable:
-				effect.OnActionDisable();
-				effect.enabled = false;
-				break;
-		}
-	}
+            case ActionOnEvent.toggle:
+                if (effect.enabled) {
+                    DoEffectAction(ActionOnEvent.disable);
+                } else {
+                    DoEffectAction(ActionOnEvent.enable);
+                }
+                break;
+        }
+    }
 
-	public void DoReset(EventType eventType) {
+    void DoGameObjectAction(ActionOnEvent action) {
+        if (toggleGameObject == null)
+            return;
+
+        switch (action) {
+            case ActionOnEvent.doNothing:
+                // Do nothing
+                break;
+
+            case ActionOnEvent.enable:
+                toggleGameObject.SetActive(true);
+                break;
+
+            case ActionOnEvent.disable:
+                toggleGameObject.SetActive(false);
+                break;
+
+            case ActionOnEvent.toggle:
+                toggleGameObject.SetActive(!toggleGameObject.activeSelf);
+                break;
+        }
+    }
+
+    void DoReset(EventType eventType) {
 		if (eventType == EventType.onDrop)
 			resetOnDrop.Reset(resetTransform, Space.Self);
 		else if (eventType == EventType.onPickup)
@@ -92,12 +132,14 @@ public class _EffectItem {
 	public enum ActionOnEvent {
 		doNothing,
 		enable,
-		disable
+		disable,
+        toggle
 	}
 
 	public enum Type {
 		effect,
-		reset,
+        gameObject,
+		resetTransform,
 	}
 
 	[System.Serializable]

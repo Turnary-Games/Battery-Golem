@@ -212,6 +212,13 @@ public class PlayerController : MonoBehaviour {
 			_ElectricListener.ElectrifyAllAt(electricPoint.position);
 		}
 	}
+
+    // Try to dropoff the item
+    void Dropoff() {
+        if (inventory.equipped != null) {
+
+        }
+    }
 #endregion
 
 	// Get all listeners of the touching 

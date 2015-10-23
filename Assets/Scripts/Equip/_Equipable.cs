@@ -2,15 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(_TouchListener))]
 public class _Equipable : MonoBehaviour {
 
     [Header("Equipable variables")]
 
     public string itemName = "Unnamned";
-    public bool stashable = true;
     public Sprite icon;
     [Space]
+    public bool stashable = true;
+    public Rigidbody rbody;
+    public _EffectItem.ActionOnEvent rbodyOnStart;
     public _EffectItem[] effects;
 
     public static List<_Equipable> _ALL = new List<_Equipable>();
@@ -21,6 +24,28 @@ public class _Equipable : MonoBehaviour {
 
 	protected virtual void Start() {
 		_ALL.Add(this);
+
+        // do stuff to rigidbody
+        switch (rbodyOnStart) {
+            case _EffectItem.ActionOnEvent.doNothing:
+                // Do nothing
+                break;
+
+            case _EffectItem.ActionOnEvent.enable:
+                EnableRigidbody();
+                break;
+
+            case _EffectItem.ActionOnEvent.disable:
+                DisableRigidbody();
+                break;
+
+            case _EffectItem.ActionOnEvent.toggle:
+                if (IsRigidbodyEnabled())
+                    DisableRigidbody();
+                else
+                    EnableRigidbody();
+                break;
+        }
 	}
 
     protected virtual void OnCollisionStay(Collision collision) {
@@ -29,20 +54,26 @@ public class _Equipable : MonoBehaviour {
     }
 
     public virtual void OnEquip(PlayerInventory inventory) {
+        // Item got equipped
 		equipped = true;
 		this.inventory = inventory;
-		print (itemName + " equipped");
+		print ("Item \"" + itemName + "\" equipped");
 	}
 
 	public virtual void OnUnequip(PlayerInventory inventory) {
+        // Item got unequipped
 		equipped = false;
 		this.inventory = null;
-		print (itemName + " unequipped");
+		print ("Item \"" + itemName + "\" unequipped");
 	}
 
 	public virtual void OnPickupBegin(PlayerInventory inventory) {
-		// Item is about to be picked up
-	}
+        // Item is about to be picked up
+
+        // Disable rigidbody
+        DisableRigidbody();
+    }
+
 	public virtual void OnPickup(PlayerInventory inventory) {
         // Item got picked up from ground
 
@@ -51,13 +82,31 @@ public class _Equipable : MonoBehaviour {
     }
 
 	public virtual void OnDroppedBegin(PlayerInventory inventory) {
-		// Item is about to be dropped
-	}
+        // Item is about to be dropped
+
+        // Reactivate rigidbody
+        EnableRigidbody();
+    }
     public virtual void OnDropped(PlayerInventory inventory) {
         // Item dropped on ground
 
         // Enable all effects
         effects.OnDrop();
+    }
+
+    public void DisableRigidbody() {
+        rbody.detectCollisions = false;
+        rbody.useGravity = false;
+        rbody.velocity = Vector3.zero;
+    }
+
+    public void EnableRigidbody() {
+        rbody.detectCollisions = true;
+        rbody.useGravity = true;
+    }
+
+    public bool IsRigidbodyEnabled() {
+        return rbody.detectCollisions && rbody.useGravity;
     }
 
 	public float GetDistance(Vector3 from, bool ignoreY = false) {

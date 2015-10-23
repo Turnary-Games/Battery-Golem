@@ -1832,7 +1832,7 @@ MonoBehaviour:
   pushPower: 2
   slopeForce: 2
   pickupRange: 3.5
-  ignoreYAxis: 0
+  ignoreYAxis: 1
   outsideForces: {x: 0, y: 0, z: 0}
 --- !u!114 &11433410
 MonoBehaviour:

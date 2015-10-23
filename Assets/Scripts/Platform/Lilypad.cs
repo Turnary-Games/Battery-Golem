@@ -2,9 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(_TouchListener))]
-public class Lilypad : MonoBehaviour {
-
-	public Rigidbody rbody;
+public class Lilypad : _Platform {
 
 	private PlayerController player;
 
