@@ -207,7 +207,7 @@ GameObject:
   m_Layer: 0
   m_Name: Electric point
   m_TagString: Untagged
-  m_Icon: {fileID: -3906512864147387971, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1803,7 +1803,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 02fb175cef30acf4d84738e642d7f81c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1831,7 +1831,7 @@ MonoBehaviour:
   continuousJumping: 1
   pushPower: 2
   slopeForce: 2
-  pickupRange: 0
+  pickupRange: 3.5
   ignoreYAxis: 0
   outsideForces: {x: 0, y: 0, z: 0}
 --- !u!114 &11433410

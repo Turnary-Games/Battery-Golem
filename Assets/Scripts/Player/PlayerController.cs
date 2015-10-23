@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
 
 	[Tooltip("Range in meters")]
 	public float pickupRange;
-	[Tooltip("When calculating which item is closest should it ignore the y axis?\n(Which would count everything as on the same height)")]
+	[Tooltip("When calculating which item is closest should it ignore the y axis? (Which would count everything as on the same height)")]
 	public bool ignoreYAxis = false;
 
 	[HideInInspector]
@@ -192,10 +192,10 @@ public class PlayerController : MonoBehaviour {
 
 	void GrabNDrop() {
 		if (inventory.equipped == null) {
-			// No item equipped. Try to grab the nearby item
-			var item = GetItemInRange();
-			if (item != null)
-				inventory.Pickup(item);
+            // No item equipped. Try to grab the nearby item
+            var item = GetItemInRange();
+            if (item != null)
+                inventory.Pickup(item);
 		} else {
 			// Item equipped. Drop it.
 			inventory.Drop();

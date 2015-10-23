@@ -2,24 +2,33 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(_TouchListener))]
 public class _Equipable : MonoBehaviour {
 
-	[Header("Equipable variables")]
+    [Header("Equipable variables")]
 
-	public string itemName = "Unnamned";
-	public bool stashable = true;
-	public Sprite icon;
+    public string itemName = "Unnamned";
+    public bool stashable = true;
+    public Sprite icon;
+    [Space]
+    public _EffectItem[] effects;
 
-	public static List<_Equipable> _ALL = new List<_Equipable>();
+    public static List<_Equipable> _ALL = new List<_Equipable>();
 
 	protected PlayerInventory inventory;
 	protected bool equipped = false;
+
 
 	protected virtual void Start() {
 		_ALL.Add(this);
 	}
 
-	public virtual void OnEquip(PlayerInventory inventory) {
+    protected virtual void OnCollisionStay(Collision collision) {
+        GameObject main = collision.collider.attachedRigidbody != null ? collision.collider.attachedRigidbody.gameObject : collision.gameObject;
+        main.SendMessage(TouchMethods.Touch, this, SendMessageOptions.DontRequireReceiver);
+    }
+
+    public virtual void OnEquip(PlayerInventory inventory) {
 		equipped = true;
 		this.inventory = inventory;
 		print (itemName + " equipped");
@@ -35,15 +44,21 @@ public class _Equipable : MonoBehaviour {
 		// Item is about to be picked up
 	}
 	public virtual void OnPickup(PlayerInventory inventory) {
-		// Item got picked up from ground
-	}
+        // Item got picked up from ground
+
+        // Disable all effects
+        effects.OnPickup();
+    }
 
 	public virtual void OnDroppedBegin(PlayerInventory inventory) {
 		// Item is about to be dropped
 	}
     public virtual void OnDropped(PlayerInventory inventory) {
-		// Item dropped on ground
-	}
+        // Item dropped on ground
+
+        // Enable all effects
+        effects.OnDrop();
+    }
 
 	public float GetDistance(Vector3 from, bool ignoreY = false) {
 		Vector3 to = transform.position;
@@ -76,12 +91,13 @@ public class _Equipable : MonoBehaviour {
 
 			// Look for the closest one
 			_ALL.ForEach(delegate (_Equipable obj) {
+                // Ignore all that is in an inventory
 				if (obj.inventory != null)
 					return;
 
 				float dist = obj.GetDistance(from, ignoreY);
 
-				if (closestObj == null || (closestDist < dist)) {
+				if (closestObj == null || (dist < closestDist)) {
 					closestObj = obj;
 					closestDist = dist;
 				}

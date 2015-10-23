@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(_TouchListener))]
 public class Lilypad : MonoBehaviour {
 
 	public Rigidbody rbody;
 
 	private PlayerController player;
 
+    // Called by fan
 	public void Move(Vector3 move, float power) {
 		rbody.velocity = Vector3.Lerp(rbody.velocity, move, Time.fixedDeltaTime * power);
 	}

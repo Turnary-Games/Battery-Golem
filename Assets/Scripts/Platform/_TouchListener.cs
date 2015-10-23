@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public sealed class TouchMethods {
 	// Called by the listener
-	public readonly static string OnTouch = "OnTouch";
-	public readonly static string OnTouchStart = "OnTouchStart";
-	public readonly static string OnTouchEnd = "OnTouchEnd";
+	public readonly static string OnTouch = "OnTouch"; // args: Touch touch
+    public readonly static string OnTouchStart = "OnTouchStart"; // args: Touch touch
+    public readonly static string OnTouchEnd = "OnTouchEnd"; // args: Touch touch
 
-	// Called by anything else to contact the listener
-	public readonly static string Touch = "Touch";
+    // Called by anything else to contact the listener
+    public readonly static string Touch = "Touch"; // args: Object source
 }
 
 public class Touch {
@@ -38,7 +38,7 @@ public class Touch {
 		touchedLastStep = touchedThisStep;
 		touchedThisStep = false;
 
-		return false; // <- keep me me
+		return false; // <- keep me
 	}
 }
 
@@ -57,6 +57,7 @@ public class _TouchListener : MonoBehaviour {
 		});
 	}
 
+    // Called from others, ex: playercontroller
 	public void Touch(Object source) {
 		if (source) {
 			// Try to find a matching touch

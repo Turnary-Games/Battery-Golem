@@ -4,11 +4,7 @@ using System.Collections.Generic;
 
 public class Fan : _Equipable {
 
-	[Header("Settings")]
-	
-	public _EffectItem[] effects;
-
-	[Space]
+	[Header("Fan settings")]
 
 	[Tooltip("Top speed the lilypad will reach.")]
 	public float speed = 1;
@@ -33,28 +29,6 @@ public class Fan : _Equipable {
 				lilypad.Move(move, power);
 			}
 		});
-	}
-
-	public override void OnPickupBegin(PlayerInventory inventory) {
-		base.OnPickupBegin(inventory);
-
-		lastY = transform.position.y;
-	}
-
-	public override void OnPickup (PlayerInventory inventory) {
-		base.OnPickup (inventory);
-
-		// Disable all effects
-		effects.OnPickup ();
-	}
-
-	public override void OnDropped (PlayerInventory inventory) {
-		base.OnDropped (inventory);
-
-		transform.position = new Vector3(transform.position.x, lastY, transform.position.z);
-
-		// Enable all effects
-		effects.OnDrop ();
 	}
 
 }
