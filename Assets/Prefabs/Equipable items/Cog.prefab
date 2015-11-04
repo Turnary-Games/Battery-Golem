@@ -155,7 +155,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 165848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09489a412a411de4f83b57925f8001ee, type: 3}
+  m_Script: {fileID: 11500000, guid: c0b953247fd3f3840aa0aa7029ce470d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Missing cog

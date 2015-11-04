@@ -53,11 +53,16 @@ public class PlayerInventory : MonoBehaviour {
 
     #region Dropoff at station
     // Dropoff at dropoff-station
-    public void Dropoff(DropoffStation station) {
-        _Equipable item = equipped;
-        UnequipRaw();
+    public bool Dropoff(DropoffStation station) {
+        DropoffItem item = equipped as DropoffItem;
+		if (item != null) {
+			UnequipRaw();
 
-        station.OnDropoff(item);
+			station.OnDropoff(item);
+
+			return true;
+		}
+		return false;
     }
     #endregion
 

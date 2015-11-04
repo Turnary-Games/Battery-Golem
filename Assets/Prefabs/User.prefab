@@ -207,7 +207,7 @@ GameObject:
   m_Layer: 0
   m_Name: Electric point
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -4453645107408684167, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -387,6 +387,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22448196}
   - 222: {fileID: 22237046}
+  - 114: {fileID: 11402308}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -1057,7 +1058,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.6000004, y: 0, z: 30.7000008}
+  m_LocalPosition: {x: -34.2000008, y: 0, z: 28.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 411782}
@@ -1784,6 +1785,19 @@ MonoBehaviour:
   equippedParent: {fileID: 465668}
   equipped: {fileID: 0}
   hud_equipped: {fileID: 11487562}
+--- !u!114 &11402308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1254083943, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 3
+  m_AspectRatio: 1
 --- !u!114 &11406550
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1823,7 +1837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 14336522}
-  electricPoint: {fileID: 411782}
+  electricTransform: {fileID: 411782}
   inventory: {fileID: 11400858}
   moveSpeed: 5
   rotSpeed: 300
@@ -2136,8 +2150,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: .75}
   m_AnchorMax: {x: .25, y: 1}
-  m_AnchoredPosition: {x: 99, y: -55.5}
-  m_SizeDelta: {x: 178, y: 91}
+  m_AnchoredPosition: {x: 5, y: -5}
+  m_SizeDelta: {x: -10, y: -10}
   m_Pivot: {x: .5, y: .5}
 --- !u!224 &22448196
 RectTransform:
@@ -2153,10 +2167,10 @@ RectTransform:
   - {fileID: 22419970}
   m_Father: {fileID: 22424050}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 128, y: 128}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22452526
 RectTransform:
@@ -2172,10 +2186,10 @@ RectTransform:
   - {fileID: 22498256}
   m_Father: {fileID: 22424050}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 128, y: 0}
-  m_SizeDelta: {x: 256, y: 128}
+  m_AnchoredPosition: {x: 120, y: 0}
+  m_SizeDelta: {x: 200, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22467434
 RectTransform:

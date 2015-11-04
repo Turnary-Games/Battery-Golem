@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
 	[Header("Variables (DONT ALTER)")]
 
 	public CharacterController character;
-	public Transform electricPoint;
+	public Transform electricTransform;
 	public PlayerInventory inventory;
 
 	[Header("Movement settings")]
@@ -29,9 +29,19 @@ public class PlayerController : MonoBehaviour {
 	public float pickupRange;
 	[Tooltip("When calculating which item is closest should it ignore the y axis? (Which would count everything as on the same height)")]
 	public bool ignoreYAxis = false;
-
-	[HideInInspector]
+	
 	public Vector3 outsideForces;
+
+	public Vector3 characterCenter {
+		get {
+			return transform.position + (character != null ? character.center : Vector3.zero);
+        }
+	}
+	public Vector3 electricPoint {
+		get {
+			return electricTransform != null ? electricTransform.position : transform.position;
+		}
+	}
 
 	// Current movement velocity
 	private Vector3 motion;
@@ -42,13 +52,20 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		Movement ();
-		Interact();
+
+		if (Input.GetButtonDown("GrabNDrop")) {
+			GrabNDrop();
+		}
+
+		if (Input.GetAxis("Interact") != 0) {
+			ElectrifyNInteract();
+		}
 	}
 
 #if UNITY_EDITOR
 	void OnDrawGizmosSelected() {
 		Gizmos.color = Color.cyan;
-		Gizmos.DrawWireSphere(transform.position + character.center, pickupRange);
+		Gizmos.DrawWireSphere(characterCenter, pickupRange);
 	}
 #endif
 
@@ -173,21 +190,24 @@ public class PlayerController : MonoBehaviour {
 	}
 	*/
 
-#region Picking up/Dropping items & Interacting
+	#region Picking up/Dropping items & Interacting
 
-	void Interact() {
-		if (Input.GetButtonDown("GrabNDrop")) {
-			GrabNDrop();
-		}
-
-		if (Input.GetAxis("Interact") != 0) {
-			Electrify();
+	void ElectrifyNInteract() {
+		if (!_ElectricListener.InteractAt(this, electricPoint)) {
+			// Didn't interact with anything... Try to electrify
+			if (inventory.equipped != null) {
+				// Electrify the equipped item
+				inventory.equipped.SendMessage(ElectricMethods.Electrify, this, SendMessageOptions.DontRequireReceiver);
+			} else {
+				// Try to electrify at your fingertips
+				_ElectricListener.ElectrifyAllAt(this, electricPoint);
+			}
 		}
 	}
 
 	public _Equipable GetItemInRange() {
-		var closest = _Equipable.GetClosest(transform.position + character.center, ignoreYAxis);
-		return closest.valid && closest.dist <= pickupRange ? closest.item : null;
+		var closest = Searchable.GetClosest<_Equipable>(characterCenter, ignoreYAxis);
+		return closest.valid && closest.dist <= pickupRange ? closest.obj : null;
 	}
 
 	void GrabNDrop() {
@@ -202,24 +222,7 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	// Try to electrify "something"
-	void Electrify() {
-		if (inventory.equipped != null) {
-			// Electrify the equipped item
-			inventory.equipped.SendMessage(ElectricMethods.Electrify, SendMessageOptions.DontRequireReceiver);
-		} else if (electricPoint != null) {
-			// Try to electrify at your fingertips
-			_ElectricListener.ElectrifyAllAt(electricPoint.position);
-		}
-	}
-
-    // Try to dropoff the item
-    void Dropoff() {
-        if (inventory.equipped != null) {
-
-        }
-    }
-#endregion
+	#endregion
 
 	// Get all listeners of the touching 
 	public List<_TouchListener> GetListeners() {
