@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
 
 	[Tooltip("Speed in meters per second.")]
 	public float moveSpeed = 1;
+	[Tooltip("Time in seconds it takes to reach speed of /moveSpeed/. The lower the value the higer the acceleration.")]
+	public float topSpeedAfter = 0.5f;
 	[Tooltip("Speed in degrees per second.")]
 	public float rotSpeed = 1;
 	public float jumpHeight = 1;
@@ -80,10 +82,17 @@ public class PlayerController : MonoBehaviour {
 
 	void Move() {
 		// Motion to apply to the character
-		motion = GetAxis() * moveSpeed + Vector3.up * motion.y;
+		Vector3 targetMotion = GetAxis() * moveSpeed + Vector3.up * motion.y;
+		
+		// Pushed out from slopes
+		if (character.isGrounded && slopeAngle > character.slopeLimit) {
+			Vector3 delta = slopePoint - transform.position;
+			delta.y = 0;
+			targetMotion -= delta.normalized * slopeForce;
+		}
 
-		// Add external forces to the calulation
-		motion += outsideForces;
+		// Apply acceleration to motion vector
+		motion = Vector3.MoveTowards(motion, targetMotion, moveSpeed * Time.deltaTime / topSpeedAfter);
 
 		if (IsGrounded()) {
 			// Jumping
@@ -94,15 +103,9 @@ public class PlayerController : MonoBehaviour {
 			motion += Physics.gravity * Time.deltaTime;
 		}
 
-		// Pushed out from slopes
-		if (character.isGrounded && slopeAngle > character.slopeLimit) {
-			Vector3 delta = slopePoint - transform.position;
-			delta.y = 0;
-			motion -= delta.normalized * slopeForce;
-		}
 
 		// Move the character
-		character.Move(motion * Time.deltaTime);
+		character.Move((motion + outsideForces) * Time.deltaTime);
 	}
 
 	void Rotate() {

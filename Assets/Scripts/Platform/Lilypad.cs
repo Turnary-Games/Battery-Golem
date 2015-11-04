@@ -25,6 +25,7 @@ public class Lilypad : _Platform {
 
 	void OnTouchEnd(Touch touch) {
 		if (IsPlayer(touch)) {
+			player.outsideForces = Vector3.zero;
 			player = null;
 		}
 	}
