@@ -1058,7 +1058,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34.2000008, y: 0, z: 28.5}
+  m_LocalPosition: {x: -26.6000004, y: 0, z: 28.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 411782}
@@ -1781,10 +1781,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a9ed37ad47c7742be0f0eb05b55282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slots: []
   player: {fileID: 11410162}
   equippedParent: {fileID: 465668}
-  equipped: {fileID: 0}
   hud_equipped: {fileID: 11487562}
+  equipped: {fileID: 0}
 --- !u!114 &11402308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1810,7 +1811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1840,6 +1841,7 @@ MonoBehaviour:
   electricTransform: {fileID: 411782}
   inventory: {fileID: 11400858}
   moveSpeed: 5
+  topSpeedAfter: .5
   rotSpeed: 300
   jumpHeight: 5
   continuousJumping: 1

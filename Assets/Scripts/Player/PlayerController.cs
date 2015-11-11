@@ -217,11 +217,11 @@ public class PlayerController : MonoBehaviour {
 		if (inventory.equipped == null) {
             // No item equipped. Try to grab the nearby item
             var item = GetItemInRange();
-            if (item != null)
-                inventory.Pickup(item);
+			if (item != null)
+				inventory.AddItem(item);
 		} else {
 			// Item equipped. Drop it.
-			inventory.Drop();
+			inventory.RemoveItem(0);
 		}
 	}
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class DropoffStation : MonoBehaviour {
 
-    public Transform targetTransform;    
+    public Transform targetTransform;
 	public bool valid {
 		get {
 			return item != null;

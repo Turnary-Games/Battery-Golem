@@ -12,18 +12,17 @@ public class HUD_Equipped : MonoBehaviour {
 	public Text textItemInfo;
 	public Image imageFrame;
 	public Image imageIcon;
-
-	// Current item
-	private _Equipable item;
+	
 
 	public void SetItem(_Equipable item) {
 		textItemInfo.text = GetItemDescription(item);
 		imageIcon.sprite = GetItemSprite(item);
+		imageIcon.color = item == null ? Color.clear : Color.white;
 	}
 
 	public string GetItemDescription(_Equipable item) {
 		return item != null
-		/* Valid */		? "name: " + item.name
+		/* Valid */		? "name: " + item.itemName
 		/* Invalid */	: "<no item>";
 	}
 
@@ -33,8 +32,9 @@ public class HUD_Equipped : MonoBehaviour {
 		/* Invalid */	: null;
 	}
 
+	// Called by clicking on the HUD
 	public void DropItem() {
 		print("HUD sais drop it!");
-		inventory.Drop();
+		inventory.RemoveItem(0);
 	}
 }

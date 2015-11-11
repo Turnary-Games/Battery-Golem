@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ExtensionMethods {
 
@@ -24,5 +25,23 @@ namespace ExtensionMethods {
             return rbody.detectCollisions && rbody.useGravity;
         }
     }
+
+	public static class InventoryExtension {
+		public static int EmptySlot(this List<_Item> list, int size) {
+			if (list == null || list.Capacity == 0)
+				return -1;
+
+			// Basic algorithm to find an empty slot
+			for (int i = 0; i < size; i++) {
+				if (list[i] == null) {
+					// Empty slot
+					return i;
+				}
+			}
+
+			// List is full
+			return -1;
+		}
+	}
 
 }
