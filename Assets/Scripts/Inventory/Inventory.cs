@@ -3,49 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 using ExtensionMethods;
 
-public abstract class Inventory : MonoBehaviour {
-
+public abstract class Inventory<Item> : MonoBehaviour where Item : _Item {
+	
 	/// <summary>
-	/// The inventory slots. The size of the inventory is defined by the size variable.
+	/// The inventory slots. The size of the inventory is defined by the size of the array.
 	/// </summary>
-	public List<_Item> slots = new List<_Item>();
-	/// <summary>
-	/// The size of the inventory.
-	/// </summary>
-	public abstract int capacity { get; }
+	public abstract Item[] slots { get; }
 
 	// Events
-	public abstract void OnItemMoved(_Item item);
-	public abstract void OnItemAdded(_Item item);
-	public abstract void OnItemRemoved(_Item item);
+	public abstract void OnItemMoved(OnItemMovedEvent _event);
+	public abstract void OnItemAdded(OnItemAddedEvent _event);
+	public abstract void OnItemRemoved(OnItemRemovedEvent _event);
 
 	/// <summary>
 	/// Should the inventory accept this item?
 	/// Returns the slot the item should go into. A value of -1 means it does not accept the item.
 	/// </summary>
 	/// <param name="item">The item to check</param>
-	public virtual int AcceptItem(_Item item) {
-		return slots.EmptySlot(capacity);
+	public virtual int AcceptItem(Item item) {
+		return slots.EmptySlot();
 	}
 	
 
-	public bool AddItem(_Item item) {
+	public bool AddItem(Item item) {
 		int index = AcceptItem(item);
 
 		if (index >= 0) {
+			Debug.Log("["+name+"] Add item at index " + index);
 			if (slots[index] != null)
 				RemoveItem(index);
 
 			slots[index] = item;
 			item.OnPickup();
-			OnItemAdded(item);
+			OnItemAdded(new OnItemAddedEvent(item, index));
 
 			return true;
 		} else
 			return false;
 	}
 
-	public void RemoveItem(_Item item) {
+	public void RemoveItem(Item item) {
 		int index = slots.IndexOf(item);
 		if (index >= 0) {
 			RemoveItem(index);
@@ -53,12 +50,13 @@ public abstract class Inventory : MonoBehaviour {
 	}
 
 	public void RemoveItem(int index) {
-		_Item item = slots[index];
+		Item item = slots[index];
 
 		if (item != null) {
-			slots.RemoveAt(index);
+			Debug.Log("[" + name + "] Remove item from " + index);
+			slots[index] = null;
 			item.OnDropped();
-			OnItemRemoved(item);
+			OnItemRemoved(new OnItemRemovedEvent(item, index));
 		}
 	}
 
@@ -72,9 +70,56 @@ public abstract class Inventory : MonoBehaviour {
 
 		// Send events
 		if (itemA != null)
-			OnItemMoved(itemA);
+			OnItemMoved(new OnItemMovedEvent(itemA, slotA, slotB));
 		if (itemB != null)
-			OnItemMoved(itemB);
+			OnItemMoved(new OnItemMovedEvent(itemB, slotB, slotA));
+	}
+
+	public bool TransferItem<T>(int index, Inventory<T> other) where T: Item {
+		T item = slots[index] as T;
+		if (item != null && other.AcceptItem(item) >= 0) {
+			// Valid item and the other inventory accepts this item
+			RemoveItem(index);
+			return other.AddItem(item); // Should take it but just to be sure
+		} else {
+			return false;
+		}
+	}
+
+	public override string ToString() {
+		return slots.ToFancyString();
+	}
+
+	public struct OnItemRemovedEvent {
+		public int index;
+		public Item item;
+
+		public OnItemRemovedEvent(Item item, int index) {
+			this.item = item;
+			this.index = index;
+		}
+	}
+
+	public struct OnItemMovedEvent {
+		public int from;
+		public int to;
+		public Item item;
+
+		public OnItemMovedEvent(Item item, int from, int to) {
+			this.item = item;
+			this.from = from;
+			this.to = to;
+		}
+	}
+
+	public struct OnItemAddedEvent {
+		public int index;
+		public Item item;
+
+		public OnItemAddedEvent(Item item, int index) {
+			this.item = item;
+			this.index = index;
+		}
 	}
 
 }

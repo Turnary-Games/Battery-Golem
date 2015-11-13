@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 
-public class PlayerInventory : Inventory {
+public class PlayerInventory : Inventory<_Equipable> {
 
 	/*
 
@@ -21,116 +21,99 @@ public class PlayerInventory : Inventory {
 	public HUD_Equipped hud_equipped;
 
 	[HideInInspector]
-	public _Equipable equipped;
+	public _Equipable equipped {
+		get { return slots.Length > 0 ? slots[0] as _Equipable : null; }
+		set { slots[0] = value; }
+	}
 
-	public override int capacity { get { return 4; } }
+	// The size of the inventoryList defines the size of the inventory
+	private _Equipable[] inventoryList = new _Equipable[4];
+	public override _Equipable[] slots { get { return inventoryList; } }
 
 	void Start() {
 		hud_equipped.SetItem(equipped);
 	}
-
-	/*
+	
 	#region Pickup item (from ground)
 	public void Pickup(_Equipable item) {
-		if ((equipped != null && !equipped.Equals(item as _Equipable)) || item == null)
+		if (equipped != null)
+			return;
+
+		if (item == null)
 			return;
 		
 		if (AddItem(item)) {
 			// Equip the item
-			Equip(item);
 			item.OnPickup();
 		}
 	}
 
 	public void Pickup(GameObject obj) {
-		var item = obj.GetComponent<_Equipable>();
-
-		if (item != null) {
-			// Valid object, equip it.
-			Pickup(item);
-		} else {
-			print("INVALID PICKUP ITEM: " + obj.name);
-		}
+		Pickup(obj.GetComponent<_Equipable>());
 	}
     #endregion
-	*/
 
     #region Dropoff at station
     // Dropoff at dropoff-station
     public bool Dropoff(DropoffStation station) {
-        DropoffItem item = equipped as DropoffItem;
-		if (item != null) {
-			RemoveItem(0);
-			station.OnDropoff(item);
-
-			return true;
-		}
-		return false;
+		return TransferItem(0, station);
     }
     #endregion
 
-	/*
     #region Equipping
-	private void EquipRaw(_Equipable item) {
-		// Equip it
-		equipped = item;
-		// Move it
+	void MoveToEquipped(_Equipable item) {
 		item.transform.parent = equippedParent;
 		item.transform.localPosition = Vector3.zero;
 		item.transform.localEulerAngles = Vector3.zero;
+		item.OnEquip(this);
+	}
+
+	void MoveToInventory(_Equipable item) {
+		item.transform.parent = transform;
+		item.transform.localPosition = Vector3.zero;
+		item.transform.localEulerAngles = Vector3.zero;
+		item.OnUnequip(this);
+	}
+	#endregion
+
+	#region Inventory manager
+	public override void OnItemRemoved(OnItemRemovedEvent _event) {
+		// Set it free
+		_event.item.transform.parent = null;
+		if (_event.index == 0)
+			_event.item.OnUnequip(this);
+		hud_equipped.SetItem(equipped);
+	}
+
+	public override void OnItemMoved(OnItemMovedEvent _event) {
+		if (_event.to == 0) {
+			// Moved to equipped slot
+			MoveToEquipped(_event.item);
+		} else if (_event.from == 0) {
+			// Moved from equipped slot
+			MoveToInventory(_event.item);
+		}
+
 		// Update the HUD
 		hud_equipped.SetItem(equipped);
 	}
 
-    public void Equip(_Equipable item) {
-		EquipRaw(item);
-
-		// Send the event
-		item.OnEquip (this);
-	}
-
-    private void UnequipRaw() {
-        equipped = null;
-		equipped.transform.parent = null;
-
-        hud_equipped.SetItem(null);
-    }
-
-	public _Equipable Unequip() {
-		if (equipped != null) {
-			var item = equipped;
-            UnequipRaw();
-			
-			// Send the events
-			item.OnUnequip(this);
-			return item;
-		}
-		return null;
-	}
-	#endregion
-	*/
-
-	#region Inventory manager
-	public override void OnItemRemoved(_Item item) {
-		//
-	}
-
-	public override void OnItemMoved(_Item item) {
-		//
-	}
-
-	public override void OnItemAdded(_Item item) {
-		//
+	public override void OnItemAdded(OnItemAddedEvent _event) {
+		// Move it
+		if (_event.index == 0) {
+			MoveToEquipped(_event.item);
+		} else
+			MoveToInventory(_event.item);
 	}
 
 	// Algorithm for deciding which slot the item goes into
-	public override int AcceptItem(_Item item) {
+	public override int AcceptItem(_Equipable item) {
 		// Only accept _Equipable items
-		if (!(item is _Equipable))
+		if (item == null)
 			return -1;
 
 		// If there is an equipped item then no
-		if (slots[0] != null)
+		if (equipped != null)
 			return -1;
 
 		// TODO

@@ -27,8 +27,24 @@ namespace ExtensionMethods {
     }
 
 	public static class InventoryExtension {
-		public static int EmptySlot(this List<_Item> list, int size) {
-			if (list == null || list.Capacity == 0)
+
+		/// <summary>
+		/// Get the index of the first empty slot.
+		/// If the value is null the slot is counted as empty.
+		/// If no size is declared it will use the /list.Length/ value.
+		/// </summary>
+		public static int EmptySlot<Item>(this Item[] list) where Item : _Item {
+			return list.EmptySlot(list.Length);
+		}
+
+		/// <summary>
+		/// Get the index of the first empty slot.
+		/// If the value is null the slot is counted as empty.
+		/// If no size is declared it will use the /list.Length/ value.
+		/// </summary>
+		/// <param name="size">Max size of the list</param>
+		public static int EmptySlot<Item>(this Item[] list, int size) where Item : _Item {
+			if (list == null || list.Length == 0)
 				return -1;
 
 			// Basic algorithm to find an empty slot
@@ -41,6 +57,24 @@ namespace ExtensionMethods {
 
 			// List is full
 			return -1;
+		}
+
+		public static int IndexOf<Item>(this Item[] list, Item item) where Item : _Item {
+			for (int index = 0; index < list.Length; index++) {
+				if ((item==null && list[index]==null) || (item!=null && item.Equals(list[index]))) {
+					return index;
+				} 
+			}
+			return -1;
+		}
+
+		public static string ToFancyString<T>(this T[] list) {
+			string s = "";
+			for (int index = 0; index < list.Length; index++) {
+				s += "[" + index + "]=" + (list[index] == null ? "null" : list[index].ToString()) + ";";
+			}
+
+			return list.ToString() + "{ " + s + " }";
 		}
 	}
 
