@@ -51,4 +51,8 @@ public class _Item : Searchable {
 		effects.OnDrop();
 		rbody.SetEnabled(true);
 	}
+
+	public virtual bool CanLiveInSlot<Item>(Inventory<Item> inv, int slot) where Item : _Item {
+		return true;
+	}
 }

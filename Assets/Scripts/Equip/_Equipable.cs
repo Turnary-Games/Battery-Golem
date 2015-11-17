@@ -14,6 +14,7 @@ using ExtensionMethods;
 public abstract class _Equipable : _Item {
 
     public Sprite icon;
+	public int slot = -1;
 
 	protected PlayerInventory inventory;
 	public bool equipped {
@@ -32,4 +33,10 @@ public abstract class _Equipable : _Item {
 		print ("Item \"" + itemName + "\" unequipped");
 	}
 
+	public override bool CanLiveInSlot<Item>(Inventory<Item> inv, int slot) {
+		if (inv is PlayerInventory) {
+			return slot == 0 || slot == this.slot;
+		}
+		return base.CanLiveInSlot(inv, slot);
+	}
 }

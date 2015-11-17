@@ -51,6 +51,25 @@ public class PlayerInventory : Inventory<_Equipable> {
 	public void Pickup(GameObject obj) {
 		Pickup(obj.GetComponent<_Equipable>());
 	}
+
+	// Unequip the equipped item
+	public void Unequip() {
+		if (equipped == null)
+			return;
+
+		if (equipped.slot <= 0) {
+			// Can't be stored in inventory
+			RemoveItem(0);
+		} else {
+			if (slots[equipped.slot] != null) {
+				// Not enough room! This should never happen; only assign 1 item to 1 slot!
+				// If for some reason we have 2 of the same item then just remove 1 of them
+				DeleteItem(equipped.slot);
+			}
+
+			SwapItems(equipped.slot, 0);
+		}
+	}
     #endregion
 
     #region Dropoff at station

@@ -60,19 +60,43 @@ public abstract class Inventory<Item> : MonoBehaviour where Item : _Item {
 		}
 	}
 
-	public void SwapItems(int slotA, int slotB) {
+	public void DeleteItem(int index) {
+		Item item = slots[index];
+
+		if (item != null) {
+			Debug.Log("[" + name + "] Deleted item from " + index);
+			slots[index] = null;
+			item.OnDropped();
+			OnItemRemoved(new OnItemRemovedEvent(item, index));
+
+			Destroy(item.gameObject);
+		}
+	}
+
+	public bool SwapItems(int slotA, int slotB) {
 		var itemA = slots[slotA];
 		var itemB = slots[slotB];
 
+		if (itemA != null && !itemA.CanLiveInSlot(this, slotB)) {
+			// Can't swap
+			return false;
+		}
+		if (itemB != null && !itemB.CanLiveInSlot(this, slotA)) {
+			// Can't swap
+			return false;
+		} 
+
 		// Swap
-		slots[slotA] = itemB;
 		slots[slotB] = itemA;
+		slots[slotA] = itemB;
 
 		// Send events
 		if (itemA != null)
 			OnItemMoved(new OnItemMovedEvent(itemA, slotA, slotB));
 		if (itemB != null)
 			OnItemMoved(new OnItemMovedEvent(itemB, slotB, slotA));
+
+		return true;
 	}
 
 	public bool TransferItem<T>(int index, Inventory<T> other) where T: Item {
