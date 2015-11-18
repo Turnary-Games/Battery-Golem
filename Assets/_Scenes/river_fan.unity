@@ -15064,7 +15064,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400788, guid: 8878de9dbe4088742bad7d85a3254dda, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9514638, guid: 8878de9dbe4088742bad7d85a3254dda, type: 2}
       propertyPath: m_Controller
@@ -16246,6 +16246,10 @@ Prefab:
     - target: {fileID: 11408562, guid: 130ff901fdb0f834b812ce9e57d4737b, type: 2}
       propertyPath: disablePixelLights
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408562, guid: 130ff901fdb0f834b812ce9e57d4737b, type: 2}
+      propertyPath: waterMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 130ff901fdb0f834b812ce9e57d4737b, type: 2}
