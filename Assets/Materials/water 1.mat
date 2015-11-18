@@ -72,11 +72,11 @@ Material:
       data:
         first:
           name: _ReflDistort
-        second: .493999988
+        second: .600000024
       data:
         first:
           name: _RefrDistort
-        second: .550000012
+        second: .600000024
     m_Colors:
       data:
         first:
@@ -84,15 +84,15 @@ Material:
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
-          name: _BumpMap_ST
-        second: {r: 1, g: 1, b: 0, a: 0}
-      data:
-        first:
           name: _RefrColor
-        second: {r: .882352948, g: .86678201, b: .843425632, a: 1}
+        second: {r: .843425632, g: .843694091, b: .882352948, a: 1}
       data:
         first:
           name: _Fresnel_ST
+        second: {r: 1, g: 1, b: 0, a: 0}
+      data:
+        first:
+          name: _BumpMap_ST
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
