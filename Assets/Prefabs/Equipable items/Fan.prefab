@@ -30,7 +30,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &129120
 GameObject:
   m_ObjectHideFlags: 1
@@ -94,6 +94,22 @@ GameObject:
   - 23: {fileID: 2320230}
   m_Layer: 0
   m_Name: fanBlade3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &147898
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 491672}
+  - 119: {fileID: 11934548}
+  m_Layer: 0
+  m_Name: Shadow projection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,6 +191,7 @@ Transform:
   m_Children:
   - {fileID: 499622}
   - {fileID: 498782}
+  - {fileID: 491672}
   m_Father: {fileID: 485918}
   m_RootOrder: 0
 --- !u!4 &437670
@@ -232,13 +249,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197074}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: -33.9500008, y: 2, z: 47.1616821}
+  m_LocalPosition: {x: -33.9500008, y: 1.5, z: 47.1616821}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 422040}
   - {fileID: 401478}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &491672
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147898}
+  m_LocalRotation: {x: .707105994, y: 1.42108547e-14, z: 2.30404382e-07, w: .707107604}
+  m_LocalPosition: {x: 0, y: 1.71429849, z: 0}
+  m_LocalScale: {x: 1.50906515, y: 1.50906551, z: 1.50906551}
+  m_Children: []
+  m_Father: {fileID: 422040}
+  m_RootOrder: 2
 --- !u!4 &498782
 Transform:
   m_ObjectHideFlags: 1
@@ -461,10 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Fan
-  icon: {fileID: 21300000, guid: 02fb175cef30acf4d84738e642d7f81c, type: 3}
-  stashable: 1
   rbody: {fileID: 5482988}
-  rbodyOnStart: 0
   effects:
   - type: 1
     effect: {fileID: 11466538}
@@ -534,6 +560,26 @@ MonoBehaviour:
       position: 0
       rotation: 0
       scale: 0
+  - type: 1
+    effect: {fileID: 0}
+    effectOnPickup: 0
+    effectOnDrop: 0
+    toggleGameObject: {fileID: 147898}
+    toggleOnPickup: 2
+    toggleOnDrop: 1
+    resetTransform: {fileID: 491672}
+    resetRelativeTo: 1
+    resetOnPickup:
+      position: 0
+      rotation: 1
+      scale: 0
+    resetOnDrop:
+      position: 0
+      rotation: 0
+      scale: 0
+  icon: {fileID: 21300000, guid: 02fb175cef30acf4d84738e642d7f81c, type: 3}
+  slot: 1
+  canBeElectrified: 1
   speed: 5.01999998
   power: 4
 --- !u!114 &11436518
@@ -561,6 +607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   col: {fileID: 0}
+  acceptElectrifying: 1
+  acceptInteraction: 0
 --- !u!114 &11466538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -575,6 +623,24 @@ MonoBehaviour:
   waveAmplitude: .400000006
   waveLength: 4
   relativeTo: 1
+--- !u!119 &11934548
+Projector:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147898}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: .100000001
+  m_FarClipPlane: 5
+  m_FieldOfView: 60
+  m_AspectRatio: 1
+  m_Orthographic: 0
+  m_OrthographicSize: 10
+  m_Material: {fileID: 2100000, guid: e30ff3588e719f34bbf0c66f22d97487, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -11,9 +11,10 @@ GameObject:
   - 33: {fileID: 3357896}
   - 23: {fileID: 2351064}
   - 114: {fileID: 11408562}
+  - 65: {fileID: 6551554}
   m_Layer: 4
   m_Name: water 1
-  m_TagString: Untagged
+  m_TagString: Water
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,6 +62,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159814}
   m_Mesh: {fileID: 4300006, guid: ba6a41dc489914734857bb5924eb70ad, type: 3}
+--- !u!65 &6551554
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 159814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 27.7999992, y: 158.991318, z: 65}
+  m_Center: {x: -3.03891684e-05, y: -80.6999969, z: 3.03891793e-05}
 --- !u!114 &11408562
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
-using System.Collections.Generic;
+using ExtensionMethods;
 
-public class PlayerInventory : Inventory<_Equipable> {
+public class PlayerInventory : _Inventory<_Equipable> {
 
 	/*
 
@@ -18,11 +17,11 @@ public class PlayerInventory : Inventory<_Equipable> {
 
 	public PlayerController player;
 	public Transform equippedParent;
-	public HUD_Equipped hud_equipped;
+	public PlayerHUD hud;
 
 	[HideInInspector]
 	public _Equipable equipped {
-		get { return slots.Length > 0 ? slots[0] as _Equipable : null; }
+		get { return slots.Get(0); }
 		set { slots[0] = value; }
 	}
 
@@ -31,7 +30,7 @@ public class PlayerInventory : Inventory<_Equipable> {
 	public override _Equipable[] slots { get { return inventoryList; } }
 
 	void Start() {
-		hud_equipped.SetItem(equipped);
+		hud.UpdateUIElements();
 	}
 	
 	#region Pickup item (from ground)
@@ -56,25 +55,28 @@ public class PlayerInventory : Inventory<_Equipable> {
 	public void Unequip() {
 		if (equipped == null)
 			return;
+		
+		if (equipped.slot < 0) {
+			RemoveItem(0);
+			return;
+		}
 
-		if (equipped.slot <= 0) {
+		if (slots.Get(equipped.slot) != null) {
+			// Not enough room! This should never happen; only assign 1 item to 1 slot!
+			// If for some reason we have 2 of the same item then just remove 1 of them
+			DeleteItem(equipped.slot);
+		}
+
+		if (!SwapItems(equipped.slot, 0)) {
 			// Can't be stored in inventory
 			RemoveItem(0);
-		} else {
-			if (slots[equipped.slot] != null) {
-				// Not enough room! This should never happen; only assign 1 item to 1 slot!
-				// If for some reason we have 2 of the same item then just remove 1 of them
-				DeleteItem(equipped.slot);
-			}
-
-			SwapItems(equipped.slot, 0);
 		}
 	}
     #endregion
 
     #region Dropoff at station
     // Dropoff at dropoff-station
-    public bool Dropoff(DropoffStation station) {
+    public bool Dropoff<Item>(_DropoffStation<Item> station) where Item : _Equipable {
 		return TransferItem(0, station);
     }
     #endregion
@@ -101,7 +103,8 @@ public class PlayerInventory : Inventory<_Equipable> {
 		_event.item.transform.parent = null;
 		if (_event.index == 0)
 			_event.item.OnUnequip(this);
-		hud_equipped.SetItem(equipped);
+
+		hud.UpdateUIElements();
 	}
 
 	public override void OnItemMoved(OnItemMovedEvent _event) {
@@ -114,7 +117,7 @@ public class PlayerInventory : Inventory<_Equipable> {
 		}
 
 		// Update the HUD
-		hud_equipped.SetItem(equipped);
+		hud.UpdateUIElements();
 	}
 
 	public override void OnItemAdded(OnItemAddedEvent _event) {
@@ -123,6 +126,8 @@ public class PlayerInventory : Inventory<_Equipable> {
 			MoveToEquipped(_event.item);
 		} else
 			MoveToInventory(_event.item);
+
+		hud.UpdateUIElements();
 	}
 
 	// Algorithm for deciding which slot the item goes into

@@ -5,11 +5,19 @@ using ExtensionMethods;
 
 public class PlayerController : MonoBehaviour {
 
-	[Header("Variables (DONT ALTER)")]
+	[Header("Object references")]
 
 	public CharacterController character;
 	public Transform electricTransform;
 	public PlayerInventory inventory;
+	public GameObject deathParticles;
+	public ParticleSystem electricParticles;
+
+	[Header("Health")]
+
+	[Tooltip("Time spent being dead until the game resets")]
+	public float resetDelay = 2.5f;
+	public float deathShake = .5f;
 
 	[Header("Movement settings")]
 
@@ -36,14 +44,10 @@ public class PlayerController : MonoBehaviour {
 	public Vector3 outsideForces;
 
 	public Vector3 characterCenter {
-		get {
-			return transform.position + (character != null ? character.center : Vector3.zero);
-        }
+		get { return transform.position + (character != null ? character.center : Vector3.zero); }
 	}
 	public Vector3 electricPoint {
-		get {
-			return electricTransform != null ? electricTransform.position : transform.position;
-		}
+		get { return (electricTransform ?? transform).position; }
 	}
 
 	// Current movement velocity
@@ -53,15 +57,52 @@ public class PlayerController : MonoBehaviour {
 	private float slopeAngle;
 	private Vector3 slopePoint;
 
+	private bool electrifying;
+
+	public bool dead {
+		get { return _dead; }
+		set {
+			if (value == true && !_dead) {
+				_dead = value;
+				OnDeath();
+			}
+		}
+	}
+	private bool _dead;
+
+	void Start() {
+		deathParticles.SetActive(false);
+	}
+
 	void Update () {
+		if (dead) {
+			DeadStep();
+
+			// Stop everything when dead.
+			// This includes gravity and movement.
+			return;
+		}
+
 		Movement ();
 
 		if (Input.GetButtonDown("GrabNDrop")) {
 			GrabNDrop();
 		}
 
+		electrifying = false;
 		if (Input.GetAxis("Interact") != 0) {
 			ElectrifyNInteract();
+		}
+		if (electrifying && !electricParticles.isPlaying)
+			electricParticles.Play();
+		if (!electrifying && !electricParticles.isStopped)
+			electricParticles.Stop();
+		
+
+		for (int slot = 1; slot <= 3; slot++) {
+			if (Input.GetButtonDown("Slot " + slot)) {
+				inventory.SwapItems(0, slot);
+			}
 		}
 	}
 
@@ -71,6 +112,31 @@ public class PlayerController : MonoBehaviour {
 		Gizmos.DrawWireSphere(characterCenter, pickupRange);
 	}
 #endif
+
+	#region Health
+	private float timeOfDeath;
+	private Vector3 placeOfDeath;
+
+	void OnDeath() {
+		deathParticles.SetActive(true);
+		timeOfDeath = Time.time;
+		placeOfDeath = transform.position;
+		
+		// Disable electrifying just in case
+		electricParticles.enableEmission = false;
+	}
+
+	void DeadStep() {
+
+		// Shake a little
+		transform.position = placeOfDeath + Vector3.one * Random.value * deathShake;
+
+		if (Time.time - timeOfDeath > resetDelay) {
+			Application.LoadLevel(Application.loadedLevel);
+		}
+	}
+
+	#endregion
 
 	#region Movement algorithms
 	void Movement() {
@@ -156,7 +222,15 @@ public class PlayerController : MonoBehaviour {
 		return (continuousJumping && Input.GetButton ("Jump"))
 			|| (!continuousJumping && Input.GetButtonDown ("Jump"));
 	}
-#endregion
+	#endregion
+
+	#region Collisions
+
+	void OnTriggerEnter(Collider other) {
+		if (other.tag == "Water") {
+			dead = true;
+		}
+	}
 
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 		// Calculate slope angle (in degrees)
@@ -171,6 +245,8 @@ public class PlayerController : MonoBehaviour {
 
 		PushObjects (hit);
 	}
+
+	#endregion
 
 	void PushObjects(ControllerColliderHit hit) {
 		Rigidbody body = hit.collider.attachedRigidbody;
@@ -199,14 +275,17 @@ public class PlayerController : MonoBehaviour {
 	void ElectrifyNInteract() {
 		if (!_ElectricListener.InteractAt(this, electricPoint)) {
 			// Didn't interact with anything... Try to electrify
-			if (inventory.equipped != null) {
+			if (inventory.equipped != null && inventory.equipped.canBeElectrified) {
 				// Electrify the equipped item
 				inventory.equipped.SendMessage(ElectricMethods.Electrify, this, SendMessageOptions.DontRequireReceiver);
-			} else {
+				electrifying = true;
+			} else if (inventory.equipped == null) {
 				// Try to electrify at your fingertips
 				_ElectricListener.ElectrifyAllAt(this, electricPoint);
+				electrifying = true;
 			}
 		}
+
 	}
 
 	public _Equipable GetItemInRange() {
@@ -222,7 +301,7 @@ public class PlayerController : MonoBehaviour {
 				inventory.AddItem(item);
 		} else {
 			// Item equipped. Drop it.
-			inventory.RemoveItem(0);
+			inventory.Unequip();
 		}
 	}
 

@@ -26,7 +26,7 @@ namespace ExtensionMethods {
         }
     }
 
-	public static class InventoryExtension {
+	public static class ListExtension {
 
 		/// <summary>
 		/// Get the index of the first empty slot.
@@ -75,6 +75,30 @@ namespace ExtensionMethods {
 			}
 
 			return list.ToString() + "{ " + s + " }";
+		}
+
+		public static T Get<T>(this T[] list, int index) where T : Object {
+			return list.Length > index && index >= 0 ? list[index] : null;
+		}
+	}
+
+	public static class ParticleExtensions {
+		public static void Play(this ParticleSystem[] list) {
+			foreach(var system in list) {
+				system.Play();
+			}
+		}
+
+		public static void Stop(this ParticleSystem[] list) {
+			foreach (var system in list) {
+				system.Stop();
+			}
+		}
+
+		public static void Pause(this ParticleSystem[] list) {
+			foreach (var system in list) {
+				system.Pause();
+			}
 		}
 	}
 
