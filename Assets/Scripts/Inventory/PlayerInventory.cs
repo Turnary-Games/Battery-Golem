@@ -34,23 +34,6 @@ public class PlayerInventory : _Inventory<_Equipable> {
 	}
 	
 	#region Pickup item (from ground)
-	public void Pickup(_Equipable item) {
-		if (equipped != null)
-			return;
-
-		if (item == null)
-			return;
-		
-		if (AddItem(item)) {
-			// Equip the item
-			item.OnPickup();
-		}
-	}
-
-	public void Pickup(GameObject obj) {
-		Pickup(obj.GetComponent<_Equipable>());
-	}
-
 	// Unequip the equipped item
 	public void Unequip() {
 		if (equipped == null)
@@ -76,7 +59,7 @@ public class PlayerInventory : _Inventory<_Equipable> {
 
     #region Dropoff at station
     // Dropoff at dropoff-station
-    public bool Dropoff<Item>(_DropoffStation<Item> station) where Item : _Equipable {
+    public bool Dropoff<Item>(_DropoffStation<Item> station) where Item : _DropoffItem {
 		return TransferItem(0, station);
     }
     #endregion
@@ -124,6 +107,7 @@ public class PlayerInventory : _Inventory<_Equipable> {
 		// Move it
 		if (_event.index == 0) {
 			MoveToEquipped(_event.item);
+			hud.UnlockSlot(_event.item.slot);
 		} else
 			MoveToInventory(_event.item);
 

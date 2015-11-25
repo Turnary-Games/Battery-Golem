@@ -33,7 +33,7 @@ public class PlayerHUD : MonoBehaviour {
 #endif
 
 	public void UpdateUIElements() {
-		
+
         for (int slot=0; slot < elements.Length; slot++) {
 			var item = inventory.slots.Get(slot);
 			var element = elements.Get(slot);
@@ -43,6 +43,15 @@ public class PlayerHUD : MonoBehaviour {
 			}
 		}
 
+	}
+
+	public bool UnlockSlot(int slot) {
+		var e = elements.Get(slot);
+		if (e != null && !e.unlocked) {
+			e.unlocked = true;
+			return true;
+		}
+		return false;
 	}
 
 	public void OnClick(int slot) {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public abstract class _DropoffStation<Item> : _Inventory<Item> where Item : _Equipable {
+public abstract class _DropoffStation<Item> : _Inventory<Item> where Item : _DropoffItem {
 
     public Transform targetTransform;
 	public bool valid { get { return item != null; } }
@@ -26,6 +26,7 @@ public abstract class _DropoffStation<Item> : _Inventory<Item> where Item : _Equ
 		_event.item.transform.parent = targetTransform != null ? targetTransform : transform;
 		_event.item.transform.localPosition = Vector3.zero;
 		_event.item.transform.localEulerAngles = Vector3.zero;
+		_event.item.OnItemDroppedOff(this);
 	}
 
 	public override void OnItemRemoved(OnItemRemovedEvent _event) {

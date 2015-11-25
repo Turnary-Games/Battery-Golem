@@ -5,14 +5,16 @@ using System.Collections;
 public class UIElement : MonoBehaviour {
 	
 	public static Sprite placeholder;
+	
+	public Sprite shadowSprite;
+	public bool unlocked = false;
 
-	public bool shadowAfterFirst = false;
+	[Space]
 
 	public Text title;
 	public Image frame;
 	public Image icon;
-
-	private Sprite savedSprite;
+	
 	private int slot = -1;
 	private PlayerHUD hud;
 
@@ -24,22 +26,17 @@ public class UIElement : MonoBehaviour {
 		var sprite = GetItemSprite(item);
 		var color = item == null ? Color.clear : Color.white;
 
-		if (shadowAfterFirst) {
-			if (sprite != null)
-				// If there is a sprite (i.e. valid item)
-				// Save it for later referance
-				savedSprite = sprite;
-			else if (savedSprite != null) {
-				// If there is no sprite (i.e. no item)
-				// Use the saved one, to indicate what goes here
-				sprite = savedSprite;
-				color = new Color(1, 1, 1, 0.5f);
-			}
+		if (sprite == null && shadowSprite != null && unlocked) {
+			// If there is no sprite (i.e. no item)
+			// Use the saved one, to indicate what goes here
+			SetShadow();
+		} else {
+
+			icon.sprite = sprite;
+			icon.color = color;
 		}
 
 		title.text = desc;
-		icon.sprite = sprite;
-		icon.color = color;
 	}
 
 	public void OnClick() {
@@ -47,13 +44,18 @@ public class UIElement : MonoBehaviour {
 			hud.OnClick(slot);
 	}
 
-	public static string GetItemDescription(_Equipable item) {
+	public void SetShadow(Sprite sprite = null) {
+		icon.sprite = shadowSprite = sprite ?? shadowSprite;
+		icon.color = new Color(1, 1, 1, 0.5f);
+	}
+
+	static string GetItemDescription(_Equipable item) {
 		return item != null
 		/* Valid */      ? "name: " + item.itemName
 		/* Invalid */    : "<no item>";
 	}
 
-	public static Sprite GetItemSprite(_Equipable item) {
+	static Sprite GetItemSprite(_Equipable item) {
 		return item != null
 		/* Valid */      ? (item.icon != null ? item.icon : placeholder)
 		/* Invalid */    : null;
