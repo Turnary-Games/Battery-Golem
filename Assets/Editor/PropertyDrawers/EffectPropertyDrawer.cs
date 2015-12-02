@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-[CustomPropertyDrawer(typeof(_EffectItem))]
+[CustomPropertyDrawer(typeof(PickupAction))]
 public class EffectPropertyDrawer : PropertyDrawer {
 
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
@@ -14,16 +14,16 @@ public class EffectPropertyDrawer : PropertyDrawer {
 
 	public float GetHeightMultiplier(SerializedProperty property, GUIContent label) {
 		// Type of effect
-		_EffectItem.Type type = (_EffectItem.Type)property.FindPropertyRelative("type").enumValueIndex;
+		PickupAction.Type type = (PickupAction.Type)property.FindPropertyRelative("type").enumValueIndex;
 
         switch (type) {
-			case _EffectItem.Type.resetTransform:
+			case PickupAction.Type.resetTransform:
 				return 3f;
 
-			case _EffectItem.Type.effect:
+			case PickupAction.Type.effect:
 				return 2f;
 
-            case _EffectItem.Type.gameObject:
+            case PickupAction.Type.gameObject:
                 return 2f;
 
 			default:
@@ -35,7 +35,7 @@ public class EffectPropertyDrawer : PropertyDrawer {
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 
 		// Type of effect
-		_EffectItem.Type type = (_EffectItem.Type)property.FindPropertyRelative("type").enumValueIndex;
+		PickupAction.Type type = (PickupAction.Type)property.FindPropertyRelative("type").enumValueIndex;
 
 
 		EditorGUI.BeginProperty(position, label, property);
@@ -54,7 +54,7 @@ public class EffectPropertyDrawer : PropertyDrawer {
 		EditorGUI.PropertyField(typeEnum, typeProperty, GUIContent.none);
 		EditorGUI.EndProperty();
 
-		if (type == _EffectItem.Type.resetTransform) {
+		if (type == PickupAction.Type.resetTransform) {
 			// Calculate relativeto rect
 			var relProperty = property.FindPropertyRelative("resetRelativeTo");
 			var relContent = new GUIContent("Relative To");
@@ -75,12 +75,12 @@ public class EffectPropertyDrawer : PropertyDrawer {
 		EditorGUI.indentLevel = 0;
 
 
-		if (type == _EffectItem.Type.effect || type == _EffectItem.Type.gameObject) {
+		if (type == PickupAction.Type.effect || type == PickupAction.Type.gameObject) {
             // What
-            string objectRef = type == _EffectItem.Type.effect ? "effect" : "toggleGameObject";
-            string pickUpRef = type == _EffectItem.Type.effect ? "effectOnPickup" : "toggleOnPickup";
-            string dropRef = type == _EffectItem.Type.effect ? "effectOnDrop" : "toggleOnDrop";
-            float labelWidth = type == _EffectItem.Type.effect ? 45f : 80f;
+            string objectRef = type == PickupAction.Type.effect ? "effect" : "toggleGameObject";
+            string pickUpRef = type == PickupAction.Type.effect ? "effectOnPickup" : "toggleOnPickup";
+            string dropRef = type == PickupAction.Type.effect ? "effectOnDrop" : "toggleOnDrop";
+            float labelWidth = type == PickupAction.Type.effect ? 45f : 80f;
 
             // Calculate rects
             var halfw = position.width / 2f;
@@ -106,7 +106,7 @@ public class EffectPropertyDrawer : PropertyDrawer {
 
 			// Draw fields - passs GUIContent.none to each so they are drawn without labels
 			EditorGUI.BeginProperty(objRect, new GUIContent(objectRef), objProperty);
-			EditorGUI.LabelField(objLabel, type == _EffectItem.Type.effect ? "effect:" : "gameobject:");
+			EditorGUI.LabelField(objLabel, type == PickupAction.Type.effect ? "effect:" : "gameobject:");
 			EditorGUI.PropertyField(objObj, objProperty, GUIContent.none);
 			EditorGUI.EndProperty();
 
@@ -120,7 +120,7 @@ public class EffectPropertyDrawer : PropertyDrawer {
 			EditorGUI.PropertyField(onDropEnum, onDropProperty, GUIContent.none);
 			EditorGUI.EndProperty();
 
-		} else if (type == _EffectItem.Type.resetTransform) {
+		} else if (type == PickupAction.Type.resetTransform) {
 
 			// Calculate rects
 			var height = EditorGUIUtility.singleLineHeight;
@@ -161,7 +161,7 @@ public class EffectPropertyDrawer : PropertyDrawer {
 
 
 
-[CustomPropertyDrawer(typeof(_EffectItem.ResetTransform))]
+[CustomPropertyDrawer(typeof(PickupAction.ResetTransform))]
 public class EffectStructPropertyDrawer : PropertyDrawer {
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {

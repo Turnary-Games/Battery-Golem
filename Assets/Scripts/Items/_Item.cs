@@ -6,7 +6,7 @@ public abstract class _Item : Searchable {
 
 	public string itemName = "Unnamned";
 	public Rigidbody rbody;
-	public _EffectItem[] effects;
+	public PickupAction[] effects;
 
 	private Vector3 startPos;
 	private Quaternion startRot;

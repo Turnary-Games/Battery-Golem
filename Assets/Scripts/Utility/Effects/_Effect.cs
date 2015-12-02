@@ -2,16 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class _Effect : MonoBehaviour {
-	public virtual void OnPickup() {}
-	public virtual void OnDrop() {}
-
-	public virtual void OnActionDisable() {}
-	public virtual void OnActionEnable() {}
+public abstract class _Effect : MonoBehaviour {
+	public virtual void OnPickup(PickupAction.Type actionType, PickupAction.EventType eventType) {}
+	public virtual void OnDrop(PickupAction.Type actionType, PickupAction.EventType eventType) {}
 }
 
 [System.Serializable]
-public class _EffectItem {
+public class PickupAction {
 	// Action type
 	public Type type;
 
@@ -44,10 +41,8 @@ public class _EffectItem {
 			case Type.effect:
                 if (eventType == EventType.onDrop) {
                     DoEffectAction(effectOnDrop);
-                    effect.OnDrop();
                 } else if (eventType == EventType.onPickup) {
                     DoEffectAction(effectOnPickup);
-                    effect.OnPickup();
                 }
                 break;
 
@@ -63,6 +58,12 @@ public class _EffectItem {
                 }
                 break;
 		}
+
+		// Call events
+		if (eventType == EventType.onDrop)
+			effect.OnDrop(type, eventType);
+		if (eventType == EventType.onPickup)
+			effect.OnPickup(type, eventType);
 	}
 
     void DoEffectAction(ActionOnEvent action) {
@@ -75,12 +76,10 @@ public class _EffectItem {
                 break;
 
             case ActionOnEvent.enable:
-                effect.OnActionEnable();
                 effect.enabled = true;
                 break;
 
             case ActionOnEvent.disable:
-                effect.OnActionDisable();
                 effect.enabled = false;
                 break;
 
@@ -191,27 +190,27 @@ public class _EffectItem {
 public static class EffectItemExtension {
 
 	// Array extension
-	public static void OnPickup(this _EffectItem[] array) {
-		foreach (_EffectItem effect in array) {
+	public static void OnPickup(this PickupAction[] array) {
+		foreach (PickupAction effect in array) {
 			effect.OnPickup();
 		}
 	}
 
-	public static void OnDrop(this _EffectItem[] array) {
-		foreach (_EffectItem effect in array) {
+	public static void OnDrop(this PickupAction[] array) {
+		foreach (PickupAction effect in array) {
 			effect.OnDrop();
 		}
 	}
 
 	// List extension
-	public static void OnPickup(this List<_EffectItem> list) {
-		foreach (_EffectItem effect in list) {
+	public static void OnPickup(this List<PickupAction> list) {
+		foreach (PickupAction effect in list) {
 			effect.OnPickup();
 		}
 	}
 	
-	public static void OnDrop(this List<_EffectItem> list) {
-		foreach (_EffectItem effect in list) {
+	public static void OnDrop(this List<PickupAction> list) {
+		foreach (PickupAction effect in list) {
 			effect.OnDrop();
 		}
 	}
