@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public abstract class _Effect : MonoBehaviour {
-	public virtual void OnPickup(PickupAction.Type actionType, PickupAction.EventType eventType) {}
-	public virtual void OnDrop(PickupAction.Type actionType, PickupAction.EventType eventType) {}
+	public virtual void OnPickup() {}
+	public virtual void OnDrop() {}
 }
 
 [System.Serializable]
@@ -41,10 +41,12 @@ public class PickupAction {
 			case Type.effect:
                 if (eventType == EventType.onDrop) {
                     DoEffectAction(effectOnDrop);
+					effect.OnDrop();
                 } else if (eventType == EventType.onPickup) {
                     DoEffectAction(effectOnPickup);
+					effect.OnPickup();
                 }
-                break;
+				break;
 
 			case Type.resetTransform:
 				DoReset(eventType);
@@ -59,11 +61,6 @@ public class PickupAction {
                 break;
 		}
 
-		// Call events
-		if (eventType == EventType.onDrop)
-			effect.OnDrop(type, eventType);
-		if (eventType == EventType.onPickup)
-			effect.OnPickup(type, eventType);
 	}
 
     void DoEffectAction(ActionOnEvent action) {
@@ -187,32 +184,4 @@ public class PickupAction {
 	}
 }
 
-public static class EffectItemExtension {
-
-	// Array extension
-	public static void OnPickup(this PickupAction[] array) {
-		foreach (PickupAction effect in array) {
-			effect.OnPickup();
-		}
-	}
-
-	public static void OnDrop(this PickupAction[] array) {
-		foreach (PickupAction effect in array) {
-			effect.OnDrop();
-		}
-	}
-
-	// List extension
-	public static void OnPickup(this List<PickupAction> list) {
-		foreach (PickupAction effect in list) {
-			effect.OnPickup();
-		}
-	}
-	
-	public static void OnDrop(this List<PickupAction> list) {
-		foreach (PickupAction effect in list) {
-			effect.OnDrop();
-		}
-	}
-}
 

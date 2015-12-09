@@ -19,13 +19,13 @@ public class Lilypad : _Platform {
 
 	void OnTouch(Touch touch) {
 		if (IsPlayer (touch)) {
-			player.outsideForces = rbody.velocity;
+			player.movement.outsideForces = rbody.velocity;
 		}
 	}
 
 	void OnTouchEnd(Touch touch) {
 		if (IsPlayer(touch)) {
-			player.outsideForces = Vector3.zero;
+			player.movement.outsideForces = Vector3.zero;
 			player = null;
 		}
 	}

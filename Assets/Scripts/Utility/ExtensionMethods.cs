@@ -102,4 +102,38 @@ namespace ExtensionMethods {
 		}
 	}
 
+
+	public static class EffectItemExtension {
+
+		// Array extension
+		public static void OnPickup(this PickupAction[] array) {
+			foreach (PickupAction effect in array) {
+				if (effect != null)
+					effect.OnPickup();
+			}
+		}
+
+		public static void OnDrop(this PickupAction[] array) {
+			foreach (PickupAction effect in array) {
+				if (effect != null)
+					effect.OnDrop();
+			}
+		}
+
+		// List extension
+		public static void OnPickup(this List<PickupAction> list) {
+			foreach (PickupAction effect in list) {
+				if (effect != null)
+					effect.OnPickup();
+			}
+		}
+
+		public static void OnDrop(this List<PickupAction> list) {
+			foreach (PickupAction effect in list) {
+				if (effect != null)
+					effect.OnDrop();
+			}
+		}
+	}
+
 }

@@ -13,13 +13,26 @@ public class PlayerInventory : _Inventory<_Equipable> {
 
 	*/
 
-	[Header("Variables (DONT ALTER)")]
 
-	public PlayerController player;
+	[Header("Player sub-classes")]
+	public PlayerController controller;
+	public PlayerInventory inventory { get { return this; } }
+	public PlayerMovement movement { get { return controller.movement; } }
+	public PlayerHealth health { get { return controller.health; } }
+	public PlayerInteraction interaction { get { return controller.interaction; } }
+
+	[Header("Object references")]
+	
 	public Transform equippedParent;
 	public PlayerHUD hud;
 
-	[HideInInspector]
+	[Header("Inventory settings")]
+
+	[Tooltip("Range in meters")]
+	public float pickupRadius;
+	[Tooltip("When calculating which item is closest should it ignore the y axis? (Which would count everything as on the same height)")]
+	public bool ignoreYAxis = false;
+
 	public _Equipable equipped {
 		get { return slots.Get(0); }
 		set { slots[0] = value; }
@@ -32,7 +45,14 @@ public class PlayerInventory : _Inventory<_Equipable> {
 	void Start() {
 		hud.UpdateUIElements();
 	}
-	
+
+#if UNITY_EDITOR
+	void OnValidate() {
+		// Limit values
+		pickupRadius = Mathf.Max(pickupRadius, 0f);
+	}
+#endif
+
 	#region Pickup item (from ground)
 	// Unequip the equipped item
 	public void Unequip() {

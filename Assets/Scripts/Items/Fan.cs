@@ -19,7 +19,7 @@ public class Fan : _Equipable {
 		if (inventory == null)
 			return;
 
-		var listeners = inventory.player.GetListeners();
+		var listeners = inventory.controller.GetListeners();
 		
 		listeners.ForEach(delegate (_TouchListener listener) {
 			var lilypad = listener.GetComponent<Lilypad>();

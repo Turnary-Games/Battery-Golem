@@ -26,7 +26,7 @@ public class FloatEffect : _Effect {
 		start = relativeTo == Space.World ? transform.position : transform.localPosition;
 	}
 
-	public override void OnDrop(PickupAction.Type actionType, PickupAction.EventType eventType) {
+	public override void OnDrop() {
 		ResetStartPosition();
 	}
 	
