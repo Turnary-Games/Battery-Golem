@@ -9,11 +9,11 @@ public class _SceneDropDown : PropertyDrawer {
 
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 		EditorGUI.BeginProperty (position, label, property);
-
+		
 		if (property.propertyType == SerializedPropertyType.String) {
-			property.stringValue = DrawScenePopup(position, label, property.stringValue);
+			property.stringValue = DrawScenePopup(position, label, property.hasMultipleDifferentValues ? "" : property.stringValue);
 		} else if (property.propertyType == SerializedPropertyType.Integer) {
-			property.intValue = DrawScenePopup(position, label, property.intValue);
+			property.intValue = DrawScenePopup(position, label, property.hasMultipleDifferentValues ? -1 : property.intValue);
 		} else {
 			EditorGUI.LabelField(position, label.text, "Use SceneDropDown with strings or integers.");
 		}

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using ExtensionMethods;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour {
 	[Tooltip("When calculating which item is closest should it ignore the y axis? (Which would count everything as on the same height)")]
 	public bool ignoreYAxis = false;
 	
+	[HideInInspector]
 	public Vector3 outsideForces;
 
 	public Vector3 characterCenter {
@@ -123,7 +125,8 @@ public class PlayerController : MonoBehaviour {
 		placeOfDeath = transform.position;
 		
 		// Disable electrifying just in case
-		electricParticles.enableEmission = false;
+		var em = electricParticles.emission;
+		em.enabled = false;
 	}
 
 	void DeadStep() {
@@ -132,7 +135,7 @@ public class PlayerController : MonoBehaviour {
 		transform.position = placeOfDeath + Vector3.one * Random.value * deathShake;
 
 		if (Time.time - timeOfDeath > resetDelay) {
-			Application.LoadLevel(Application.loadedLevel);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 	}
 
