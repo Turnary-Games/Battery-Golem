@@ -2,14 +2,16 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class PlayerHealth : MonoBehaviour {
+public class PlayerHealth : MonoBehaviour, PlayerSubClass {
 
-	[Header("Player sub-classes")]
-	public PlayerController controller;
-	public PlayerInventory inventory { get { return controller.inventory; } }
-	public PlayerMovement movement { get { return controller.movement; } }
+	[Header("Player parent class")]
+
+	public PlayerController parent;
+	public PlayerController controller { get { return parent; } }
+	public PlayerInventory inventory { get { return parent.inventory; } }
+	public PlayerMovement movement { get { return parent.movement; } }
 	public PlayerHealth health { get { return this; } }
-	public PlayerInteraction interaction { get { return controller.interaction; } }
+	public PlayerInteraction interaction { get { return parent.interaction; } }
 
 	[Header("Death settings")]
 

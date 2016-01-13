@@ -3,9 +3,17 @@ using UnityEngine.UI;
 using System.Collections;
 using ExtensionMethods;
 
-public class PlayerHUD : MonoBehaviour {
+public class PlayerHUD : MonoBehaviour, PlayerSubClass {
 
-	public PlayerInventory inventory;
+	[Header("Player parent class")]
+
+	public PlayerController parent;
+	public PlayerController controller { get { return parent; } }
+	public PlayerInventory inventory { get { return parent.inventory; } }
+	public PlayerMovement movement { get { return parent.movement; } }
+	public PlayerHealth health { get { return parent.health; } }
+	public PlayerInteraction interaction { get { return parent.interaction; } }
+
 	public Sprite placeholderIcon;
 
 	[Header("UI elements")]

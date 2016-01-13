@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInteraction : MonoBehaviour {
-
-	[Header("Player sub-classes")]
-	public PlayerController controller;
-	public PlayerInventory inventory { get { return controller.inventory; } }
-	public PlayerMovement movement { get { return controller.movement; } }
-	public PlayerHealth health { get { return controller.health; } }
+public class PlayerInteraction : MonoBehaviour, PlayerSubClass {
+	
+	[Header("Player parent class")]
+	
+	public PlayerController parent;
+	public PlayerController controller { get { return parent; } }
+	public PlayerInventory inventory { get { return parent.inventory; } }
+	public PlayerMovement movement { get { return parent.movement; } }
+	public PlayerHealth health { get { return parent.health; } }
 	public PlayerInteraction interaction { get { return this; } }
 
 	[Header("Electric settings")]
@@ -15,11 +17,54 @@ public class PlayerInteraction : MonoBehaviour {
 	public Transform electricTransform;
 	public ParticleSystem electricParticles;
 
+	[Header("Pickup settings")]
+
+	public Transform pickupPoint;
+	[Tooltip("Range in meters")]
+	public float pickupRadius;
+	[Tooltip("When calculating which item is closest should it ignore the y axis? (Which would count everything as on the same height)")]
+	public bool ignoreYAxis = false;
+
 	public Vector3 electricPoint {
 		get { return (electricTransform ?? transform).position; }
 	}
 
 	private bool electrifying;
+
+#if UNITY_EDITOR
+	void OnDrawGizmos() {
+		if (pickupPoint == null)
+			return;
+
+		bool shouldDraw = false;
+		var selected = UnityEditor.Selection.gameObjects;
+		foreach (var obj in selected) {
+			if (obj.transform.IsChildOf(transform)) {
+				shouldDraw = true;
+				break;
+			}
+		}
+
+		if (shouldDraw) {
+			if (interaction.ignoreYAxis) {
+				UnityEditor.Handles.color = Color.cyan;
+				UnityEditor.Handles.DrawLine(pickupPoint.position + new Vector3(pickupRadius, 50), pickupPoint.position + new Vector3(pickupRadius, -50));
+				UnityEditor.Handles.DrawLine(pickupPoint.position + new Vector3(-pickupRadius, 50), pickupPoint.position + new Vector3(-pickupRadius, -50));
+				UnityEditor.Handles.DrawLine(pickupPoint.position + new Vector3(0, 50, pickupRadius), pickupPoint.position + new Vector3(0, -50, pickupRadius));
+				UnityEditor.Handles.DrawLine(pickupPoint.position + new Vector3(0, 50, -pickupRadius), pickupPoint.position + new Vector3(0, -50, -pickupRadius));
+				UnityEditor.Handles.DrawWireDisc(pickupPoint.position, Vector3.up, pickupRadius);
+			} else {
+				Gizmos.color = Color.cyan;
+				Gizmos.DrawWireSphere(pickupPoint.position, pickupRadius);
+			}
+		}
+	}
+
+	void OnValidate() {
+		// Limit values
+		pickupRadius = Mathf.Max(pickupRadius, 0f);
+	}
+#endif
 
 	void Update() {
 		if (Input.GetButtonDown("GrabNDrop")) {
@@ -30,34 +75,47 @@ public class PlayerInteraction : MonoBehaviour {
 		if (Input.GetAxis("Interact") != 0) {
 			ElectrifyNInteract();
 		}
-		if (electrifying && !electricParticles.isPlaying)
-			electricParticles.Play();
-		if (!electrifying && !electricParticles.isStopped)
-			electricParticles.Stop();
-	}
 
+		// Particles
+		//var em = electricParticles.emission;
+		//em.enabled = electrifying;
+
+		bool clear = electrifying && !electricParticles.gameObject.activeSelf;
+
+		electricParticles.gameObject.SetActive(electrifying);
+		if (clear) electricParticles.GetComponent<ParticleSystem>().Clear();
+
+		foreach (Transform trans in electricParticles.transform) {
+			trans.gameObject.SetActive(electrifying);
+			if (clear) trans.GetComponent<ParticleSystem>().Clear();
+		}
+		
+	}
 
 	#region Picking up/Dropping items & Interacting
 
 	void ElectrifyNInteract() {
-		if (!_ElectricListener.InteractAt(this, electricPoint)) {
+		if (!_ElectricListener.InteractAt(controller, electricPoint)) {
 			// Didn't interact with anything... Try to electrify
 			if (inventory.equipped != null && inventory.equipped.canBeElectrified) {
 				// Electrify the equipped item
-				inventory.equipped.SendMessage(ElectricMethods.Electrify, this, SendMessageOptions.DontRequireReceiver);
+				inventory.equipped.SendMessage(ElectricMethods.Electrify, controller, SendMessageOptions.DontRequireReceiver);
 				electrifying = true;
 			} else if (inventory.equipped == null) {
 				// Try to electrify at your fingertips
-				_ElectricListener.ElectrifyAllAt(this, electricPoint);
+				_ElectricListener.ElectrifyAllAt(controller, electricPoint);
 				electrifying = true;
 			}
 		}
 
 	}
 
+	public bool IsItemInRange(_Equipable item) {
+		return item.GetDistance(pickupPoint.position) <= pickupRadius;
+	}
+
 	public _Equipable GetItemInRange() {
-		var closest = Searchable.GetClosest<_Equipable>(controller.characterCenter, inventory.ignoreYAxis);
-		return closest.valid && closest.dist <= inventory.pickupRadius ? closest.obj : null;
+		return Searchable.GetClosest<_Equipable>(pickupPoint.position, pickupRadius, controller.characterCenter, ignoreYAxis).obj;
 	}
 
 	void GrabNDrop() {

@@ -36,6 +36,10 @@ public class Searchable : MonoBehaviour {
 		return new Closest<T>(from, ignoreY);
 	}
 
+	public static Closest<T> GetClosest<T>(Vector3 inRangeFrom, float radius, Vector3 closestTo, bool ignoreY = false) where T : Searchable {
+		return new Closest<T>(inRangeFrom, radius, closestTo, ignoreY);
+	}
+
 }
 
 public struct Closest<T> where T : Searchable {
@@ -54,7 +58,7 @@ public struct Closest<T> where T : Searchable {
 
 
 	public Closest(Vector3 from, bool ignoreY = false) {
-		List<T> list = Searchable._ALL.ConvertAll<T>(delegate (Searchable obj) {
+		List<T> list = Searchable._ALL.ConvertAll(delegate (Searchable obj) {
 			return obj as T;
 		});
 
@@ -64,8 +68,20 @@ public struct Closest<T> where T : Searchable {
 
 		this = new Closest<T>(list, from, ignoreY);
 	}
+	
+	public Closest(Vector3 inRangeFrom, float radius, Vector3 closestTo, bool ignoreY = false) {
+		List<T> list = Searchable._ALL.ConvertAll(delegate (Searchable obj) {
+			return obj as T;
+		});
 
-	public Closest(List<T> list, Vector3 from, bool ignoreY = false) {
+		list.RemoveAll(delegate (T obj) {
+			return obj == null || obj.GetDistance(inRangeFrom, ignoreY) > radius;
+		});
+
+		this = new Closest<T>(list, closestTo, ignoreY);
+	}
+
+	public Closest(List<T> list, Vector3 to, bool ignoreY = false) {
 		T closestObj = null;
 		float closestDist = Mathf.Infinity;
 
@@ -75,7 +91,7 @@ public struct Closest<T> where T : Searchable {
 			if (!obj.valid)
 				return;
 
-			float dist = obj.GetDistance(from, ignoreY);
+			float dist = obj.GetDistance(to, ignoreY);
 
 			if (closestObj == null || (dist < closestDist)) {
 				closestObj = obj as T;
@@ -86,7 +102,6 @@ public struct Closest<T> where T : Searchable {
 		this.obj = closestObj;
 		this.dist = closestDist;
 	}
-
 
 	public override string ToString() {
 		return "{ [Closest] valid=" + valid.ToString() + "; dist=" + dist.ToString() + "; obj=" + obj + " }";

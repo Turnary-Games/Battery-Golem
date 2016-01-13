@@ -13,13 +13,21 @@ using ExtensionMethods;
 [RequireComponent(typeof(_TouchListener))]
 public abstract class _Equipable : _Item {
 
+	[Header("_Equipable fields")]
+
     public Sprite icon;
 	public int slot = -1;
 	public bool canBeElectrified = false;
+	public GameObject nearbyVisual;
 
 	protected PlayerInventory inventory;
 	public bool equipped {
 		get { return inventory != null; }
+	}
+
+	protected virtual void Update() {
+		if (nearbyVisual != null)
+			nearbyVisual.SetActive(PlayerController.instance.interaction.IsItemInRange(this));
 	}
 
     public virtual void OnEquip(PlayerInventory inventory) {

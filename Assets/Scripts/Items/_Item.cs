@@ -4,6 +4,8 @@ using ExtensionMethods;
 
 public abstract class _Item : Searchable {
 
+	[Header("_Item fields")]
+
 	public string itemName = "Unnamned";
 	public Rigidbody rbody;
 	public PickupAction[] effects;

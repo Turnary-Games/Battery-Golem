@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using ExtensionMethods;
+using System;
 
-public class PlayerInventory : _Inventory<_Equipable> {
+public class PlayerInventory : _Inventory<_Equipable>, PlayerSubClass {
 
 	/*
 
@@ -13,25 +14,21 @@ public class PlayerInventory : _Inventory<_Equipable> {
 
 	*/
 
+	[Header("Player parent class")]
 
-	[Header("Player sub-classes")]
-	public PlayerController controller;
+	public PlayerController parent;
+	public PlayerController controller { get { return parent; } }
 	public PlayerInventory inventory { get { return this; } }
-	public PlayerMovement movement { get { return controller.movement; } }
-	public PlayerHealth health { get { return controller.health; } }
-	public PlayerInteraction interaction { get { return controller.interaction; } }
+	public PlayerMovement movement { get { return parent.movement; } }
+	public PlayerHealth health { get { return parent.health; } }
+	public PlayerInteraction interaction { get { return parent.interaction; } }
 
 	[Header("Object references")]
 	
 	public Transform equippedParent;
 	public PlayerHUD hud;
 
-	[Header("Inventory settings")]
-
-	[Tooltip("Range in meters")]
-	public float pickupRadius;
-	[Tooltip("When calculating which item is closest should it ignore the y axis? (Which would count everything as on the same height)")]
-	public bool ignoreYAxis = false;
+	//[Header("Inventory settings")]
 
 	public _Equipable equipped {
 		get { return slots.Get(0); }
@@ -45,13 +42,6 @@ public class PlayerInventory : _Inventory<_Equipable> {
 	void Start() {
 		hud.UpdateUIElements();
 	}
-
-#if UNITY_EDITOR
-	void OnValidate() {
-		// Limit values
-		pickupRadius = Mathf.Max(pickupRadius, 0f);
-	}
-#endif
 
 	#region Pickup item (from ground)
 	// Unequip the equipped item

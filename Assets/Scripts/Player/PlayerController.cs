@@ -4,7 +4,15 @@ using System.Collections.Generic;
 using ExtensionMethods;
 using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour {
+public interface PlayerSubClass {
+	PlayerController controller { get; }
+	PlayerInventory inventory { get; }
+	PlayerMovement movement { get; }
+	PlayerHealth health { get; }
+	PlayerInteraction interaction { get; }
+}
+
+public class PlayerController : SingletonBase<PlayerController> {
 
 	[Header("Player sub-classes")]
 
@@ -12,8 +20,6 @@ public class PlayerController : MonoBehaviour {
 	public PlayerMovement movement;
 	public PlayerHealth health;
 	public PlayerInteraction interaction;
-
-
 
 	public Vector3 characterCenter {
 		get { return transform.position + (movement.character != null ? movement.character.center : Vector3.zero); }
@@ -34,30 +40,6 @@ public class PlayerController : MonoBehaviour {
 		movement = movement ?? GetComponent<PlayerMovement>();
 		health = health ?? GetComponent<PlayerHealth>();
 		interaction = interaction ?? GetComponent<PlayerInteraction>();
-	}
-
-	void OnDrawGizmos() {
-		bool shouldDraw = false;
-		var selected = UnityEditor.Selection.gameObjects;
-		foreach (var obj in selected) {
-			if (obj.GetComponent<PlayerController>() != null
-				|| obj.GetComponent<PlayerInventory>() != null)
-				shouldDraw = true;
-		}
-
-		if (shouldDraw) {
-			if (inventory.ignoreYAxis) {
-				UnityEditor.Handles.color = Color.cyan;
-				UnityEditor.Handles.DrawLine(characterCenter + new Vector3(inventory.pickupRadius, 50), characterCenter + new Vector3(inventory.pickupRadius, -50));
-				UnityEditor.Handles.DrawLine(characterCenter + new Vector3(-inventory.pickupRadius, 50), characterCenter + new Vector3(-inventory.pickupRadius, -50));
-				UnityEditor.Handles.DrawLine(characterCenter + new Vector3(0, 50, inventory.pickupRadius), characterCenter + new Vector3(0, -50, inventory.pickupRadius));
-				UnityEditor.Handles.DrawLine(characterCenter + new Vector3(0, 50, -inventory.pickupRadius), characterCenter + new Vector3(0, -50, -inventory.pickupRadius));
-				UnityEditor.Handles.DrawWireDisc(characterCenter, Vector3.up, inventory.pickupRadius);
-			} else {
-				Gizmos.color = Color.cyan;
-				Gizmos.DrawWireSphere(characterCenter, inventory.pickupRadius);
-			}
-		}
 	}
 #endif
 

@@ -25,11 +25,11 @@ public class _ElectricListener : Searchable {
 
 	private bool electrifiedThisStep;
 	private bool electrifiedLastStep;
-	private PlayerInteraction electrifiedSource;
+	private PlayerController electrifiedSource;
 
 	private bool interactThisStep;
 	private bool interactLastStep;
-	private PlayerInteraction interactSource;
+	private PlayerController interactSource;
 
 	public override bool valid {
 		get {
@@ -74,7 +74,7 @@ public class _ElectricListener : Searchable {
 		interactThisStep = false;
 	}
 
-	public void Electrify(PlayerInteraction source) {
+	public void Electrify(PlayerController source) {
 		if (!acceptElectrifying)
 			return;
 
@@ -86,7 +86,7 @@ public class _ElectricListener : Searchable {
 		electrifiedSource = source;
 	}
 
-	public void Interact(PlayerInteraction source) {
+	public void Interact(PlayerController source) {
 		if (!acceptInteraction)
 			return;
 
@@ -125,7 +125,7 @@ public class _ElectricListener : Searchable {
 	}
 
 	// Electrify everything touching this point
-	public static bool ElectrifyAllAt(PlayerInteraction source, Vector3 point) {
+	public static bool ElectrifyAllAt(PlayerController source, Vector3 point) {
 		bool success = false;
 
 		foreach (var obj in FindObjectsOfType<_ElectricListener>()) {
@@ -139,7 +139,7 @@ public class _ElectricListener : Searchable {
 	}
 
 	// Interact with the closest thing at point
-	public static bool InteractAt(PlayerInteraction source, Vector3 point) {
+	public static bool InteractAt(PlayerController source, Vector3 point) {
 		var list = GetListenersAt(point);
 		list.RemoveAll(delegate (_ElectricListener obj) {
 			return !obj.acceptInteraction;

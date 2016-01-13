@@ -3,12 +3,14 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-	[Header("Player sub-classes")]
-	public PlayerController controller;
-	public PlayerInventory inventory { get { return controller.inventory; } }
+	[Header("Player parent class")]
+
+	public PlayerController parent;
+	public PlayerController controller { get { return parent; } }
+	public PlayerInventory inventory { get { return parent.inventory; } }
 	public PlayerMovement movement { get { return this; } }
-	public PlayerHealth health { get { return controller.health; } }
-	public PlayerInteraction interaction { get { return controller.interaction; } }
+	public PlayerHealth health { get { return parent.health; } }
+	public PlayerInteraction interaction { get { return parent.interaction; } }
 
 	[Header("Object references")]
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Fan : _Equipable {
 
-	[Header("Fan settings")]
+	[Header("Fan fields")]
 
 	[Tooltip("Top speed the lilypad will reach.")]
 	public float speed = 1;
