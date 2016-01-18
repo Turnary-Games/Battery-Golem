@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	[Header("Object references")]
 
 	public CharacterController character;
+	public Animator anim;
 
 	[Header("Movement settings")]
 
@@ -79,9 +80,14 @@ public class PlayerMovement : MonoBehaviour {
 			motion += Physics.gravity * Time.deltaTime;
 		}
 
-
 		// Move the character
 		character.Move((motion + outsideForces) * Time.deltaTime);
+
+		// Tell animator
+		float magn = new Vector2(motion.x, motion.z).magnitude;
+		anim.SetBool("Walking", magn > 0);
+		anim.SetFloat("MoveSpeed", magn / 5);
+
 	}
 
 	void Rotate() {

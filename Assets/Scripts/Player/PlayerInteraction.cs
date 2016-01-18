@@ -71,6 +71,10 @@ public class PlayerInteraction : MonoBehaviour, PlayerSubClass {
 			GrabNDrop();
 		}
 
+	}
+
+	void FixedUpdate() { 
+
 		electrifying = false;
 		if (Input.GetAxis("Interact") != 0) {
 			ElectrifyNInteract();

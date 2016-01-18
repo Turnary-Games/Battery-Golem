@@ -1,0 +1,218 @@
+fileFormatVersion: 2
+guid: 98a20f9e0f671aa4bb9efb5ba27facb9
+timeCreated: 1453124356
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: batteryBase
+    100002: eyeCube
+    100004: headGrass
+    100006: LeftArm
+    100008: leftLeg
+    100010: MAIN
+    100012: nubLeft
+    100014: nubRight
+    100016: pCube12
+    100018: pCube13
+    100020: pCube13 1
+    100022: pCube14
+    100024: pCube14 1
+    100026: RightArm
+    100028: rightLeg
+    100030: transform4
+    100032: upperArmGrass
+    100034: //RootNode
+    400000: batteryBase
+    400002: eyeCube
+    400004: headGrass
+    400006: LeftArm
+    400008: leftLeg
+    400010: MAIN
+    400012: nubLeft
+    400014: nubRight
+    400016: pCube12
+    400018: pCube13
+    400020: pCube13 1
+    400022: pCube14
+    400024: pCube14 1
+    400026: RightArm
+    400028: rightLeg
+    400030: transform4
+    400032: upperArmGrass
+    400034: //RootNode
+    2300000: batteryBase
+    2300002: eyeCube
+    2300004: headGrass
+    2300006: LeftArm
+    2300008: leftLeg
+    2300010: MAIN
+    2300012: nubLeft
+    2300014: nubRight
+    2300016: pCube13
+    2300018: pCube13 1
+    2300020: pCube14
+    2300022: pCube14 1
+    2300024: RightArm
+    2300026: rightLeg
+    2300028: upperArmGrass
+    3300000: batteryBase
+    3300002: eyeCube
+    3300004: headGrass
+    3300006: LeftArm
+    3300008: leftLeg
+    3300010: MAIN
+    3300012: nubLeft
+    3300014: nubRight
+    3300016: pCube13
+    3300018: pCube13 1
+    3300020: pCube14
+    3300022: pCube14 1
+    3300024: RightArm
+    3300026: rightLeg
+    3300028: upperArmGrass
+    4300000: MAIN
+    4300002: eyeCube
+    4300004: headGrass
+    4300006: batteryBase
+    4300008: nubLeft
+    4300010: nubRight
+    4300012: RightArm
+    4300014: pCube13
+    4300016: pCube14
+    4300018: LeftArm
+    4300020: upperArmGrass
+    4300022: pCube14
+    4300024: pCube13
+    4300026: leftLeg
+    4300028: rightLeg
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: MAIN
+        weight: 1
+      - path: MAIN/batteryBase
+        weight: 1
+      - path: MAIN/batteryBase/nubLeft
+        weight: 1
+      - path: MAIN/batteryBase/nubRight
+        weight: 1
+      - path: MAIN/eyeCube
+        weight: 1
+      - path: MAIN/headGrass
+        weight: 1
+      - path: MAIN/LeftArm
+        weight: 1
+      - path: MAIN/LeftArm/pCube13
+        weight: 1
+      - path: MAIN/LeftArm/pCube14
+        weight: 1
+      - path: MAIN/LeftArm/upperArmGrass
+        weight: 1
+      - path: MAIN/leftLeg
+        weight: 1
+      - path: MAIN/RightArm
+        weight: 1
+      - path: MAIN/RightArm/pCube13 1
+        weight: 1
+      - path: MAIN/RightArm/pCube14 1
+        weight: 1
+      - path: MAIN/rightLeg
+        weight: 1
+      - path: pCube12
+        weight: 1
+      - path: pCube12/transform4
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
