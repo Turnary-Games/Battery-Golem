@@ -593,7 +593,9 @@ MonoBehaviour:
       rotation: 0
       scale: 0
   icon: {fileID: 21300000, guid: 02fb175cef30acf4d84738e642d7f81c, type: 3}
-  slot: 1
+  targetSlot: 0
+  fixedInInv: 1
+  unlocked: 0
   canBeElectrified: 1
   nearbyVisual: {fileID: 114732}
   speed: 5.02

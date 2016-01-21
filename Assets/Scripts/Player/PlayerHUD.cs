@@ -3,79 +3,60 @@ using UnityEngine.UI;
 using System.Collections;
 using ExtensionMethods;
 
-public class PlayerHUD : MonoBehaviour, PlayerSubClass {
-
-	[Header("Player parent class")]
-
-	public PlayerController parent;
-	public PlayerController controller { get { return parent; } }
-	public PlayerInventory inventory { get { return parent.inventory; } }
-	public PlayerMovement movement { get { return parent.movement; } }
-	public PlayerHealth health { get { return parent.health; } }
-	public PlayerInteraction interaction { get { return parent.interaction; } }
-
-	public Sprite placeholderIcon;
+public class PlayerHUD : PlayerSubClass {
 
 	[Header("UI elements")]
-	public UIElement[] elements;
+	public Animator[] leaves;
 
-	void Awake() {
-		UIElement.placeholder = placeholderIcon;
+	public bool isOpen { get {
+		return leaves.Length > 0 && leaves[0] != null ? leaves[0].gameObject.activeSelf : false;
+	} }
+
+	void Start() {
+		SetHUDVisable(false);
 	}
 
-#if UNITY_EDITOR
-	void OnValidate() {
-
-		if (inventory != null && elements.Length != inventory.slots.Length) {
-			UIElement[] old = elements;
-			elements = new UIElement[inventory.slots.Length];
-
-			int slots = Mathf.Min(inventory.slots.Length, old.Length);
-
-			for (int slot = 0; slot < slots; slot++) {
-				elements[slot] = old[slot];
-			}
+	void Update() {
+		// Read input
+		if (Input.GetButtonDown("Inventory")) {
+			SetHUDVisable(true);
 		}
+		if (Input.GetButtonUp("Inventory")) {
+			SetHUDVisable(false);
+		}
+
 		
 	}
-#endif
 
-	public void UpdateUIElements() {
+	/// <summary>
+	/// Unlock a slot. This would happen if you picked up an (inventory) item for the first time.
+	/// </summary>
+	public void UnlockItem(int slot) {
+		Animator anim = leaves.Get(slot);
+		if (anim != null) {
+			SetHUDVisable(true);
+			anim.SetBool("Slow", true);
+		}
+	}
 
-        for (int slot=0; slot < elements.Length; slot++) {
-			var item = inventory.slots.Get(slot);
-			var element = elements.Get(slot);
+	void SetHUDVisable(bool state) {
+		for (int slot = 0; slot < inventory.coreItems.Length; slot++) {
+			Animator anim = leaves.Get(slot);
+			_Equipable item = inventory.coreItems.Get(slot);
 
-			if (element != null) {
-				element.UpdateElement(this, slot, item);
+			anim.gameObject.SetActive(state);
+
+			if (state) {
+				// When activating/deactivating the animator it gets confused and "un-initialized"
+				if (!anim.isInitialized) {
+					// Reset the animator
+					anim.Rebind();
+				}
+
+				anim.SetBool("Open", item != null && item.unlocked);
+				anim.SetBool("Slow", false);
 			}
 		}
-
-	}
-
-	public bool UnlockSlot(int slot) {
-		var e = elements.Get(slot);
-		if (e != null && !e.unlocked) {
-			e.unlocked = true;
-			return true;
-		}
-		return false;
-	}
-
-	public void OnClick(int slot) {
-		// The UI Element for the slot got clicked
-
-		if (slot == 0) {
-			inventory.Unequip();
-		} else {
-			inventory.SwapItems(0, slot);
-		}
-	}
-
-	// Called by clicking on the HUD
-	public void DropItem() {
-		print("HUD sais drop it!");
-		inventory.Unequip();
 	}
 	
 }

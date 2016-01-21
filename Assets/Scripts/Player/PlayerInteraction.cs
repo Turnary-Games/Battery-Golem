@@ -1,16 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInteraction : MonoBehaviour, PlayerSubClass {
-	
-	[Header("Player parent class")]
-	
-	public PlayerController parent;
-	public PlayerController controller { get { return parent; } }
-	public PlayerInventory inventory { get { return parent.inventory; } }
-	public PlayerMovement movement { get { return parent.movement; } }
-	public PlayerHealth health { get { return parent.health; } }
-	public PlayerInteraction interaction { get { return this; } }
+public class PlayerInteraction : PlayerSubClass {
 
 	[Header("Electric settings")]
 
@@ -125,9 +116,9 @@ public class PlayerInteraction : MonoBehaviour, PlayerSubClass {
 	void GrabNDrop() {
 		if (inventory.equipped == null) {
 			// No item equipped. Try to grab the nearby item
-			var item = GetItemInRange();
+			_Equipable item = GetItemInRange();
 			if (item != null)
-				inventory.AddItem(item);
+				inventory.Equip(item);
 		} else {
 			// Item equipped. Drop it.
 			inventory.Unequip();

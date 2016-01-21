@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using ExtensionMethods;
 using UnityEngine.SceneManagement;
 
-public interface PlayerSubClass {
-	PlayerController controller { get; }
-	PlayerInventory inventory { get; }
-	PlayerMovement movement { get; }
-	PlayerHealth health { get; }
-	PlayerInteraction interaction { get; }
+public class PlayerSubClass : MonoBehaviour {
+	public PlayerController parent;
+	public PlayerController controller { get { return parent; } }
+	public PlayerInventory inventory { get { return parent.inventory; } }
+	public PlayerMovement movement { get { return parent.movement; } }
+	public PlayerHealth health { get { return parent.health; } }
+	public PlayerInteraction interaction { get { return parent.interaction; } }
+	public PlayerHUD hud { get { return parent.hud; } }
 }
 
 public class PlayerController : SingletonBase<PlayerController> {
@@ -20,17 +22,10 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public PlayerMovement movement;
 	public PlayerHealth health;
 	public PlayerInteraction interaction;
+	public PlayerHUD hud;
 
 	public Vector3 characterCenter {
 		get { return transform.position + (movement.character != null ? movement.character.center : Vector3.zero); }
-	}
-
-	void Update() {
-		for (int slot = 1; slot <= 3; slot++) {
-			if (Input.GetButtonDown("Slot " + slot)) {
-				inventory.SwapItems(0, slot);
-			}
-		}
 	}
 
 #if UNITY_EDITOR

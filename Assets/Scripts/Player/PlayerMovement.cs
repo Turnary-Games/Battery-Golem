@@ -1,16 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovement : MonoBehaviour {
-
-	[Header("Player parent class")]
-
-	public PlayerController parent;
-	public PlayerController controller { get { return parent; } }
-	public PlayerInventory inventory { get { return parent.inventory; } }
-	public PlayerMovement movement { get { return this; } }
-	public PlayerHealth health { get { return parent.health; } }
-	public PlayerInteraction interaction { get { return parent.interaction; } }
+public class PlayerMovement : PlayerSubClass {
 
 	[Header("Object references")]
 
@@ -53,7 +44,8 @@ public class PlayerMovement : MonoBehaviour {
 		Move();
 
 		// Rotate the character
-		Rotate();
+		if (!hud.isOpen)
+			Rotate();
 	}
 
 	#region Movement algorithms

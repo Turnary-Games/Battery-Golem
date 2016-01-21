@@ -262,7 +262,8 @@ MonoBehaviour:
       rotation: 0
       scale: 0
   icon: {fileID: 21300000, guid: 3ccd8e57ab209ca49a2cd60f39aa35c2, type: 3}
-  slot: -1
+  targetSlot: -1
+  unlocked: 0
   canBeElectrified: 0
   nearbyVisual: {fileID: 196272}
 --- !u!114 &11414868

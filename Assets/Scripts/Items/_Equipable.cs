@@ -16,13 +16,17 @@ public abstract class _Equipable : _Item {
 	[Header("_Equipable fields")]
 
     public Sprite icon;
-	public int slot = -1;
+	public int targetSlot = -1;
+	[HideInInspector] public bool unlocked = false;
 	public bool canBeElectrified = false;
 	public GameObject nearbyVisual;
 
 	protected PlayerInventory inventory;
 	public bool equipped {
 		get { return inventory != null; }
+	}
+	public bool fixedInInv {
+		get { return targetSlot >= 0; }
 	}
 
 	protected virtual void Update() {
@@ -43,9 +47,6 @@ public abstract class _Equipable : _Item {
 	}
 
 	public override bool CanLiveInSlot<Item>(_Inventory<Item> inv, int slot) {
-		if (inv is PlayerInventory) {
-			return slot == 0 || slot == this.slot;
-		}
 		return base.CanLiveInSlot(inv, slot);
 	}
 }
