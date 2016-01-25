@@ -15,17 +15,7 @@ public class PlayerInventory : PlayerSubClass {
 
 	// The size of the inventoryList defines the size of the inventory
 	public _Equipable[] coreItems = new _Equipable[4];
-
-	void Update() {
-		if (hud.isOpen) {
-			for (int slot = 1; slot <= 4; slot++) {
-				if (Input.GetButtonDown("Slot " + slot)) {
-					inventory.Equip(slot - 1);
-				}
-			}
-		}
-	}
-
+	
 	#region Pickup item (from ground) & Equipping
 	// Unequip the equipped item
 	public void Unequip() {
@@ -35,8 +25,9 @@ public class PlayerInventory : PlayerSubClass {
 		if (equipped.fixedInInv) {
 			MoveToInventory(equipped);
 		} else {
-			equipped.OnDropped();
+			_Equipable item = equipped;
 			MoveToWorld(equipped);
+			item.OnDropped();
 		}
 
 		equipped = null;
@@ -46,11 +37,14 @@ public class PlayerInventory : PlayerSubClass {
 	/// Equip an item from the inventory.
 	/// </summary>
 	public void Equip(int slot) {
+		_Equipable item = coreItems.Get(slot);
+
+		if (item == equipped && item != null) return;
+
 		// If theres already an item equipped
 		Unequip();
 
 		// Move it
-		_Equipable item = coreItems.Get(slot);
 		if (item != null)
 			MoveToEquipped(item);
 	}
@@ -64,9 +58,18 @@ public class PlayerInventory : PlayerSubClass {
 		// If theres already an item equipped
 		Unequip();
 
-		// Move it
+
+		if (!item.unlocked && item.targetSlot >= 0) {
+			coreItems[item.targetSlot] = item;
+			item.unlocked = true;
+			hud.UnlockItem(GetItemSlot(item));
+			MoveToInventory(item);
+		} else {
+			// Move it
+			MoveToEquipped(item);
+		}
+
 		item.OnPickup();
-		MoveToEquipped(item);
 	}
 
     #endregion
@@ -85,9 +88,6 @@ public class PlayerInventory : PlayerSubClass {
     #region Parenting
 	void MoveToEquipped(_Equipable item) {
 		equipped = item;
-
-		if (item.targetSlot >= 0) coreItems[item.targetSlot] = item;
-		if (!item.unlocked) { item.unlocked = true;  hud.UnlockItem(GetItemSlot(item)); }
 
 		item.transform.parent = equippedParent;
 		item.transform.localPosition = Vector3.zero;

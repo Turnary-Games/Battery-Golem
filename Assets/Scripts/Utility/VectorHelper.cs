@@ -36,5 +36,20 @@ public class VectorHelper {
 		return total / vectors.Length;
 	}
 
+	public static float ToDegrees(Vector2 vector) {
+		return Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+	}
+
+	public static float ToDegrees(Vector3 vector) {
+		return Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+	}
+
+	public static float ToRadians(Vector2 vector) {
+		return Mathf.Atan2(vector.y, vector.x);
+	}
+
+	public static float ToRadians(Vector3 vector) {
+		return Mathf.Atan2(vector.y, vector.x);
+	}
 }
 

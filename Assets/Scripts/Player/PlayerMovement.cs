@@ -44,8 +44,7 @@ public class PlayerMovement : PlayerSubClass {
 		Move();
 
 		// Rotate the character
-		if (!hud.isOpen)
-			Rotate();
+		Rotate();
 	}
 
 	#region Movement algorithms
@@ -84,7 +83,7 @@ public class PlayerMovement : PlayerSubClass {
 
 	void Rotate() {
 		// Vector of the (looking) axis
-		Vector3 rawAxis = new Vector3(Input.GetAxisRaw("HorizontalLook"), 0, Input.GetAxisRaw("VerticalLook"));
+		Vector3 rawAxis = hud.isOpen ? Vector3.zero : new Vector3(Input.GetAxisRaw("HorizontalLook"), 0, Input.GetAxisRaw("VerticalLook"));
 
 		// Not using the looking axis input, try the movement axis
 		if (rawAxis.x == 0 && rawAxis.z == 0)

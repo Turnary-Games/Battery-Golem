@@ -136,4 +136,19 @@ namespace ExtensionMethods {
 		}
 	}
 
+	public static class VectorExtensions {
+		/// <summary>
+		/// Converts a vector3 to a vector2. The Z value gets lost.
+		/// </summary>
+		public static Vector2 ToVector2(this Vector3 vector) {
+			return new Vector2(vector.x, vector.y);
+		}
+
+		/// <summary>
+		/// Converts a vector2 to  a vector3. The Z value gets set to 0.
+		/// </summary>
+		public static Vector3 ToVector3(this Vector2 vector) {
+			return new Vector3(vector.x, vector.y);
+		}
+	}
 }
