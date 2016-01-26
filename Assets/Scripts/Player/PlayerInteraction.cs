@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ExtensionMethods;
 
 public class PlayerInteraction : PlayerSubClass {
 
@@ -74,16 +75,8 @@ public class PlayerInteraction : PlayerSubClass {
 		// Particles
 		//var em = electricParticles.emission;
 		//em.enabled = electrifying;
-
-		bool clear = electrifying && !electricParticles.gameObject.activeSelf;
-
-		electricParticles.gameObject.SetActive(electrifying);
-		if (clear) electricParticles.GetComponent<ParticleSystem>().Clear();
-
-		foreach (Transform trans in electricParticles.transform) {
-			trans.gameObject.SetActive(electrifying);
-			if (clear) trans.GetComponent<ParticleSystem>().Clear();
-		}
+		
+		electricParticles.SetActive(electrifying);
 		
 	}
 

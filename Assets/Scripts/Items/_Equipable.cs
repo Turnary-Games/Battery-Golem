@@ -25,13 +25,13 @@ public abstract class _Equipable : _Item {
 	public bool equipped {
 		get { return inventory != null; }
 	}
-	public bool fixedInInv {
+	public bool fitsInInv {
 		get { return targetSlot >= 0; }
 	}
 
 	protected virtual void Update() {
 		if (nearbyVisual != null)
-			nearbyVisual.SetActive(PlayerController.instance.interaction.IsItemInRange(this));
+			nearbyVisual.SetActive(PlayerController.instance != null && PlayerController.instance.interaction.IsItemInRange(this));
 	}
 
     public virtual void OnEquip(PlayerInventory inventory) {

@@ -22,13 +22,16 @@ public class PlayerInventory : PlayerSubClass {
 		if (equipped == null)
 			return;
 		
-		if (equipped.fixedInInv) {
+		if (equipped.fitsInInv) {
 			MoveToInventory(equipped);
 		} else {
 			_Equipable item = equipped;
 			MoveToWorld(equipped);
 			item.OnDropped();
 		}
+
+		// Tell the animator
+		movement.anim.SetTrigger("ArmsEmpty");
 
 		equipped = null;
 	}
@@ -77,7 +80,7 @@ public class PlayerInventory : PlayerSubClass {
     #region Dropoff at station
     // Dropoff at dropoff-station
     public void Dropoff<Item>(_DropoffStation<Item> station) where Item : _DropoffItem {
-		if (equipped != null && !equipped.fixedInInv) {
+		if (equipped != null && !equipped.fitsInInv) {
 			_Equipable item = equipped;
 			Unequip();
 			station.AddItem(item as Item);
@@ -87,6 +90,10 @@ public class PlayerInventory : PlayerSubClass {
 
     #region Parenting
 	void MoveToEquipped(_Equipable item) {
+		// Tell animator
+		if (item.fitsInInv) movement.anim.SetTrigger("ArmsHolding");
+		else movement.anim.SetTrigger("ArmsLifting");
+
 		equipped = item;
 
 		item.transform.parent = equippedParent;
