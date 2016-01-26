@@ -14,16 +14,8 @@ public class PlayerHealth : PlayerSubClass {
 	private float timeOfDeath;
 	private Vector3 placeOfDeath;
 
-	private bool _dead;
-	public bool dead {
-		get { return _dead; }
-		set {
-			if (value == true && !_dead) {
-				_dead = value;
-				OnDeath();
-			}
-		}
-	}
+	[HideInInspector]
+	public bool dead;
 
 	void Start() {
 		deathParticles.SetActive(false);
@@ -41,6 +33,8 @@ public class PlayerHealth : PlayerSubClass {
 	}
 
 	void OnDeath() {
+		dead = true;
+
 		deathParticles.SetActive(true);
 		timeOfDeath = Time.time;
 		placeOfDeath = transform.position;
@@ -51,8 +45,8 @@ public class PlayerHealth : PlayerSubClass {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.tag == "Water") {
-			dead = true;
+		if (other.tag == "Water" && !dead) {
+			OnDeath();
 		}
 	}
 

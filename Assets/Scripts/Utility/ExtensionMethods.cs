@@ -151,4 +151,19 @@ namespace ExtensionMethods {
 			return new Vector3(vector.x, vector.y);
 		}
 	}
+
+	public static class TransformExitensions {
+		/// <summary>
+		/// Get the full hierarchy path of a transfrom.
+		/// Recursive.
+		/// </summary>
+		public static string GetPath(this Transform current) {
+			// Recursive
+
+			if (current.parent == null)
+				return current.name;
+
+			return current.parent.GetPath() + "/" + current.name;
+		}
+	}
 }

@@ -123,7 +123,9 @@ public class PlayerHUD : PlayerSubClass {
 			// Close inventory
 			if (Input.GetButtonUp("Inventory")) {
 				SetHUDVisable(false);
-			}
+				if (hoverKey != -1)
+					inventory.Equip(hoverKey);
+            }
 		}
 	}
 

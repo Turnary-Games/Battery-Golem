@@ -78,7 +78,8 @@ public class PlayerMovement : PlayerSubClass {
 		float magn = new Vector2(motion.x, motion.z).magnitude;
 		anim.SetBool("Walking", magn > 0);
 		anim.SetFloat("MoveSpeed", magn / 5);
-
+		anim.SetBool("Grounded", IsGrounded());
+		anim.SetFloat("VertSpeed", motion.y);
 	}
 
 	void Rotate() {
