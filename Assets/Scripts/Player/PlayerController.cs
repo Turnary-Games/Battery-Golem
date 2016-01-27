@@ -9,6 +9,7 @@ public class PlayerSubClass : MonoBehaviour {
 	public PlayerController controller { get { return parent; } }
 	public PlayerInventory inventory { get { return parent.inventory; } }
 	public PlayerMovement movement { get { return parent.movement; } }
+	public PlayerPushing pushing { get { return parent.pushing; } }
 	public PlayerHealth health { get { return parent.health; } }
 	public PlayerInteraction interaction { get { return parent.interaction; } }
 	public PlayerHUD hud { get { return parent.hud; } }
@@ -21,6 +22,7 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public PlayerInventory inventory;
 	public PlayerMovement movement;
 	public PlayerHealth health;
+	public PlayerPushing pushing;
 	public PlayerInteraction interaction;
 	public PlayerHUD hud;
 

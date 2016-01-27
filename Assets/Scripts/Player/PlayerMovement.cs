@@ -50,7 +50,14 @@ public class PlayerMovement : PlayerSubClass {
 	#region Movement algorithms
 	void Move() {
 		// Motion to apply to the character
-		Vector3 targetMotion = GetAxis() * moveSpeed + Vector3.up * motion.y;
+		Vector3 targetMotion = Vector3.zero;
+		if (pushing.point != null)
+			pushing.SetMovement();
+		else
+			targetMotion = GetAxis() * moveSpeed;
+
+		// Keep previous y axis
+		targetMotion += Vector3.up * motion.y;
 
 		// Pushed out from slopes
 		if (character.isGrounded && slopeAngle > character.slopeLimit) {
@@ -84,8 +91,15 @@ public class PlayerMovement : PlayerSubClass {
 
 	void Rotate() {
 		// Vector of the (looking) axis
-		Vector3 rawAxis = hud.isOpen ? Vector3.zero : new Vector3(Input.GetAxisRaw("HorizontalLook"), 0, Input.GetAxisRaw("VerticalLook"));
+		Vector3 rawAxis;
 
+		if (hud.isOpen)
+			rawAxis = Vector3.zero;
+		else if (pushing.point != null)
+			rawAxis = pushing.GetAxis();
+		else
+			rawAxis = new Vector3(Input.GetAxisRaw("HorizontalLook"), 0, Input.GetAxisRaw("VerticalLook"));
+		print("raw=" + rawAxis);
 		// Not using the looking axis input, try the movement axis
 		if (rawAxis.x == 0 && rawAxis.z == 0)
 			rawAxis = new Vector3(Input.GetAxisRaw("HorizontalMove"), 0, Input.GetAxisRaw("VerticalMove"));

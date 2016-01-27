@@ -108,10 +108,14 @@ public class PlayerInteraction : PlayerSubClass {
 
 	void GrabNDrop() {
 		if (inventory.equipped == null) {
-			// No item equipped. Try to grab the nearby item
-			_Equipable item = GetItemInRange();
-			if (item != null)
-				inventory.Equip(item);
+			// No item equipped. Try to grab the nearby pushing point
+			if (!pushing.GrabNDrop() && pushing.point == null) {
+				// Nothing happened and no pushing point selected
+				// Try to grab the nearby item
+				_Equipable item = GetItemInRange();
+				if (item != null)
+					inventory.Equip(item);
+			}
 		} else {
 			// Item equipped. Drop it.
 			inventory.Unequip();
