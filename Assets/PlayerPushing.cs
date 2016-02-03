@@ -16,7 +16,7 @@ public class PlayerPushing : PlayerSubClass {
 		if (point) {
 			// Drop current point
 			point = null;
-			movement.outsideForces = Vector3.zero;
+			//movement.outsideForces = Vector3.zero;
 			return true;
 		} else {
 			// Grab a point
@@ -37,12 +37,12 @@ public class PlayerPushing : PlayerSubClass {
 		return false;
 	}
 
-	public void SetMovement() {
-		if (point == null) return;
+	public Vector3 GetMovement() {
+		if (point == null) return Vector3.zero;
 
 		Vector3 delta = point.playerPos - transform.position;
 		delta.y = 0;
-		movement.outsideForces = Vector3.ClampMagnitude(delta, 1) * movement.moveSpeed;
+		return Vector3.ClampMagnitude(delta, 1) * movement.moveSpeed;
 	}
 
 	public Vector3 GetAxis() {

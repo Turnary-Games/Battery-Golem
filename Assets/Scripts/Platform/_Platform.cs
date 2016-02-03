@@ -3,7 +3,7 @@ using System.Collections;
 
 public class _Platform : MonoBehaviour {
 
-    public Rigidbody rbody;
+    public Rigidbody body;
 
     protected virtual void Start() {}
 

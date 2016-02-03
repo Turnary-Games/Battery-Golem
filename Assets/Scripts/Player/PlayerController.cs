@@ -27,7 +27,7 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public PlayerHUD hud;
 
 	public Vector3 characterCenter {
-		get { return transform.position + (movement.character != null ? movement.character.center : Vector3.zero); }
+		get { return transform.position + (movement.capsule != null ? movement.capsule.center : Vector3.zero); }
 	}
 
 #if UNITY_EDITOR

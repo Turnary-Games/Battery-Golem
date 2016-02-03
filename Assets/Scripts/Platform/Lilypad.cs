@@ -8,7 +8,7 @@ public class Lilypad : _Platform {
 
     // Called by fan
 	public void Move(Vector3 move, float power) {
-		rbody.velocity = Vector3.Lerp(rbody.velocity, move, Time.fixedDeltaTime * power);
+		body.velocity = Vector3.Lerp(body.velocity, move, Time.fixedDeltaTime * power);
 	}
 
 	void OnTouchStart(Touch touch) {
@@ -19,13 +19,14 @@ public class Lilypad : _Platform {
 
 	void OnTouch(Touch touch) {
 		if (IsPlayer (touch)) {
-			player.movement.outsideForces = rbody.velocity;
+			//player.movement.outsideForces = rbody.velocity;
+			player.movement.body.AddForce(body.velocity);
 		}
 	}
 
 	void OnTouchEnd(Touch touch) {
 		if (IsPlayer(touch)) {
-			player.movement.outsideForces = Vector3.zero;
+			//player.movement.outsideForces = Vector3.zero;
 			player = null;
 		}
 	}

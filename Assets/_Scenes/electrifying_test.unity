@@ -188,7 +188,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.4}
   m_Center: {x: 0, y: 0.5, z: -0.7}
---- !u!1001 &314165039
+--- !u!1001 &402499943
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -517,7 +517,7 @@ Transform:
 --- !u!4 &1864414662 stripped
 Transform:
   m_PrefabParentObject: {fileID: 476006, guid: 8878de9dbe4088742bad7d85a3254dda, type: 2}
-  m_PrefabInternal: {fileID: 314165039}
+  m_PrefabInternal: {fileID: 402499943}
 --- !u!1 &2030624627
 GameObject:
   m_ObjectHideFlags: 0
