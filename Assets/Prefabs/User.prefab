@@ -1160,7 +1160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -33.5, y: 0, z: 27.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 467552}
@@ -1952,8 +1952,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161296}
-  m_LocalRotation: {x: 0.38268322, y: 0, z: 0, w: 0.9238797}
-  m_LocalPosition: {x: -26.6, y: 2.05, z: 28.5}
+  m_LocalRotation: {x: 0.38268346, y: 0, z: 0, w: 0.9238795}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 423058}
@@ -1969,7 +1969,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.08000004, z: 0.000000001406501}
+  m_LocalPosition: {x: 0, y: 0.08000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 411782}
@@ -2913,8 +2913,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 11410162}
-  points: []
-  point: {fileID: 0}
+  breakDist: 1
+  pushSpeed: 4
 --- !u!114 &11434416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2927,7 +2927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  useMainCam: 0
+  useMainCam: 1
   executeInEditMode: 0
 --- !u!114 &11482876
 MonoBehaviour:
@@ -2961,15 +2961,16 @@ MonoBehaviour:
   capsule: {fileID: 13691380}
   anim: {fileID: 9562896}
   moveSpeed: 8
-  topSpeedAfter: 0.5
+  topSpeedAfter: 0.25
   rotSpeed: 300
   jumpHeight: 5
   continuousJumping: 1
   groundDist: 0.2
   groundLayer:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 1537
   slopeLimit: 30
+  outsideMotion: {x: 0, y: 0, z: 0}
 --- !u!114 &11495730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3558,7 +3559,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     type: 3
-    radius: 0.08
+    radius: 0.6
     angle: 55.56
     length: 5
     boxX: 1
@@ -9152,7 +9153,7 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 1
   SubModule:
-    enabled: 1
+    enabled: 0
     subEmitterBirth: {fileID: 19801616}
     subEmitterBirth1: {fileID: 0}
     subEmitterCollision: {fileID: 0}

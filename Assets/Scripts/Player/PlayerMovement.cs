@@ -28,6 +28,9 @@ public class PlayerMovement : PlayerSubClass {
 	[Range(0,90)]
 	public float slopeLimit = 30f;
 
+	[HideInInspector]
+	public Vector3 outsideMotion;
+
 	bool grounded;
 
 	void Update() {
@@ -48,13 +51,14 @@ public class PlayerMovement : PlayerSubClass {
 	void RaycastGround() {
 		RaycastHit hit;
 
-		if (Physics.Raycast(transform.position, Vector3.down, out hit, groundDist, groundLayer)) {
+		if (Physics.Raycast(transform.position + Vector3.up * groundDist / 2, Vector3.down, out hit, groundDist, groundLayer)) {
 			grounded = Vector3.Angle(hit.normal, Vector3.up) <= slopeLimit;
 		} else {
 			grounded = false;
 		}
 	}
 
+	private Vector3 lastOutsideMotion;
 	void Move() {
 		// Motion to apply to the character
 		Vector3 motion = Vector3.zero;
@@ -66,7 +70,7 @@ public class PlayerMovement : PlayerSubClass {
 		//body.AddForce(force);
 
 		// Apply acceleration to motion vector
-		motion = Vector3.MoveTowards(body.velocity, motion, moveSpeed * Time.deltaTime / topSpeedAfter);
+		motion = Vector3.MoveTowards(body.velocity - lastOutsideMotion, motion, moveSpeed * Time.deltaTime / topSpeedAfter);
 
 		if (grounded) {
 			// Jumping
@@ -79,14 +83,15 @@ public class PlayerMovement : PlayerSubClass {
 
 		// Move the character
 		//character.Move((motion + outsideForces) * Time.deltaTime);
-		body.velocity = motion;
+		body.velocity = motion + outsideMotion;
+		lastOutsideMotion = outsideMotion;
 	}
 
 	void UpdateAnimator() {
 		// Tell animator
 		float magn = new Vector2(body.velocity.x, body.velocity.z).magnitude;
 		anim.SetBool("Walking", magn > 0);
-		anim.SetFloat("MoveSpeed", magn / 5);
+		anim.SetFloat("MoveSpeed", magn > 0 ? magn / 5 : 1);
 		anim.SetBool("Grounded", grounded);
 		anim.SetFloat("VertSpeed", body.velocity.y);
 	}
@@ -99,14 +104,15 @@ public class PlayerMovement : PlayerSubClass {
 			rawAxis = Vector3.zero;
 		else if (pushing.point != null)
 			rawAxis = pushing.GetAxis();
-		else
+		else {
 			rawAxis = new Vector3(Input.GetAxisRaw("HorizontalLook"), 0, Input.GetAxisRaw("VerticalLook"));
-		
-		// Not using the looking axis input, try the movement axis
-		if (rawAxis.x == 0 && rawAxis.z == 0)
-			rawAxis = new Vector3(Input.GetAxisRaw("HorizontalMove"), 0, Input.GetAxisRaw("VerticalMove"));
 
-		// Not using that one either, then dont rotate at all
+			// Not using the looking axis input, try the movement axis
+			if (rawAxis.x == 0 && rawAxis.z == 0)
+				rawAxis = new Vector3(Input.GetAxisRaw("HorizontalMove"), 0, Input.GetAxisRaw("VerticalMove"));
+		}
+
+		// No rotation
 		if (rawAxis.x == 0 && rawAxis.z == 0) {
 			body.angularVelocity = Vector3.zero;
 			return;
@@ -123,7 +129,7 @@ public class PlayerMovement : PlayerSubClass {
 		//transform.eulerAngles = rot;
 	}
 
-	Vector3 GetAxis() {
+	public Vector3 GetAxis() {
 		// Vector of the (movement) axis
 		Vector3 inputAxis = new Vector3(Input.GetAxis("HorizontalMove"), 0, Input.GetAxis("VerticalMove"));
 

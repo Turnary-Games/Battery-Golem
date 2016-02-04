@@ -5,26 +5,29 @@ using ExtensionMethods;
 
 public class PushingPoint : Searchable {
 
+	public Rigidbody body;
+
 	public bool x;
 	public bool z;
 	public Vector3 offset;
 	public float rotation;
 
-	public bool playerInside = false;
-
 	public Vector3 playerPos { get { return transform.TransformPoint(offset); } }
 	public Vector3 playerRot { get { var vec = VectorHelper.FromDegrees(rotation); return new Vector3(vec.x, 0, vec.y); } }
 
+
 #if UNITY_EDITOR
 	void OnDrawGizmos() {
+		if (!transform.IsSelected()) return;
+
 		Gizmos.color = Color.red;
 		Gizmos.DrawSphere(playerPos, 0.2f);
-		Gizmos.DrawRay(playerPos + Vector3.up*0.2f, Vector3.up);
+		Gizmos.DrawRay(playerPos + Vector3.up * 0.2f, Vector3.up);
 		Gizmos.DrawRay(playerPos + Vector3.up * 1.2f, playerRot);
 
 		BoxCollider col = GetComponent<BoxCollider>();
 		if (col) {
-			Gizmos.color = Color.green;
+			Gizmos.color = body == null ? Color.red : Color.green;
 			Gizmos.DrawWireCube(transform.TransformPoint(col.center), transform.TransformVector(col.size));
         }
 
@@ -38,9 +41,6 @@ public class PushingPoint : Searchable {
 			UnityEditor.Handles.color = Color.red;
 			UnityEditor.Handles.ArrowCap(-1, pos, Quaternion.LookRotation(Vector3.right), 0.5f);
 		}
-
-
-
 	}
 #endif
 
@@ -54,5 +54,4 @@ public class PushingPoint : Searchable {
 
 		return Vector3.Distance(from, to);
 	}
-
 }

@@ -65,19 +65,33 @@ public class PlayerInteraction : PlayerSubClass {
 
 	}
 
+	bool lastInteract;
 	void FixedUpdate() { 
 
 		electrifying = false;
-		if (Input.GetAxis("Interact") != 0) {
+		bool interact = Input.GetAxis("Interact") != 0;
+		if (interact) {
 			ElectrifyNInteract();
 		}
+
+		// Interaction changed
+		if (interact != lastInteract && inventory.equipped == null) {
+			if (electrifying)
+				movement.anim.SetTrigger("ArmsHolding");
+			else if (!interact) {
+				movement.anim.SetTrigger("ArmsEmpty");
+				movement.anim.ResetTrigger("ArmsHolding");
+			}
+		}
+
+		lastInteract = interact;
+
 
 		// Particles
 		//var em = electricParticles.emission;
 		//em.enabled = electrifying;
 		
 		electricParticles.SetActive(electrifying);
-		
 	}
 
 	#region Picking up/Dropping items & Interacting

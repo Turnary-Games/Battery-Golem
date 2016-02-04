@@ -122,7 +122,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 442098, guid: df8321e8089b8d242aae2345f94652ee, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11427368, guid: df8321e8089b8d242aae2345f94652ee, type: 2}
       propertyPath: targetObj
@@ -171,11 +171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3e7aca5151faa4d8455815e652f9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 504487455}
   x: 0
   z: 1
   offset: {x: 0, y: 0, z: -1}
   rotation: 90
-  playerInside: 0
 --- !u!65 &184481154
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -227,6 +227,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11434416, guid: 8878de9dbe4088742bad7d85a3254dda, type: 2}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 812157663}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8878de9dbe4088742bad7d85a3254dda, type: 2}
   m_IsPrefabParent: 0
@@ -317,14 +321,19 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 504487450}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 12
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
+  m_Interpolate: 1
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!20 &812157663 stripped
+Camera:
+  m_PrefabParentObject: {fileID: 2038860, guid: df8321e8089b8d242aae2345f94652ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 18875340}
 --- !u!1 &1023698096
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,11 +374,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3e7aca5151faa4d8455815e652f9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 504487455}
   x: 0
   z: 1
   offset: {x: 0, y: 0, z: -1}
   rotation: -90
-  playerInside: 0
 --- !u!65 &1023698099
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -422,11 +431,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3e7aca5151faa4d8455815e652f9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 504487455}
   x: 1
   z: 0
   offset: {x: 0, y: 0, z: -1}
   rotation: 0
-  playerInside: 0
 --- !u!65 &1340167075
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -558,11 +567,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d3e7aca5151faa4d8455815e652f9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 504487455}
   x: 1
   z: 0
   offset: {x: 0, y: 0, z: -1}
   rotation: 180
-  playerInside: 0
 --- !u!65 &2030624630
 BoxCollider:
   m_ObjectHideFlags: 0
