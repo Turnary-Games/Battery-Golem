@@ -10,16 +10,18 @@ public class PlayerPushing : PlayerSubClass {
 	public float pushSpeed = 2.5f;
 
 	private List<PushingPoint> points = new List<PushingPoint>();
-	[HideInInspector]
 	public PushingPoint point {
 		get { return _point; }
 		set { var old = _point; _point = value; if (_point != old) OnPointChange(old); }
 	}
 	private PushingPoint _point;
 
+	public bool hasPoint { get { return point != null; } }
+	private bool pointBreak { get { return hasPoint ? Mathf.Abs(point.playerPos.y - transform.position.y) > breakDist : true; } }
+
 	void Update() {
 		// Check if outside breaking distance (on the Y axis)
-		if (point != null && Mathf.Abs(point.playerPos.y - transform.position.y) > breakDist) {
+		if (pointBreak) {
 			point = null;
 		}
 	}
@@ -30,12 +32,16 @@ public class PlayerPushing : PlayerSubClass {
 	/// Returns false if nothing happened.
 	/// </summary>
 	public bool GrabNDrop() {
-		if (point) {
+		if (hasPoint) {
 			// Drop current point
 			point = null;
 			return true;
 		} else {
 			// Grab a point
+
+			// Error checking
+			if (!movement.grounded || !pointBreak)
+				return false;
 
 			// Remove all invalid points. If for some reason they occur.
 			points.RemoveAll(delegate (PushingPoint p) {
@@ -75,12 +81,13 @@ public class PlayerPushing : PlayerSubClass {
 	}
 
 	public Vector3 GetAxis() {
-		if (point == null) return Vector3.zero;
+		if (!hasPoint) return Vector3.zero;
 		return point.playerRot;
 	}
 
 	void OnPointChange(PushingPoint old) {
-		if (point) movement.anim.SetTrigger("ArmsHolding");
+		// Tell the animator
+		if (hasPoint) movement.anim.SetTrigger("ArmsHolding");
 		else movement.anim.SetTrigger("ArmsEmpty");
 	}
 

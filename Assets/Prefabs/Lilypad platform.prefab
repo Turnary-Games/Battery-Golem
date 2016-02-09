@@ -59,8 +59,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101266}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.22999954, y: -.978919983, z: 19.1019993}
-  m_LocalScale: {x: 1.20000005, y: 1.20000005, z: 1.20000005}
+  m_LocalPosition: {x: 4.599137, y: 0, z: 32.4}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 429678}
   - {fileID: 444224}
@@ -73,8 +73,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .482423663, z: 0}
-  m_LocalScale: {x: 6.14995766, y: .464960337, z: 6.14995766}
+  m_LocalPosition: {x: 0, y: 0.48242366, z: 0}
+  m_LocalScale: {x: 6.1499577, y: 0.46496034, z: 6.1499577}
   m_Children: []
   m_Father: {fileID: 429280}
   m_RootOrder: 0
@@ -85,8 +85,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .482423663, z: 0}
-  m_LocalScale: {x: 6.14995766, y: .464960337, z: 6.14995766}
+  m_LocalPosition: {x: 0, y: 0.48242366, z: 0}
+  m_LocalScale: {x: 6.1499577, y: 0.46496034, z: 6.1499577}
   m_Children: []
   m_Father: {fileID: 429280}
   m_RootOrder: 1
@@ -108,8 +108,10 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -128,9 +130,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101266}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 12
   m_Drag: 1
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -170,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251efbccb54f2554981ac8a3b05c2a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rbody: {fileID: 5469462}
+  body: {fileID: 5469462}
 --- !u!114 &11476898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0819a0d84823493428b5d8abdd64b29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rbody: {fileID: 5469462}
+  body: {fileID: 5469462}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

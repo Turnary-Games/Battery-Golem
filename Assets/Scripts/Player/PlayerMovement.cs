@@ -31,7 +31,11 @@ public class PlayerMovement : PlayerSubClass {
 	[HideInInspector]
 	public Vector3 outsideMotion;
 
-	bool grounded;
+	[HideInInspector]
+	public bool grounded;
+
+	[HideInInspector]
+	public _Platform platform;
 
 	void Update() {
 		if (health.dead) {
@@ -53,8 +57,16 @@ public class PlayerMovement : PlayerSubClass {
 
 		if (Physics.Raycast(transform.position + Vector3.up * groundDist / 2, Vector3.down, out hit, groundDist, groundLayer)) {
 			grounded = Vector3.Angle(hit.normal, Vector3.up) <= slopeLimit;
+
+			GameObject main = hit.collider.attachedRigidbody ? hit.collider.attachedRigidbody.gameObject : hit.collider.gameObject;
+
+			_TouchListener listener = main.GetComponent<_TouchListener>();
+			if (listener) listener.Touch(this);
+
+			platform = main.GetComponent<_Platform>();
 		} else {
 			grounded = false;
+			platform = null;
 		}
 	}
 
@@ -88,12 +100,15 @@ public class PlayerMovement : PlayerSubClass {
 	}
 
 	void UpdateAnimator() {
+		// Velocity, relative to the current platform (if any)
+		Vector3 motion = platform ? body.velocity - platform.body.velocity : body.velocity;
+		float magn = new Vector2(motion.x, motion.z).magnitude;
+
 		// Tell animator
-		float magn = new Vector2(body.velocity.x, body.velocity.z).magnitude;
 		anim.SetBool("Walking", magn > 0);
 		anim.SetFloat("MoveSpeed", magn > 0 ? magn / 5 : 1);
 		anim.SetBool("Grounded", grounded);
-		anim.SetFloat("VertSpeed", body.velocity.y);
+		anim.SetFloat("VertSpeed", motion.y);
 	}
 
 	void Rotate() {
@@ -143,10 +158,10 @@ public class PlayerMovement : PlayerSubClass {
 		return axis;
 	}
 
-	// This is combined with the IsGrounded() function
+	// This is combined with the grounded field
 	bool ShouldJump() {
-		return (continuousJumping && Input.GetButton("Jump"))
-			|| (!continuousJumping && Input.GetButtonDown("Jump"));
+		return !pushing.hasPoint && ((continuousJumping && Input.GetButton("Jump"))
+			|| (!continuousJumping && Input.GetButtonDown("Jump")));
 	}
 	#endregion
 }
