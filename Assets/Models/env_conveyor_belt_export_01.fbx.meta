@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: 89930428f6d33a546af911a29e295aaa
+timeCreated: 1455030692
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: conveyor_belt
+    100002: //RootNode
+    100004: glass_pinne1
+    100006: glass_pinne1 1
+    100008: glass_pinne2
+    100010: glass_pinne2 1
+    100012: motor
+    100014: motor 1
+    100016: motor_holder
+    100018: motor_holder 1
+    100020: scaffolding1
+    100022: scaffolding2
+    400000: conveyor_belt
+    400002: //RootNode
+    400004: glass_pinne1
+    400006: glass_pinne1 1
+    400008: glass_pinne2
+    400010: glass_pinne2 1
+    400012: motor
+    400014: motor 1
+    400016: motor_holder
+    400018: motor_holder 1
+    400020: scaffolding1
+    400022: scaffolding2
+    2300000: conveyor_belt
+    2300002: glass_pinne1
+    2300004: glass_pinne1 1
+    2300006: glass_pinne2
+    2300008: glass_pinne2 1
+    2300010: motor
+    2300012: motor 1
+    2300014: motor_holder
+    2300016: motor_holder 1
+    3300000: conveyor_belt
+    3300002: glass_pinne1
+    3300004: glass_pinne1 1
+    3300006: glass_pinne2
+    3300008: glass_pinne2 1
+    3300010: motor
+    3300012: motor 1
+    3300014: motor_holder
+    3300016: motor_holder 1
+    4300000: conveyor_belt
+    4300002: motor
+    4300004: glass_pinne1
+    4300006: motor_holder
+    4300008: glass_pinne2
+    4300010: motor
+    4300012: glass_pinne1
+    4300014: motor_holder
+    4300016: glass_pinne2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
