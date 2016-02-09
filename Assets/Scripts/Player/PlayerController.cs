@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class PlayerSubClass : MonoBehaviour {
 	public PlayerController parent;
 	public PlayerController controller { get { return parent; } }
-	public PlayerInventory inventory { get { return parent.inventory; } }
-	public PlayerMovement movement { get { return parent.movement; } }
-	public PlayerHealth health { get { return parent.health; } }
-	public PlayerInteraction interaction { get { return parent.interaction; } }
-	public PlayerHUD hud { get { return parent.hud; } }
+	public PlayerInventory inventory { get { return parent != null ? parent.inventory : null; } }
+	public PlayerMovement movement { get { return parent != null ? parent.movement : null; } }
+	public PlayerPushing pushing { get { return parent != null ? parent.pushing : null; } }
+	public PlayerHealth health { get { return parent != null ? parent.health : null; } }
+	public PlayerInteraction interaction { get { return parent != null ? parent.interaction : null; } }
+	public PlayerHUD hud { get { return parent != null ? parent.hud : null; } }
 }
 
 public class PlayerController : SingletonBase<PlayerController> {
@@ -21,11 +22,12 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public PlayerInventory inventory;
 	public PlayerMovement movement;
 	public PlayerHealth health;
+	public PlayerPushing pushing;
 	public PlayerInteraction interaction;
 	public PlayerHUD hud;
 
 	public Vector3 characterCenter {
-		get { return transform.position + (movement.character != null ? movement.character.center : Vector3.zero); }
+		get { return transform.position + (movement.capsule != null ? movement.capsule.center : Vector3.zero); }
 	}
 
 #if UNITY_EDITOR

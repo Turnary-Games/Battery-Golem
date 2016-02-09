@@ -26,7 +26,7 @@ public class ItemCarrier : _Platform {
         if (item == null || !items.Contains(item))
             return;
 
-        item.rbody.velocity = rbody.velocity;
+        item.rbody.velocity = body.velocity;
     }
 
 }

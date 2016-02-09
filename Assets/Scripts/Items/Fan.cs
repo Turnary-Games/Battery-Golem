@@ -28,16 +28,12 @@ public class Fan : _Equipable {
 		if (inventory == null)
 			return;
 
-		var listeners = inventory.controller.GetListeners();
-		
-		listeners.ForEach(delegate (_TouchListener listener) {
-			var lilypad = listener.GetComponent<Lilypad>();
-			if (lilypad != null) {
-				// Move objects
-				Vector3 move = -transform.forward * speed;
-				lilypad.Move(move, power);
-			}
-		});
+		Lilypad lilypad = inventory.movement.platform as Lilypad;
+		if (lilypad != null) {
+			// Move objects
+			Vector3 move = -transform.forward * speed;
+			lilypad.Move(move, power);
+		}
 	}
 
 	void OnElectrifyStart() {

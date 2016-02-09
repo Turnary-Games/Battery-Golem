@@ -65,19 +65,33 @@ public class PlayerInteraction : PlayerSubClass {
 
 	}
 
+	bool lastInteract;
 	void FixedUpdate() { 
 
 		electrifying = false;
-		if (Input.GetAxis("Interact") != 0) {
+		bool interact = Input.GetAxis("Interact") != 0;
+		if (interact) {
 			ElectrifyNInteract();
 		}
+
+		// Interaction changed
+		if (interact != lastInteract && inventory.equipped == null) {
+			if (electrifying)
+				movement.anim.SetTrigger("ArmsHolding");
+			else if (!interact) {
+				movement.anim.SetTrigger("ArmsEmpty");
+				movement.anim.ResetTrigger("ArmsHolding");
+			}
+		}
+
+		lastInteract = interact;
+
 
 		// Particles
 		//var em = electricParticles.emission;
 		//em.enabled = electrifying;
 		
 		electricParticles.SetActive(electrifying);
-		
 	}
 
 	#region Picking up/Dropping items & Interacting
@@ -108,10 +122,14 @@ public class PlayerInteraction : PlayerSubClass {
 
 	void GrabNDrop() {
 		if (inventory.equipped == null) {
-			// No item equipped. Try to grab the nearby item
-			_Equipable item = GetItemInRange();
-			if (item != null)
-				inventory.Equip(item);
+			// No item equipped. Try to grab the nearby pushing point
+			if (!pushing.GrabNDrop() && pushing.point == null) {
+				// Nothing happened and no pushing point selected
+				// Try to grab the nearby item
+				_Equipable item = GetItemInRange();
+				if (item != null)
+					inventory.Equip(item);
+			}
 		} else {
 			// Item equipped. Drop it.
 			inventory.Unequip();

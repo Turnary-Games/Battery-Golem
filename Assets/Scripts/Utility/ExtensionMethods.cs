@@ -10,14 +10,17 @@ namespace ExtensionMethods {
         /// Deacting will disable the gravity and collision detection, as well as resetting the linear and angular velocity.
         /// Reactivating will do the opposite, except will not affect the velocity.
         /// </summary>
-        /// <param name="rbody"></param>
+        /// <param name="body"></param>
         /// <param name="state">True to activate, False to deactivate</param>
-        public static void SetEnabled(this Rigidbody rbody, bool state) {
-            rbody.useGravity = state;
-            rbody.detectCollisions = state;
+        public static void SetEnabled(this Rigidbody body, bool state) {
+            body.useGravity = state;
+            body.detectCollisions = state;
+			body.isKinematic = !state;
+			body.interpolation = state ? RigidbodyInterpolation.Interpolate : RigidbodyInterpolation.None;
+
             if (state == false) {
-                rbody.velocity = Vector3.zero;
-                rbody.angularVelocity = Vector3.zero;
+                body.velocity = Vector3.zero;
+                body.angularVelocity = Vector3.zero;
             }
         }
 
@@ -157,13 +160,27 @@ namespace ExtensionMethods {
 		/// Get the full hierarchy path of a transfrom.
 		/// Recursive.
 		/// </summary>
-		public static string GetPath(this Transform current) {
+		public static string GetPath(this Transform self) {
 			// Recursive
 
-			if (current.parent == null)
-				return current.name;
+			if (self.parent == null)
+				return self.name;
 
-			return current.parent.GetPath() + "/" + current.name;
+			return self.parent.GetPath() + "/" + self.name;
+		}
+
+		/// <summary>
+		/// Is the transform selected in the heirarchy?
+		/// </summary>
+		public static bool IsSelected(this Transform self, bool includeParents = true) {
+#if UNITY_EDITOR
+			foreach (Transform t in UnityEditor.Selection.transforms) {
+				if (t == self || (includeParents && self.IsChildOf(t))) return true;
+			}
+			return false;
+#else
+			return false;
+#endif
 		}
 	}
 
