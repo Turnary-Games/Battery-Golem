@@ -15,3 +15,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Unity lightmap snapshots
+**/LightmapSnapshot.asset filter=lfs diff=lfs merge=lfs -text
+**/ReflectionProbe-*.exr filter=lfs diff=lfs merge=lfs -text

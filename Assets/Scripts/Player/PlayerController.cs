@@ -1,146 +1,56 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using ExtensionMethods;
+using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerSubClass : MonoBehaviour {
+	public PlayerController parent;
+	public PlayerController controller { get { return parent; } }
+	public PlayerInventory inventory { get { return parent != null ? parent.inventory : null; } }
+	public PlayerMovement movement { get { return parent != null ? parent.movement : null; } }
+	public PlayerPushing pushing { get { return parent != null ? parent.pushing : null; } }
+	public PlayerHealth health { get { return parent != null ? parent.health : null; } }
+	public PlayerInteraction interaction { get { return parent != null ? parent.interaction : null; } }
+	public PlayerHUD hud { get { return parent != null ? parent.hud : null; } }
+}
 
-	[Header("Variables (DONT ALTER)")]
+public class PlayerController : SingletonBase<PlayerController> {
 
-	public CharacterController character;
-	public Transform electricPoint;
+	[Header("Player sub-classes")]
+
 	public PlayerInventory inventory;
+	public PlayerMovement movement;
+	public PlayerHealth health;
+	public PlayerPushing pushing;
+	public PlayerInteraction interaction;
+	public PlayerHUD hud;
 
-	[Header("Movement settings")]
-
-	[Tooltip("Speed in meters per second.")]
-	public float moveSpeed = 1;
-	[Tooltip("Speed in degrees per second.")]
-	public float rotSpeed = 1;
-	public float jumpHeight = 1;
-	public bool continuousJumping = true;
-	public float pushPower = 2.0F;
-
-	// Current movement velocity
-	private Vector3 motion;
-
-	// Current slope
-	private float slope;
-
-	void Update () {
-		Movement ();
-		Electrify ();
+	public Vector3 characterCenter {
+		get { return transform.position + (movement.capsule != null ? movement.capsule.center : Vector3.zero); }
 	}
 
-	void Movement() {
-		// Motion to apply to the character
-		motion = GetAxis () * moveSpeed + Vector3.up * motion.y;
-
-		if (IsGrounded()) {
-			// Jumping
-			if (ShouldJump())
-				motion.y = jumpHeight;
-		} else {
-			// Apply gravity
-			motion += Physics.gravity * Time.deltaTime;
-		}
-
-		// Move the character
-		character.Move (motion * Time.deltaTime);
-
-		// Rotate the character
-		Rotate ();
+#if UNITY_EDITOR
+	void OnValidate() {
+		// Try to find the sub-classes automatically
+		inventory = inventory ?? GetComponent<PlayerInventory>();
+		movement = movement ?? GetComponent<PlayerMovement>();
+		health = health ?? GetComponent<PlayerHealth>();
+		interaction = interaction ?? GetComponent<PlayerInteraction>();
 	}
+#endif
 
-	void Rotate() {
-		// Vector of the (looking) axis
-		Vector3 rawAxis = new Vector3 (Input.GetAxisRaw ("HorizontalLook"), 0, Input.GetAxisRaw ("VerticalLook"));
-		
-		// Not using the looking axis input, try the movement axis
-		if (rawAxis.x == 0 && rawAxis.z == 0)
-			rawAxis = new Vector3 (Input.GetAxisRaw("HorizontalMove"), 0, Input.GetAxisRaw("VerticalMove"));
-
-		// Not using that one either, then dont rotate at all
-		if (rawAxis.x == 0 && rawAxis.z == 0)
-			return;
-
-		// Get the angles
-		Vector3 rot = character.transform.eulerAngles;
-		float angle = Mathf.Atan2 (rawAxis.z, -rawAxis.x) * Mathf.Rad2Deg - 90f;
-		
-		// Change the value
-		rot.y = Mathf.MoveTowardsAngle (rot.y, angle, rotSpeed * Time.deltaTime);
-		// Set the value
-		character.transform.eulerAngles = rot;
-	}
-
-	Vector3 GetAxis() {
-		// Vector of the (movement) axis
-		Vector3 inputAxis = new Vector3 (Input.GetAxis ("HorizontalMove"), 0, Input.GetAxis ("VerticalMove"));
-
-		// Normalize it so that all directions moves the same combined speed
-		Vector3 axis = inputAxis.normalized;
-
-		// Restore the movement lerp that's lost in the normalization
-		axis.x *= Mathf.Abs (inputAxis.x);
-		axis.z *= Mathf.Abs (inputAxis.z);
-
-		return axis;
-	}
-
-	// Extended version of character.isGrounded
-	// This one includes the slope the controller is currently standing on
-	bool IsGrounded() {
-		return character.isGrounded && slope <= character.slopeLimit;
-	}
-
-	// This is combined with the IsGrounded() function
-	bool ShouldJump() {
-		return (continuousJumping && Input.GetButton ("Jump"))
-			|| (!continuousJumping && Input.GetButtonDown ("Jump"));
-	}
-
+	#region Collisions
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 
-		// Calculate slope angle (in degrees)
-		slope = Vector3.Angle (Vector3.up, hit.normal);
-
 		// Collision listener
-		hit.gameObject.SendMessage(TouchMethods.Touch, this, SendMessageOptions.DontRequireReceiver);
-
-		PushObjects (hit);
-	}
-
-	void PushObjects(ControllerColliderHit hit) {
-		Rigidbody body = hit.collider.attachedRigidbody;
-		if (body == null || body.isKinematic)
-			return;
-		
-		if (hit.moveDirection.y < -0.3F)
-			return;
-		
-		Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-		body.velocity = pushDir * pushPower;
-		//body.AddForceAtPosition (pushDir * pushPower, hit.point);
-	}
-
-	// Try to electrify "something"
-	void Electrify() {
-		if (Input.GetAxis("Electrify") != 0) {
-			if (inventory.equipped != null) {
-				// Electrify the equipped item
-				inventory.equipped.SendMessage(ElectricMethods.Electrify, SendMessageOptions.DontRequireReceiver);
-			} else if (electricPoint != null) {
-				// Try to electrify at your fingertips
-				_ElectricListener.ElectrifyAllAt(electricPoint.position);
-			}
+		GameObject main = hit.collider.attachedRigidbody != null ? hit.collider.attachedRigidbody.gameObject : hit.gameObject;
+		if (main != null) {
+			main.SendMessage (TouchMethods.Touch, this, SendMessageOptions.DontRequireReceiver);
 		}
 	}
+	#endregion
 
-	void OnTriggerEnter(Collider other) {
-		if (other.isTrigger) {
-			inventory.Pickup(other.gameObject);
-		}
-	}
 
 	// Get all listeners of the touching 
 	public List<_TouchListener> GetListeners() {
