@@ -1160,7 +1160,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -26.68, y: 50, z: 46.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 467552}
@@ -2121,8 +2121,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156650}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
@@ -2147,8 +2147,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153214}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
@@ -2251,8 +2251,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125402}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
@@ -2277,8 +2277,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 185076}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
@@ -2459,8 +2459,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170722}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
@@ -2563,8 +2563,8 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 176638}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_Materials:
   - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
@@ -2755,7 +2755,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181442}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -2960,7 +2960,7 @@ MonoBehaviour:
   body: {fileID: 5411254}
   capsule: {fileID: 13691380}
   anim: {fileID: 9562896}
-  moveSpeed: 8
+  moveSpeed: 10
   topSpeedAfter: 0.25
   rotSpeed: 300
   jumpHeight: 5
@@ -2972,6 +2972,7 @@ MonoBehaviour:
   slopeLimit: 30
   outsideMotion: {x: 0, y: 0, z: 0}
   grounded: 0
+  platform: {fileID: 0}
 --- !u!114 &11495730
 MonoBehaviour:
   m_ObjectHideFlags: 1

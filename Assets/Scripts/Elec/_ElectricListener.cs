@@ -37,7 +37,18 @@ public class _ElectricListener : Searchable {
 		}
 	}
 
-	void FixedUpdate() {
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        if (col)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireCube(col.bounds.center, col.bounds.size);
+        }
+    }
+#endif
+
+    void FixedUpdate() {
 		/*
 			Electrifying
 		*/

@@ -10,7 +10,6 @@ using ExtensionMethods;
 */
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(_TouchListener))]
 public abstract class _Equipable : _Item {
 
 	[Header("_Equipable fields")]
@@ -23,7 +22,7 @@ public abstract class _Equipable : _Item {
 
 	protected PlayerInventory inventory;
 	public bool equipped {
-		get { return inventory != null; }
+		get { return inventory != null && inventory.equipped == this; }
 	}
 	public bool fitsInInv {
 		get { return targetSlot >= 0; }

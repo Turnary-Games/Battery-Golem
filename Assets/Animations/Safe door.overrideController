@@ -1,0 +1,12 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Safe door
+  m_Controller: {fileID: 9100000, guid: 9dc13a33503025e479f337934932ac43, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e859db08941341e4fa622fb26ef35826, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 462d5a3f0e11567459c63679520b3dfd, type: 3}
