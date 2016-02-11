@@ -297,7 +297,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197074}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
-  m_LocalPosition: {x: -33.95, y: 1.5, z: 47.161682}
+  m_LocalPosition: {x: 6.886277, y: 1, z: 12.400823}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 422040}
@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Handheld fan
-  rbody: {fileID: 5482988}
+  body: {fileID: 5482988}
   effects:
   - type: 0
     effect: {fileID: 11466538}
@@ -652,6 +652,7 @@ MonoBehaviour:
       position: 0
       rotation: 0
       scale: 0
+  startDisabled: 1
   icon: {fileID: 21300000, guid: 02fb175cef30acf4d84738e642d7f81c, type: 3}
   targetSlot: 0
   unlocked: 0
