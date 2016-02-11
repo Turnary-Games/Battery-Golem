@@ -12,6 +12,6 @@ public class WaterDrop : MonoBehaviour {
         particles.transform.localScale = Vector3.one;
         Destroy(particles, 5f);
 
-        Destroy(gameObject);
+        Destroy(gameObject, 0.1f);
     }
 }
