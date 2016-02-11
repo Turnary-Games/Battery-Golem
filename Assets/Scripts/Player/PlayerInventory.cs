@@ -80,10 +80,10 @@ public class PlayerInventory : PlayerSubClass {
     #region Dropoff at station
     // Dropoff at dropoff-station
     public void Dropoff<Item>(_DropoffStation<Item> station) where Item : _DropoffItem {
-		if (equipped != null && !equipped.fitsInInv) {
-			_Equipable item = equipped;
+		Item item = equipped as Item;
+		if (item != null && !equipped.fitsInInv) {
 			Unequip();
-			station.AddItem(item as Item);
+			station.AddItem(item);
 		}
     }
     #endregion
