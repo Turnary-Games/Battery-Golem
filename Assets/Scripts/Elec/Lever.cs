@@ -4,19 +4,33 @@ using System.Collections;
 public class Lever : MonoBehaviour {
 
 	public Animator anim;
-	public string multiplier = "Direction";
+	public string parameter = "Flipped";
 
-	public bool on = false;
+	private bool on = false;
+	private bool idle = true;
+
+	void OnValidate() {
+		if (Application.isPlaying && anim && idle) {
+			anim.SetBool(parameter, on);
+			idle = false;
+		}
+	}
 
 	void Start() {
 		if (anim != null)
-			anim.SetFloat(multiplier, on ? 1 : -1);
+			anim.SetBool(parameter, on);
 	}
 
-	void OnElectricStart() {
+	void OnInteractStart() {
 		on = !on;
+		idle = false;
 		if (anim != null)
-			anim.SetFloat(multiplier, on ? 1 : -1);
+			anim.SetBool(parameter, on);
+	}
+
+	// Called by the animation
+	void AnimationIdle() {
+		idle = true;
 	}
 
 }

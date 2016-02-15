@@ -58,11 +58,23 @@ public class PlayerInteraction : PlayerSubClass {
 	}
 #endif
 
+	private _Equipable lastHover;
 	void Update() {
+		// Visualization
+		_Equipable hover = GetItemInRange();
+
+		if (hover != lastHover) {
+			// Hover changed
+			if (hover) hover.nearbyVisual.SetActive(true);
+			if (lastHover) lastHover.nearbyVisual.SetActive(false);
+		}
+		
+		lastHover = hover;
+
+		// Actual grabbing
 		if (Input.GetButtonDown("GrabNDrop")) {
 			GrabNDrop();
 		}
-
 	}
 
 	bool lastInteract;
