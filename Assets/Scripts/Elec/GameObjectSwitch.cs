@@ -6,20 +6,16 @@ public class GameObjectSwitch : MonoBehaviour {
 	public GameObject targetObject;
 	public bool inverted;
 
-	void OnElectrify() {
-		
+	void Start() {
+		targetObject.SetActive(inverted);
 	}
 
 	void OnElectrifyStart() {
-		TargetSetActive(true);
+		targetObject.SetActive(!inverted);
 	}
 
 	void OnElectrifyEnd() {
-		TargetSetActive(false);
-	}
-
-	void TargetSetActive(bool state) {
-		targetObject.SetActive(inverted ? !state : state);
+		targetObject.SetActive(inverted);
 	}
 
 }

@@ -4,38 +4,38 @@ using System.Collections;
 public class ConveyorController : MonoBehaviour {
 
 	public Lever lever;
-	public ConveyorBelt[] belts;
-	private Vector3[] motion;
+	public Object[] belts;
+	public Vector3 beltMotion;
+	public Vector3 scrollMotion;
 	public float topSpeedAfter = 1;
 
 	bool elec = false;
 	float t = 0;
 
-	void Awake() {
-		motion = new Vector3[belts.Length];
-		for (int i=0; i<belts.Length; i++) {
-			motion[i] = belts[i].motion;
-		}
-	}
+	int target { get { return elec ? (lever.on ? -1 : 1) : 0; } }
 
 	void Update() {
+		// Update the scale
 		if (topSpeedAfter <= 0)
-			t = elec ? 1 : 0;
+			t = target;
 		else
-			t = Mathf.MoveTowards(t, elec ? 1 : 0, Time.deltaTime);
+			t = Mathf.MoveTowards(t, target, Time.deltaTime);
 
+		// Update each belt
 		for (int i = 0; i < belts.Length; i++) {
-			ConveyorBelt belt = belts[i];
-			belt.motion = Vector3.Lerp(Vector3.zero, motion[i], t);
+			Object obj = belts[i];
+
+			if (obj is ConveyorBelt) (obj as ConveyorBelt).motion = beltMotion * t;
+			else if (obj is ScrollTexture) (obj as ScrollTexture).motion = scrollMotion * t;
 		}
 	}
 
-	void OnElectricStart() {
+	void OnElectrifyStart() {
 		elec = true;
 	}
 
-	void OnElectricEnd() {
-		elec = true;
+	void OnElectrifyEnd() {
+		elec = false;
 	}
 
 }

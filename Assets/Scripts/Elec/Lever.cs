@@ -6,7 +6,8 @@ public class Lever : MonoBehaviour {
 	public Animator anim;
 	public string parameter = "Flipped";
 
-	private bool on = false;
+	[HideInInspector]
+	public bool on = false;
 	private bool idle = true;
 
 	void OnValidate() {

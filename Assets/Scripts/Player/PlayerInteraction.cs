@@ -65,8 +65,8 @@ public class PlayerInteraction : PlayerSubClass {
 
 		if (hover != lastHover) {
 			// Hover changed
-			if (hover) hover.nearbyVisual.SetActive(true);
-			if (lastHover) lastHover.nearbyVisual.SetActive(false);
+			if (hover && hover.nearbyVisual) hover.nearbyVisual.SetActive(true);
+			if (lastHover && lastHover.nearbyVisual) lastHover.nearbyVisual.SetActive(false);
 		}
 		
 		lastHover = hover;

@@ -6,13 +6,14 @@ using ExtensionMethods;
 public class PushingPoint : Searchable {
 
 	public Rigidbody body;
+	public BoxCollider col;
 
 	public bool x;
 	public bool z;
 	public Vector3 offset;
 	public float rotation;
 
-	public Vector3 playerPos { get { return transform.TransformPoint(offset); } }
+	public Vector3 playerPos { get { return transform.TransformPoint(offset + (col ? col.center - Vector3.up * col.size.y / 2 : Vector3.zero)); } }
 	public Vector3 playerRot { get { var vec = VectorHelper.FromDegrees(rotation); return new Vector3(vec.x, 0, vec.y); } }
 
 
@@ -21,25 +22,22 @@ public class PushingPoint : Searchable {
 		if (!transform.IsSelected()) return;
 
 		Gizmos.color = Color.red;
-		Gizmos.DrawSphere(playerPos, 0.2f);
-		Gizmos.DrawRay(playerPos + Vector3.up * 0.2f, Vector3.up);
-		Gizmos.DrawRay(playerPos + Vector3.up * 1.2f, playerRot);
-
-		BoxCollider col = GetComponent<BoxCollider>();
+		Gizmos.DrawSphere(playerPos, 0.1f);
+		Gizmos.DrawRay(playerPos + Vector3.up * 0.1f, Vector3.up);
+		Gizmos.DrawRay(playerPos + Vector3.up * 1.1f, playerRot / 2);
+		
 		if (col) {
 			Gizmos.color = body == null ? Color.red : Color.green;
 			Gizmos.DrawWireCube(transform.TransformPoint(col.center), transform.TransformVector(col.size));
         }
 
-		Vector3 pos = transform.TransformPoint(col.center) - Vector3.up * transform.TransformVector(col.size).y / 2;
-
 		if (z) {
 			UnityEditor.Handles.color = Color.blue;
-			UnityEditor.Handles.ArrowCap(-1, pos, Quaternion.LookRotation(Vector3.forward), 0.5f);
+			UnityEditor.Handles.ArrowCap(-1, playerPos, Quaternion.LookRotation(Vector3.forward), 0.5f);
 		}
 		if (x) {
 			UnityEditor.Handles.color = Color.red;
-			UnityEditor.Handles.ArrowCap(-1, pos, Quaternion.LookRotation(Vector3.right), 0.5f);
+			UnityEditor.Handles.ArrowCap(-1, playerPos, Quaternion.LookRotation(Vector3.right), 0.5f);
 		}
 	}
 #endif

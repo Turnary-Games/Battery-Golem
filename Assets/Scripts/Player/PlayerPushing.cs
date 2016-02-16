@@ -89,6 +89,12 @@ public class PlayerPushing : PlayerSubClass {
 		// Tell the animator
 		if (hasPoint) movement.anim.SetTrigger("ArmsHolding");
 		else movement.anim.SetTrigger("ArmsEmpty");
+
+		// Toggle isKinematic
+		if (old)
+			old.body.isKinematic = true;
+		if (hasPoint)
+			point.body.isKinematic = false;
 	}
 
 	void OnTriggerEnter(Collider other) {

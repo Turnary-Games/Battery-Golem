@@ -59,7 +59,7 @@ public class HatchPuzzle : MonoBehaviour {
 	}
 
 	void OnElectrifyStart() {
-		elec = true;print("yes");
+		elec = true;
 	}
 
 	void OnElectrifyEnd() {
