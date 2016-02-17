@@ -22,7 +22,7 @@ public class TurnKinematic : MonoBehaviour {
 				body.velocity = Vector3.zero;
 				body.isKinematic = true;
 				body.constraints += (int)RigidbodyConstraints.FreezeRotationZ + (int)RigidbodyConstraints.FreezePositionY;
-				transform.eulerAngles = Vector3.zero;
+				transform.rotation = Quaternion.identity;
 			}
 		}
 	}
