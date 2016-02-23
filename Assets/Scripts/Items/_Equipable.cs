@@ -24,7 +24,7 @@ public abstract class _Equipable : _Item {
 	public bool equipped {
 		get { return inventory != null && inventory.equipped == this; }
 	}
-	public bool fitsInInv {
+	public bool isCore {
 		get { return targetSlot >= 0; }
 	}
 

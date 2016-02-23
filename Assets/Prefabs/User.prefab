@@ -23,7 +23,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 447134}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left fingertip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,7 +134,7 @@ GameObject:
   - 4: {fileID: 429072}
   - 33: {fileID: 3305006}
   - 23: {fileID: 2374944}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: upperArmGrass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - 4: {fileID: 423028}
   - 33: {fileID: 3396604}
   - 23: {fileID: 2334480}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: leftLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 415740}
   - 95: {fileID: 9562896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 499052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +704,7 @@ GameObject:
   - 4: {fileID: 433458}
   - 33: {fileID: 3306980}
   - 23: {fileID: 2318120}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: batteryBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   - 4: {fileID: 461146}
   - 33: {fileID: 3363740}
   - 23: {fileID: 2314196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -818,7 +818,7 @@ GameObject:
   - 4: {fileID: 438024}
   - 33: {fileID: 3346858}
   - 23: {fileID: 2344562}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: nubRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -865,7 +865,7 @@ GameObject:
   - 4: {fileID: 474550}
   - 33: {fileID: 3330502}
   - 23: {fileID: 2367400}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -882,7 +882,7 @@ GameObject:
   - 4: {fileID: 454260}
   - 33: {fileID: 3393852}
   - 23: {fileID: 2361094}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -899,7 +899,7 @@ GameObject:
   - 4: {fileID: 434048}
   - 33: {fileID: 3345544}
   - 23: {fileID: 2359880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: eyeCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +914,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 413630}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right fingertip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -931,7 +931,7 @@ GameObject:
   - 4: {fileID: 461392}
   - 33: {fileID: 3341964}
   - 23: {fileID: 2396386}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: rightLeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1027,6 +1027,7 @@ GameObject:
   - 114: {fileID: 11482876}
   - 114: {fileID: 11497342}
   - 114: {fileID: 11433548}
+  - 114: {fileID: 11490434}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1075,7 +1076,7 @@ GameObject:
   - 4: {fileID: 499234}
   - 33: {fileID: 3325210}
   - 23: {fileID: 2330318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube14 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1108,7 +1109,7 @@ GameObject:
   - 4: {fileID: 403964}
   - 33: {fileID: 3346862}
   - 23: {fileID: 2342048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1142,7 +1143,7 @@ GameObject:
   - 4: {fileID: 448604}
   - 33: {fileID: 3351900}
   - 23: {fileID: 2329674}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: nubLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1174,7 +1175,7 @@ GameObject:
   - 4: {fileID: 459012}
   - 33: {fileID: 3321344}
   - 23: {fileID: 2375068}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube14
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1222,7 +1223,7 @@ GameObject:
   - 4: {fileID: 463128}
   - 33: {fileID: 3324166}
   - 23: {fileID: 2358660}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pCube13 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1362,7 +1363,7 @@ GameObject:
   - 4: {fileID: 418584}
   - 33: {fileID: 3319406}
   - 23: {fileID: 2390996}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: headGrass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3130,6 +3131,7 @@ MonoBehaviour:
   pushing: {fileID: 11433548}
   interaction: {fileID: 11497342}
   hud: {fileID: 11495730}
+  anim: {fileID: 11490434}
 --- !u!114 &11416240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3219,7 +3221,6 @@ MonoBehaviour:
   parent: {fileID: 11410162}
   body: {fileID: 5411254}
   capsule: {fileID: 13691380}
-  anim: {fileID: 9562896}
   moveSpeed: 10
   topSpeedAfter: 0.25
   rotSpeed: 300
@@ -3233,6 +3234,19 @@ MonoBehaviour:
   outsideMotion: {x: 0, y: 0, z: 0}
   grounded: 0
   platform: {fileID: 0}
+--- !u!114 &11490434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feab4bffac71375408aed33fb9ce0d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 11410162}
+  ac: {fileID: 9562896}
 --- !u!114 &11495730
 MonoBehaviour:
   m_ObjectHideFlags: 1

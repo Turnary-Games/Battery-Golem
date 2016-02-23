@@ -7,7 +7,6 @@ public class PlayerMovement : PlayerSubClass {
 
 	public Rigidbody body;
 	public CapsuleCollider capsule;
-	public Animator anim;
 
 	[Header("Movement settings")]
 
@@ -28,13 +27,13 @@ public class PlayerMovement : PlayerSubClass {
 	[Range(0,90)]
 	public float slopeLimit = 30f;
 
-	[HideInInspector]
+	[System.NonSerialized]
 	public Vector3 outsideMotion;
 
-	[HideInInspector]
+	[System.NonSerialized]
 	public bool grounded;
 
-	[HideInInspector]
+	[System.NonSerialized]
 	public _Platform platform;
 
 	void Update() {
@@ -47,8 +46,6 @@ public class PlayerMovement : PlayerSubClass {
 		RaycastGround();
 		Move();
 		Rotate();
-
-		UpdateAnimator();
 	}
 
 	#region Movement algorithms
@@ -97,18 +94,6 @@ public class PlayerMovement : PlayerSubClass {
 		//character.Move((motion + outsideForces) * Time.deltaTime);
 		body.velocity = motion + outsideMotion;
 		lastOutsideMotion = outsideMotion;
-	}
-
-	void UpdateAnimator() {
-		// Velocity, relative to the current platform (if any)
-		Vector3 motion = platform ? body.velocity - platform.body.velocity : body.velocity;
-		float magn = new Vector2(motion.x, motion.z).magnitude;
-
-		// Tell animator
-		anim.SetBool("Walking", magn > 0);
-		anim.SetFloat("MoveSpeed", magn > 0 ? magn / 5 : 1);
-		anim.SetBool("Grounded", grounded);
-		anim.SetFloat("VertSpeed", motion.y);
 	}
 
 	void Rotate() {

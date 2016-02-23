@@ -21,7 +21,8 @@ public class PlayerInteraction : PlayerSubClass {
 		get { return (electricTransform ?? transform).position; }
 	}
 
-	private bool electrifying;
+	[System.NonSerialized]
+	public bool electrifying;
 
 #if UNITY_EDITOR
 	void OnDrawGizmos() {
@@ -76,8 +77,7 @@ public class PlayerInteraction : PlayerSubClass {
 			GrabNDrop();
 		}
 	}
-
-	bool lastInteract;
+	
 	void FixedUpdate() { 
 
 		electrifying = false;
@@ -85,18 +85,6 @@ public class PlayerInteraction : PlayerSubClass {
 		if (interact) {
 			ElectrifyNInteract();
 		}
-
-		// Interaction changed
-		if (interact != lastInteract && inventory.equipped == null) {
-			if (electrifying)
-				movement.anim.SetTrigger("ArmsHolding");
-			else if (!interact) {
-				movement.anim.SetTrigger("ArmsEmpty");
-				movement.anim.ResetTrigger("ArmsHolding");
-			}
-		}
-
-		lastInteract = interact;
 
 
 		// Particles

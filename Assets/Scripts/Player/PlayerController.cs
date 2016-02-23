@@ -13,6 +13,7 @@ public class PlayerSubClass : MonoBehaviour {
 	public PlayerHealth health { get { return parent != null ? parent.health : null; } }
 	public PlayerInteraction interaction { get { return parent != null ? parent.interaction : null; } }
 	public PlayerHUD hud { get { return parent != null ? parent.hud : null; } }
+	public PlayerAnimation anim { get { return parent != null ? parent.anim : null; } }
 }
 
 public class PlayerController : SingletonBase<PlayerController> {
@@ -25,6 +26,7 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public PlayerPushing pushing;
 	public PlayerInteraction interaction;
 	public PlayerHUD hud;
+	public PlayerAnimation anim;
 
 	public Vector3 characterCenter {
 		get { return transform.position + (movement.capsule != null ? movement.capsule.center : Vector3.zero); }
