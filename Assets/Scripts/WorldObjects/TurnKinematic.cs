@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
 public class TurnKinematic : MonoBehaviour {
 
-	public Rigidbody body;
-	[Range(0,180)]
-	public float angleError = 2;
-
+	private Rigidbody body;
 	private bool done = false;
+
+	void Start() {
+		body = GetComponent<Rigidbody>();
+	}
 
 	void OnCollisionStay(Collision col) {
 		if (col.collider.tag == "Terrain" && !done) {
-			float delta = Mathf.DeltaAngle(transform.eulerAngles.z, 0);
-			if (Mathf.Abs(delta) <= angleError) {
+			float product = Vector3.Dot(transform.up, Vector3.down);
+
+			if (Mathf.Approximately(Mathf.Abs(product),1)) {
 				done = true;
 
 				foreach(PushingPoint point in GetComponentsInChildren<PushingPoint>(true)) {
