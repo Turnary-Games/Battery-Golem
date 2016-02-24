@@ -26,15 +26,29 @@ public class PlayerMovement : PlayerSubClass {
 	public LayerMask groundLayer;
 	[Range(0,90)]
 	public float slopeLimit = 30f;
-
-	[System.NonSerialized]
+	
+	[HideInInspector]
 	public Vector3 outsideMotion;
-
-	[System.NonSerialized]
+	
+	[HideInInspector]
 	public bool grounded;
+	
+	private RaycastHit? lastHit;
 
-	[System.NonSerialized]
+	[HideInInspector]
 	public _Platform platform;
+
+#if UNITY_EDITOR
+	void OnDrawGizmosSelected() {
+
+		Gizmos.color = Color.green;
+		Gizmos.DrawRay(transform.position + Vector3.up * groundDist, Vector3.down * (lastHit.HasValue ? lastHit.Value.distance : groundDist*2));
+		if (lastHit.HasValue) {
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(lastHit.Value.point, Vector3.down * (groundDist * 2 - lastHit.Value.distance));
+		}
+	}
+#endif
 
 	void Update() {
 		if (health.dead) {
@@ -52,18 +66,21 @@ public class PlayerMovement : PlayerSubClass {
 	void RaycastGround() {
 		RaycastHit hit;
 
-		if (Physics.Raycast(transform.position + Vector3.up * groundDist / 2, Vector3.down, out hit, groundDist, groundLayer)) {
+		if (Physics.Raycast(transform.position + Vector3.up * groundDist, Vector3.down, out hit, groundDist*2, groundLayer)) {
 			grounded = Vector3.Angle(hit.normal, Vector3.up) <= slopeLimit;
-
+			
 			GameObject main = hit.collider.attachedRigidbody ? hit.collider.attachedRigidbody.gameObject : hit.collider.gameObject;
 
 			_TouchListener listener = main.GetComponent<_TouchListener>();
 			if (listener) listener.Touch(this);
 
 			platform = main.GetComponent<_Platform>();
+
+			lastHit = hit;
 		} else {
 			grounded = false;
 			platform = null;
+			lastHit = null;
 		}
 	}
 

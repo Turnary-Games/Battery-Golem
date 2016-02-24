@@ -17,8 +17,11 @@ public class PlayerHealth : PlayerSubClass {
 	[HideInInspector]
 	public bool dead;
 
+	private bool hasReset = false;
+
 	void Start() {
-		deathParticles.SetActive(false);
+		//deathParticles.SetActive(false);
+		SetParticles(false);
 	}
 
 	void Update() {
@@ -26,16 +29,30 @@ public class PlayerHealth : PlayerSubClass {
 			// Shake a little
 			transform.position = placeOfDeath + Vector3.one * Random.value * deathShake;
 
-			if (Time.time - timeOfDeath > resetDelay) {
-				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			if (Time.time - timeOfDeath > resetDelay && !hasReset) {
+				hasReset = true;
+				if (LevelSerializer.CanResume)
+					// Jump back to checkpoint
+					LevelSerializer.Resume();
+				else
+					// Hardreset level
+					SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			}
+		}
+	}
+
+	void SetParticles(bool state) {
+		foreach (ParticleSystem ps in deathParticles.GetComponentsInChildren<ParticleSystem>()) {
+			var em = ps.emission;
+			em.enabled = state;
 		}
 	}
 
 	void OnDeath() {
 		dead = true;
 
-		deathParticles.SetActive(true);
+		//deathParticles.SetActive(true);
+		SetParticles(true);
 		timeOfDeath = Time.time;
 		placeOfDeath = transform.position;
 

@@ -9,6 +9,7 @@ public class AnimationPlayer : MonoBehaviour {
 	public float speedMultiplier = 1;
 
     private bool active;
+	[SerializeThis]
     private float speed = 0;
 
 #if UNITY_EDITOR

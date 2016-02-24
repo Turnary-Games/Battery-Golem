@@ -36,7 +36,8 @@ ModelImporter:
     4300004: Peg2
     4300006: Cog2
     4300008: Bridge
-    7400000: Take 001
+    7400000: bridge@lower
+    7400002: bridge@down
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -58,7 +59,95 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: bridge@lower
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 34
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bridge
+        weight: 1
+      - path: Cog_piece1
+        weight: 1
+      - path: Cog_piece1/Cog1
+        weight: 1
+      - path: Cog_piece1/Peg1
+        weight: 1
+      - path: Cog_piece2
+        weight: 1
+      - path: Cog_piece2/Cog2
+        weight: 1
+      - path: Cog_piece2/Peg2
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: bridge@down
+      takeName: Take 001
+      firstFrame: 34
+      lastFrame: 35
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Bridge
+        weight: 1
+      - path: Cog_piece1
+        weight: 1
+      - path: Cog_piece1/Cog1
+        weight: 1
+      - path: Cog_piece1/Peg1
+        weight: 1
+      - path: Cog_piece2
+        weight: 1
+      - path: Cog_piece2/Cog2
+        weight: 1
+      - path: Cog_piece2/Peg2
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []

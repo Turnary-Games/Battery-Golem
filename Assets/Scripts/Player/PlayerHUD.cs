@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using ExtensionMethods;
 
 public class PlayerHUD : PlayerSubClass {
@@ -16,16 +17,18 @@ public class PlayerHUD : PlayerSubClass {
 	public int intOffset;
 
 	[Header("HUD Animated leaves")]
-	public Animator[] leaves = new Animator[4];
+	public Transform leavesParent;
+	public GameObject leavesPrefab;
 
 	private int hoverMouse;
 	private int hoverKey; // hotkeys
 
 	private Vector3 mouseDelta = Vector3.zero;
-
-	public bool isOpen { get {
-		return leaves.Length > 0 && leaves[0] != null ? leaves[0].gameObject.activeSelf : false;
-	} }
+	
+	[HideInInspector]
+	public bool isOpen;
+	[SerializeThis] // serialize it, but don't show it in the inspector
+	private Animator[] leaves = new Animator[4];
 
 	/// <summary>
 	/// Screen point of the center.
@@ -150,11 +153,9 @@ public class PlayerHUD : PlayerSubClass {
 	/// Unlock a slot. This would happen if you picked up an (inventory) item for the first time.
 	/// </summary>
 	public void UnlockItem(int slot) {
+		SetHUDVisable(true);
 		Animator anim = leaves.Get(slot);
-		if (anim != null) {
-			SetHUDVisable(true);
-			anim.SetBool("Slow", true);
-		}
+		anim.SetBool("Slow", true);
 	}
 
 	void SetHover(int slot) {
@@ -165,23 +166,35 @@ public class PlayerHUD : PlayerSubClass {
 	}
 
 	void SetHUDVisable(bool state) {
+		if (isOpen == state) return;
+
+		// Loop each slot
 		for (int slot = 0; slot < inventory.coreItems.Length; slot++) {
-			Animator anim = leaves.Get(slot);
-			_Equipable item = inventory.coreItems.Get(slot);
-
-			anim.gameObject.SetActive(state);
-
+			// Update the leaves
 			if (state) {
-				// When activating/deactivating the animator it gets confused and "un-initialized"
-				if (!anim.isInitialized) {
-					// Reset the animator
-					anim.Rebind();
-				}
+				// Add leaves
+				GameObject clone = Instantiate(leavesPrefab) as GameObject;
+
+				clone.transform.SetParent(leavesParent);
+				clone.transform.localPosition = Vector3.zero;
+				clone.transform.localScale = Vector3.one;
+				clone.transform.localEulerAngles = new Vector3(0, 0, -slot * 90);
+
+				Animator anim = clone.GetComponentInChildren<Animator>();
+				_Equipable item = inventory.coreItems.Get(slot);
 
 				anim.SetBool("Open", item != null && item.unlocked);
 				anim.SetBool("Slow", false);
+
+				leaves[slot] = anim;
+            } else {
+				// Remove leaves
+				Destroy(leaves[slot].transform.parent.gameObject);
 			}
+			
 		}
+
+		isOpen = state;
 	}
 	
 }

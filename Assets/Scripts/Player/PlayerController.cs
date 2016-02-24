@@ -42,6 +42,15 @@ public class PlayerController : SingletonBase<PlayerController> {
 	}
 #endif
 
+	void Update() {
+		if (Input.GetKeyDown(KeyCode.Home) && LevelSerializer.CanResume) {
+			LevelSerializer.Resume();
+		}
+		if (Input.GetKeyDown(KeyCode.End)) {
+			LevelSerializer.Checkpoint();
+		}
+	}
+
 	#region Collisions
 	void OnControllerColliderHit(ControllerColliderHit hit) {
 
