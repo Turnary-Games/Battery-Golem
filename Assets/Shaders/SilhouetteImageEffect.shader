@@ -4,10 +4,12 @@
 		_Silhouette ("Silhouette color", Color) = (1,1,1,.5)
 	}
 	SubShader {
+		Tags { "Queue" = "Overlay" }
+
 		Blend SrcAlpha OneMinusSrcAlpha
 		Stencil {
 			Ref 1
-			Comp equal
+			Comp Equal
 		}
 
 		Pass {

@@ -6,8 +6,10 @@
 	}
 	SubShader
 	{
+		
 		// Just write to the stencil
 		Pass {
+			Cull Off
 			ZWrite Off
 			ZTest Greater
 			ColorMask 0
@@ -21,7 +23,10 @@
 		// Draw normally
 		Pass
 		{
+			Cull Back
+			ZTest On
 			ZWrite On
+			// Reset the stencil where the player is visable
 			Stencil {
 				Ref 0
 				Comp always
