@@ -2293,6 +2293,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1537
   slopeLimit: 30
+  outsideMotion: {x: 0, y: 0, z: 0}
+  grounded: 0
+  platform: {fileID: 0}
 --- !u!114 &11490434
 MonoBehaviour:
   m_ObjectHideFlags: 1
