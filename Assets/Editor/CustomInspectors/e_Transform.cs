@@ -9,9 +9,9 @@ public class e_Transform : Editor {
 	private bool move;
 	private Vector2 mouse;
 	private RaycastHit lastHit;
+	private bool shift;
 
 	void OnEnable() {
-		//TransformInspector.cs
 		this.positionProperty = this.serializedObject.FindProperty("m_LocalPosition");
 		this.rotationProperty = this.serializedObject.FindProperty("m_LocalRotation");
 		this.scaleProperty = this.serializedObject.FindProperty("m_LocalScale");
@@ -169,20 +169,11 @@ public class e_Transform : Editor {
 			EditorGUILayout.HelpBox(positionWarningText, MessageType.Warning);
 		}
 
-
-
 		GUI.enabled = !move;
 		if (GUILayout.Button(serializedObject.isEditingMultipleObjects ? "Move (" + serializedObject.targetObjects.Length + ") objects" : "Move " + serializedObject.targetObject.name)) {
 			move = true;
 		}
 		GUI.enabled = true;
-
-		if (GUILayout.Button("Move X steps")) {
-			foreach(Object o in serializedObject.targetObjects) {
-				(o as Transform).position += Vector3.down * 50;
-			}
-		}
-
 
 		this.serializedObject.ApplyModifiedProperties();
 	}
