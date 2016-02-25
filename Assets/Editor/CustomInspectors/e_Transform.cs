@@ -9,7 +9,6 @@ public class e_Transform : Editor {
 	private bool move;
 	private Vector2 mouse;
 	private RaycastHit lastHit;
-	private bool shift;
 
 	void OnEnable() {
 		this.positionProperty = this.serializedObject.FindProperty("m_LocalPosition");
