@@ -5,18 +5,18 @@ public class PlayerAnimation : PlayerSubClass {
 
 	public Animator ac;
 	
-	void LateUpdate() {
-		if (pushing.movement.pushing.anim.pushing.interaction.pushing.hud.inventory.pushing.point) {
+	void FixedUpdate() {
+		if (pushing && pushing.point) {
 			ac.SetBool("ArmsUp", true);
 			ac.SetBool("CoreItem", true);
-		} else if (interaction.electrifying) {
-			ac.SetBool("ArmsUp", true);
-			ac.SetBool("CoreItem", true);
-		} else {
+		} else if (inventory && inventory.equipped) {
 			ac.SetBool("ArmsUp", inventory.equipped);
 			ac.SetBool("CoreItem", inventory.equipped && inventory.equipped.isCore);
-		}
-
+		} else {
+			bool up = interaction && interaction.isElectrifying;
+			ac.SetBool("ArmsUp", up);
+			ac.SetBool("CoreItem", up);
+		} 
 
 		// Velocity, relative to the current platform (if any)
 		Vector3 motion = movement.platform ? movement.body.velocity - movement.platform.body.velocity : movement.body.velocity;

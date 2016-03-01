@@ -17,12 +17,18 @@ public class PlayerInteraction : PlayerSubClass {
 	[Tooltip("When calculating which item is closest should it ignore the y axis? (Which would count everything as on the same height)")]
 	public bool ignoreYAxis = false;
 
+
+	[SerializeThis]
+	private _Equipable lastHover;
+	private bool elecDown;
+	private bool inteDown;
+
+	[System.NonSerialized]
+	public bool isElectrifying;
+
 	public Vector3 electricPoint {
 		get { return (electricTransform ?? transform).position; }
 	}
-
-	[System.NonSerialized]
-	public bool electrifying;
 
 #if UNITY_EDITOR
 	void OnDrawGizmos() {
@@ -46,6 +52,8 @@ public class PlayerInteraction : PlayerSubClass {
 				UnityEditor.Handles.DrawLine(pickupPoint.position + new Vector3(0, 50, pickupRadius), pickupPoint.position + new Vector3(0, -50, pickupRadius));
 				UnityEditor.Handles.DrawLine(pickupPoint.position + new Vector3(0, 50, -pickupRadius), pickupPoint.position + new Vector3(0, -50, -pickupRadius));
 				UnityEditor.Handles.DrawWireDisc(pickupPoint.position, Vector3.up, pickupRadius);
+				UnityEditor.Handles.DrawWireDisc(pickupPoint.position + Vector3.up * 50, Vector3.up, pickupRadius);
+				UnityEditor.Handles.DrawWireDisc(pickupPoint.position + Vector3.down * 50, Vector3.up, pickupRadius);
 			} else {
 				Gizmos.color = Color.cyan;
 				Gizmos.DrawWireSphere(pickupPoint.position, pickupRadius);
@@ -59,7 +67,6 @@ public class PlayerInteraction : PlayerSubClass {
 	}
 #endif
 
-	private _Equipable lastHover;
 	void Update() {
 		// Visualization
 		_Equipable hover = GetItemInRange();
@@ -69,48 +76,68 @@ public class PlayerInteraction : PlayerSubClass {
 			if (hover && hover.nearbyVisual) hover.nearbyVisual.SetActive(true);
 			if (lastHover && lastHover.nearbyVisual) lastHover.nearbyVisual.SetActive(false);
 		}
-		
 		lastHover = hover;
 
-		// Actual grabbing
-		if (Input.GetButtonDown("GrabNDrop")) {
-			GrabNDrop();
-		}
+		// Read input
+		if (!inteDown && Input.GetButtonDown("Interact")) inteDown = true;
 	}
 	
 	void FixedUpdate() { 
 
-		electrifying = false;
-		bool interact = Input.GetAxis("Interact") != 0;
-		if (interact) {
-			ElectrifyNInteract();
-		}
+		if (inteDown) {
+			inteDown = false;
+			// Interacting priority order:
+			// - release
+			// - pickup (if no item)
+			// - interact
+			// - drop
+			// - grab
 
-
-		// Particles
-		//var em = electricParticles.emission;
-		//em.enabled = electrifying;
-		
-		electricParticles.SetActive(electrifying);
-	}
-
-	#region Picking up/Dropping items & Interacting
-
-	void ElectrifyNInteract() {
-		if (!_ElectricListener.InteractAt(controller, electricPoint)) {
-			// Didn't interact with anything... Try to electrify
-			if (inventory.equipped != null && inventory.equipped.canBeElectrified) {
-				// Electrify the equipped item
-				inventory.equipped.SendMessage(ElectricMethods.Electrify, controller, SendMessageOptions.DontRequireReceiver);
-				electrifying = true;
-			} else if (inventory.equipped == null) {
-				// Try to electrify at your fingertips
-				_ElectricListener.ElectrifyAllAt(controller, electricPoint);
-				electrifying = true;
+			if (pushing.hasPoint) {
+				// Release grabbed object
+				pushing.point = null;
+			} else {
+				// Try to grab the nearest item
+				_Equipable item = GetItemInRange();
+				if (!inventory.equipped && item != null)
+					inventory.Equip(item);
+				else {
+					// Try to interact
+					if (!_ElectricListener.InteractAt(controller, electricPoint)) {
+						// Didn't interact with anything
+						if (inventory.equipped)
+							// Drop equipped item
+							inventory.Unequip();
+						else
+							// Grab an object
+							pushing.TryToGrab();
+					}
+				}
 			}
 		}
 
+		isElectrifying = Input.GetAxis("Electrify") != 0;
+		electricParticles.SetActive(isElectrifying);
+		if (isElectrifying) {
+			// Electrifying priority order:
+			// - electrify held item
+			// - electrify grabbed object
+			// - electrify point in world
+			
+			if (inventory.equipped) {
+				// Electrify the held item
+				inventory.equipped.SendMessage(ElectricMethods.Electrify, controller, SendMessageOptions.DontRequireReceiver);
+			} else if (pushing.hasPoint) {
+				// Try to electrify grabbed object
+				throw new System.NotImplementedException();
+			} else {
+				// Try to electrify at your fingertips
+				_ElectricListener.ElectrifyAllAt(controller, electricPoint);
+			}
+		}
 	}
+
+	#region Picking up/Dropping items & Interacting
 
 	public bool IsItemInRange(_Equipable item) {
 		return item.GetDistance(pickupPoint.position) <= pickupRadius;
@@ -118,22 +145,6 @@ public class PlayerInteraction : PlayerSubClass {
 
 	public _Equipable GetItemInRange() {
 		return Searchable.GetClosest<_Equipable>(pickupPoint.position, pickupRadius, controller.characterCenter, ignoreYAxis).obj;
-	}
-
-	void GrabNDrop() {
-		if (inventory.equipped == null) {
-			// No item equipped. Try to grab the nearby pushing point
-			if (!pushing.GrabNDrop() && pushing.point == null) {
-				// Nothing happened and no pushing point selected
-				// Try to grab the nearby item
-				_Equipable item = GetItemInRange();
-				if (item != null)
-					inventory.Equip(item);
-			}
-		} else {
-			// Item equipped. Drop it.
-			inventory.Unequip();
-		}
 	}
 
 	#endregion

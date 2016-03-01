@@ -10,15 +10,27 @@ public class e_Transform : Editor {
 	private Vector2 mouse;
 	private RaycastHit lastHit;
 
+	private Material mat;
+	private Material mat2;
+
+	private string label { get { return Selection.transforms.Length > 1 ? "Move (" + Selection.transforms.Length + ") objects" : "Move " + Selection.transforms[0].name; } }
+
 	void OnEnable() {
 		this.positionProperty = this.serializedObject.FindProperty("m_LocalPosition");
 		this.rotationProperty = this.serializedObject.FindProperty("m_LocalRotation");
 		this.scaleProperty = this.serializedObject.FindProperty("m_LocalScale");
+
+
+		mat = new Material(Shader.Find("Sprites/Default"));
+		mat.color = new Color(0.5f, 0.5f, 0f, 0.5f);
+
+		mat2 = new Material(Shader.Find("Sprites/Default"));
+		mat2.color = new Color(1f, 0f, 0f, 0.1f);
 	}
 
-	void Update() {
-		if (Event.current.type == EventType.MouseDown)
-			Event.current.Use();
+	void OnDisable() {
+		DestroyImmediate(mat);
+		DestroyImmediate(mat2);
 	}
 
 	void OnSceneGUI() {
@@ -42,26 +54,20 @@ public class e_Transform : Editor {
 			case EventType.MouseUp:
 				if (e.button != 0) break;
 
-				if (serializedObject.isEditingMultipleObjects) {
-					Undo.RecordObjects(serializedObject.targetObjects, "Move position");
-
-					// Calculate center
-					Vector3[] all = new Vector3[serializedObject.targetObjects.Length];
-					for (int i = 0; i < serializedObject.targetObjects.Length; i++) {
-						all[i] = (serializedObject.targetObjects[i] as Transform).position;
-					}
-					Vector3 center = VectorHelper.Average(all);
-
-					foreach (Object o in serializedObject.targetObjects) {
-						Vector3 offset = center - (o as Transform).position;
-						(o as Transform).position = lastHit.point + offset;
-					}
-				} else {
-					Undo.RecordObject(serializedObject.targetObject, "Move position");
-					(serializedObject.targetObject as Transform).position = lastHit.point;
+				// Calculate center
+				Vector3[] all = new Vector3[Selection.transforms.Length];
+				for (int i = 0; i < Selection.transforms.Length; i++) {
+					all[i] = Selection.transforms[i].position;
 				}
-				move = false;
+				Vector3 center = VectorHelper.Average(all);
 
+				// Move em
+				foreach (var t in Selection.transforms) {
+					Undo.RecordObject(t, "Move position");
+					t.position = lastHit.point + t.position - center;
+				}
+				
+				move = false;
 				GUIUtility.hotControl = 0;
 				e.Use();
 				break;
@@ -86,11 +92,20 @@ public class e_Transform : Editor {
 			Ray ray = HandleUtility.GUIPointToWorldRay(mouse);
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, Camera.current.farClipPlane, LayerMask.GetMask("Default", "Terrain"))) {
+				Handles.color = new Color(0, 1, 1);
 				Handles.ArrowCap(controlID, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), 1);
 				Handles.CircleCap(controlID, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), 1);
 
-				#region Draw hit colliders
-				foreach (var box in hit.collider.GetComponentsInChildren<BoxCollider>()) { 	
+				#region Draw meshes
+				foreach (var filter in hit.collider.GetComponentsInChildren<MeshFilter>()) {
+					mat2.SetPass(0);
+					Handles.color = Color.magenta;
+					Graphics.DrawMeshNow(filter.sharedMesh, Matrix4x4.TRS(filter.transform.position, filter.transform.rotation, filter.transform.lossyScale));
+				}
+				#endregion
+
+				#region Draw box colliders
+				foreach (var box in hit.collider.GetComponentsInChildren<BoxCollider>()) {
 					Handles.color = Color.red;
 
 					Vector3 pos = box.transform.position;
@@ -136,18 +151,29 @@ public class e_Transform : Editor {
 				}
 				#endregion
 
-				//#region Draw what's held
-				//Debug.Log(serializedObject.targetObjects.Length);
+				#region Draw what's held
 
-				//// Calculate center
-				//Vector3[] all = new Vector3[serializedObject.targetObjects.Length];
-				//for (int i = 0; i < serializedObject.targetObjects.Length; i++) {
-				//	all[i] = (serializedObject.targetObjects[i] as Transform).position;
-				//}
-				//Vector3 center = VectorHelper.Average(all);
-				//#endregion
+				// Calculate center
+				Vector3[] all = new Vector3[Selection.transforms.Length];
+				for (int i = 0; i < Selection.transforms.Length; i++) {
+					all[i] = Selection.transforms[i].position;
+				}
+				Vector3 center = VectorHelper.Average(all);
 
-				Handles.Label(hit.point + Vector3.up * HandleUtility.GetHandleSize(hit.point)/2, "LMB to move\nRMB to abort");
+				Transform t = target as Transform;
+				Vector3 newpos = lastHit.point + t.position - center;
+
+				Handles.color = new Color(1, 1, 0, .5f);
+				Handles.CircleCap(controlID, newpos, Quaternion.FromToRotation(Vector3.forward, Vector3.up), 1);
+				foreach(var filter in t.GetComponentsInChildren<MeshFilter>()) {
+					Vector3 offset = filter.transform.position - t.position;
+					mat.SetPass(0);
+					Graphics.DrawMeshNow(filter.sharedMesh, Matrix4x4.TRS(newpos + offset, filter.transform.rotation, filter.transform.lossyScale));
+				}
+
+				#endregion
+
+				Handles.Label(hit.point + Vector3.up * HandleUtility.GetHandleSize(hit.point)/2, label+"\nLMB to move\nRMB to abort");
 				lastHit = hit;
 			}
 		}
@@ -168,11 +194,13 @@ public class e_Transform : Editor {
 			EditorGUILayout.HelpBox(positionWarningText, MessageType.Warning);
 		}
 
-		GUI.enabled = !move;
-		if (GUILayout.Button(serializedObject.isEditingMultipleObjects ? "Move (" + serializedObject.targetObjects.Length + ") objects" : "Move " + serializedObject.targetObject.name)) {
-			move = true;
+		if (Selection.transforms.Length > 0) {
+			GUI.enabled = !move;
+			if (GUILayout.Button(label)) {
+				move = true;
+			}
+			GUI.enabled = true;
 		}
-		GUI.enabled = true;
 
 		this.serializedObject.ApplyModifiedProperties();
 	}

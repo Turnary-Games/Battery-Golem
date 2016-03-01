@@ -27,36 +27,22 @@ public class PlayerPushing : PlayerSubClass {
 	}
 
 	/// <summary>
-	/// Try to grab/drop a pushing point.
-	/// Returns true if grabbed/dropped.
-	/// Returns false if nothing happened.
+	/// Try to grab a pushing point.
 	/// </summary>
-	public bool GrabNDrop() {
-		if (hasPoint) {
-			// Drop current point
-			point = null;
-			return true;
-		} else {
-			// Grab a point
+	public void TryToGrab() {
 
-			// Error checking
-			if (!movement.grounded || !pointBreak)
-				return false;
+		// Error checking
+		if (hasPoint) return;
+		if (!movement.grounded || !pointBreak) return;
 
-			// Remove all invalid points. If for some reason they occur.
-			points.RemoveAll(delegate (PushingPoint p) {
-				return p == null;
-			});
+		// Remove all invalid points. If for some reason they occur.
+		points.RemoveAll(p => p == null);
 
-			// Find the closest one
-			Closest<PushingPoint> closest = PushingPoint.GetClosest(points, controller.characterCenter, interaction.ignoreYAxis);
+		// Find the closest one
+		Closest<PushingPoint> closest = PushingPoint.GetClosest(points, controller.characterCenter, interaction.ignoreYAxis);
 
-			if (closest.valid) {
-				point = closest.obj;
-				return true;
-			}
-		}
-		return false;
+		if (closest.valid)
+			point = closest.obj;
 	}
 
 	public Vector3 GetMovement() {
