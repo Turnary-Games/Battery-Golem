@@ -20,7 +20,7 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: d7166ab41b62b014cbb2b3b1e9180cdd, type: 3}
-          m_Scale: {x: 1.7, y: 24}
+          m_Scale: {x: -1.7, y: 10.5}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -34,6 +34,41 @@ Material:
           name: _DetailNormalMap
         second:
           m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Fresnel
+        second:
+          m_Texture: {fileID: 2800000, guid: 7380e8c721b237e478a43d1f912ba127, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ReflectiveColor
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ReflectionTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _RefractionTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ColorControl
+        second:
+          m_Texture: {fileID: 2800000, guid: 7380e8c721b237e478a43d1f912ba127, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -78,41 +113,6 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _Fresnel
-        second:
-          m_Texture: {fileID: 2800000, guid: 7380e8c721b237e478a43d1f912ba127, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ReflectiveColor
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ReflectionTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _RefractionTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _ColorControl
-        second:
-          m_Texture: {fileID: 2800000, guid: 7380e8c721b237e478a43d1f912ba127, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -126,6 +126,18 @@ Material:
         first:
           name: _Cutoff
         second: 0.5
+      data:
+        first:
+          name: _WaveScale
+        second: 0.07
+      data:
+        first:
+          name: _ReflDistort
+        second: 0.44
+      data:
+        first:
+          name: _RefrDistort
+        second: 0.4
       data:
         first:
           name: _Parallax
@@ -162,18 +174,6 @@ Material:
         first:
           name: _Metallic
         second: 0
-      data:
-        first:
-          name: _WaveScale
-        second: 0.07
-      data:
-        first:
-          name: _ReflDistort
-        second: 0.44
-      data:
-        first:
-          name: _RefrDistort
-        second: 0.4
     m_Colors:
       data:
         first:
