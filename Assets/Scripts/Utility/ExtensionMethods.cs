@@ -205,4 +205,10 @@ namespace ExtensionMethods {
 			}
 		}
 	}
+
+	public static class ColliderExstension {
+		public static GameObject GetMainObject(this Collider col) {
+			return col.attachedRigidbody ? col.attachedRigidbody.gameObject : col.gameObject;
+		}
+	}
 }
