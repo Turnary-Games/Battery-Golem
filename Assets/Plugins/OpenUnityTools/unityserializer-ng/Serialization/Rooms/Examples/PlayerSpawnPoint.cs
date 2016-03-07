@@ -5,14 +5,8 @@
 //     ------------------- */
 // 
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-using System.Linq;
-using Serialization;
 
 [AddComponentMenu("Storage/Rooms/Examples/Player Spawn Point")]
-[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(StoreInformation))]
 public class PlayerSpawnPoint : MonoBehaviour
 {
@@ -38,9 +32,10 @@ public class PlayerSpawnPoint : MonoBehaviour
 		GetComponent<Collider>().isTrigger = true;
 	}
 	
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider col)
 	{
-		if(other.gameObject == PlayerLocator.PlayerGameObject)
+		GameObject main = col.attachedRigidbody ? col.attachedRigidbody.gameObject : col.gameObject;
+		if (main == PlayerLocator.player)
 		{
 			current = true;
 		}
@@ -51,8 +46,8 @@ public class PlayerSpawnPoint : MonoBehaviour
 	{
 		if(current)
 		{
-			PlayerLocator.Current.transform.position = transform.position;
-			PlayerLocator.Current.transform.rotation = transform.rotation;
+			PlayerLocator.current.transform.position = transform.position;
+			PlayerLocator.current.transform.rotation = transform.rotation;
 		}
 	}
 	

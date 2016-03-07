@@ -6,10 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/Section1.unity
-  - enabled: 1
     path: Assets/_Scenes/Menu/mane_menu.unity
   - enabled: 1
     path: Assets/_Scenes/Menu/options.unity
+  - enabled: 1
+    path: Assets/_Scenes/InitializingScene.unity
+  - enabled: 1
+    path: Assets/_Scenes/Section1.unity
   - enabled: 1
     path: Assets/_Scenes/test section.unity

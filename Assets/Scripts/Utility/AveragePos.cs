@@ -10,6 +10,7 @@ public class AveragePos : MonoBehaviour {
 
 			Vector3[] collection = new Vector3[list.Length];
 			for (int i = 0; i < list.Length; i++) {
+				if (!list[i]) continue;
 				collection[i] = list[i].position;
 			}
 

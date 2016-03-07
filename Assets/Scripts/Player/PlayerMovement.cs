@@ -93,7 +93,9 @@ public class PlayerMovement : PlayerSubClass {
 		else
 			motion = GetAxis() * moveSpeed;
 
-		//body.AddForce(force);
+		// Less control if airborne
+		if (!grounded)
+			motion = Vector3.Lerp(motion, body.velocity - outsideMotion, 0.97f);
 
 		// Apply acceleration to motion vector
 		motion = Vector3.MoveTowards(body.velocity - lastOutsideMotion, motion, moveSpeed * Time.deltaTime / topSpeedAfter);

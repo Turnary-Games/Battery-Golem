@@ -18,7 +18,7 @@ public abstract class _Equipable : _Item {
 	public int targetSlot = -1;
 	[HideInInspector] public bool unlocked = false;
 	public bool canBeElectrified = false;
-	public GameObject nearbyVisual;
+	public Renderer nearbyVisual;
 
 	protected PlayerInventory inventory;
 	public bool equipped {

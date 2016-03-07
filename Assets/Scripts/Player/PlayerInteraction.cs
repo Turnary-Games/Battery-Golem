@@ -73,8 +73,8 @@ public class PlayerInteraction : PlayerSubClass {
 
 		if (hover != lastHover) {
 			// Hover changed
-			if (hover && hover.nearbyVisual) hover.nearbyVisual.SetActive(true);
-			if (lastHover && lastHover.nearbyVisual) lastHover.nearbyVisual.SetActive(false);
+			if (hover && hover.nearbyVisual) hover.nearbyVisual.enabled = true;
+			if (lastHover && lastHover.nearbyVisual) lastHover.nearbyVisual.enabled = false;
 		}
 		lastHover = hover;
 
@@ -117,7 +117,10 @@ public class PlayerInteraction : PlayerSubClass {
 		}
 
 		isElectrifying = Input.GetAxis("Electrify") != 0;
-		electricParticles.SetActive(isElectrifying);
+		foreach(ParticleSystem ps in electricParticles.GetComponentsInChildren<ParticleSystem>()) {
+			var em = ps.emission;
+			em.enabled = isElectrifying;
+		}
 		if (isElectrifying) {
 			// Electrifying priority order:
 			// - electrify held item

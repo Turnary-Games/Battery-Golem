@@ -184,28 +184,6 @@ namespace ExtensionMethods {
 		}
 	}
 
-	public static class ParticleSystemExtensions {
-		public static void SetActive(this ParticleSystem ps, bool state, bool ignoreEmission = false) {
-			// Disable self
-			if (state != ps.gameObject.activeSelf) {
-				ps.gameObject.SetActive(state);
-
-				if (!ignoreEmission) {
-					var em = ps.emission;
-					em.enabled = state;
-				}
-
-				if (state) ps.Clear();
-			}
-
-			// Recursive
-			foreach (Transform trans in ps.transform) {
-				var child = trans.GetComponent<ParticleSystem>();
-				if (child) child.SetActive(state);
-			}
-		}
-	}
-
 	public static class ColliderExstension {
 		public static GameObject GetMainObject(this Collider col) {
 			return col.attachedRigidbody ? col.attachedRigidbody.gameObject : col.gameObject;

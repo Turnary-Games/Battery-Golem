@@ -31,6 +31,9 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public Vector3 characterCenter {
 		get { return transform.position + (movement.capsule != null ? movement.capsule.center : Vector3.zero); }
 	}
+	
+	[HideInInspector]
+	public int exitID;
 
 #if UNITY_EDITOR
 	void OnValidate() {
@@ -42,14 +45,16 @@ public class PlayerController : SingletonBase<PlayerController> {
 	}
 #endif
 
-	void Update() {
-		if (Input.GetKeyDown(KeyCode.Home) && LevelSerializer.CanResume) {
-			LevelSerializer.Resume();
-		}
-		if (Input.GetKeyDown(KeyCode.End)) {
-			LevelSerializer.Checkpoint();
-		}
-	}
+	//void Update() {
+	//	if (Input.GetKeyDown(KeyCode.Home) && LevelSerializer.CanResume) {
+	//		print("LOAD CHECKPOINT");
+	//		LevelSerializer.Resume();
+	//	}
+	//	if (Input.GetKeyDown(KeyCode.End)) {
+	//		print("SAVE CHECKPOINT");
+	//		LevelSerializer.Checkpoint();
+	//	}
+	//}
 
 	#region Collisions
 	void OnControllerColliderHit(ControllerColliderHit hit) {
@@ -66,5 +71,43 @@ public class PlayerController : SingletonBase<PlayerController> {
 	// Get all listeners of the touching 
 	public List<_TouchListener> GetListeners() {
 		return _TouchListener.FindListeners(this);
+	}
+	
+	
+	protected override void Awake() {
+		base.Awake();
+		DontDestroyOnLoad(transform.root.gameObject);
+	}
+
+	void OnRoomWasLoaded() {
+		print("LOADED!");
+
+		SpawnPoint exit = null;
+
+		if (exitID >= 0) {
+			exit = SpawnPoint.GetFromID(exitID);
+			exitID = -1;
+			if (exit)
+				goto UseSpawnPoint;
+			else
+				goto UseDefault;
+
+		} else goto UseDefault;
+
+		UseSpawnPoint:
+		print("TAKE " + exit.ID + ": " + exit.transform.position);
+		transform.position = exit.transform.position;
+		transform.rotation = exit.transform.rotation;
+		movement.body.velocity = Vector3.zero;
+		movement.body.angularVelocity = Vector3.zero;
+		return;	
+
+	UseDefault:
+		var def = FindObjectOfType<DefaultSpawnPoint>();
+		if (def) {
+			print("TAKE DEFAULT: " + def.transform.position);
+			transform.position = def.transform.position;
+			transform.rotation = def.transform.rotation;
+		}
 	}
 }
