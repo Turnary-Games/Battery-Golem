@@ -1,6 +1,7 @@
 Shader "Projector/Texture" {
 	Properties {
 		_Tex ("Cookie", 2D) = "gray" {}
+		_FalloffTex ("FallOff", 2D) = "white" {}
 		_Color("Tint", Color) = (1,1,1,1)
 	}
 	Subshader {
@@ -16,7 +17,8 @@ Shader "Projector/Texture" {
 			#include "UnityCG.cginc"
 			
 			struct v2f {
-				float4 uv : TEXCOORD0;
+				float4 uvTex : TEXCOORD0;
+				float4 uvFalloff : TEXCOORD1;
 				float4 pos : SV_POSITION;
 			};
 			
@@ -27,22 +29,28 @@ Shader "Projector/Texture" {
 			{
 				v2f o;
 				o.pos = mul (UNITY_MATRIX_MVP, vertex);
-				o.uv = mul (_Projector, vertex);
+				o.uvTex = mul (_Projector, vertex);
+				o.uvFalloff = mul(_ProjectorClip, vertex);
 				return o;
 			}
 			
 			fixed4 _Color;
 			sampler2D _Tex;
+			sampler2D _FalloffTex;
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// Take texture from cookie
-				fixed4 c = tex2Dproj (_Tex, UNITY_PROJ_COORD(i.uv));
+				// Take color from texture
+				fixed4 tex = tex2Dproj (_Tex, UNITY_PROJ_COORD(i.uvTex));
 				
 				// Add tint
-				c *= _Color;
+				tex *= _Color;
 
-				return c;
+				// Add falloff
+				fixed4 texF = tex2Dproj(_FalloffTex, UNITY_PROJ_COORD(i.uvFalloff));
+				fixed4 res = lerp(fixed4(1, 1, 1, 0), tex, texF.a);
+
+				return res;
 			}
 			ENDCG
 		}
