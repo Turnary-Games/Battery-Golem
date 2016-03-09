@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using ExtensionMethods;
 
 public sealed class ElectricMethods {
 	// Called by the listener
@@ -43,7 +44,14 @@ public class _ElectricListener : Searchable {
         if (col)
         {
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(col.bounds.center, col.bounds.size);
+
+			if (col is SphereCollider) {
+				var s = col as SphereCollider;
+				Gizmos.DrawWireSphere(s.transform.TransformPoint(s.center), s.radius * s.transform.lossyScale.MaxValue());
+			} else {
+				Gizmos.DrawWireCube(col.bounds.center, col.bounds.size);
+			}
+
         }
     }
 #endif
@@ -112,6 +120,11 @@ public class _ElectricListener : Searchable {
 	public bool IsInside(Vector3 point) {
 		if (col == null)
 			return false;
+
+		if (col is SphereCollider) {
+			var s = col as SphereCollider;
+			return Vector3.Distance(point, s.transform.TransformPoint(s.center)) <= s.radius * s.transform.lossyScale.MaxValue();
+		}
 		
 		return col.bounds.Contains (point);
 	}

@@ -13,5 +13,5 @@ EditorBuildSettings:
     path: Assets/_Scenes/InitializingScene.unity
   - enabled: 1
     path: Assets/_Scenes/Section1.unity
-  - enabled: 0
-    path: Assets/_Scenes/test section.unity
+  - enabled: 1
+    path: Assets/_Scenes/npc_testing.unity
