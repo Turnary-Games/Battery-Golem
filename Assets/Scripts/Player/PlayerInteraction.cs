@@ -17,6 +17,8 @@ public class PlayerInteraction : PlayerSubClass {
 	[Tooltip("When calculating which item is closest should it ignore the y axis? (Which would count everything as on the same height)")]
 	public bool ignoreYAxis = false;
 
+	[HideInInspector]
+	public NPCController talkingTo;
 
 	[SerializeThis]
 	private _Equipable lastHover;
@@ -87,13 +89,17 @@ public class PlayerInteraction : PlayerSubClass {
 		if (inteDown) {
 			inteDown = false;
 			// Interacting priority order:
+			// - NPC dialog
 			// - release
 			// - pickup (if no item)
 			// - interact
 			// - drop
 			// - grab
 
-			if (pushing.hasPoint) {
+			if (talkingTo) {
+				// Continue talking
+				talkingTo.GetComponent<_ElectricListener>().Interact(controller);
+			} else if (pushing && pushing.hasPoint) {
 				// Release grabbed object
 				pushing.point = null;
 			} else {

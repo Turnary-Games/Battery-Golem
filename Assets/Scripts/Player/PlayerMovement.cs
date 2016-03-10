@@ -51,11 +51,9 @@ public class PlayerMovement : PlayerSubClass {
 #endif
 
 	void Update() {
-		if (health.dead) {
-			// Stop everything when dead.
-			// This includes gravity and movement.
+		if (health.dead)
+			// Stop movement when dead
 			return;
-		}
 
 		RaycastGround();
 		Move();
@@ -88,9 +86,15 @@ public class PlayerMovement : PlayerSubClass {
 	void Move() {
 		// Motion to apply to the character
 		Vector3 motion = Vector3.zero;
-		if (pushing.point != null)
+
+		if (pushing && pushing.point != null)
+			// Move according to the pushing point
 			motion = pushing.GetMovement();
+		else if (interaction && interaction.talkingTo)
+			// Dont move if talking to a NPC
+			motion = Vector3.zero;
 		else
+			// Use the players input for moving
 			motion = GetAxis() * moveSpeed;
 
 		// Less control if airborne
@@ -120,10 +124,16 @@ public class PlayerMovement : PlayerSubClass {
 		Vector3 rawAxis;
 
 		if (hud.isOpen)
+			// Dont rotate
 			rawAxis = Vector3.zero;
-		else if (pushing.point != null)
+		else if (pushing && pushing.point != null)
+			// Turn according to pushing point
 			rawAxis = pushing.GetAxis();
+		else if (interaction && interaction.talkingTo != null)
+			// Turn towards NPC
+			rawAxis = interaction.talkingTo.GetAxis(from:transform.position);
 		else {
+			// Listen to users input
 			rawAxis = new Vector3(Input.GetAxisRaw("HorizontalLook"), 0, Input.GetAxisRaw("VerticalLook"));
 
 			// Not using the looking axis input, try the movement axis
