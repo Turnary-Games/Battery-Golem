@@ -80,8 +80,6 @@ public class PlayerController : SingletonBase<PlayerController> {
 	}
 
 	void OnRoomWasLoaded() {
-		print("LOADED!");
-
 		SpawnPoint exit = null;
 
 		if (exitID >= 0) {
@@ -94,8 +92,8 @@ public class PlayerController : SingletonBase<PlayerController> {
 
 		} else goto UseDefault;
 
-		UseSpawnPoint:
-		print("TAKE " + exit.ID + ": " + exit.transform.position);
+	UseSpawnPoint:
+		print("TAKE " + exit.name + " (id=" + exit.ID + "): " + exit.transform.position);
 		transform.position = exit.transform.position;
 		transform.rotation = exit.transform.rotation;
 		movement.body.velocity = Vector3.zero;

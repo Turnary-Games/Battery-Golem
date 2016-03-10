@@ -153,6 +153,10 @@ namespace ExtensionMethods {
 		public static Vector3 ToVector3(this Vector2 vector) {
 			return new Vector3(vector.x, vector.y);
 		}
+
+		public static float MaxValue(this Vector3 vector) {
+			return Mathf.Max(vector.x, vector.y, vector.z);
+		}
 	}
 
 	public static class TransformExitensions {
@@ -184,7 +188,7 @@ namespace ExtensionMethods {
 		}
 	}
 
-	public static class ColliderExstension {
+	public static class ColliderExstensions {
 		public static GameObject GetMainObject(this Collider col) {
 			return col.attachedRigidbody ? col.attachedRigidbody.gameObject : col.gameObject;
 		}
