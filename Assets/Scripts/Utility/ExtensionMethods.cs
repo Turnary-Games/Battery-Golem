@@ -83,6 +83,19 @@ namespace ExtensionMethods {
 		public static T Get<T>(this T[] list, int index) where T : Object {
 			return list.Length > index && index >= 0 ? list[index] : null;
 		}
+
+		public static T GetRandom<T>(this T[] list) {
+			return list[Random.Range(0, list.Length)];
+		}
+
+		public static T GetRandom<T>(this List<T> list) {
+			return list[Random.Range(0, list.Count)];
+		}
+
+		public static int GetRandomIndex<T>(this List<T> list) {
+			if (list.Count == 0) return -1;
+			return Random.Range(0, list.Count);
+		}
 	}
 
 	public static class ParticleExtensions {

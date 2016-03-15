@@ -3,19 +3,23 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using ExtensionMethods;
 
 public class NPCController : MonoBehaviour {
 
-	[HideInInspector] [TextArea]
-	public List<string> dialog = new List<string>();
+	public List<Dialog> dialogs = new List<Dialog>();
+	private int currentDialog;
+	
 	public Transform boxTarget;
 	public GameObject prefab;
 	
 	[SerializeThis]
-	private NPCDialogBox current;
+	private NPCDialogBox dialogUI;
 
-	[SerializeThis]
-	private int index = -1;
+	void Start() {
+		string test = null;
+		print(test);
+	}
 
 	void OnInteractStart(PlayerController source) {
 		if (!source) return;
@@ -24,25 +28,27 @@ public class NPCController : MonoBehaviour {
 		if (source.interaction) source.interaction.talkingTo = this;
 		if (source.movement) source.movement.body.velocity = Vector3.zero;
 
-		if (!current || current.done) {
+		if (dialogUI && !dialogUI.done) {
+			// Skip the dialog animation
+			dialogUI.SkipAnimation();
+		} else {
 			// Goto next dialog
-			index++;
 
-			if (index >= dialog.Count) {
+			string message = GetNextMessage();
+
+			if (message == null) {
 				// Done talking
-				index = -1;
-				Destroy(current.gameObject);
+				Destroy(dialogUI.gameObject);
 				// Release the player
 				if (source.interaction) source.interaction.talkingTo = null;
 			} else {
-				if (current) {
-					current.NewDialog(dialog[index]);
-
-				} else CreateNewDialog(dialog[index]);
+				if (dialogUI)
+					// Tell the existing one to keep talking
+					dialogUI.NewDialog(message);
+				else
+					// Create a new one
+					CreateNewDialog(message);
 			}
-		} else {
-			// Skip the dialog animation
-			current.SkipAnimation();
 		}
 	}
 
@@ -60,7 +66,7 @@ public class NPCController : MonoBehaviour {
 			box.dialog = dialog;
 
 			// Save for later referance
-			current = box;
+			dialogUI = box;
 		} else {
 			Debug.LogError("No canvas found! Please make sure one is in the scene");
 		}
@@ -71,4 +77,57 @@ public class NPCController : MonoBehaviour {
 		return new Vector3(vec.x, 0, vec.z).normalized;
 	}
 
+	string GetNextMessage() {
+
+		// Find the first dialog
+		int index = dialogs.FindIndex(d => d.playOnce);
+		if (index != -1) {
+			if (dialogs[index].done) {
+				dialogs.RemoveAt(index);
+				return null;
+			} else
+				return dialogs[index].Next();
+		}
+
+		// No more playonces left
+		if (currentDialog == -1) {
+			currentDialog = dialogs.GetRandomIndex();
+		}
+		if (currentDialog != -1) {
+			return dialogs[currentDialog].Next();
+		}
+
+		// No other conversations
+		return null;
+	}
+
+	[System.Serializable]
+	public struct Dialog {
+		[TextArea]
+		public List<string> messages;
+		public bool playOnce;
+		public int index;
+
+		public bool done { get { return index == -1 || index >= messages.Count; } }
+
+		public string Next() {
+			// Error check
+			if (index == -1) return null;
+			if (index >= messages.Count) index = 0;
+
+			// Get message
+			string msg = messages[index];
+
+			// Iterate
+			index++;
+
+			if (index >= messages.Count)
+				if (playOnce)
+					index = -1;
+
+			return msg;
+		}
+	}
+	
 }
+

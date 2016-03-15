@@ -654,17 +654,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb88c39cd312e44e911b274f8ff8855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialog:
-  - Hello lil' robot
-  - You look lost
-  - Go away u annoy me
+  dialogs: []
   boxTarget: {fileID: 875718664}
   prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
-  onDoneTalking:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
 --- !u!114 &1343983232
 MonoBehaviour:
   m_ObjectHideFlags: 0
