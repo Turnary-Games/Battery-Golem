@@ -266,6 +266,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 979733715
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -457,7 +458,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 799116343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d49efd53907b42149a342aa0ce6e3d2, type: 3}
   m_Name: 
@@ -654,7 +655,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb88c39cd312e44e911b274f8ff8855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - messages:
+    - aeg
+    - 
+    playOnce: 0
+    index: 0
+  - messages:
+    - 
+    - 
+    playOnce: 0
+    index: 0
   boxTarget: {fileID: 875718664}
   prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
 --- !u!114 &1343983232

@@ -7,6 +7,7 @@ using ExtensionMethods;
 
 public class NPCController : MonoBehaviour {
 
+	[HideInInspector]
 	public List<Dialog> dialogs = new List<Dialog>();
 	private int currentDialog;
 	
