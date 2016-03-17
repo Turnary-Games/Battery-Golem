@@ -657,13 +657,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogs:
   - messages:
-    - aeg
-    - 
+    - text: Eyyy lil robot
+      turnHead: 0
+    - text: Can I smoke ya tits
+      turnHead: 0
+    playOnce: 1
+    index: 0
+  - messages:
+    - text: What do you say?
+      turnHead: 0
     playOnce: 0
     index: 0
   - messages:
-    - 
-    - 
+    - text: dags o spela mtg
+      turnHead: 0
     playOnce: 0
     index: 0
   boxTarget: {fileID: 875718664}

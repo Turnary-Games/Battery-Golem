@@ -7,18 +7,14 @@ using UnityEditorInternal;
 [CustomPropertyDrawer(typeof(NPCController.Dialog))]
 public class _Dialog : PropertyDrawer {
 
-	private ReorderableList list;
-	private SerializedProperty propPlayOnce;
-	private SerializedProperty propMessages;
+	private Dictionary<string, ThisObject> properties = new Dictionary<string, ThisObject>();
 
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
 		Init(property, label);
+		
+		ThisObject t = properties[property.propertyPath];
 
-		float h = EditorGUI.GetPropertyHeight(propPlayOnce) + list.GetHeight();
-
-		//for (int i=0; i<propMessages.arraySize; i++) {
-		//	h += EditorGUI.GetPropertyHeight(propMessages.GetArrayElementAtIndex(i));
-		//}
+		float h = EditorGUI.GetPropertyHeight(t.propPlayOnce) + t.list.GetHeight();
 
 		return h;
 	}
@@ -27,29 +23,54 @@ public class _Dialog : PropertyDrawer {
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
 		Init(property, label);
 
-		EditorGUI.BeginProperty (position, label, property);
-
-		Rect rectPlayOnce = new Rect(position.x, position.y, position.width, EditorGUI.GetPropertyHeight(propPlayOnce));
-		Rect rectMessages = new Rect(position.x, rectPlayOnce.yMax, position.width, list.GetHeight());
-
-		EditorGUI.PropertyField(rectPlayOnce, propPlayOnce);
+		ThisObject t = properties[property.propertyPath];
 
 		property.serializedObject.Update();
-		list.DoList(rectMessages);
-		property.serializedObject.ApplyModifiedProperties();
+		EditorGUI.BeginProperty (position, label, property);
+
+		Rect rectPlayOnce = new Rect(position.x, position.y, position.width, EditorGUI.GetPropertyHeight(t.propPlayOnce));
+		Rect rectMessages = new Rect(position.x, rectPlayOnce.yMax, position.width, t.list.GetHeight());
+
+		EditorGUI.PropertyField(rectPlayOnce, t.propPlayOnce);
+
+		t.list.DoList(rectMessages);
 
 		EditorGUI.EndProperty();
+		property.serializedObject.ApplyModifiedProperties();
 	}
 
 	void Init(SerializedProperty property, GUIContent label) {
-		propPlayOnce = propPlayOnce ?? property.FindPropertyRelative("playOnce");
-		propMessages = propMessages ?? property.FindPropertyRelative("messages");
+		string path = property.propertyPath;
 
-		if (list == null) {
-			list = new ReorderableList(propMessages.serializedObject, propMessages, true, true, true, true);
+		if (!properties.ContainsKey(path)) {
+			ThisObject t = new ThisObject() {
+				propPlayOnce = property.FindPropertyRelative("playOnce"),
+				propMessages = property.FindPropertyRelative("messages"),
+				list = null
+			};
+			
+			t.list = new ReorderableList(t.propMessages.serializedObject, t.propMessages, true, true, true, true);
 
+			t.list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) => {
+				EditorGUI.PropertyField(rect, t.propMessages.GetArrayElementAtIndex(index));
+			};
 
+			t.list.elementHeightCallback = (int index) => {
+				return EditorGUI.GetPropertyHeight(t.list.serializedProperty.GetArrayElementAtIndex(index));
+			};
+
+			t.list.drawHeaderCallback = (Rect rect) => {
+				EditorGUI.LabelField(rect, property.displayName + " (index:" + property.FindPropertyRelative("index").intValue + ")");
+			};
+
+			properties[path] = t;
 		}
+	}
+
+	struct ThisObject {
+		public SerializedProperty propPlayOnce;
+		public SerializedProperty propMessages;
+		public ReorderableList list;
 	}
 
 }

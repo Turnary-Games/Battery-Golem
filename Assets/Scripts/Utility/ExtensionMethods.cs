@@ -96,6 +96,17 @@ namespace ExtensionMethods {
 			if (list.Count == 0) return -1;
 			return Random.Range(0, list.Count);
 		}
+
+		public static int GetRandomIndex<T>(this List<T> list, System.Predicate<T> match) {
+			List<int> valid = new List<int>();
+
+			for (int i = 0; i < list.Count; i++) {
+				if (match(list[i])) valid.Add(i);
+			}
+
+			if (valid.Count == 0) return -1;
+			return valid[Random.Range(0, valid.Count)];
+		}
 	}
 
 	public static class ParticleExtensions {

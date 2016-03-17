@@ -17,11 +17,6 @@ public class NPCController : MonoBehaviour {
 	[SerializeThis]
 	private NPCDialogBox dialogUI;
 
-	void Start() {
-		string test = null;
-		print(test);
-	}
-
 	void OnInteractStart(PlayerController source) {
 		if (!source) return;
 
@@ -39,7 +34,8 @@ public class NPCController : MonoBehaviour {
 
 			if (message == null) {
 				// Done talking
-				Destroy(dialogUI.gameObject);
+				if (dialogUI)
+					Destroy(dialogUI.gameObject);
 				// Release the player
 				if (source.interaction) source.interaction.talkingTo = null;
 			} else {
@@ -81,21 +77,21 @@ public class NPCController : MonoBehaviour {
 	string GetNextMessage() {
 
 		// Find the first dialog
-		int index = dialogs.FindIndex(d => d.playOnce);
-		if (index != -1) {
-			if (dialogs[index].done) {
-				dialogs.RemoveAt(index);
-				return null;
-			} else
-				return dialogs[index].Next();
-		}
+		if (currentDialog == -1)
+			currentDialog = dialogs.FindIndex(d => d.playOnce && d.index != -1);
 
 		// No more playonces left
-		if (currentDialog == -1) {
-			currentDialog = dialogs.GetRandomIndex();
-		}
+		if (currentDialog == -1)
+			currentDialog = dialogs.GetRandomIndex(d => !d.playOnce);
+
+		// Get it's string
 		if (currentDialog != -1) {
-			return dialogs[currentDialog].Next();
+			string str;
+
+			dialogs[currentDialog] = dialogs[currentDialog].Next(out str);
+			if (str == null) currentDialog = -1;
+
+			return str;
 		}
 
 		// No other conversations
@@ -104,29 +100,41 @@ public class NPCController : MonoBehaviour {
 
 	[System.Serializable]
 	public struct Dialog {
-		[TextArea]
-		public List<string> messages;
+		public List<Message> messages;
 		public bool playOnce;
 		public int index;
 
-		public bool done { get { return index == -1 || index >= messages.Count; } }
+		public Dialog Next(out string msg) {
+			msg = null;
 
-		public string Next() {
 			// Error check
-			if (index == -1) return null;
-			if (index >= messages.Count) index = 0;
+			if (index == -1) return this;
+			if (index >= messages.Count) {
+				index = 0;
+				return this;
+			}
 
 			// Get message
-			string msg = messages[index];
+			msg = messages[index].text;
 
 			// Iterate
 			index++;
 
-			if (index >= messages.Count)
+			if (index >= messages.Count) {
 				if (playOnce)
 					index = -1;
+				else
+					index = messages.Count;
+			}
 
-			return msg;
+			return this;
+		}
+
+		[System.Serializable]
+		public struct Message {
+			[TextArea]
+			public string text;
+			public bool turnHead;
 		}
 	}
 	
