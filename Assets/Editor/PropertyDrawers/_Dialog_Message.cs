@@ -7,7 +7,6 @@ using UnityEditorInternal;
 [CustomPropertyDrawer(typeof(NPCController.Dialog.Message))]
 public class _Dialog_Message : PropertyDrawer {
 
-
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
 		var propText = property.FindPropertyRelative("text");
 		var propTurnHead = property.FindPropertyRelative("turnHead");
@@ -24,7 +23,10 @@ public class _Dialog_Message : PropertyDrawer {
 		Rect rectTurnHead = new Rect(position.x, position.y, position.width, EditorGUI.GetPropertyHeight(propTurnHead));
 		Rect rectText = new Rect(position.x, rectTurnHead.yMax - EditorGUIUtility.singleLineHeight + 3, position.width, EditorGUI.GetPropertyHeight(propText));
 
-		propTurnHead.boolValue = EditorGUI.ToggleLeft(rectTurnHead, propTurnHead.displayName, propTurnHead.boolValue);
+		EditorGUI.BeginProperty(rectTurnHead, new GUIContent(propTurnHead.displayName), propTurnHead);
+		EditorGUI.PropertyField(rectTurnHead, propTurnHead);
+		//propTurnHead.boolValue = EditorGUI.ToggleLeft(rectTurnHead, propTurnHead.displayName, propTurnHead.boolValue);
+		EditorGUI.EndProperty();
 		EditorGUI.PropertyField(rectText, propText, GUIContent.none);
 	}
 }

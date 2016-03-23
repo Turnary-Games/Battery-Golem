@@ -5,7 +5,7 @@ using System.IO;
 
 public class ResetSaves : MonoBehaviour {
 	
-	void Start () {
+	void Awake () {
 		LevelSerializer.ClearCheckpoint();
 		RoomManager.rooms = new Dictionary<string, string>();
 	}

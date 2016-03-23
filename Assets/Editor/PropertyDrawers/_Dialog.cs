@@ -11,12 +11,9 @@ public class _Dialog : PropertyDrawer {
 
 	public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
 		Init(property, label);
-		
+
 		ThisObject t = properties[property.propertyPath];
-
-		float h = EditorGUI.GetPropertyHeight(t.propPlayOnce) + t.list.GetHeight();
-
-		return h;
+		return t.list.GetHeight();
 	}
 
 	// Draw the int as a list popup
@@ -28,12 +25,7 @@ public class _Dialog : PropertyDrawer {
 		property.serializedObject.Update();
 		EditorGUI.BeginProperty (position, label, property);
 
-		Rect rectPlayOnce = new Rect(position.x, position.y, position.width, EditorGUI.GetPropertyHeight(t.propPlayOnce));
-		Rect rectMessages = new Rect(position.x, rectPlayOnce.yMax, position.width, t.list.GetHeight());
-
-		EditorGUI.PropertyField(rectPlayOnce, t.propPlayOnce);
-
-		t.list.DoList(rectMessages);
+		t.list.DoList(position);
 
 		EditorGUI.EndProperty();
 		property.serializedObject.ApplyModifiedProperties();
@@ -52,18 +44,58 @@ public class _Dialog : PropertyDrawer {
 			t.list = new ReorderableList(t.propMessages.serializedObject, t.propMessages, true, true, true, true);
 
 			t.list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) => {
+				if (!t.list.serializedProperty.isExpanded) return;
 				EditorGUI.PropertyField(rect, t.propMessages.GetArrayElementAtIndex(index));
 			};
 
-			t.list.elementHeightCallback = (int index) => {
-				return EditorGUI.GetPropertyHeight(t.list.serializedProperty.GetArrayElementAtIndex(index));
-			};
+			t.list.elementHeight = t.list.serializedProperty.isExpanded ? (t.list.count == 0 ? EditorGUIUtility.singleLineHeight : 64) : 0;
+			//t.list.elementHeightCallback = (int index) => {
+			//	return EditorGUI.GetPropertyHeight(t.list.serializedProperty.GetArrayElementAtIndex(index));
+			//};
 
 			t.list.drawHeaderCallback = (Rect rect) => {
-				EditorGUI.LabelField(rect, property.displayName + " (index:" + property.FindPropertyRelative("index").intValue + ")");
+				//EditorGUI.LabelField(rect, "Dialog");
+				Rect rectLabel = new Rect(rect.x, rect.y, rect.width / 2f, rect.height);
+				Rect rectPlayOnce = new Rect(rect.x + rect.width / 2f, rect.y, rect.width / 2, rect.height);
+
+				EditorGUI.indentLevel++;
+				t.list.serializedProperty.isExpanded = EditorGUI.Foldout(rectLabel, t.list.serializedProperty.isExpanded, "Dialog");
+				EditorGUI.indentLevel--;
+
+				var playOnceLabel = new GUIContent(t.propPlayOnce.displayName);
+				EditorGUI.BeginProperty(rectPlayOnce, playOnceLabel, t.propPlayOnce);
+				//EditorGUI.PropertyField(rectPlayOnce, t.propPlayOnce);
+				t.propPlayOnce.boolValue = EditorGUI.ToggleLeft(rectPlayOnce, playOnceLabel, t.propPlayOnce.boolValue);
+				EditorGUI.EndProperty();
+
+				t.list.draggable =
+				t.list.displayAdd =
+				t.list.displayRemove = t.list.serializedProperty.isExpanded;
+
+				t.list.elementHeight = t.list.serializedProperty.isExpanded ? (t.list.count == 0 ? EditorGUIUtility.singleLineHeight : 64) : 0;
+			};
+
+			t.list.onAddCallback = (ReorderableList list) => {
+				var prop = list.serializedProperty;
+				int index = prop.arraySize;
+
+				prop.InsertArrayElementAtIndex(index);
+
+				// Reset the values
+				var sub = prop.GetArrayElementAtIndex(index);
+				sub.FindPropertyRelative("text").stringValue = string.Empty;
+				sub.FindPropertyRelative("turnHead").boolValue = false;
+			};
+
+			t.list.onRemoveCallback = (ReorderableList list) => {
+				if (list.count > 0) {
+					list.serializedProperty.DeleteArrayElementAtIndex(list.index >= 0 ? list.index : list.count - 1);
+					list.elementHeight = list.serializedProperty.isExpanded ? (list.count == 0 ? EditorGUIUtility.singleLineHeight : 64) : 0;
+				}
 			};
 
 			properties[path] = t;
+			
 		}
 	}
 

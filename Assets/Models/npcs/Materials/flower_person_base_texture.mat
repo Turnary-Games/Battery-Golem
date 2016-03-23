@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: flower_person_base_texture
-  m_Shader: {fileID: 4800000, guid: 3f92630ee6a7f684fad5c4c590251368, type: 3}
+  m_Shader: {fileID: 4800000, guid: cbb5e29b02ee5cb428e74cc67d285b7a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000

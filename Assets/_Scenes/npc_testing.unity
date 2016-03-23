@@ -193,6 +193,10 @@ Prefab:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 2073024, guid: f370ba46dbf6797448631d100e74b720, type: 2}
+      propertyPath: m_OcclusionCulling
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f370ba46dbf6797448631d100e74b720, type: 2}
   m_IsPrefabParent: 0
@@ -554,7 +558,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400082, guid: b80744db492ac1d489133e7c7c41b5c6, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 400062, guid: b80744db492ac1d489133e7c7c41b5c6, type: 3}
       propertyPath: m_RootOrder
@@ -562,7 +566,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400054, guid: b80744db492ac1d489133e7c7c41b5c6, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: b80744db492ac1d489133e7c7c41b5c6, type: 3}
       propertyPath: m_RootOrder
@@ -660,13 +664,13 @@ MonoBehaviour:
     - text: Eyyy lil robot
       turnHead: 0
     - text: Can I smoke ya tits
-      turnHead: 0
+      turnHead: 1
     playOnce: 1
     index: 0
   - messages:
     - text: What do you say?
-      turnHead: 0
-    playOnce: 0
+      turnHead: 1
+    playOnce: 1
     index: 0
   - messages:
     - text: dags o spela mtg
@@ -674,7 +678,37 @@ MonoBehaviour:
     playOnce: 0
     index: 0
   boxTarget: {fileID: 875718664}
-  prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+  dialogPrefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+  headBone: {fileID: 875718664}
+  headRange: 9.34
+  ignoreY: 1
+  forwardAngle: 200
+  headWeight:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0.0015873001
+      outSlope: 0.0015873001
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 109.352646
+      value: 0.8122101
+      inSlope: -0.006854534
+      outSlope: -0.006854534
+      tangentMode: 0
+    - time: 180
+      value: 0.35625
+      inSlope: -0.00013661201
+      outSlope: -0.00013661201
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1343983232
 MonoBehaviour:
   m_ObjectHideFlags: 0

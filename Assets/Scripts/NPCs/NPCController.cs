@@ -5,17 +5,88 @@ using System.Collections;
 using System.Collections.Generic;
 using ExtensionMethods;
 
+[RequireComponent(typeof(_ElectricListener))]
 public class NPCController : MonoBehaviour {
 
 	[HideInInspector]
 	public List<Dialog> dialogs = new List<Dialog>();
 	private int currentDialog;
-	
+
+	[Tooltip("Where the dialog UI box will popup. Preferably the NPCs head.")]
 	public Transform boxTarget;
-	public GameObject prefab;
-	
+	public GameObject dialogPrefab;
+	[Space]
+	public Transform headBone;
+	public float headRange = 5;
+	public bool ignoreY = false;
+	[Space]
+	public float forwardAngle = 0;
+	[HideInInspector]
+	public AnimationCurve headWeight = AnimationCurve.Linear(0, 1, 1, 1);
+
 	[SerializeThis]
 	private NPCDialogBox dialogUI;
+	[SerializeThis]
+	private Quaternion headDefault;
+
+#if UNITY_EDITOR
+	void OnDrawGizmosSelected() {
+		if (ignoreY) {
+			Vector3 pos = transform.position;
+			float rad = headRange;
+
+			UnityEditor.Handles.color = Color.red;
+			UnityEditor.Handles.DrawLine(pos + new Vector3(rad, 50), pos + new Vector3(rad, -50));
+			UnityEditor.Handles.DrawLine(pos + new Vector3(-rad, 50), pos + new Vector3(-rad, -50));
+			UnityEditor.Handles.DrawLine(pos + new Vector3(0, 50, rad), pos + new Vector3(0, -50, rad));
+			UnityEditor.Handles.DrawLine(pos + new Vector3(0, 50, -rad), pos + new Vector3(0, -50, -rad));
+			UnityEditor.Handles.DrawWireDisc(pos, Vector3.up, rad);
+			UnityEditor.Handles.DrawWireDisc(pos + Vector3.up * 50, Vector3.up, rad);
+			UnityEditor.Handles.DrawWireDisc(pos + Vector3.down * 50, Vector3.up, rad);
+		} else {
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere(transform.position, headRange);
+		}
+
+		UnityEditor.Handles.color = Color.green;
+		UnityEditor.Handles.ArrowCap(-1, (headBone ?? transform).position, Quaternion.Euler(0, forwardAngle, 0), 1);
+	}
+#endif
+
+	void Start() {
+		headDefault = headBone.rotation;
+	}
+
+	void Update() {
+		Quaternion lookDirection = GetRotation();
+
+		headBone.rotation = LockRotation(Quaternion.Lerp(headBone.rotation, lookDirection, Time.deltaTime * 5));
+		//headBone.rotation = Quaternion.RotateTowards(headBone.rotation, lookDirection, headSpeed * Time.deltaTime);
+	}
+
+	Quaternion LockRotation(Quaternion rotation) {
+		Vector3 euler = rotation.eulerAngles;
+		
+		float weight = Mathf.Clamp(headWeight.Evaluate(Mathf.Abs(Mathf.DeltaAngle(euler.y, forwardAngle))),0f,1f);
+		euler.y = Mathf.LerpAngle(euler.y, forwardAngle, 1 - weight);
+
+		return Quaternion.Euler(euler);
+	}
+
+	Quaternion GetRotation() {
+		var player = PlayerController.instance;
+
+		if (player != null) {
+			Vector3 a = player.transform.position;
+			Vector3 b = transform.position;
+			if (ignoreY) a.y = b.y = 0;
+			if (Vector3.Distance(a, b) <= headRange) {
+				return Quaternion.LookRotation(player.characterTop - headBone.position);
+			}
+		}
+
+		return headDefault;
+	}
 
 	void OnInteractStart(PlayerController source) {
 		if (!source) return;
@@ -54,7 +125,7 @@ public class NPCController : MonoBehaviour {
 
 		if (canvas) {
 			// Create object from prefab
-			GameObject clone = Instantiate(prefab) as GameObject;
+			GameObject clone = Instantiate(dialogPrefab) as GameObject;
 			clone.transform.SetParent(canvas.transform);
 			
 			// Assign variables

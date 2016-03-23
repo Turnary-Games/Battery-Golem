@@ -29,7 +29,11 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public PlayerAnimation anim;
 
 	public Vector3 characterCenter {
-		get { return transform.position + (movement.capsule != null ? movement.capsule.center : Vector3.zero); }
+		get { return transform.position + (movement && movement.capsule ? movement.transform.TransformVector(movement.capsule.center) : Vector3.zero); }
+	}
+
+	public Vector3 characterTop {
+		get { return transform.position + (movement && movement.capsule ? movement.transform.TransformVector(movement.capsule.center + Vector3.up * movement.capsule.height / 2) : Vector3.zero); }
 	}
 	
 	[HideInInspector]
