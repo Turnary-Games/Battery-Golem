@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -845,6 +845,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 376477215}
   - 136: {fileID: 376477216}
+  - 135: {fileID: 376477219}
+  - 114: {fileID: 376477218}
+  - 114: {fileID: 376477217}
   m_Layer: 0
   m_Name: Flower_person_blue
   m_TagString: Untagged
@@ -879,6 +882,64 @@ CapsuleCollider:
   m_Height: 25
   m_Direction: 1
   m_Center: {x: 0, y: 8.97, z: 0}
+--- !u!114 &376477217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376477214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb88c39cd312e44e911b274f8ff8855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - messages:
+    - text: Eyy lil robot
+      turnHead: 0
+    - text: Can i smoke yo tits?
+      turnHead: 1
+    playOnce: 1
+    index: 0
+  - messages:
+    - text: What do you say?
+      turnHead: 1
+    playOnce: 1
+    index: 0
+  - messages:
+    - text: Time to play mtg
+      turnHead: 0
+    playOnce: 0
+    index: 0
+  boxTarget: {fileID: 1945331964}
+  prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+--- !u!114 &376477218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376477214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74885efa56c986147ac7cd329f3ec896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 376477219}
+  ignoreY: 1
+  acceptElectrifying: 0
+  acceptInteraction: 1
+--- !u!135 &376477219
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 376477214}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 13
+  m_Center: {x: 0, y: 8.17, z: 0}
 --- !u!1 &387889761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,6 +1254,76 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &550349866
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 550349869}
+  - 218: {fileID: 550349868}
+  - 154: {fileID: 550349867}
+  m_Layer: 0
+  m_Name: Terrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!154 &550349867
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 550349866}
+  m_Material: {fileID: 0}
+  m_Enabled: 1
+  m_TerrainData: {fileID: 15600000, guid: 99009febcafc58042bcd96306a5a5082, type: 2}
+  m_EnableTreeColliders: 1
+--- !u!218 &550349868
+Terrain:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 550349866}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_TerrainData: {fileID: 15600000, guid: 99009febcafc58042bcd96306a5a5082, type: 2}
+  m_TreeDistance: 2000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMaximumLOD: 0
+  m_CastShadows: 1
+  m_DrawHeightmap: 1
+  m_DrawTreesAndFoliage: 1
+  m_ReflectionProbeUsage: 1
+  m_MaterialType: 3
+  m_LegacySpecular:
+    serializedVersion: 2
+    rgba: 4286545791
+  m_LegacyShininess: 0.078125
+  m_MaterialTemplate: {fileID: 2100000, guid: 5263eee8a2fbd6e4488c10f54bd63ee6, type: 2}
+  m_BakeLightProbesForTrees: 1
+  m_ScaleInLightmap: 0.0512
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!4 &550349869
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 550349866}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -50.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!1 &552534502
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,6 +2255,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 907309415}
   m_RootOrder: 2
+--- !u!1 &829832429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 829832432}
+  - 114: {fileID: 829832431}
+  - 114: {fileID: 829832430}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &829832430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829832429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &829832431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829832429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &829832432
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829832429}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
 --- !u!1001 &833159432
 Prefab:
   m_ObjectHideFlags: 0
@@ -2895,6 +3087,10 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
   m_PrefabInternal: {fileID: 1327594239}
+--- !u!4 &1066134327 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400010, guid: 3f9ae13f438ed44489e8bb5596a33bf7, type: 3}
+  m_PrefabInternal: {fileID: 1376965805}
 --- !u!1 &1068428534
 GameObject:
   m_ObjectHideFlags: 0
@@ -2995,6 +3191,10 @@ MonoBehaviour:
   classId: 6b3158ea-6a4d-447a-89bd-6d7d697b4882
   StoreAllComponents: 1
   Components: []
+--- !u!4 &1125292371 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400010, guid: f36c1570387a2c7429ef18c0bd906826, type: 3}
+  m_PrefabInternal: {fileID: 1794134668}
 --- !u!1 &1125411192
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,7 +3646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!154 &1272777889
 TerrainCollider:
   m_ObjectHideFlags: 0
@@ -3938,7 +4138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1389132645
 Light:
   m_ObjectHideFlags: 0
@@ -4542,6 +4742,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 1567674588}
   - 136: {fileID: 1567674589}
+  - 135: {fileID: 1567674592}
+  - 114: {fileID: 1567674591}
+  - 114: {fileID: 1567674590}
   m_Layer: 0
   m_Name: Flower_person_purple
   m_TagString: Untagged
@@ -4576,6 +4779,64 @@ CapsuleCollider:
   m_Height: 25
   m_Direction: 1
   m_Center: {x: 0, y: 8.97, z: 0}
+--- !u!114 &1567674590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1567674587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb88c39cd312e44e911b274f8ff8855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - messages:
+    - text: Eyy lil robot
+      turnHead: 0
+    - text: Can i smoke yo tits?
+      turnHead: 1
+    playOnce: 1
+    index: 0
+  - messages:
+    - text: What do you say?
+      turnHead: 1
+    playOnce: 1
+    index: 0
+  - messages:
+    - text: Time to play mtg
+      turnHead: 0
+    playOnce: 0
+    index: 0
+  boxTarget: {fileID: 1125292371}
+  prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+--- !u!114 &1567674591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1567674587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74885efa56c986147ac7cd329f3ec896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 1567674589}
+  ignoreY: 1
+  acceptElectrifying: 0
+  acceptInteraction: 1
+--- !u!135 &1567674592
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1567674587}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 13
+  m_Center: {x: 0, y: 8.17, z: 0}
 --- !u!1 &1571841133
 GameObject:
   m_ObjectHideFlags: 0
@@ -5422,6 +5683,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 1863766816}
   - 136: {fileID: 1863766817}
+  - 135: {fileID: 1863766820}
+  - 114: {fileID: 1863766819}
+  - 114: {fileID: 1863766818}
   m_Layer: 0
   m_Name: Flower_person_red
   m_TagString: Untagged
@@ -5456,6 +5720,64 @@ CapsuleCollider:
   m_Height: 25
   m_Direction: 1
   m_Center: {x: 0, y: 8.97, z: 0}
+--- !u!114 &1863766818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863766815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cb88c39cd312e44e911b274f8ff8855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogs:
+  - messages:
+    - text: Eyy lil robot
+      turnHead: 0
+    - text: Can i smoke yo tits?
+      turnHead: 1
+    playOnce: 1
+    index: 0
+  - messages:
+    - text: What do you say?
+      turnHead: 1
+    playOnce: 1
+    index: 0
+  - messages:
+    - text: Time to play mtg
+      turnHead: 0
+    playOnce: 0
+    index: 0
+  boxTarget: {fileID: 1066134327}
+  prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+--- !u!114 &1863766819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863766815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74885efa56c986147ac7cd329f3ec896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 1863766817}
+  ignoreY: 1
+  acceptElectrifying: 0
+  acceptInteraction: 1
+--- !u!135 &1863766820
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863766815}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 13
+  m_Center: {x: 0, y: 8.17, z: 0}
 --- !u!1001 &1874913174
 Prefab:
   m_ObjectHideFlags: 0
@@ -5786,6 +6108,97 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1894373961}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1917335682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1917335686}
+  - 223: {fileID: 1917335685}
+  - 114: {fileID: 1917335684}
+  - 114: {fileID: 1917335683}
+  m_Layer: 5
+  m_Name: Canvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1917335683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1917335682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1917335684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1917335682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+--- !u!223 &1917335685
+Canvas:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1917335682}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &1917335686
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1917335682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!4 &1932522411 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
@@ -5860,6 +6273,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1945331964 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400074, guid: 609b265d3d335e949b72d99fd652a478, type: 3}
+  m_PrefabInternal: {fileID: 2138981849}
 --- !u!4 &1968406815 stripped
 Transform:
   m_PrefabParentObject: {fileID: 448050, guid: a0f04dfd51d31dc488ff38574d49f379, type: 2}
@@ -7716,44 +8133,6 @@ MonoBehaviour:
   entries:
   - gameObject: {fileID: 45582224}
     Id: c4853ec1-0787-4b62-a3e2-5ec22af0183c
-  - gameObject: {fileID: 0}
-    Id: ec51354c-3b84-4596-8932-db42650a84f9
-  - gameObject: {fileID: 0}
-    Id: e1494c61-1f10-439c-bf23-6b4cc644f1ae
-  - gameObject: {fileID: 0}
-    Id: 83802de2-94f0-4f0d-9597-2cf94bcc8f82
-  - gameObject: {fileID: 0}
-    Id: cebd5430-459b-4e8c-89e2-e8ac7c6fa147
-  - gameObject: {fileID: 0}
-    Id: 19bbd334-3f3f-4cba-92b8-0c87333a479f
-  - gameObject: {fileID: 0}
-    Id: eb4b57a9-bd19-4dd6-ab67-d5cd64be52bd
-  - gameObject: {fileID: 0}
-    Id: 6543aed3-550e-43fc-933f-38db761d27ab
-  - gameObject: {fileID: 0}
-    Id: 71965867-27cd-421c-ba1b-0921664a3b3a
-  - gameObject: {fileID: 0}
-    Id: 65537608-7c13-4636-813d-3ddef90e896f
-  - gameObject: {fileID: 0}
-    Id: e430376e-cc63-48af-b18d-1b1bae9e2b2f
-  - gameObject: {fileID: 0}
-    Id: 89fb0351-f20f-47aa-beba-b83fb8428ec9
-  - gameObject: {fileID: 0}
-    Id: abc7b8df-6216-44a8-980e-01cc9d4c28fc
-  - gameObject: {fileID: 0}
-    Id: 22f00e39-1afc-4c77-8778-d0b19bb69345
-  - gameObject: {fileID: 0}
-    Id: f7d1cdae-bb03-4b96-a96f-ca1c1f3e3e35
-  - gameObject: {fileID: 0}
-    Id: c8c606d2-11fe-4679-a8db-78e2bf2c1311
-  - gameObject: {fileID: 0}
-    Id: ccf12d99-cc8e-4f22-9d16-cbeb90f0e4f1
-  - gameObject: {fileID: 0}
-    Id: f0f12ca3-e0d2-4240-9b83-739ad388dfd7
-  - gameObject: {fileID: 0}
-    Id: d6bce712-cbd3-404e-beb8-a10c7c6f6932
-  - gameObject: {fileID: 0}
-    Id: 14b1d1e6-7c56-47a0-a9d6-7bea9abf0402
   - gameObject: {fileID: 1146065746}
     Id: de3d0a83-0fc5-4e1a-aaa8-b4b18e2756e4
   - gameObject: {fileID: 225721768}
