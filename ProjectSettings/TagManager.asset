@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Water
   - Push point
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Player
   - Static
   - Terrain
-  - 
+  - Tech
   - 
   - 
   - 
@@ -45,4 +46,7 @@ TagManager:
     locked: 0
   - name: Particles
     uniqueID: 1651362213
+    locked: 0
+  - name: NPC dialog
+    uniqueID: 979733715
     locked: 0

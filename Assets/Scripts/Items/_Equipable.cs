@@ -10,7 +10,6 @@ using ExtensionMethods;
 */
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(_TouchListener))]
 public abstract class _Equipable : _Item {
 
 	[Header("_Equipable fields")]
@@ -19,19 +18,14 @@ public abstract class _Equipable : _Item {
 	public int targetSlot = -1;
 	[HideInInspector] public bool unlocked = false;
 	public bool canBeElectrified = false;
-	public GameObject nearbyVisual;
+	public Renderer nearbyVisual;
 
 	protected PlayerInventory inventory;
 	public bool equipped {
-		get { return inventory != null; }
+		get { return inventory != null && inventory.equipped == this; }
 	}
-	public bool fitsInInv {
+	public bool isCore {
 		get { return targetSlot >= 0; }
-	}
-
-	protected virtual void Update() {
-		if (nearbyVisual != null)
-			nearbyVisual.SetActive(PlayerController.instance != null && PlayerController.instance.interaction.IsItemInRange(this));
 	}
 
     public virtual void OnEquip(PlayerInventory inventory) {

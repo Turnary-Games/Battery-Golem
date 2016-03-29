@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using ExtensionMethods;
 
 public sealed class ElectricMethods {
 	// Called by the listener
@@ -20,6 +21,7 @@ public sealed class ElectricMethods {
 public class _ElectricListener : Searchable {
 
 	public Collider col;
+	public bool ignoreY = false;
 	public bool acceptElectrifying = true;
 	public bool acceptInteraction;
 
@@ -37,7 +39,41 @@ public class _ElectricListener : Searchable {
 		}
 	}
 
-	void FixedUpdate() {
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        if (col)
+        {
+
+			if (col is SphereCollider) {
+				var s = col as SphereCollider;
+
+				if (ignoreY) {
+					Vector3 pos = s.transform.TransformPoint(s.center);
+					float rad = s.radius * s.transform.lossyScale.MaxValue();
+
+					UnityEditor.Handles.color = Color.cyan;
+					UnityEditor.Handles.DrawLine(pos + new Vector3(rad, 50), pos + new Vector3(rad, -50));
+					UnityEditor.Handles.DrawLine(pos + new Vector3(-rad, 50), pos + new Vector3(-rad, -50));
+					UnityEditor.Handles.DrawLine(pos + new Vector3(0, 50, rad), pos + new Vector3(0, -50, rad));
+					UnityEditor.Handles.DrawLine(pos + new Vector3(0, 50, -rad), pos + new Vector3(0, -50, -rad));
+					UnityEditor.Handles.DrawWireDisc(pos, Vector3.up, rad);
+					UnityEditor.Handles.DrawWireDisc(pos + Vector3.up * 50, Vector3.up, rad);
+					UnityEditor.Handles.DrawWireDisc(pos + Vector3.down * 50, Vector3.up, rad);
+				} else {
+					Gizmos.color = Color.cyan;
+					Gizmos.DrawWireSphere(s.transform.TransformPoint(s.center), s.radius * s.transform.lossyScale.MaxValue());
+				}
+			} else {
+				Gizmos.color = Color.cyan;
+				Gizmos.DrawWireCube(col.bounds.center, ignoreY ? new Vector3(col.bounds.size.x, 100f, col.bounds.size.z) : col.bounds.size);
+			}
+
+        }
+    }
+#endif
+
+    void FixedUpdate() {
 		/*
 			Electrifying
 		*/
@@ -101,7 +137,16 @@ public class _ElectricListener : Searchable {
 	public bool IsInside(Vector3 point) {
 		if (col == null)
 			return false;
-		
+
+		// Custom algorithm for sphere colliders
+		if (col is SphereCollider) {
+			var s = col as SphereCollider;
+			if (ignoreY) point.y = s.transform.TransformPoint(s.center).y;
+			return Vector3.Distance(point, s.transform.TransformPoint(s.center)) <= s.radius * s.transform.lossyScale.MaxValue();
+		}
+
+		// Otherwise just use the collision bounds
+		if (ignoreY) point.y = col.bounds.center.y;
 		return col.bounds.Contains (point);
 	}
 

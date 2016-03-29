@@ -7,15 +7,17 @@ public abstract class _Item : Searchable {
 	[Header("_Item fields")]
 
 	public string itemName = "Unnamned";
-	public Rigidbody rbody;
+	public Rigidbody body;
 	public PickupAction[] effects;
+    public bool startDisabled = true;
 
 	private Vector3 startPos;
 	private Quaternion startRot;
 
 	protected virtual void Start() {
 		// disable rigidbody
-		rbody.SetEnabled(false);
+        if (startDisabled)
+	    	body.SetEnabled(false);
 
 		startPos = transform.position;
 		startRot = transform.rotation;
@@ -38,7 +40,7 @@ public abstract class _Item : Searchable {
 
 		// Disable all effects
 		effects.OnPickup();
-		rbody.SetEnabled(false);
+		body.SetEnabled(false);
 	}
 
 	public virtual void OnDropped() {
@@ -46,13 +48,13 @@ public abstract class _Item : Searchable {
 
 		// Enable all effects
 		effects.OnDrop();
-		rbody.SetEnabled(true);
+		body.SetEnabled(true);
 	}
 
 	public virtual void Reset() {
 		transform.position = startPos;
 		transform.rotation = startRot;
-		rbody.SetEnabled(false);
+		body.SetEnabled(false);
 	}
 
 	public virtual bool CanLiveInSlot<Item>(_Inventory<Item> inv, int slot) where Item : _Item {

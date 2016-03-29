@@ -9,7 +9,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
+  companyName: Turnary Games
   productName: Battery Golem
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -177,7 +177,10 @@ PlayerSettings:
       m_Width: 0
       m_Height: 0
   m_BuildTargetBatching: []
-  m_BuildTargetGraphicsAPIs: []
+  m_BuildTargetGraphicsAPIs:
+  - m_BuildTarget: WindowsStandaloneSupport
+    m_APIs: 0100000002000000
+    m_Automatic: 0
   webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
   wiiUTitleID: 0005000011000000
@@ -442,7 +445,7 @@ PlayerSettings:
   WebGL::ScriptingBackend: 1
   WebGL::audioCompressionFormat: 4
   WebGL::exceptionSupport: 1
-  WebGL::memorySize: 256
+  WebGL::memorySize: 512
   iOS::Architecture: 2
   iOS::EnableIncrementalBuildSupportForIl2cpp: 0
   iOS::ScriptingBackend: 1
@@ -468,5 +471,5 @@ PlayerSettings:
   additionalIl2CppArgs::additionalIl2CppArgs: 
   cloudProjectId: 6a617c7c-715a-47cd-a451-84a93b55106a
   projectName: Battery Golem
-  organizationId: kalle-jillheden
+  organizationId: turnary-games
   cloudEnabled: 0

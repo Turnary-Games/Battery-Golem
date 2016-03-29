@@ -90,12 +90,16 @@ ModelImporter:
     7400006: move@jump@peak
     7400008: move@jump@down
     7400010: move@jump@land
-    7400012: arms@empty@idle
+    7400012: arms@empty
     7400014: arms@empty@walk
-    7400016: arms@holding@idle
+    7400016: arms@holding
     7400018: arms@holding@walk
-    7400020: arms@lifting@idle
+    7400020: arms@lifting
     7400022: arms@lifting@walk
+    7400024: arms@jump@up
+    7400026: arms@jump@peak
+    7400028: arms@jump@down
+    7400030: arms@jump@land
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -491,7 +495,7 @@ ModelImporter:
       maskSource: {fileID: 101100000, guid: 095307db5381aea4d9243a95391c083e, type: 2}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: arms@empty@idle
+      name: arms@empty
       takeName: Take 001
       firstFrame: 1
       lastFrame: 40
@@ -615,7 +619,7 @@ ModelImporter:
       maskSource: {fileID: 101100000, guid: aad5f1300ca399e4783d79ca84c6543b, type: 2}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: arms@holding@idle
+      name: arms@holding
       takeName: Take 001
       firstFrame: 301
       lastFrame: 339
@@ -677,69 +681,7 @@ ModelImporter:
       maskSource: {fileID: 101100000, guid: aad5f1300ca399e4783d79ca84c6543b, type: 2}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: arms@holding@walk
-      takeName: Take 001
-      firstFrame: 400
-      lastFrame: 418.5
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Main
-        weight: 0
-      - path: Main/batteryBase
-        weight: 0
-      - path: Main/batteryBase/nubLeft
-        weight: 0
-      - path: Main/batteryBase/nubRight
-        weight: 0
-      - path: Main/Body
-        weight: 0
-      - path: Main/Body/eyeCube
-        weight: 0
-      - path: Main/Body/headGrass
-        weight: 0
-      - path: Main/LeftArm
-        weight: 1
-      - path: Main/LeftArm/pCube13
-        weight: 1
-      - path: Main/LeftArm/pCube14
-        weight: 1
-      - path: Main/LeftArm/upperArmGrass
-        weight: 1
-      - path: Main/leftLeg
-        weight: 0
-      - path: Main/RightArm
-        weight: 1
-      - path: Main/RightArm/pCube13 1
-        weight: 1
-      - path: Main/RightArm/pCube14 1
-        weight: 1
-      - path: Main/rightLeg
-        weight: 0
-      maskType: 1
-      maskSource: {fileID: 101100000, guid: aad5f1300ca399e4783d79ca84c6543b, type: 2}
-      additiveReferencePoseFrame: 1
-    - serializedVersion: 16
-      name: arms@lifting@idle
+      name: arms@lifting
       takeName: Take 001
       firstFrame: 600
       lastFrame: 640
@@ -801,17 +743,203 @@ ModelImporter:
       maskSource: {fileID: 101100000, guid: aad5f1300ca399e4783d79ca84c6543b, type: 2}
       additiveReferencePoseFrame: 1
     - serializedVersion: 16
-      name: arms@lifting@walk
+      name: arms@jump@up
       takeName: Take 001
-      firstFrame: 700
-      lastFrame: 718.5
+      firstFrame: 200
+      lastFrame: 206
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Main
+        weight: 0
+      - path: Main/batteryBase
+        weight: 0
+      - path: Main/batteryBase/nubLeft
+        weight: 0
+      - path: Main/batteryBase/nubRight
+        weight: 0
+      - path: Main/Body
+        weight: 0
+      - path: Main/Body/eyeCube
+        weight: 0
+      - path: Main/Body/headGrass
+        weight: 0
+      - path: Main/LeftArm
+        weight: 1
+      - path: Main/LeftArm/pCube13
+        weight: 1
+      - path: Main/LeftArm/pCube14
+        weight: 1
+      - path: Main/LeftArm/upperArmGrass
+        weight: 1
+      - path: Main/leftLeg
+        weight: 0
+      - path: Main/RightArm
+        weight: 1
+      - path: Main/RightArm/pCube13 1
+        weight: 1
+      - path: Main/RightArm/pCube14 1
+        weight: 1
+      - path: Main/rightLeg
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 101100000, guid: aad5f1300ca399e4783d79ca84c6543b, type: 2}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: arms@jump@peak
+      takeName: Take 001
+      firstFrame: 206
+      lastFrame: 207
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Main
+        weight: 0
+      - path: Main/batteryBase
+        weight: 0
+      - path: Main/batteryBase/nubLeft
+        weight: 0
+      - path: Main/batteryBase/nubRight
+        weight: 0
+      - path: Main/Body
+        weight: 0
+      - path: Main/Body/eyeCube
+        weight: 0
+      - path: Main/Body/headGrass
+        weight: 0
+      - path: Main/LeftArm
+        weight: 1
+      - path: Main/LeftArm/pCube13
+        weight: 1
+      - path: Main/LeftArm/pCube14
+        weight: 1
+      - path: Main/LeftArm/upperArmGrass
+        weight: 1
+      - path: Main/leftLeg
+        weight: 0
+      - path: Main/RightArm
+        weight: 1
+      - path: Main/RightArm/pCube13 1
+        weight: 1
+      - path: Main/RightArm/pCube14 1
+        weight: 1
+      - path: Main/rightLeg
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 101100000, guid: aad5f1300ca399e4783d79ca84c6543b, type: 2}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: arms@jump@down
+      takeName: Take 001
+      firstFrame: 206
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Main
+        weight: 0
+      - path: Main/batteryBase
+        weight: 0
+      - path: Main/batteryBase/nubLeft
+        weight: 0
+      - path: Main/batteryBase/nubRight
+        weight: 0
+      - path: Main/Body
+        weight: 0
+      - path: Main/Body/eyeCube
+        weight: 0
+      - path: Main/Body/headGrass
+        weight: 0
+      - path: Main/LeftArm
+        weight: 1
+      - path: Main/LeftArm/pCube13
+        weight: 1
+      - path: Main/LeftArm/pCube14
+        weight: 1
+      - path: Main/LeftArm/upperArmGrass
+        weight: 1
+      - path: Main/leftLeg
+        weight: 0
+      - path: Main/RightArm
+        weight: 1
+      - path: Main/RightArm/pCube13 1
+        weight: 1
+      - path: Main/RightArm/pCube14 1
+        weight: 1
+      - path: Main/rightLeg
+        weight: 0
+      maskType: 1
+      maskSource: {fileID: 101100000, guid: aad5f1300ca399e4783d79ca84c6543b, type: 2}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: arms@jump@land
+      takeName: Take 001
+      firstFrame: 210
+      lastFrame: 215
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

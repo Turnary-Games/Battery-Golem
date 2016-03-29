@@ -46,7 +46,7 @@ Transform:
   m_GameObject: {fileID: 108966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.007, y: 0.007, z: 0.007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495858}
   m_Father: {fileID: 0}
@@ -95,7 +95,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108966}
-  m_Mesh: {fileID: 4300000, guid: bc16c96c5be6fb04ca8de85d35da4942, type: 3}
+  m_Mesh: {fileID: 4300016, guid: 7ddf461eb36e1234c8bd0c1065adef29, type: 3}
 --- !u!54 &5449336
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -150,8 +150,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 99.99999
-  m_Center: {x: -4.827411, y: 0, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &19895396
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1499,7 +1499,7 @@ ParticleSystem:
   CollisionModule:
     enabled: 1
     serializedVersion: 2
-    type: 0
+    type: 1
     collisionMode: 0
     plane0: {fileID: 0}
     plane1: {fileID: 0}
@@ -1618,11 +1618,11 @@ ParticleSystem:
       serializedVersion: 2
       m_Bits: 4294967295
     maxCollisionShapes: 256
-    quality: 0
+    quality: 1
     voxelSize: 0.5
     collisionMessages: 0
-    collidesWithDynamic: 1
-    interiorCollisions: 1
+    collidesWithDynamic: 0
+    interiorCollisions: 0
   SubModule:
     enabled: 0
     subEmitterBirth: {fileID: 0}
@@ -1678,7 +1678,27 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CollisionModule.interiorCollisions
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CollisionModule.collidesWithDynamic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CollisionModule.m_Dampen.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CollisionModule.quality
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 108966}

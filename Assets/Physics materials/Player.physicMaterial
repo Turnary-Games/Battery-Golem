@@ -10,4 +10,4 @@ PhysicMaterial:
   staticFriction: 0
   bounciness: 0
   frictionCombine: 2
-  bounceCombine: 0
+  bounceCombine: 3

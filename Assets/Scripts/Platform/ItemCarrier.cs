@@ -17,7 +17,7 @@ public class ItemCarrier : _Platform {
         var item = touch.source as _Equipable;
         if (item != null && items.Contains(item)) {
             items.Remove(item);
-            item.rbody.velocity = Vector3.zero;
+            item.body.velocity = Vector3.zero;
         }
     }
 
@@ -26,7 +26,7 @@ public class ItemCarrier : _Platform {
         if (item == null || !items.Contains(item))
             return;
 
-        item.rbody.velocity = body.velocity;
+        item.body.velocity = body.velocity;
     }
 
 }

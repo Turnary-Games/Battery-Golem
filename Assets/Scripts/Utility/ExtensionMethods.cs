@@ -83,6 +83,30 @@ namespace ExtensionMethods {
 		public static T Get<T>(this T[] list, int index) where T : Object {
 			return list.Length > index && index >= 0 ? list[index] : null;
 		}
+
+		public static T GetRandom<T>(this T[] list) {
+			return list[Random.Range(0, list.Length)];
+		}
+
+		public static T GetRandom<T>(this List<T> list) {
+			return list[Random.Range(0, list.Count)];
+		}
+
+		public static int GetRandomIndex<T>(this List<T> list) {
+			if (list.Count == 0) return -1;
+			return Random.Range(0, list.Count);
+		}
+
+		public static int GetRandomIndex<T>(this List<T> list, System.Predicate<T> match) {
+			List<int> valid = new List<int>();
+
+			for (int i = 0; i < list.Count; i++) {
+				if (match(list[i])) valid.Add(i);
+			}
+
+			if (valid.Count == 0) return -1;
+			return valid[Random.Range(0, valid.Count)];
+		}
 	}
 
 	public static class ParticleExtensions {
@@ -153,6 +177,10 @@ namespace ExtensionMethods {
 		public static Vector3 ToVector3(this Vector2 vector) {
 			return new Vector3(vector.x, vector.y);
 		}
+
+		public static float MaxValue(this Vector3 vector) {
+			return Mathf.Max(vector.x, vector.y, vector.z);
+		}
 	}
 
 	public static class TransformExitensions {
@@ -184,25 +212,9 @@ namespace ExtensionMethods {
 		}
 	}
 
-	public static class ParticleSystemExtensions {
-		public static void SetActive(this ParticleSystem ps, bool state, bool ignoreEmission = false) {
-			// Disable self
-			if (state != ps.gameObject.activeSelf) {
-				ps.gameObject.SetActive(state);
-
-				if (!ignoreEmission) {
-					var em = ps.emission;
-					em.enabled = state;
-				}
-
-				if (state) ps.Clear();
-			}
-
-			// Recursive
-			foreach (Transform trans in ps.transform) {
-				var child = trans.GetComponent<ParticleSystem>();
-				if (child) child.SetActive(state);
-			}
+	public static class ColliderExstensions {
+		public static GameObject GetMainObject(this Collider col) {
+			return col.attachedRigidbody ? col.attachedRigidbody.gameObject : col.gameObject;
 		}
 	}
 }

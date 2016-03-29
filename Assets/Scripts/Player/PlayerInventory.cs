@@ -22,16 +22,13 @@ public class PlayerInventory : PlayerSubClass {
 		if (equipped == null)
 			return;
 		
-		if (equipped.fitsInInv) {
+		if (equipped.isCore) {
 			MoveToInventory(equipped);
 		} else {
 			_Equipable item = equipped;
 			MoveToWorld(equipped);
 			item.OnDropped();
 		}
-
-		// Tell the animator
-		movement.anim.SetTrigger("ArmsEmpty");
 
 		equipped = null;
 	}
@@ -73,6 +70,11 @@ public class PlayerInventory : PlayerSubClass {
 		}
 
 		item.OnPickup();
+
+		// Add components
+		foreach(Transform trans in item.GetComponentsInChildren<Transform>(true)) {
+			trans.gameObject.AddComponent<DontStoreObjectInRoom>();
+		}
 	}
 
     #endregion
@@ -80,20 +82,16 @@ public class PlayerInventory : PlayerSubClass {
     #region Dropoff at station
     // Dropoff at dropoff-station
     public void Dropoff<Item>(_DropoffStation<Item> station) where Item : _DropoffItem {
-		if (equipped != null && !equipped.fitsInInv) {
-			_Equipable item = equipped;
+		Item item = equipped as Item;
+		if (item != null && !equipped.isCore) {
 			Unequip();
-			station.AddItem(item as Item);
+			station.AddItem(item);
 		}
     }
     #endregion
 
     #region Parenting
 	void MoveToEquipped(_Equipable item) {
-		// Tell animator
-		if (item.fitsInInv) movement.anim.SetTrigger("ArmsHolding");
-		else movement.anim.SetTrigger("ArmsLifting");
-
 		equipped = item;
 
 		item.transform.parent = equippedParent;
@@ -112,6 +110,11 @@ public class PlayerInventory : PlayerSubClass {
 	void MoveToWorld(_Equipable item) {
 		item.transform.parent = null;
 		item.OnUnequip(this);
+
+		// Remove components
+		foreach(DontStoreObjectInRoom comp in item.GetComponentsInChildren<DontStoreObjectInRoom>(true)) {
+			Destroy(comp);
+		}
 	}
 	#endregion
 

@@ -14,6 +14,7 @@ public abstract class _DropoffStation<Item> : _Inventory<Item> where Item : _Dro
 	}
 
 	// The size of the inventoryList defines the size of the inventory
+	[SerializeThis]
 	private Item[] inventoryList = new Item[1];
 	public override Item[] slots { get { return inventoryList; } }
 

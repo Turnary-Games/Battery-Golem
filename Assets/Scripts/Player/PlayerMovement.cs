@@ -7,7 +7,6 @@ public class PlayerMovement : PlayerSubClass {
 
 	public Rigidbody body;
 	public CapsuleCollider capsule;
-	public Animator anim;
 
 	[Header("Movement settings")]
 
@@ -27,46 +26,59 @@ public class PlayerMovement : PlayerSubClass {
 	public LayerMask groundLayer;
 	[Range(0,90)]
 	public float slopeLimit = 30f;
-
+	
 	[HideInInspector]
 	public Vector3 outsideMotion;
-
+	
 	[HideInInspector]
 	public bool grounded;
+	
+	private RaycastHit? lastHit;
 
 	[HideInInspector]
 	public _Platform platform;
 
-	void Update() {
-		if (health.dead) {
-			// Stop everything when dead.
-			// This includes gravity and movement.
-			return;
+#if UNITY_EDITOR
+	void OnDrawGizmosSelected() {
+
+		Gizmos.color = Color.green;
+		Gizmos.DrawRay(transform.position + Vector3.up * groundDist, Vector3.down * (lastHit.HasValue ? lastHit.Value.distance : groundDist*2));
+		if (lastHit.HasValue) {
+			Gizmos.color = Color.red;
+			Gizmos.DrawRay(lastHit.Value.point, Vector3.down * (groundDist * 2 - lastHit.Value.distance));
 		}
+	}
+#endif
+
+	void Update() {
+		if (health.dead)
+			// Stop movement when dead
+			return;
 
 		RaycastGround();
 		Move();
 		Rotate();
-
-		UpdateAnimator();
 	}
 
 	#region Movement algorithms
 	void RaycastGround() {
 		RaycastHit hit;
 
-		if (Physics.Raycast(transform.position + Vector3.up * groundDist / 2, Vector3.down, out hit, groundDist, groundLayer)) {
+		if (Physics.Raycast(transform.position + Vector3.up * groundDist, Vector3.down, out hit, groundDist*2, groundLayer)) {
 			grounded = Vector3.Angle(hit.normal, Vector3.up) <= slopeLimit;
-
+			
 			GameObject main = hit.collider.attachedRigidbody ? hit.collider.attachedRigidbody.gameObject : hit.collider.gameObject;
 
 			_TouchListener listener = main.GetComponent<_TouchListener>();
 			if (listener) listener.Touch(this);
 
 			platform = main.GetComponent<_Platform>();
+
+			lastHit = hit;
 		} else {
 			grounded = false;
 			platform = null;
+			lastHit = null;
 		}
 	}
 
@@ -74,12 +86,20 @@ public class PlayerMovement : PlayerSubClass {
 	void Move() {
 		// Motion to apply to the character
 		Vector3 motion = Vector3.zero;
-		if (pushing.point != null)
+
+		if (pushing && pushing.point != null)
+			// Move according to the pushing point
 			motion = pushing.GetMovement();
+		else if (interaction && interaction.talkingTo)
+			// Dont move if talking to a NPC
+			motion = Vector3.zero;
 		else
+			// Use the players input for moving
 			motion = GetAxis() * moveSpeed;
 
-		//body.AddForce(force);
+		// Less control if airborne
+		if (!grounded)
+			motion = Vector3.Lerp(motion, body.velocity - outsideMotion, 0.97f);
 
 		// Apply acceleration to motion vector
 		motion = Vector3.MoveTowards(body.velocity - lastOutsideMotion, motion, moveSpeed * Time.deltaTime / topSpeedAfter);
@@ -99,27 +119,21 @@ public class PlayerMovement : PlayerSubClass {
 		lastOutsideMotion = outsideMotion;
 	}
 
-	void UpdateAnimator() {
-		// Velocity, relative to the current platform (if any)
-		Vector3 motion = platform ? body.velocity - platform.body.velocity : body.velocity;
-		float magn = new Vector2(motion.x, motion.z).magnitude;
-
-		// Tell animator
-		anim.SetBool("Walking", magn > 0);
-		anim.SetFloat("MoveSpeed", magn > 0 ? magn / 5 : 1);
-		anim.SetBool("Grounded", grounded);
-		anim.SetFloat("VertSpeed", motion.y);
-	}
-
 	void Rotate() {
 		// Vector of the (looking) axis
 		Vector3 rawAxis;
 
 		if (hud.isOpen)
+			// Dont rotate
 			rawAxis = Vector3.zero;
-		else if (pushing.point != null)
+		else if (pushing && pushing.point != null)
+			// Turn according to pushing point
 			rawAxis = pushing.GetAxis();
+		else if (interaction && interaction.talkingTo != null)
+			// Turn towards NPC
+			rawAxis = interaction.talkingTo.GetAxis(from:transform.position);
 		else {
+			// Listen to users input
 			rawAxis = new Vector3(Input.GetAxisRaw("HorizontalLook"), 0, Input.GetAxisRaw("VerticalLook"));
 
 			// Not using the looking axis input, try the movement axis
