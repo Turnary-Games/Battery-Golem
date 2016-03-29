@@ -28,8 +28,13 @@ public class e_NPCController : Editor {
 			if (!list.serializedProperty.isExpanded) return 0;
 
 			var element = list.serializedProperty.GetArrayElementAtIndex(index);
+			float h = EditorGUI.GetPropertyHeight(element) + 6;
 
-			return EditorGUI.GetPropertyHeight(element) + 2;
+			// If it's not the last one, but it's the last playOnce...
+			if (element.FindPropertyRelative("messages").isExpanded && ShowLastPlayOnceStuff(index))
+				h += 20;
+
+			return h;
 		};
 
 		list.drawHeaderCallback = (Rect rect) => {
@@ -47,11 +52,20 @@ public class e_NPCController : Editor {
 		list.drawElementBackgroundCallback = (Rect rect, int index, bool isActive, bool isFocused) => {
 			if (!list.serializedProperty.isExpanded) return;
 
+			bool playOnce = list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("playOnce").boolValue;
+
 			rect.y -= 2;
 			rect.x += 1;
 			rect.width -= 2;
 			rect.height = list.elementHeightCallback(index);
-			EditorGUI.DrawRect(rect, isFocused ? new Color(0.2f, 0.2f, 0.2f, 0.2f) : Color.clear);
+			EditorGUI.DrawRect(rect, isFocused
+				? (playOnce ? new Color(0.2f, 0.5f, 0.2f, 0.2f) : new Color(0.2f, 0.2f, 0.2f, 0.2f))
+				: (playOnce ? new Color(0, 1, 0, 0.1f) : Color.clear));
+			
+			if (ShowLastPlayOnceStuff(index)) {
+				var bot = new Rect(rect.x, rect.yMax-1, rect.width, 1);
+				EditorGUI.DrawRect(bot, new Color(0, 0.5f, 0, 0.5f));
+			}
 		};
 
 		list.onAddCallback = (ReorderableList l) => {
@@ -75,7 +89,50 @@ public class e_NPCController : Editor {
 
 		serializedObject.Update();
 		list.DoLayoutList();
+		ValidateList();
 		serializedObject.ApplyModifiedProperties();
+	}
+
+	void ValidateList() {
+		var prop = list.serializedProperty;
+
+	Start:
+		int nonPlayOnceIndex = -1;
+		for (int i = 0; i < prop.arraySize; i++) {
+			var item = prop.GetArrayElementAtIndex(i);
+			var playOnce = item.FindPropertyRelative("playOnce");
+
+			if (!playOnce.boolValue) nonPlayOnceIndex = i;
+			else if (nonPlayOnceIndex != -1) {
+				// A "playOnce=true" after a "playOnce=false"
+				// Move up the "playOnce=true"
+				prop.MoveArrayElement(i, nonPlayOnceIndex);
+				// Repeat until this never happens
+				goto Start;
+			}
+		}
+	}
+
+	bool ShowLastPlayOnceStuff(int index) {
+		// Don't if it's the last one
+		if (index == list.serializedProperty.arraySize - 1) return false;
+		
+		var prop = list.serializedProperty;
+
+		for (int i = 0; i < prop.arraySize; i++) {
+			var item = prop.GetArrayElementAtIndex(i);
+			var playOnce = item.FindPropertyRelative("playOnce");
+			
+			// It's not even playOnce itself...
+			if (i == index && !playOnce.boolValue)
+				return false;
+			
+			// There was a playOnce after you, therefore...
+			if (i > index && playOnce.boolValue)
+				return false;
+		}
+		// No playOnce's returned, therefore...
+		return true;
 	}
 
 }

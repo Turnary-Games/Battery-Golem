@@ -10,16 +10,15 @@ public class NPCController : MonoBehaviour {
 
 	[HideInInspector]
 	public List<Dialog> dialogs = new List<Dialog>();
-	private int currentDialog;
-
-	[Tooltip("Where the dialog UI box will popup. Preferably the NPCs head.")]
-	public Transform boxTarget;
+	
 	public GameObject dialogPrefab;
-	[Space]
 	public Transform headBone;
+	[Space]
 	public float headRange = 5;
 	public bool ignoreY = false;
 	[Space]
+	public bool lookAtWhileIdle = true;
+	public float idleAngle = 0;
 	public float forwardAngle = 0;
 	[HideInInspector]
 	public AnimationCurve headWeight = AnimationCurve.Linear(0, 1, 1, 1);
@@ -27,10 +26,13 @@ public class NPCController : MonoBehaviour {
 	[SerializeThis]
 	private NPCDialogBox dialogUI;
 	[SerializeThis]
-	private Quaternion headDefault;
+	private int currentDialog = -1;
+
+	private bool isTalking { get { return currentDialog != -1; } }
 
 #if UNITY_EDITOR
 	void OnDrawGizmosSelected() {
+		// Gizmos displaying range of the head rotating
 		if (ignoreY) {
 			Vector3 pos = transform.position;
 			float rad = headRange;
@@ -48,14 +50,14 @@ public class NPCController : MonoBehaviour {
 			Gizmos.DrawWireSphere(transform.position, headRange);
 		}
 
-		UnityEditor.Handles.color = Color.green;
+		// Arrow for forward angle
+		UnityEditor.Handles.color = Color.blue;
 		UnityEditor.Handles.ArrowCap(-1, (headBone ?? transform).position, Quaternion.Euler(0, forwardAngle, 0), 1);
+		// Arrow for idle angle
+		UnityEditor.Handles.color = Color.green;
+		UnityEditor.Handles.ArrowCap(-1, (headBone ?? transform).position, Quaternion.Euler(0, idleAngle, 0), 1.5f);
 	}
 #endif
-
-	void Start() {
-		headDefault = headBone.rotation;
-	}
 
 	void Update() {
 		Quaternion lookDirection = GetRotation();
@@ -66,26 +68,35 @@ public class NPCController : MonoBehaviour {
 
 	Quaternion LockRotation(Quaternion rotation) {
 		Vector3 euler = rotation.eulerAngles;
-		
-		float weight = Mathf.Clamp(headWeight.Evaluate(Mathf.Abs(Mathf.DeltaAngle(euler.y, forwardAngle))),0f,1f);
+
+		float angle = Mathf.Abs(Mathf.DeltaAngle(euler.y, forwardAngle)); // abs(-180 to 180) => 0 to 180
+		float weight = Mathf.Clamp(headWeight.Evaluate(angle),0f,1f);
 		euler.y = Mathf.LerpAngle(euler.y, forwardAngle, 1 - weight);
 
 		return Quaternion.Euler(euler);
 	}
 
 	Quaternion GetRotation() {
-		var player = PlayerController.instance;
+		if ((!isTalking && lookAtWhileIdle)
+		|| (isTalking && dialogs[currentDialog].current.turnHead)) {
+			var player = PlayerController.instance;
 
-		if (player != null) {
-			Vector3 a = player.transform.position;
-			Vector3 b = transform.position;
-			if (ignoreY) a.y = b.y = 0;
-			if (Vector3.Distance(a, b) <= headRange) {
-				return Quaternion.LookRotation(player.characterTop - headBone.position);
+			if (player != null) {
+				// Just look, dont mind checking if player is in range while talking
+				if (isTalking)
+					return Quaternion.LookRotation(player.characterTop - headBone.position);
+				
+				// Check the distance to the player
+				Vector3 a = player.transform.position;
+				Vector3 b = transform.position;
+				if (ignoreY) a.y = b.y = 0;
+				if (Vector3.Distance(a, b) <= headRange) {
+					return Quaternion.LookRotation(player.characterTop - headBone.position);
+				}
 			}
 		}
 
-		return headDefault;
+		return Quaternion.Euler(0, idleAngle, 0);
 	}
 
 	void OnInteractStart(PlayerController source) {
@@ -130,7 +141,7 @@ public class NPCController : MonoBehaviour {
 			
 			// Assign variables
 			NPCDialogBox box = clone.GetComponent<NPCDialogBox>();
-			box.target = boxTarget ?? transform;
+			box.target = headBone ?? transform;
 			box.dialog = dialog;
 
 			// Save for later referance
@@ -149,7 +160,7 @@ public class NPCController : MonoBehaviour {
 
 		// Find the first dialog
 		if (currentDialog == -1)
-			currentDialog = dialogs.FindIndex(d => d.playOnce && d.index != -1);
+			currentDialog = dialogs.FindIndex(d => d.playOnce && d.nextIndex != -1);
 
 		// No more playonces left
 		if (currentDialog == -1)
@@ -173,29 +184,35 @@ public class NPCController : MonoBehaviour {
 	public struct Dialog {
 		public List<Message> messages;
 		public bool playOnce;
-		public int index;
+		public int nextIndex;
+		public int currIndex;
+
+		public Message current {
+			get { return messages[currIndex]; }
+		}
 
 		public Dialog Next(out string msg) {
 			msg = null;
+			currIndex = nextIndex;
 
 			// Error check
-			if (index == -1) return this;
-			if (index >= messages.Count) {
-				index = 0;
+			if (nextIndex == -1) return this; // done talking
+			if (nextIndex >= messages.Count) { // prepare for next chat
+				nextIndex = 0;
 				return this;
 			}
 
 			// Get message
-			msg = messages[index].text;
+			msg = messages[nextIndex].text;
 
 			// Iterate
-			index++;
+			nextIndex++;
 
-			if (index >= messages.Count) {
+			if (nextIndex >= messages.Count) {
 				if (playOnce)
-					index = -1;
+					nextIndex = -1;
 				else
-					index = messages.Count;
+					nextIndex = messages.Count;
 			}
 
 			return this;
