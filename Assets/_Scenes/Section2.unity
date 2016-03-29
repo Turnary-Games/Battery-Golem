@@ -85,6 +85,10 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &27160777 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400076, guid: 609b265d3d335e949b72d99fd652a478, type: 3}
+  m_PrefabInternal: {fileID: 2138981849}
 --- !u!1 &31743980
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +187,10 @@ Transform:
   - {fileID: 1863766816}
   m_Father: {fileID: 0}
   m_RootOrder: 10
+--- !u!4 &66448610 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 400038, guid: f36c1570387a2c7429ef18c0bd906826, type: 3}
+  m_PrefabInternal: {fileID: 1794134668}
 --- !u!1001 &118486399
 Prefab:
   m_ObjectHideFlags: 0
@@ -912,7 +920,27 @@ MonoBehaviour:
     playOnce: 0
     index: 0
   boxTarget: {fileID: 1945331964}
-  prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+  dialogPrefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+  headBone: {fileID: 27160777}
+  headRange: 5
+  ignoreY: 1
+  forwardAngle: 0
+  headWeight:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &376477218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,7 +955,7 @@ MonoBehaviour:
   col: {fileID: 376477219}
   ignoreY: 1
   acceptElectrifying: 0
-  acceptInteraction: 1
+  acceptInteraction: 0
 --- !u!135 &376477219
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1264,7 +1292,7 @@ GameObject:
   - 4: {fileID: 550349869}
   - 218: {fileID: 550349868}
   - 154: {fileID: 550349867}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4303,7 +4331,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 106276, guid: f370ba46dbf6797448631d100e74b720, type: 2}
       propertyPath: m_Name
-      value: Main Camera (1)
+      value: Main Camera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f370ba46dbf6797448631d100e74b720, type: 2}
@@ -4809,7 +4837,27 @@ MonoBehaviour:
     playOnce: 0
     index: 0
   boxTarget: {fileID: 1125292371}
-  prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+  dialogPrefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+  headBone: {fileID: 66448610}
+  headRange: 9.06
+  ignoreY: 0
+  forwardAngle: 0
+  headWeight:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1567674591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4821,7 +4869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74885efa56c986147ac7cd329f3ec896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  col: {fileID: 1567674589}
+  col: {fileID: 1567674592}
   ignoreY: 1
   acceptElectrifying: 0
   acceptInteraction: 1
@@ -5750,7 +5798,27 @@ MonoBehaviour:
     playOnce: 0
     index: 0
   boxTarget: {fileID: 1066134327}
-  prefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+  dialogPrefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
+  headBone: {fileID: 1066134327}
+  headRange: 5
+  ignoreY: 0
+  forwardAngle: 0
+  headWeight:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1863766819
 MonoBehaviour:
   m_ObjectHideFlags: 0
