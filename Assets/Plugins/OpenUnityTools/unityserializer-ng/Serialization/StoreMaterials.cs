@@ -106,7 +106,6 @@ public partial class StoreMaterials : MonoBehaviour {
 #if UNITY_EDITOR
         if (!StoreMaterials.Dirty) {
             Renderer renderer = GetComponent<Renderer>();
-			if (!renderer) return;
             foreach (Material mat in renderer.sharedMaterials) {
                 if (!ShaderDatabase.ContainsKey(mat.shader.name)) {
                     Dirty = true;

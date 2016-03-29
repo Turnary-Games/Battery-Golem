@@ -7,7 +7,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using System.Linq;
 
 public class RoomManager
 {
@@ -32,29 +31,24 @@ public class RoomManager
 	{
 		if(Room.Current)
 			Room.Current.Save();
-
-		if (rooms.ContainsKey(name))
+		if(rooms.ContainsKey(name))
 		{
 			loadingRoom = true;
 			var loader = LevelSerializer.LoadSavedLevel(rooms[name]);
 			loader.showGUI = showGUI;
-			loader.whenCompleted = (obj, list) => {
-				//foreach (var gameObject in list) {
-				//	gameObject.SendMessage("OnRoomWasLoaded", SendMessageOptions.DontRequireReceiver);
-				//}
-				foreach (var go in GameObject.FindObjectsOfType(typeof(GameObject)).Cast<GameObject>()) {
-					go.SendMessage("OnRoomWasLoaded", SendMessageOptions.DontRequireReceiver);
+			loader.whenCompleted = (obj, list)=>{
+				foreach(var gameObject in list)
+				{
+					gameObject.SendMessage("OnRoomWasLoaded", SendMessageOptions.DontRequireReceiver);
 				}
 			};
-
 		}
 		else
 		{
 			var go = new GameObject("RoomLoader");
 			go.AddComponent<RoomLoader>();
-			SceneManager.LoadScene(name, LoadSceneMode.Single);
+            SceneManager.LoadScene(name, LoadSceneMode.Single);
 		}
-
 	}
 	
 	

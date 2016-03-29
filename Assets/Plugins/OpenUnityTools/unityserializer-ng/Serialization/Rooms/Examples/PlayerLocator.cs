@@ -5,23 +5,23 @@
 //     ------------------- */
 // 
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System;
+using System.Linq;
+using Serialization;
 
 [AddComponentMenu("Storage/Rooms/Examples/Player Locator")]
 public class PlayerLocator : MonoBehaviour
 {
-	public static PlayerLocator current;
-	public static GameObject player;
+	public static PlayerLocator Current;
+	public static GameObject PlayerGameObject;
 	
-	void Start() {
-		if (current != this && current != null)
-			Destroy(transform.root.gameObject);
-	}
-
 	void Awake()
 	{
-		DontDestroyOnLoad(transform.root.gameObject);
-		current = this;
-		player = gameObject;
+		DontDestroyOnLoad(gameObject);
+		Current = this;
+		PlayerGameObject = gameObject;
 	}
 
 }

@@ -255,7 +255,10 @@ public static class LevelSerializer
     /// <param name="usePersistentDataPath">
     /// Is filename just a filename in Application.persistentDataPath or a whole path?
     /// </param>
-    public static void LoadSavedLevelFromFile(string filename, bool usePersistentDataPath = true) {
+    /// <param name="showGUI">
+    /// Should the screen fade?
+    /// </param>
+    public static void LoadSavedLevelFromFile(string filename, bool usePersistentDataPath = true, bool showGUI = true) {
         StreamReader reader;
         string data = null;
         if (usePersistentDataPath) {
@@ -276,7 +279,7 @@ public static class LevelSerializer
         }
 
         if (data != null) {
-            LoadSavedLevel(data);
+            LoadSavedLevel(data, showGUI);
         }
         else {
             Debug.LogErrorFormat("No data was loaded from {0}", filename);
@@ -1215,7 +1218,8 @@ public static class LevelSerializer
     ///   Loads the saved level.
     /// </summary>
     /// <param name='data'> The data describing the level to load </param>
-    public static LevelLoader LoadSavedLevel(string data)
+    /// <param name="showGUI"> Should the screen fade? </param>
+    public static LevelLoader LoadSavedLevel(string data, bool showGUI = true)
     {
         if(BeginLoad != null) {
             BeginLoad();
@@ -1238,6 +1242,7 @@ public static class LevelSerializer
         Object.DontDestroyOnLoad(go);
         var loader = go.AddComponent<LevelLoader>();
         loader.Data = ld;
+        loader.showGUI = showGUI;
 
         SceneManager.LoadScene(ld.Name);
         return loader;

@@ -343,50 +343,56 @@ public class UnitySerializerWindow : EditorWindow {
                         using (new Vertical()) {
                             using (new Horizontal()) {
                                 if (!Has(Selection.activeGameObject, typeof(UniqueIdentifier)) && GUILayout.Button("Unique Identifier")) {
-                                    Undo.RegisterSceneUndo("Change Identifiers");
-                                    Add(typeof(UniqueIdentifier), Selection.activeGameObject);
+                                    Undo.RecordObject(Selection.activeGameObject, "usng: Add unique identifier");
+                                    AddUndo(typeof(UniqueIdentifier), Selection.activeGameObject);
                                 }
                                 if (!Has(Selection.activeGameObject, typeof(StoreInformation)) && GUILayout.Button("Store Information")) {
-                                    Undo.RegisterSceneUndo("Change Identifiers");
-                                    Add(typeof(StoreInformation), Selection.activeGameObject);
+                                    Undo.RecordObject(Selection.activeGameObject, "usng: Store information");
+                                    AddUndo(typeof(StoreInformation), Selection.activeGameObject);
                                 }
                                 if (Selection.activeGameObject.GetComponent<StoreMaterials>() == null && Selection.activeGameObject.GetComponent<StoreInformation>() != null) {
                                     if (GUILayout.Button("Store Materials")) {
-                                        Undo.RegisterSceneUndo("Change Identifiers");
-                                        Selection.activeGameObject.AddComponent<StoreMaterials>();
+                                        Undo.RecordObject(Selection.activeGameObject, "usng: Store materials");
+                                        Undo.AddComponent<StoreMaterials>(Selection.activeGameObject);
                                     }
                                 }
                             }
                             using (new Horizontal()) {
                                 if (Selection.activeGameObject.GetComponent<StoreMesh>() == null && Selection.activeGameObject.GetComponent<StoreInformation>() != null && (Selection.activeGameObject.GetComponent<MeshFilter>() != null || Selection.activeGameObject.GetComponent<SkinnedMeshRenderer>() != null)) {
                                     if (GUILayout.Button("Store Mesh")) {
-                                        Undo.RegisterSceneUndo("Change Identifiers");
-                                        Selection.activeGameObject.AddComponent<StoreMesh>();
+                                        Undo.RecordObject(Selection.activeGameObject, "usng: Store mesh");
+                                        Undo.AddComponent<StoreMesh>(Selection.activeGameObject);
                                     }
                                 }
                                 if (Selection.activeGameObject.GetComponent<StoreAnimator>() == null && Selection.activeGameObject.GetComponent<StoreInformation>() != null && Selection.activeGameObject.GetComponent<Animator>() != null) {
                                     if (GUILayout.Button("Store Animator")) {
-                                        Selection.activeGameObject.AddComponent<StoreAnimator>();
+                                        Undo.RecordObject(Selection.activeGameObject, "usng: Store animator");
+                                        Undo.AddComponent<StoreAnimator>(Selection.activeGameObject);
                                     }
                                 }
                             }
                             using (new Horizontal()) {
                                 if (!Has(Selection.activeGameObject, typeof(PrefabIdentifier)) && PrefabUtility.GetPrefabType(Selection.activeGameObject) != PrefabType.None && GUILayout.Button("Prefab Identifier")) {
-                                    Undo.RegisterSceneUndo("Change Identifiers");
-                                    Add(typeof(PrefabIdentifier), Selection.activeGameObject);
+                                    Undo.RecordObject(Selection.activeGameObject, "usng: Add prefab identifier");
+                                    AddUndo(typeof(PrefabIdentifier), Selection.activeGameObject);
                                     PrefabUtility.ReplacePrefab(Selection.activeGameObject, PrefabUtility.GetPrefabParent(Selection.activeGameObject), ReplacePrefabOptions.ConnectToPrefab);
                                 }
                                 GUI.color = new Color(0.9f, 0.5f, 0.5f);
                                 if (GUILayout.Button("Remove")) {
-                                    Undo.RegisterSceneUndo("Change Identifiers");
+                                    int group = Undo.GetCurrentGroup();
+                                    Undo.IncrementCurrentGroup();
+
+                                    Undo.RecordObject(Selection.activeGameObject, "usng: Remove components");
                                     foreach (var c in Selection.activeGameObject.GetComponents<UniqueIdentifier>())
-                                        DestroyImmediate(c, true);
+                                        Undo.DestroyObjectImmediate(c);
                                     foreach (var c in Selection.activeGameObject.GetComponents<StoreMaterials>())
-                                        DestroyImmediate(c, true);
+                                        Undo.DestroyObjectImmediate(c);
                                     foreach (var c in Selection.activeGameObject.GetComponents<StoreMesh>())
-                                        DestroyImmediate(c, true);
+                                        Undo.DestroyObjectImmediate(c);
                                     foreach (var c in Selection.activeGameObject.GetComponents<StoreAnimator>())
-                                        DestroyImmediate(c, true);
+                                        Undo.DestroyObjectImmediate(c);
+
+                                    Undo.CollapseUndoOperations(group);
                                 }
                                 GUI.color = Color.white;
                             }
@@ -405,27 +411,49 @@ public class UnitySerializerWindow : EditorWindow {
                             using (new Vertical()) {
                                 using (new Horizontal()) {
                                     if (GUILayout.Button("Unique Identifier")) {
-                                        Undo.RegisterSceneUndo("Change Identifiers");
-                                        foreach (var c in Selection.activeGameObject.GetAllComponentsInChildren<Transform>().Select(t => t.gameObject).Where(g => !Has(g, typeof(UniqueIdentifier))))
-                                            Add(typeof(UniqueIdentifier), c);
+                                        GameObject[] objects = Selection.activeGameObject.GetAllComponentsInChildren<Transform>().Select(t => t.gameObject).Where(g => !Has(g, typeof(UniqueIdentifier))).ToArray();
+                                        int group = Undo.GetCurrentGroup();
+                                        Undo.IncrementCurrentGroup();
+
+                                        Undo.RecordObjects(objects, "usng: Add unique identifiers");
+                                        foreach (var c in objects)
+                                            AddUndo(typeof(UniqueIdentifier), c);
+                                        Undo.CollapseUndoOperations(group);
                                     }
                                     if (GUILayout.Button("Store Information")) {
-                                        Undo.RegisterSceneUndo("Change Identifiers");
-                                        foreach (var c in Selection.activeGameObject.GetAllComponentsInChildren<Transform>().Select(t => t.gameObject).Where(g => !Has(g, typeof(StoreInformation))))
-                                            Add(typeof(StoreInformation), c);
+                                        GameObject[] objects = Selection.activeGameObject.GetAllComponentsInChildren<Transform>().Select(t => t.gameObject).Where(g => !Has(g, typeof(StoreInformation))).ToArray();
+                                        int group = Undo.GetCurrentGroup();
+                                        Undo.IncrementCurrentGroup();
+
+                                        Undo.RecordObjects(objects, "usng: Store information of objects");
+                                        foreach (var c in objects)
+                                            AddUndo(typeof(StoreInformation), c);
+                                        Undo.CollapseUndoOperations(group);
                                     }
                                 }
                                 GUI.color = new Color(0.9f, 0.5f, 0.5f);
                                 if (GUILayout.Button("Remove All")) {
-                                    Undo.RegisterSceneUndo("Change Identifiers");
-                                    foreach (var c in Selection.activeGameObject.GetAllComponentsInChildren<UniqueIdentifier>())
-                                        DestroyImmediate(c, true);
-                                    foreach (var c in Selection.activeGameObject.GetAllComponentsInChildren<StoreMaterials>())
-                                        DestroyImmediate(c, true);
-                                    foreach (var c in Selection.activeGameObject.GetComponents<StoreMesh>())
-                                        DestroyImmediate(c, true);
-                                    foreach (var c in Selection.activeGameObject.GetComponents<StoreAnimator>())
-                                        DestroyImmediate(c, true);
+                                    int group = Undo.GetCurrentGroup();
+                                    Undo.IncrementCurrentGroup();
+
+                                    while (Selection.activeGameObject.GetAllComponentsInChildren<UniqueIdentifier>().Length > 0) {
+                                        Undo.RecordObject(Selection.activeGameObject.GetAllComponentsInChildren<UniqueIdentifier>()[0], "usng: Remove all");
+                                        Undo.DestroyObjectImmediate(Selection.activeGameObject.GetAllComponentsInChildren<UniqueIdentifier>()[0]);
+                                    }
+                                    while (Selection.activeGameObject.GetAllComponentsInChildren<StoreMaterials>().Length > 0) {
+                                        Undo.RecordObject(Selection.activeGameObject.GetAllComponentsInChildren<StoreMaterials>()[0], "usng: Remove all");
+                                        Undo.DestroyObjectImmediate(Selection.activeGameObject.GetAllComponentsInChildren<StoreMaterials>()[0]);
+                                    }
+                                    while (Selection.activeGameObject.GetAllComponentsInChildren<StoreMesh>().Length > 0) {
+                                        Undo.RecordObject(Selection.activeGameObject.GetAllComponentsInChildren<StoreMesh>()[0], "usng: Remove all");
+                                        Undo.DestroyObjectImmediate(Selection.activeGameObject.GetAllComponentsInChildren<StoreMesh>()[0]);
+                                    }
+                                    while (Selection.activeGameObject.GetAllComponentsInChildren<StoreAnimator>().Length > 0) {
+                                        Undo.RecordObject(Selection.activeGameObject.GetAllComponentsInChildren<StoreAnimator>()[0], "usng: Remove all");
+                                        Undo.DestroyObjectImmediate(Selection.activeGameObject.GetAllComponentsInChildren<StoreAnimator>()[0]);
+                                    }
+
+                                    Undo.CollapseUndoOperations(group);
                                 }
                                 GUI.color = Color.white;
                             }
@@ -436,7 +464,6 @@ public class UnitySerializerWindow : EditorWindow {
             }
             else if (Selection.gameObjects.Length > 0) {
                 using (new HorizontalCentered()) {
-
                     GUILayout.Label("Selected Objects", bold);
                 }
                 GUILayout.Space(6);
@@ -444,26 +471,47 @@ public class UnitySerializerWindow : EditorWindow {
                     using (new Vertical()) {
                         using (new Horizontal()) {
                             if (GUILayout.Button("Unique Identifier")) {
-                                Undo.RegisterSceneUndo("Change Identifiers");
+                                int group = Undo.GetCurrentGroup();
+                                Undo.IncrementCurrentGroup();
+
+                                Undo.RecordObjects(Selection.gameObjects, "usng: Add unique identifiers");
                                 foreach (var c in Selection.gameObjects)
-                                    Add(typeof(UniqueIdentifier), c);
+                                    AddUndo(typeof(UniqueIdentifier), c);
+                                Undo.CollapseUndoOperations(group);
                             }
                             if (GUILayout.Button("Store Information")) {
-                                Undo.RegisterSceneUndo("Change Identifiers");
+                                int group = Undo.GetCurrentGroup();
+                                Undo.IncrementCurrentGroup();
+
+                                Undo.RecordObjects(Selection.gameObjects, "usng: Store information of objects");
                                 foreach (var c in Selection.gameObjects)
-                                    Add(typeof(StoreInformation), c);
+                                    AddUndo(typeof(StoreInformation), c);
+                                Undo.CollapseUndoOperations(group);
                             }
                         }
                         using (new Horizontal()) {
                             if (GUILayout.Button("Store Materials")) {
-                                foreach (var c in Selection.gameObjects.Where(g => g.GetComponent<StoreMaterials>() == null && g.GetComponent<Renderer>() != null))
-                                    c.AddComponent<StoreMaterials>();
+                                GameObject[] objects = Selection.gameObjects.Where(g => g.GetComponent<StoreMaterials>() == null && g.GetComponent<Renderer>() != null).ToArray();
+                                int group = Undo.GetCurrentGroup();
+                                Undo.IncrementCurrentGroup();
+
+                                Undo.RecordObjects(objects, "usng: Store materials of objects");
+                                foreach (var c in objects)
+                                    Undo.AddComponent<StoreMaterials>(c);
+                                Undo.CollapseUndoOperations(group);
                             }
                             GUI.color = new Color(0.9f, 0.5f, 0.5f);
                             if (GUILayout.Button("Remove All")) {
-                                Undo.RegisterSceneUndo("Change Identifiers");
-                                foreach (var c in Selection.gameObjects.Cast<GameObject>().SelectMany(s => s.GetAllComponentsInChildren<UniqueIdentifier>()))
-                                    DestroyImmediate(c);
+                                int group = Undo.GetCurrentGroup();
+                                Undo.IncrementCurrentGroup();
+
+                                while (Selection.gameObjects.Cast<GameObject>().SelectMany(s => s.GetAllComponentsInChildren<UniqueIdentifier>()).Count() > 0) {
+                                    var obj = Selection.gameObjects.Cast<GameObject>().SelectMany(s => s.GetAllComponentsInChildren<UniqueIdentifier>()).First();
+                                    Undo.RecordObject(obj, "usng: Remove all");
+                                    Undo.DestroyObjectImmediate(obj);
+                                }
+
+                                Undo.CollapseUndoOperations(group);
                             }
                             GUI.color = Color.white;
 
@@ -481,12 +529,12 @@ public class UnitySerializerWindow : EditorWindow {
                 GUI.color = Color.white;
                 using (new Horizontal()) {
                     if (Selection.activeGameObject != null && GUILayout.Button("Assign Save Game Manager")) {
-                        Undo.RegisterSceneUndo("Assign save game manager");
-                        Selection.activeGameObject.AddComponent<SaveGameManager>();
+                        Undo.RecordObject(Selection.activeGameObject, "usng: Assign save game manager");
+                        Undo.AddComponent<SaveGameManager>(Selection.activeGameObject);
                     }
                     if (GUILayout.Button("Create a new Save Game Manager")) {
-                        Undo.RegisterSceneUndo("Create save game manager");
                         var go = new GameObject();
+                        Undo.RegisterCreatedObjectUndo(go, "usng: Create save game manager");
                         go.name = "Save Game Manager";
                         go.AddComponent<SaveGameManager>();
                     }
@@ -530,7 +578,6 @@ public class UnitySerializerWindow : EditorWindow {
         if (showRoom) {
             GUILayout.BeginVertical();
             if (GameObject.FindObjectOfType<Room>()) {
-
                 if (Selection.gameObjects.Length == 1) {
                     if (Selection.activeGameObject != null) {
                         GUILayout.Space(8);
@@ -539,7 +586,6 @@ public class UnitySerializerWindow : EditorWindow {
                         }
                         using (new HorizontalCentered()) {
                             GUI.color = new Color(0.8f, 1f, 0.8f, 1);
-
 
                             if (Selection.activeGameObject.GetComponent<DontStoreObjectInRoom>()) {
                                 GUILayout.Label(Has(Selection.activeGameObject, typeof(StoreInformation)) ? "Stored in the save game but not stored in the room state" : "Not saved but flagged for exclusion anyway.");
@@ -554,16 +600,16 @@ public class UnitySerializerWindow : EditorWindow {
                             using (new Vertical()) {
                                 using (new Horizontal()) {
                                     if (!Selection.activeGameObject.GetComponent<DontStoreObjectInRoom>() && GUILayout.Button("Exclude from room")) {
-                                        Undo.RegisterSceneUndo("Exclude");
-                                        Add(typeof(DontStoreObjectInRoom), Selection.activeGameObject);
+                                        Undo.RecordObject(Selection.activeGameObject, "usng: Exclude from room");
+                                        AddUndo(typeof(DontStoreObjectInRoom), Selection.activeGameObject);
                                     }
 
                                 }
                                 GUI.color = new Color(0.9f, 0.5f, 0.5f);
                                 if (GUILayout.Button("Remove")) {
-                                    Undo.RegisterSceneUndo("Change Identifiers");
+                                    Undo.RecordObject(Selection.activeGameObject, "usng: Remove (room)");
                                     foreach (var c in Selection.activeGameObject.GetComponents<DontStoreObjectInRoom>())
-                                        DestroyImmediate(c);
+                                        Undo.DestroyObjectImmediate(c);
 
                                 }
                                 GUI.color = Color.white;
@@ -583,17 +629,28 @@ public class UnitySerializerWindow : EditorWindow {
                                 using (new Vertical()) {
                                     using (new Horizontal()) {
                                         if (GUILayout.Button("Exclude from room")) {
-                                            Undo.RegisterSceneUndo("Change Identifiers");
-                                            foreach (var c in Selection.activeGameObject.GetAllComponentsInChildren<Transform>().Select(t => t.gameObject).Where(g => !g.GetComponent<DontStoreObjectInRoom>()))
-                                                Add(typeof(DontStoreObjectInRoom), c);
-                                        }
+                                            int group = Undo.GetCurrentGroup();
+                                            Undo.IncrementCurrentGroup();
 
+                                            var objects = Selection.activeGameObject.GetAllComponentsInChildren<Transform>().Select(t => t.gameObject).Where(g => !g.GetComponent<DontStoreObjectInRoom>()).ToArray();
+                                            Undo.RecordObjects(objects, "usng: Exclude from room");
+                                            foreach (var c in Selection.activeGameObject.GetAllComponentsInChildren<Transform>().Select(t => t.gameObject).Where(g => !g.GetComponent<DontStoreObjectInRoom>()))
+                                                AddUndo(typeof(DontStoreObjectInRoom), c);
+
+                                            Undo.CollapseUndoOperations(group);
+                                        }
 
                                         GUI.color = new Color(0.9f, 0.5f, 0.5f);
                                         if (GUILayout.Button("Remove")) {
-                                            Undo.RegisterSceneUndo("Change Identifiers");
-                                            foreach (var c in Selection.activeGameObject.GetAllComponentsInChildren<DontStoreObjectInRoom>())
-                                                DestroyImmediate(c);
+                                            int group = Undo.GetCurrentGroup();
+                                            Undo.IncrementCurrentGroup();
+                                            
+                                            for (int i = 0; i < Selection.activeGameObject.GetAllComponentsInChildren<DontStoreObjectInRoom>().Length; i++) {
+                                                Undo.RecordObject(Selection.activeGameObject.GetAllComponentsInChildren<DontStoreObjectInRoom>()[i], "unsg: Remove room scripts");
+                                                Undo.DestroyObjectImmediate(Selection.activeGameObject.GetAllComponentsInChildren<DontStoreObjectInRoom>()[i]);
+                                            }
+
+                                            Undo.CollapseUndoOperations(group);
                                         }
                                         GUI.color = Color.white;
                                     }
@@ -605,7 +662,6 @@ public class UnitySerializerWindow : EditorWindow {
                 }
                 else if (Selection.gameObjects.Length > 0) {
                     using (new HorizontalCentered()) {
-
                         GUILayout.Label("Selected Objects", bold);
                     }
                     GUILayout.Space(6);
@@ -613,18 +669,30 @@ public class UnitySerializerWindow : EditorWindow {
                         using (new Vertical()) {
                             using (new Horizontal()) {
                                 if (GUILayout.Button("Exlude from room")) {
-                                    Undo.RegisterSceneUndo("Change Identifiers");
-                                    foreach (var c in Selection.gameObjects.Where(g => g.GetComponent<DontStoreObjectInRoom>()))
-                                        Add(typeof(DontStoreObjectInRoom), c);
+                                    int group = Undo.GetCurrentGroup();
+                                    Undo.IncrementCurrentGroup();
+                                    var objects = Selection.gameObjects.Where(g => !g.GetComponent<DontStoreObjectInRoom>()).ToArray();
+                                    
+                                    Undo.RecordObjects(objects, "undo: Exclude from room");
+                                    foreach (var c in objects)
+                                        AddUndo(typeof(DontStoreObjectInRoom), c);
+
+                                    Undo.CollapseUndoOperations(group);
                                 }
 
                             }
                             using (new Horizontal()) {
                                 GUI.color = new Color(0.9f, 0.5f, 0.5f);
                                 if (GUILayout.Button("Remove")) {
-                                    Undo.RegisterSceneUndo("Change Identifiers");
-                                    foreach (var c in Selection.gameObjects.Cast<GameObject>().SelectMany(s => s.GetAllComponentsInChildren<DontStoreObjectInRoom>()))
-                                        DestroyImmediate(c);
+                                    int group = Undo.GetCurrentGroup();
+                                    Undo.IncrementCurrentGroup();
+                                    
+                                    while(Selection.gameObjects.Cast<GameObject>().SelectMany(s => s.GetAllComponentsInChildren<DontStoreObjectInRoom>()).Count() > 0) {
+                                        Undo.RecordObject(Selection.gameObjects.Cast<GameObject>().SelectMany(s => s.GetAllComponentsInChildren<DontStoreObjectInRoom>()).First(), "usng: Remove room");
+                                        Undo.DestroyObjectImmediate(Selection.gameObjects.Cast<GameObject>().SelectMany(s => s.GetAllComponentsInChildren<DontStoreObjectInRoom>()).First());
+                                    }
+
+                                    Undo.CollapseUndoOperations(group);
                                 }
                                 GUI.color = Color.white;
 
@@ -642,9 +710,17 @@ public class UnitySerializerWindow : EditorWindow {
                 GUI.color = Color.white;
                 using (new Horizontal()) {
                     if (GUILayout.Button("Create a new Room Manager")) {
-                        Undo.RegisterSceneUndo("Create room manager");
-                        var go = new GameObject();
-                        go.name = "Room Manager";
+                        var go = new GameObject("Room Manager");
+                        int group = Undo.GetCurrentGroup();
+                        Undo.RegisterCreatedObjectUndo(go, "usng: Create room manager");
+
+                        if(!FindObjectOfType<SaveGameManager>()) {
+                            var manager = new GameObject("Save Game Manager");
+                            Undo.RegisterCreatedObjectUndo(manager, "usng: Create room manager");
+                            manager.AddComponent<SaveGameManager>();
+                        }
+                        Undo.CollapseUndoOperations(group);
+
                         go.AddComponent<StoreInformation>();
                         go.AddComponent<RoomDataSaveGameStorage>();
                         go.AddComponent<Room>();
@@ -754,6 +830,15 @@ public class UnitySerializerWindow : EditorWindow {
                 DestroyImmediate(c);
         }
         go.AddComponent(componentType);
+    }
+
+    static void AddUndo(Type componentType, GameObject go) {
+        if (componentType.IsSubclassOf(typeof(UniqueIdentifier))) {
+            foreach (var c in go.GetComponents(typeof(UniqueIdentifier)).Cast<UniqueIdentifier>())
+                DestroyImmediate(c);
+        }
+        Undo.AddComponent(go, componentType);
+        //go.AddComponent(componentType);
     }
 
     // Called 100 times per second on all visible windows.

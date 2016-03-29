@@ -37,6 +37,7 @@ public class LevelLoader : MonoBehaviour
     public static event SerializedComponentDelegate LoadComponent = delegate { };
     public static event Action<Component> LoadedComponent = delegate { };
 
+    public static Color guiColor = Color.white;
 
     private void Awake()
     {
@@ -66,7 +67,8 @@ public class LevelLoader : MonoBehaviour
         {
             return;
         }
-        _pixel.SetPixel(0, 0, new Color(1, 1, 1, _alpha));
+        guiColor.a = _alpha;
+        _pixel.SetPixel(0, 0, guiColor);
         _pixel.Apply();
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), _pixel, ScaleMode.StretchToFill);
     }
