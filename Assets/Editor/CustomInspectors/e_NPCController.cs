@@ -51,6 +51,7 @@ public class e_NPCController : Editor {
 		
 		list.drawElementBackgroundCallback = (Rect rect, int index, bool isActive, bool isFocused) => {
 			if (!list.serializedProperty.isExpanded) return;
+			if (index < 0) return;
 
 			bool playOnce = list.serializedProperty.GetArrayElementAtIndex(index).FindPropertyRelative("playOnce").boolValue;
 
@@ -82,8 +83,16 @@ public class e_NPCController : Editor {
 
 	public override void OnInspectorGUI() {
 		base.OnInspectorGUI();
-		
+
 		script.headWeight = EditorGUILayout.CurveField("Head Weight", script.headWeight, Color.green, new Rect(0, 0, 180, 1));
+
+		EditorGUILayout.Space();
+
+		GUI.enabled = script.headBone != null;
+		if (GUILayout.Button("Set Idle Angle to current euler")) {
+			script.idleAngle = script.headBone.eulerAngles;
+		}
+		GUI.enabled = true;
 
 		EditorGUILayout.Space();
 

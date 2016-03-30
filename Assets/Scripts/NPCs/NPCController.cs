@@ -14,14 +14,14 @@ public class NPCController : MonoBehaviour {
 	public GameObject dialogPrefab;
 	public Transform headBone;
 	[Space]
-	public float headRange = 5;
-	public bool ignoreY = false;
+	public float headRange = 12;
+	public bool ignoreY = true;
 	[Space]
 	public bool lookAtWhileIdle = true;
-	public float idleAngle = 0;
-	public float forwardAngle = 0;
+	public Vector3 idleAngle;
+	public float forwardAngle;
 	[HideInInspector]
-	public AnimationCurve headWeight = AnimationCurve.Linear(0, 1, 1, 1);
+	public AnimationCurve headWeight = new AnimationCurve(new Keyframe(0, 1), new Keyframe(90, 1), new Keyframe(180, .5f));
 
 	[SerializeThis]
 	private NPCDialogBox dialogUI;
@@ -50,28 +50,37 @@ public class NPCController : MonoBehaviour {
 			Gizmos.DrawWireSphere(transform.position, headRange);
 		}
 
-		// Arrow for forward angle
-		UnityEditor.Handles.color = Color.blue;
-		UnityEditor.Handles.ArrowCap(-1, (headBone ?? transform).position, Quaternion.Euler(0, forwardAngle, 0), 1);
-		// Arrow for idle angle
-		UnityEditor.Handles.color = Color.green;
-		UnityEditor.Handles.ArrowCap(-1, (headBone ?? transform).position, Quaternion.Euler(0, idleAngle, 0), 1.5f);
+		if (headBone != null) {
+			// Arrow for idle angle
+			UnityEditor.Handles.color = Color.green;
+			UnityEditor.Handles.ArrowCap(-1, headBone.position, Quaternion.Euler(idleAngle), 1.5f);
+			// Arrow for forward angle
+			UnityEditor.Handles.color = Color.blue;
+			UnityEditor.Handles.ArrowCap(-1, headBone.position, Quaternion.Euler(0, forwardAngle, 0), 1);
+		}
 	}
 #endif
 
 	void Update() {
-		Quaternion lookDirection = GetRotation();
+		Quaternion lookDirection = LockRotation(GetRotation());
 
-		headBone.rotation = LockRotation(Quaternion.Lerp(headBone.rotation, lookDirection, Time.deltaTime * 5));
-		//headBone.rotation = Quaternion.RotateTowards(headBone.rotation, lookDirection, headSpeed * Time.deltaTime);
+		float cy = headBone.eulerAngles.y - forwardAngle;
+		float dy = lookDirection.eulerAngles.y - forwardAngle;
+		float ny = Mathf.Lerp(cy, dy, Time.deltaTime * 5) + forwardAngle;
+
+		headBone.rotation = Quaternion.Lerp(headBone.rotation, lookDirection, Time.deltaTime * 5);
+		headBone.eulerAngles = new Vector3(headBone.eulerAngles.x, ny, headBone.eulerAngles.z);
 	}
 
 	Quaternion LockRotation(Quaternion rotation) {
 		Vector3 euler = rotation.eulerAngles;
 
-		float angle = Mathf.Abs(Mathf.DeltaAngle(euler.y, forwardAngle)); // abs(-180 to 180) => 0 to 180
-		float weight = Mathf.Clamp(headWeight.Evaluate(angle),0f,1f);
+		// Lock it on the Y axis
+		var dAngle = Mathf.DeltaAngle(euler.y, forwardAngle);
+		float weight = Mathf.Clamp(headWeight.Evaluate(Mathf.Abs(dAngle)), 0f, 1f); // abs(-180 to 180) => 0 to 180
 		euler.y = Mathf.LerpAngle(euler.y, forwardAngle, 1 - weight);
+
+		// TODO: Lock the tilt too
 
 		return Quaternion.Euler(euler);
 	}
@@ -96,7 +105,7 @@ public class NPCController : MonoBehaviour {
 			}
 		}
 
-		return Quaternion.Euler(0, idleAngle, 0);
+		return Quaternion.Euler(idleAngle);
 	}
 
 	void OnInteractStart(PlayerController source) {

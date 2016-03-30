@@ -1195,7 +1195,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: e993090380aa67a45a48db2533f4c9f5, type: 2}
+  - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1299,7 +1299,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: e993090380aa67a45a48db2533f4c9f5, type: 2}
+  - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1351,7 +1351,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: e993090380aa67a45a48db2533f4c9f5, type: 2}
+  - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1429,7 +1429,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: e993090380aa67a45a48db2533f4c9f5, type: 2}
+  - {fileID: 2100000, guid: 96576062c5d6cca42b555caa5ea10229, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1815,6 +1815,7 @@ MonoBehaviour:
   interaction: {fileID: 11497342}
   hud: {fileID: 11495730}
   anim: {fileID: 11490434}
+  exitID: 0
 --- !u!114 &11411224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2659,6 +2660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 11410162}
   ac: {fileID: 9562896}
+  deadzone: 0.02
 --- !u!114 &11491000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2793,6 +2795,7 @@ MonoBehaviour:
   pickupPoint: {fileID: 419940}
   pickupRadius: 4
   ignoreYAxis: 0
+  talkingTo: {fileID: 0}
 --- !u!114 &11498176
 MonoBehaviour:
   m_ObjectHideFlags: 1
