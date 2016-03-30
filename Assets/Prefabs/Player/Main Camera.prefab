@@ -13,7 +13,6 @@ GameObject:
   - 124: {fileID: 12498984}
   - 81: {fileID: 8145494}
   - 114: {fileID: 11407148}
-  - 114: {fileID: 11429874}
   - 114: {fileID: 11403702}
   m_Layer: 0
   m_Name: Main Camera
@@ -46,8 +45,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106276}
-  m_LocalRotation: {x: 0.32758173, y: 0, z: 0, w: 0.9448229}
-  m_LocalPosition: {x: -26.68, y: 20.09435, z: 25.720108}
+  m_LocalRotation: {x: 0.3275821, y: 0, z: 0, w: 0.9448227}
+  m_LocalPosition: {x: 249.07, y: 19.803505, z: 75.920105}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 461026}
@@ -166,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: be41afa6-f5cd-4e57-a73e-b58fb0c72030
+  _id: c4853ec1-0787-4b62-a3e2-5ec22af0183c
   classId: 945d0d73-b3fc-4aba-b4fb-7303319e4a39
   StoreAllComponents: 1
   Components: []
@@ -185,18 +184,6 @@ MonoBehaviour:
   distance: 26
   offset: {x: 0, y: 4, z: 0}
   player: {fileID: 0}
---- !u!114 &11429874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53177813b3d5b0f44a1781938ab92451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  silhouetteColor: {r: 0.9686275, g: 0.8431373, b: 0.784, a: 0.5}
 --- !u!124 &12464518
 Behaviour:
   m_ObjectHideFlags: 1
