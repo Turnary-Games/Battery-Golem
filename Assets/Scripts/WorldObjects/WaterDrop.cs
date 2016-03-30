@@ -3,14 +3,14 @@ using System.Collections;
 
 public class WaterDrop : MonoBehaviour {
 
-    public GameObject particles;
+    public ParticleSystem particles;
 
     void OnTriggerEnter(Collider other)
     {
         particles.transform.SetParent(transform.parent);
-        particles.SetActive(true);
         particles.transform.localScale = Vector3.one;
-        Destroy(particles, 5f);
+		particles.Play();
+		Destroy(particles.gameObject, 5f);
 
         Destroy(gameObject, 0.1f);
     }

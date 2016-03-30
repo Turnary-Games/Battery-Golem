@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: env_flower_kit_flower1_tex
-  m_Shader: {fileID: 4800000, guid: c68a29b6f0b7fea4a9f0a26f84e098ba, type: 3}
+  m_Shader: {fileID: 4800000, guid: f9ff28a391ea4f74ab1be6e6d3bb2588, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: 2450
   stringTagMap:
     RenderType: Transparent
   m_SavedProperties:
@@ -128,6 +128,22 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _ShakeDisplacement
+        second: 0
+      data:
+        first:
+          name: _ShakeTime
+        second: 0.336
+      data:
+        first:
+          name: _ShakeWindspeed
+        second: 0.6
+      data:
+        first:
+          name: _ShakeBending
+        second: 0.445
     m_Colors:
       data:
         first:
