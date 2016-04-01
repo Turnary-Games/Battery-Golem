@@ -51,7 +51,7 @@ ModelImporter:
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -72,8 +72,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
-      firstFrame: 180
-      lastFrame: 200
+      firstFrame: 0
+      lastFrame: 205
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

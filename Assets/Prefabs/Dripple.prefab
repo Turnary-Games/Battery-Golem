@@ -61,7 +61,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 150.93486, y: 25.22, z: 80.4617}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495858}
@@ -87,7 +87,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100222}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 464296}
@@ -177,11 +177,11 @@ Projector:
   m_FieldOfView: 40
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 2
+  m_OrthographicSize: 1.3
   m_Material: {fileID: 2100000, guid: e30ff3588e719f34bbf0c66f22d97487, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 0
 --- !u!135 &13573510
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -594,11 +594,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
       minMaxState: 0
-    cnt0: 20
+    cnt0: 5
     cnt1: 30
     cnt2: 30
     cnt3: 30
-    cntmax0: 20
+    cntmax0: 10
     cntmax1: 30
     cntmax2: 30
     cntmax3: 30
