@@ -1388,10 +1388,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 370312707}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &371623909 stripped
+--- !u!4 &371623909
 Transform:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400006, guid: b2584d87bd4f21a418a42f72f0d4843b, type: 3}
   m_PrefabInternal: {fileID: 1908052473}
+  m_GameObject: {fileID: 1519275955}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1527466653}
+  m_RootOrder: 0
 --- !u!1 &376477214
 GameObject:
   m_ObjectHideFlags: 0
@@ -8266,6 +8274,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1515887923}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1519275955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1908052473}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 371623909}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1524321639
 GameObject:
   m_ObjectHideFlags: 0
@@ -8380,6 +8403,34 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1527466652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1908052473}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1527466653}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1527466653
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1908052473}
+  m_GameObject: {fileID: 1527466652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 371623909}
+  m_Father: {fileID: 1783342490}
+  m_RootOrder: 0
 --- !u!1 &1535032862
 GameObject:
   m_ObjectHideFlags: 0
@@ -8764,7 +8815,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb88c39cd312e44e911b274f8ff8855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - messages:
+    - text: Oh look, a Golem. How delightful!
+      turnHead: 1
+    - text: It's been such a long time since i've seen one of your kind.
+      turnHead: 1
+    - text: Welcome to our humble abode. Feel free to have a look around. Dont expect
+        much to happen right now though.
+      turnHead: 1
+    - text: "\u274COur boat broke down so one of my kids are trying to fix it."
+      turnHead: 0
+    - text: But please, make yourself at home.
+      turnHead: 0
+    playOnce: 1
+    nextIndex: 0
+    currIndex: 0
+  - messages:
+    - text: Not much happening with the boat broken.
+      turnHead: 1
+    - text: i was hoping to cross the stream today but i guess i will have to wait.
+      turnHead: 0
+    playOnce: 0
+    nextIndex: 0
+    currIndex: 0
   dialogPrefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
   headBone: {fileID: 756856547}
   headRange: 12
@@ -11649,7 +11723,7 @@ Transform:
   m_LocalPosition: {x: 290.0958, y: 0.05, z: 151.38722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 371623909}
+  - {fileID: 1527466653}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!1001 &1794134668
@@ -12255,7 +12329,76 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb88c39cd312e44e911b274f8ff8855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - messages:
+    - text: "\u274C So if i do this then perhaps...\n"
+      turnHead: 0
+    - text: Oh! Hello there!
+      turnHead: 1
+    - text: Good to see a new face around here.
+      turnHead: 1
+    - text: I'm Faluo, nice to meet you!
+      turnHead: 1
+    - text: I would love to show you around but i'm busy fixing our boat.
+      turnHead: 1
+    - text: Hey, you Golems are good with technology right?
+      turnHead: 1
+    - text: I have to go back to work but if you know a way to help fix the boat go
+        right ahead!
+      turnHead: 0
+    playOnce: 1
+    nextIndex: 0
+    currIndex: 0
+  - messages:
+    - text: "\u274CCould this work?"
+      turnHead: 0
+    - text: No, that would only make it worse.
+      turnHead: 0
+    playOnce: 0
+    nextIndex: 0
+    currIndex: 0
+  - messages:
+    - text: Hm...
+      turnHead: 0
+    playOnce: 0
+    nextIndex: 0
+    currIndex: 0
+  - messages:
+    - text: '...'
+      turnHead: 0
+    playOnce: 0
+    nextIndex: 0
+    currIndex: 0
+  - messages:
+    - text: Where does this fit?
+      turnHead: 0
+    playOnce: 0
+    nextIndex: 0
+    currIndex: 0
+  - messages:
+    - text: I think i am missing something...
+      turnHead: 0
+    - text: But what?
+      turnHead: 0
+    playOnce: 0
+    nextIndex: 0
+    currIndex: 0
+  - messages:
+    - text: Uh...
+      turnHead: 0
+    - text: That would definitely not work.
+      turnHead: 0
+    playOnce: 0
+    nextIndex: 0
+    currIndex: 0
+  - messages:
+    - text: Reminder to self.
+      turnHead: 0
+    - text: Never mix glue and color, results only in a mess.
+      turnHead: 0
+    playOnce: 0
+    nextIndex: 0
+    currIndex: 0
   dialogPrefab: {fileID: 145264, guid: f250a3532666a1448bc9669dc1da8f57, type: 2}
   headBone: {fileID: 189965881}
   headRange: 12
