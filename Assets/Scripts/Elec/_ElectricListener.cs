@@ -18,6 +18,7 @@ public sealed class ElectricMethods {
 	public readonly static string Interact = "Interact"; // args: PlayerController source
 }
 
+[DisallowMultipleComponent]
 public class _ElectricListener : Searchable {
 
 	public Collider col;
@@ -66,7 +67,10 @@ public class _ElectricListener : Searchable {
 				}
 			} else {
 				Gizmos.color = Color.cyan;
-				Gizmos.DrawWireCube(col.bounds.center, ignoreY ? new Vector3(col.bounds.size.x, 100f, col.bounds.size.z) : col.bounds.size);
+				Gizmos.DrawWireCube(ignoreY ? col.bounds.center.SetY(0) : col.bounds.center, ignoreY ? col.bounds.size.SetY(100f) : col.bounds.size);
+				if (ignoreY && col.bounds.size.y != 0) {
+					Gizmos.DrawWireCube(col.bounds.center.SetY(0), col.bounds.size.SetY(0));
+				}
 			}
 
         }
