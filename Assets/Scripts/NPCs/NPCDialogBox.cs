@@ -6,6 +6,7 @@ public class NPCDialogBox : MonoBehaviour {
 
 	public Text dialogText;
 	public Text continueText;
+    public Image continueIcon;
 	public float wordPerSecond = 1;
 	public float flashPeriod = 1;
 
@@ -30,13 +31,17 @@ public class NPCDialogBox : MonoBehaviour {
 		}
 
 		// Flash the continue text
-		Color c = continueText.color;
-		float B = 2 * Mathf.PI / flashPeriod;
+		//Color c = continueText.color;
+        Color c = continueIcon.color;
+
+        float B = 2 * Mathf.PI / flashPeriod;
 
 		c.a = -Mathf.Cos(B * Time.time) / 2 + .5f;
 
-		continueText.color = c;
-	}
+		//continueText.color = c;
+        continueIcon.color = c;
+
+    }
 
 	void LateUpdate() {
 		if (target)
