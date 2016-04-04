@@ -162,8 +162,4 @@ QualitySettings:
     asyncUploadTimeSlice: 2
     asyncUploadBufferSize: 4
     excludedTargetPlatforms: []
-  m_PerPlatformDefaultQuality:
-    Standalone: 5
-    Web: 5
-    WebGL: 3
-    Windows Store Apps: 5
+  m_PerPlatformDefaultQuality: {}
