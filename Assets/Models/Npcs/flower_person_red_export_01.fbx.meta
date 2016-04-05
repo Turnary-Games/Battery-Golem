@@ -110,7 +110,7 @@ ModelImporter:
     4300016: flower_person_base_05:spud
     4300018: flower_person_base_05:pPlane1
     4300020: flower_person_base_05:pPlane1
-    7400000: Take 001
+    7400000: npc@red@idle
     9500000: //RootNode
     13700000: flower_person_base_05:Arm_L
     13700002: flower_person_base_05:Arm_R
@@ -121,7 +121,7 @@ ModelImporter:
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -140,7 +140,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: npc@red@idle
       takeName: Take 001
       firstFrame: 2
       lastFrame: 71
