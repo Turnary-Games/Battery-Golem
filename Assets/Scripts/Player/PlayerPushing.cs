@@ -9,7 +9,8 @@ public class PlayerPushing : PlayerSubClass {
 	public float breakDist = 1f;
 	public float pushSpeed = 2.5f;
 
-	private List<PushingPoint> points = new List<PushingPoint>();
+	[DoNotSerialize]
+	public List<PushingPoint> points = new List<PushingPoint>();
 	public PushingPoint point {
 		get { return _point; }
 		set { var old = _point; _point = value; if (_point != old) OnPointChange(old); }
@@ -17,7 +18,7 @@ public class PlayerPushing : PlayerSubClass {
 	private PushingPoint _point;
 
 	public bool hasPoint { get { return point != null; } }
-	private bool pointBreak { get { return hasPoint ? Mathf.Abs(point.playerPos.y - transform.position.y) > breakDist : true; } }
+	public bool pointBreak { get { return hasPoint ? Mathf.Abs(point.playerPos.y - transform.position.y) > breakDist : false; } }
 
 	void Update() {
 		// Check if outside breaking distance (on the Y axis)
@@ -33,7 +34,7 @@ public class PlayerPushing : PlayerSubClass {
 
 		// Error checking
 		if (hasPoint) return;
-		if (!movement.grounded || !pointBreak) return;
+		if (!movement.grounded) return;
 
 		// Remove all invalid points. If for some reason they occur.
 		points.RemoveAll(p => p == null);

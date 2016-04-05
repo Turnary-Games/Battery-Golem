@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using ExtensionMethods;
 
 public class PlayerMovement : PlayerSubClass {
 
@@ -26,6 +27,7 @@ public class PlayerMovement : PlayerSubClass {
 	public LayerMask groundLayer;
 	[Range(0,90)]
 	public float slopeLimit = 30f;
+	public float slopeForce = 1f;
 	
 	[HideInInspector]
 	public Vector3 outsideMotion;
@@ -61,21 +63,38 @@ public class PlayerMovement : PlayerSubClass {
 	}
 
 	#region Movement algorithms
+	void OnCollisionStay(Collision col) {
+		float mult = 1 / col.contacts.Length;
+		foreach (ContactPoint contact in col.contacts) {
+			var angle = Vector3.Angle(contact.normal, Vector3.up);
+			if (angle > slopeLimit) {
+				print(angle);
+				body.velocity += contact.normal.SetY(0).normalized * slopeForce * mult * Time.fixedDeltaTime;
+			}
+		}
+	}
+
 	void RaycastGround() {
 		RaycastHit hit;
 
 		if (Physics.Raycast(transform.position + Vector3.up * groundDist, Vector3.down, out hit, groundDist*2, groundLayer)) {
 			grounded = Vector3.Angle(hit.normal, Vector3.up) <= slopeLimit;
-			
-			GameObject main = hit.collider.attachedRigidbody ? hit.collider.attachedRigidbody.gameObject : hit.collider.gameObject;
 
+			// Push away from the cliff
+			//outsideMotion = hit.normal.SetY(0) * slopeForce * (1 - Mathf.Abs(hit.normal.y));
+
+			GameObject main = hit.collider.attachedRigidbody ? hit.collider.attachedRigidbody.gameObject : hit.collider.gameObject;
+			
+			// Send touch events
 			_TouchListener listener = main.GetComponent<_TouchListener>();
 			if (listener) listener.Touch(this);
 
+			// Get the current platform
 			platform = main.GetComponent<_Platform>();
 
 			lastHit = hit;
 		} else {
+			outsideMotion = Vector3.zero;
 			grounded = false;
 			platform = null;
 			lastHit = null;
@@ -99,7 +118,7 @@ public class PlayerMovement : PlayerSubClass {
 
 		// Less control if airborne
 		if (!grounded)
-			motion = Vector3.Lerp(motion, body.velocity - outsideMotion, 0.97f);
+			motion = Vector3.Lerp(motion, body.velocity - outsideMotion, 0.975f);
 
 		// Apply acceleration to motion vector
 		motion = Vector3.MoveTowards(body.velocity - lastOutsideMotion, motion, moveSpeed * Time.deltaTime / topSpeedAfter);
