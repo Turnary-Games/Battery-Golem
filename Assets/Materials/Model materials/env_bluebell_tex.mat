@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: env_bluebell_tex
-  m_Shader: {fileID: 4800000, guid: c68a29b6f0b7fea4a9f0a26f84e098ba, type: 3}
+  m_Shader: {fileID: 4800000, guid: 3f92630ee6a7f684fad5c4c590251368, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_CustomRenderQueue: 2000
@@ -127,6 +127,22 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _ShakeDisplacement
+        second: 1
+      data:
+        first:
+          name: _ShakeTime
+        second: 1
+      data:
+        first:
+          name: _ShakeWindspeed
+        second: 1
+      data:
+        first:
+          name: _ShakeBending
+        second: 1
     m_Colors:
       data:
         first:
