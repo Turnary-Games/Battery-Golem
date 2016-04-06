@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class InsectController : MonoBehaviour {
 	
 	public Animator anim;
-	public List<GameObject> activateOnFlip = new List<GameObject>();
-	public List<GameObject> deactivateOnFlip = new List<GameObject>();
+	public List<PushingPoint> points = new List<PushingPoint>();
+	public BoxCollider deactivateOnFlip;
 
 	private States state = States.idle;
 
@@ -32,8 +32,9 @@ public class InsectController : MonoBehaviour {
 
 	// Invoked by the animation behaviour on the insect
 	public void OnInsectFlipped() {
-		activateOnFlip.ForEach(go => go.SetActive(true));
-		deactivateOnFlip.ForEach(go => go.SetActive(false));
+		points.ForEach(go => go.enabled = true);
+		if (deactivateOnFlip)
+			deactivateOnFlip.enabled = false;
 
 		state = States.flipped;
 		GetComponent<_ElectricListener>().acceptInteraction = false;

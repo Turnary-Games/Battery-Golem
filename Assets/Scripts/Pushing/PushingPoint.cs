@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using ExtensionMethods;
 
 public class PushingPoint : Searchable {
-
+	
 	public Rigidbody body;
 	public BoxCollider col;
 
@@ -16,6 +16,9 @@ public class PushingPoint : Searchable {
 	public Vector3 playerPos { get { return transform.TransformPoint(offset + (col ? col.center - Vector3.up * col.size.y / 2 : Vector3.zero)); } }
 	public Vector3 playerRot { get { var vec = VectorHelper.FromDegrees(rotation); return new Vector3(vec.x, 0, vec.y); } }
 
+	public override bool valid { get { return isActiveAndEnabled; } }
+
+	void Start() {}
 
 #if UNITY_EDITOR
 	void OnDrawGizmos() {

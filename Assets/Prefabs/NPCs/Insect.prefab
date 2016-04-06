@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &112914
 GameObject:
   m_ObjectHideFlags: 1
@@ -180,7 +180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &153410
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &164474
 GameObject:
   m_ObjectHideFlags: 1
@@ -226,6 +226,7 @@ GameObject:
   - 54: {fileID: 5475436}
   - 114: {fileID: 11417856}
   - 114: {fileID: 11401182}
+  - 114: {fileID: 11445410}
   m_Layer: 0
   m_Name: Insect
   m_TagString: Untagged
@@ -281,7 +282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &193566
 GameObject:
   m_ObjectHideFlags: 1
@@ -775,7 +776,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &6501624
@@ -800,8 +801,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.2159867, y: 1.6850681, z: 4.25}
-  m_Center: {x: -3.820343, y: 0.84253407, z: 0.00000022771019}
+  m_Size: {x: 2.6614897, y: 1.6850681, z: 4.25}
+  m_Center: {x: -4.0975494, y: 0.84253407, z: 0.00000024423298}
 --- !u!65 &6525172
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -894,20 +895,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 9592036}
-  activateOnFlip:
-  - {fileID: 153410}
-  - {fileID: 152256}
-  - {fileID: 102678}
-  - {fileID: 190756}
-  deactivateOnFlip:
-  - {fileID: 143022}
+  points:
+  - {fileID: 11440018}
+  - {fileID: 11467926}
+  - {fileID: 11473820}
+  - {fileID: 11472264}
+  deactivateOnFlip: {fileID: 6528488}
 --- !u!114 &11440018
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 153410}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d3e7aca5151faa4d8455815e652f9ce, type: 3}
   m_Name: 
@@ -918,13 +918,30 @@ MonoBehaviour:
   z: 0
   offset: {x: -0.3, y: 0, z: 0}
   rotation: 0
+--- !u!114 &11445410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4738358cae74042478b1ae4993c68f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 0}
+  raycastOffset: {x: 0, y: 0, z: 0}
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 1025
+  rayLength: 0.3
 --- !u!114 &11467926
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 152256}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d3e7aca5151faa4d8455815e652f9ce, type: 3}
   m_Name: 
@@ -941,7 +958,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190756}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d3e7aca5151faa4d8455815e652f9ce, type: 3}
   m_Name: 
@@ -958,7 +975,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102678}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d3e7aca5151faa4d8455815e652f9ce, type: 3}
   m_Name: 
