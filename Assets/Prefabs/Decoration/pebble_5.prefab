@@ -100,7 +100,7 @@ Projector:
   m_Enabled: 1
   serializedVersion: 2
   m_NearClipPlane: 0.01
-  m_FarClipPlane: 36.91
+  m_FarClipPlane: 5
   m_FieldOfView: 77.3
   m_AspectRatio: 1.26
   m_Orthographic: 1

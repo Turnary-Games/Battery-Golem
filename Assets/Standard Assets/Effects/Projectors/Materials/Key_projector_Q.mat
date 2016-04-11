@@ -26,14 +26,7 @@ Material:
         first:
           name: _Tex
         second:
-          m_Texture: {fileID: 2800000, guid: 60d897e7b1ccc1d45bd4300515a6bed0, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
-          name: _FalloffTex
-        second:
-          m_Texture: {fileID: 2800000, guid: 9ac99f5d8fe893d4b8ba2452501f3986, type: 3}
+          m_Texture: {fileID: 2800000, guid: 447304308b8c3fb4da42810f175f75fc, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -41,6 +34,13 @@ Material:
           name: _ShadowTex
         second:
           m_Texture: {fileID: 2800000, guid: 5237447c82c49e94ca9be395bbb334a5, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _FalloffTex
+        second:
+          m_Texture: {fileID: 2800000, guid: 9ac99f5d8fe893d4b8ba2452501f3986, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
