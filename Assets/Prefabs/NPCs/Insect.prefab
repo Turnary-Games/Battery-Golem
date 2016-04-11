@@ -75,6 +75,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 467000}
   - 95: {fileID: 9563364}
+  - 114: {fileID: 11467630}
   m_Layer: 0
   m_Name: npc_bug_export_01
   m_TagString: Untagged
@@ -391,13 +392,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164544}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 290.0958, y: -0.290844, z: 151.38722}
+  m_LocalPosition: {x: 289.82, y: -0.290844, z: 150.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458972}
+  - {fileID: 494284}
   - {fileID: 467000}
   - {fileID: 470810}
-  - {fileID: 494284}
   - {fileID: 434296}
   - {fileID: 417678}
   - {fileID: 472916}
@@ -441,7 +442,7 @@ Transform:
   - {fileID: 475604}
   - {fileID: 434132}
   m_Father: {fileID: 447164}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &470810
 Transform:
   m_ObjectHideFlags: 1
@@ -453,7 +454,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 447164}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &472916
 Transform:
   m_ObjectHideFlags: 1
@@ -504,7 +505,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 447164}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!23 &2324520
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -866,13 +867,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a84c7f67144f484182832e595d71b1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anim: {fileID: 0}
+  anim: {fileID: 9563364}
   points:
   - {fileID: 11440018}
   - {fileID: 11467926}
   - {fileID: 11473820}
   - {fileID: 11472264}
-  deactivateOnFlip: {fileID: 0}
+  deactivateOnFlip: {fileID: 6578426}
 --- !u!114 &11440018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -907,6 +908,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1025
   rayLength: 0.3
+--- !u!114 &11467630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0456c8653c86e8c4eb160702af9f8e67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11467926
 MonoBehaviour:
   m_ObjectHideFlags: 1

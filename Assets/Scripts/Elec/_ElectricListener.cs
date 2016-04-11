@@ -50,7 +50,7 @@ public class _ElectricListener : Searchable {
 				var s = col as SphereCollider;
 
 				if (ignoreY) {
-					Vector3 pos = s.transform.TransformPoint(s.center);
+					Vector3 pos = s.transform.TransformPoint(s.center).SetY(0);
 					float rad = s.radius * s.transform.lossyScale.MaxValue();
 
 					UnityEditor.Handles.color = Color.cyan;

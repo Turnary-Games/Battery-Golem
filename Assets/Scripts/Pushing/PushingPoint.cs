@@ -29,10 +29,10 @@ public class PushingPoint : Searchable {
 		Gizmos.DrawRay(playerPos + Vector3.up * 0.1f, Vector3.up);
 		Gizmos.DrawRay(playerPos + Vector3.up * 1.1f, playerRot / 2);
 		
-		if (col) {
-			Gizmos.color = body == null ? Color.red : Color.green;
-			Gizmos.DrawWireCube(transform.TransformPoint(col.center), transform.TransformVector(col.size));
-        }
+		//if (col) {
+		//	Gizmos.color = body == null ? Color.red : Color.green;
+		//	Gizmos.DrawWireCube(transform.TransformPoint(col.center), transform.TransformVector(col.size));
+		//}
 
 		if (z) {
 			UnityEditor.Handles.color = Color.blue;
