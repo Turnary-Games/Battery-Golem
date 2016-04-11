@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: env_grass_leaf_kit_grass_tex_02
-  m_Shader: {fileID: 4800000, guid: f9ff28a391ea4f74ab1be6e6d3bb2588, type: 3}
+  m_Shader: {fileID: 4800000, guid: 27ecf4eee1dd6dc4796868cffa860b20, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 2000
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -81,6 +81,10 @@ Material:
     m_Floats:
       data:
         first:
+          name: _Scale
+        second: 20
+      data:
+        first:
           name: _SrcBlend
         second: 1
       data:
@@ -143,6 +147,26 @@ Material:
         first:
           name: _ShakeBending
         second: 1
+      data:
+        first:
+          name: _MinY
+        second: 0
+      data:
+        first:
+          name: _xScale
+        second: 0.06
+      data:
+        first:
+          name: _yScale
+        second: 0.03
+      data:
+        first:
+          name: _Speed
+        second: 1
+      data:
+        first:
+          name: _WorldScale
+        second: 2
     m_Colors:
       data:
         first:

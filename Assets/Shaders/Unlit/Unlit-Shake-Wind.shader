@@ -53,13 +53,14 @@
 			float weight = sin(v.texcoord.y*PI*0.5);
 
 			if ((num) > 0.0) {
-				float3 worldPos = mul(_Object2World, v.vertex).xyz;
+				float3 worldPos = v.vertex.xyz;//mul(_Object2World, v.vertex).xyz;
 				float x = sin(worldPos.x / _WorldScale + (_Time.y*_Speed)) * weight*(num - _MinY) * _Scale * 0.01;
 				float y = sin(worldPos.y / _WorldScale + (_Time.y*_Speed)) * weight*(num - _MinY) * _Scale * 0.01;
 
 				v.vertex.x += x * _xScale;
 				v.vertex.y += y * _yScale;
 			}
+
 		}
 
 		void surf (Input IN, inout SurfaceOutput o) {

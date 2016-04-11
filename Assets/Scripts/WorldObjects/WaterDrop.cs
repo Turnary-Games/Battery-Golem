@@ -10,7 +10,7 @@ public class WaterDrop : MonoBehaviour {
         particles.transform.SetParent(transform.parent);
         particles.transform.localScale = Vector3.one;
 		particles.Play();
-		Destroy(particles.gameObject, 5f);
+		Destroy(particles.gameObject, particles.startLifetime);
 
         Destroy(gameObject, 0.1f);
     }

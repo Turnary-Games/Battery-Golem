@@ -14,6 +14,7 @@ GameObject:
   - 81: {fileID: 8145494}
   - 114: {fileID: 11407148}
   - 114: {fileID: 11403702}
+  - 114: {fileID: 11433468}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -165,7 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: be41afa6-f5cd-4e57-a73e-b58fb0c72030
+  _id: 
   classId: 945d0d73-b3fc-4aba-b4fb-7303319e4a39
   StoreAllComponents: 1
   Components: []
@@ -184,6 +185,18 @@ MonoBehaviour:
   distance: 26
   offset: {x: 0, y: 4, z: 0}
   player: {fileID: 0}
+--- !u!114 &11433468
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53177813b3d5b0f44a1781938ab92451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  silhouetteColor: {r: 1, g: 0.791, b: 1, a: 0.291}
 --- !u!124 &12464518
 Behaviour:
   m_ObjectHideFlags: 1
