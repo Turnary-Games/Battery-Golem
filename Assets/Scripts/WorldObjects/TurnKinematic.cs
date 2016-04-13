@@ -20,7 +20,7 @@ public class TurnKinematic : MonoBehaviour {
 				done = true;
 
 				foreach(PushingPoint point in GetComponentsInChildren<PushingPoint>(true)) {
-					point.gameObject.SetActive(true);
+					point.enabled = true;
 				}
 
 				body.velocity = Vector3.zero;

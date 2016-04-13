@@ -408,8 +408,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164544}
-  m_LocalRotation: {x: 0, y: 0.03749626, z: 0, w: 0.9992968}
-  m_LocalPosition: {x: 290.44, y: -0.290844, z: 148.79}
+  m_LocalRotation: {x: 0, y: -0.9997265, z: 0, w: -0.023388004}
+  m_LocalPosition: {x: 285.36, y: -0.290844, z: 157.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458972}
@@ -977,7 +977,7 @@ MonoBehaviour:
   x: 1
   z: 0
   offset: {x: -0.3, y: 0, z: 0}
-  rotation: 180
+  rotation: 0
 --- !u!114 &11472264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -994,7 +994,7 @@ MonoBehaviour:
   x: 0
   z: 1
   offset: {x: -0.3, y: 0, z: 0}
-  rotation: -90
+  rotation: 0
 --- !u!114 &11473820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1011,7 +1011,7 @@ MonoBehaviour:
   x: 0
   z: 1
   offset: {x: -0.2, y: 0, z: 0}
-  rotation: 90
+  rotation: 0
 --- !u!119 &11994306
 Projector:
   m_ObjectHideFlags: 1
