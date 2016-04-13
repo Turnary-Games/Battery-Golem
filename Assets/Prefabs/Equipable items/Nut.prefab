@@ -61,10 +61,25 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 412676}
+  - 64: {fileID: 6434912}
+  m_Layer: 0
+  m_Name: collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &196628
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 493572}
   - 33: {fileID: 3340592}
   - 23: {fileID: 2359604}
   - 95: {fileID: 9526834}
-  - 64: {fileID: 6434912}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -79,11 +94,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187928}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 448798}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!4 &448798
 Transform:
   m_ObjectHideFlags: 1
@@ -91,12 +106,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -55.38, y: -6.807, z: -34.6}
   m_LocalScale: {x: 1.2379459, y: 0.75540596, z: 1.2379462}
   m_Children:
   - {fileID: 466900}
-  - {fileID: 412676}
+  - {fileID: 493572}
   - {fileID: 456230}
+  - {fileID: 412676}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &456230
@@ -123,6 +139,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 448798}
   m_RootOrder: 0
+--- !u!4 &493572
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196628}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_Children: []
+  m_Father: {fileID: 448798}
+  m_RootOrder: 1
 --- !u!23 &2330890
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -154,7 +182,7 @@ MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187928}
+  m_GameObject: {fileID: 196628}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -180,7 +208,7 @@ MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187928}
+  m_GameObject: {fileID: 196628}
   m_Mesh: {fileID: 4300000, guid: 213e59a55cdf39445b0b4dc7a3f7ccda, type: 3}
 --- !u!33 &3358810
 MeshFilter:
@@ -222,7 +250,7 @@ Animator:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187928}
+  m_GameObject: {fileID: 196628}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 213e59a55cdf39445b0b4dc7a3f7ccda, type: 3}
   m_Controller: {fileID: 0}
@@ -241,35 +269,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 109596}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c71a17cb1e4a8d4d920399ebf4367ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a8e5f8d893fe1942b2d91b4ef8d2f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: Unnamned
-  body: {fileID: 5488086}
-  effects:
-  - type: 2
-    effect: {fileID: 0}
-    effectOnPickup: 0
-    effectOnDrop: 0
-    toggleGameObject: {fileID: 0}
-    toggleOnPickup: 0
-    toggleOnDrop: 0
-    resetTransform: {fileID: 448798}
-    resetRelativeTo: 1
-    resetOnPickup:
-      position: 0
-      rotation: 1
-      scale: 0
-    resetOnDrop:
-      position: 0
-      rotation: 0
-      scale: 0
-  startDisabled: 0
-  icon: {fileID: 0}
+  id: -1
+  itemName: Nut
+  startDisabled: 1
   targetSlot: -1
-  unlocked: 0
   canBeElectrified: 0
   nearbyVisual: {fileID: 2330890}
+  body: {fileID: 0}
 --- !u!114 &11428852
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: d4e8e540-74ae-45e5-a2a8-09f254e2faf6
+  _id: d9402312-a213-4fcf-98b3-84745951d5c1
   classId: aff7634f-13bb-44fc-b067-cfc55988e088
   StoreAllComponents: 1
   Components: []
@@ -298,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 30cdb2a6-da95-430d-8000-074378083c5d
+  _id: 4585d232-49a4-4cca-bfc4-5f1e83b4d83e
   classId: 62f480d9-cba7-4bb4-b0f6-721104fca1fc
 --- !u!114 &11487588
 MonoBehaviour:

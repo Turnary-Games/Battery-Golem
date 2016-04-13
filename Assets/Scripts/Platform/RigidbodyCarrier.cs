@@ -18,8 +18,8 @@ public class RigidbodyCarrier : MonoBehaviour {
 	void OnTouchStart(Touch touch) {
 		if (touch == null || touch.source == null) return;
 
-		if (touch.source is _Equipable) {
-			var item = touch.source as _Equipable;
+		if (touch.source is _Item) {
+			var item = touch.source as _Item;
 			bodies.Add(item.body);
 		} else if (touch.source is TouchTransmitter) {
 			var transmitter = touch.source as TouchTransmitter;
@@ -28,7 +28,7 @@ public class RigidbodyCarrier : MonoBehaviour {
     }
 
     void OnTouchEnd(Touch touch) {
-        var item = touch.source as _Equipable;
+        var item = touch.source as _Item;
         if (item != null && bodies.Contains(item.body)) {
             bodies.Remove(item.body);
             item.body.velocity = Vector3.zero;
@@ -44,7 +44,7 @@ public class RigidbodyCarrier : MonoBehaviour {
 	}
 
     void OnTouch(Touch touch) {
-        var item = touch.source as _Equipable;
+        var item = touch.source as _Item;
 		if (item != null && bodies.Contains(item.body)) {
 			item.body.velocity = body.velocity;
 			return;

@@ -12,7 +12,7 @@ public class PlayerAnimation : PlayerSubClass {
 			ac.SetBool("CoreItem", true);
 		} else if (inventory && inventory.equipped) {
 			ac.SetBool("ArmsUp", inventory.equipped);
-			ac.SetBool("CoreItem", inventory.equipped && inventory.equipped.isCore);
+			ac.SetBool("CoreItem", inventory.equipped && inventory.equipped is _CoreItem);
 		} else {
 			bool up = interaction && interaction.isElectrifying;
 			ac.SetBool("ArmsUp", up);

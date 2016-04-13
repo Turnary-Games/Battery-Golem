@@ -21,7 +21,7 @@ public class PlayerInteraction : PlayerSubClass {
 	public NPCController talkingTo;
 
 	[SerializeThis]
-	private _Equipable lastHover;
+	private _Item lastHover;
 	private bool elecDown;
 	private bool inteDown;
 
@@ -71,7 +71,7 @@ public class PlayerInteraction : PlayerSubClass {
 
 	void Update() {
 		// Visualization
-		_Equipable hover = GetItemInRange();
+		_Item hover = GetItemInRange();
 
 		if (hover != lastHover) {
 			// Hover changed
@@ -104,7 +104,7 @@ public class PlayerInteraction : PlayerSubClass {
 				pushing.point = null;
 			} else {
 				// Try to grab the nearest item
-				_Equipable item = GetItemInRange();
+				_Item item = GetItemInRange();
 				if (!inventory.equipped && item != null)
 					inventory.Equip(item);
 				else {
@@ -148,12 +148,12 @@ public class PlayerInteraction : PlayerSubClass {
 
 	#region Picking up/Dropping items & Interacting
 
-	public bool IsItemInRange(_Equipable item) {
+	public bool IsItemInRange(_Item item) {
 		return item.GetDistance(pickupPoint.position) <= pickupRadius;
 	}
 
-	public _Equipable GetItemInRange() {
-		return Searchable.GetClosest<_Equipable>(pickupPoint.position, pickupRadius, controller.characterCenter, ignoreYAxis).obj;
+	public _Item GetItemInRange() {
+		return Searchable.GetClosest<_Item>(pickupPoint.position, pickupRadius, controller.characterCenter, ignoreYAxis).obj;
 	}
 
 	#endregion

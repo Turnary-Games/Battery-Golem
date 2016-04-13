@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ExtensionMethods;
 
-public class Fan : _Equipable {
+public class Fan : _CoreItem {
 
 	[Header("Fan fields")]
 

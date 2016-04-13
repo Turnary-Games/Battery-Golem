@@ -27,8 +27,8 @@ public class PlayerHUD : PlayerSubClass {
 	
 	[HideInInspector]
 	public bool isOpen;
-	[SerializeThis] // serialize it, but don't show it in the inspector
-	private Animator[] leaves = new Animator[4];
+	[HideInInspector] // serialize it, but don't show it in the inspector
+	public Animator[] leaves = new Animator[4];
 
 	/// <summary>
 	/// Screen point of the center.
@@ -181,7 +181,7 @@ public class PlayerHUD : PlayerSubClass {
 				clone.transform.localEulerAngles = new Vector3(0, 0, -slot * 90);
 
 				Animator anim = clone.GetComponentInChildren<Animator>();
-				_Equipable item = inventory.coreItems.Get(slot);
+				_CoreItem item = inventory.coreItems.Get(slot);
 
 				anim.SetBool("Open", item != null && item.unlocked);
 				anim.SetBool("Slow", false);

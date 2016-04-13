@@ -106,7 +106,10 @@ public class PlayerMovement : PlayerSubClass {
 		// Motion to apply to the character
 		Vector3 motion = Vector3.zero;
 
-		if (pushing && pushing.point != null)
+		if (hud.isOpen)
+			// Dont move if inventory open
+			motion = Vector3.zero;
+		else if (pushing && pushing.point != null)
 			// Move according to the pushing point
 			motion = pushing.GetMovement();
 		else if (interaction && interaction.talkingTo)

@@ -10,15 +10,22 @@ public class CameraController : MonoBehaviour {
 	public Vector3 offset;
 	
 	[HideInInspector]
-	public PlayerController player;
+	public Transform player;
 
 #if UNITY_EDITOR
 	void OnDrawGizmosSelected() {
-		player = player ?? FindObjectOfType<PlayerController>();
-		if (player == null) return;
+		PlayerController pc;
+		DefaultSpawnPoint ds;
+
+		pc = FindObjectOfType<PlayerController>();
+		if (pc == null) {
+			ds = FindObjectOfType<DefaultSpawnPoint>();
+			if (ds == null) return;
+			else player = ds.transform;
+		} else player = pc.transform;
 
 		Gizmos.color = Color.red;
-		Vector3 p = player.transform.position + offset - transform.forward * distance;
+		Vector3 p = player.position + offset - transform.forward * distance;
 
 		Camera cam = GetComponent<Camera>();
 		if (cam) {
@@ -39,9 +46,9 @@ public class CameraController : MonoBehaviour {
 			Gizmos.DrawLine(f4, f1);
 		}
 
-		Gizmos.DrawWireCube(player.transform.position, new Vector3(1, 0, 1));
-		Gizmos.DrawRay(player.transform.position, offset);
-		Gizmos.DrawRay(player.transform.position + offset, -transform.forward * distance);
+		Gizmos.DrawWireCube(player.position, new Vector3(1, 0, 1));
+		Gizmos.DrawRay(player.position, offset);
+		Gizmos.DrawRay(player.position + offset, -transform.forward * distance);
 		
 	}
 
@@ -53,11 +60,15 @@ public class CameraController : MonoBehaviour {
 	}
 #endif
 
+	void Start() {
+		player = FindObjectOfType<PlayerController>().transform;
+	}
+
 	// Update is called once per frame
 	void LateUpdate () {
-		player = player ?? FindObjectOfType<PlayerController>();
+		player = player ?? FindObjectOfType<PlayerController>().transform;
 		if (player == null) return;
 
-		transform.position = Vector3.Lerp(transform.position, player.transform.position + offset - transform.forward * distance, speed * Time.deltaTime);
+		transform.position = Vector3.Lerp(transform.position, player.position + offset - transform.forward * distance, speed * Time.deltaTime);
 	}
 }

@@ -4,7 +4,7 @@ using ExtensionMethods;
 
 public class Gate : MonoBehaviour {
 
-	public CogDropoffStation station;
+	public _DropoffStation station;
 	public Animator anim;
 	public ParticleSystem[] particles;
 	public Cog[] cogs;

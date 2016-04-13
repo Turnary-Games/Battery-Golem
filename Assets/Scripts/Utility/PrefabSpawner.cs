@@ -42,7 +42,7 @@ public class PrefabSpawner : MonoBehaviour {
 				if (offsetRelativeTo == Space.World) pos += spawnOffset;
 				else if (offsetRelativeTo == Space.Self) pos += transform.TransformVector(spawnOffset);
 
-				GameObject clone = Instantiate(prefab, pos, transform.rotation) as GameObject;
+				GameObject clone = Instantiate(prefab, pos, prefab.transform.rotation) as GameObject;
 				clone.transform.SetParent(transform);
 			}
 		}
