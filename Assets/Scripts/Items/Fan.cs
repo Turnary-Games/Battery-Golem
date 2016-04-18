@@ -13,9 +13,7 @@ public class Fan : _CoreItem {
 	public float power = 1;
 
 	public ParticleSystem particles;
-
-	// Reset to lastY when dropped. Is set when picked up
-	private float lastY;
+	public RotateEffect rotator;
 
 	protected override void Start() {
 		base.Start();
@@ -38,10 +36,12 @@ public class Fan : _CoreItem {
 
 	void OnElectrifyStart() {
 		SetParticleEmission(true);
+		rotator.enabled = true;
 	}
 
 	void OnElectrifyEnd() {
 		SetParticleEmission(false);
+		rotator.enabled = false;
 	}
 
 	void SetParticleEmission(bool state) {

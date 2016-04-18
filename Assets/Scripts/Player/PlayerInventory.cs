@@ -80,17 +80,6 @@ public class PlayerInventory : PlayerSubClass {
 
     #endregion
 
-    #region Dropoff at station
-    // Dropoff at dropoff-station
-    public void Dropoff(_DropoffStation station) {
-		_Item item = equipped;
-		if (item != null && !(item is _CoreItem)) {
-			Unequip();
-			station.AddItem(item);
-		}
-    }
-    #endregion
-
     #region Parenting
 	void MoveToEquipped(_Item item) {
 		equipped = item;

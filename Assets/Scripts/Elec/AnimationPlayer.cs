@@ -22,7 +22,7 @@ public class AnimationPlayer : MonoBehaviour {
 	void Update() {
         if (fullSpeedAfter <= 0) speed = active ? 1 : 0;
         else speed = Mathf.MoveTowards(speed, active ? 1 : 0, Time.deltaTime / fullSpeedAfter);
-
+		
         anim.SetFloat(parameter, speed * speedMultiplier);
     }
 

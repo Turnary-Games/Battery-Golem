@@ -211,7 +211,7 @@ Transform:
   m_LocalScale: {x: 2.1425102, y: 1.2735301, z: 1.7220004}
   m_Children: []
   m_Father: {fileID: 453214}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!4 &401138
 Transform:
   m_ObjectHideFlags: 1
@@ -219,7 +219,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.136, z: 0}
+  m_LocalPosition: {x: 0, y: -1.136, z: 0.67}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 453214}
@@ -293,11 +293,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 151600}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0012697852, y: 0.0085196495, z: 0.40657207}
-  m_LocalScale: {x: 1.8143669, y: 1.8143669, z: 1.8143669}
+  m_LocalPosition: {x: 0, y: 2.077986, z: 0.40814194}
+  m_LocalScale: {x: 1.8143668, y: 1.8143672, z: 1.8143668}
   m_Children: []
-  m_Father: {fileID: 470182}
-  m_RootOrder: 3
+  m_Father: {fileID: 453214}
+  m_RootOrder: 0
 --- !u!4 &453214
 Transform:
   m_ObjectHideFlags: 1
@@ -308,6 +308,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children:
+  - {fileID: 434380}
   - {fileID: 470182}
   - {fileID: 400414}
   m_Father: {fileID: 401138}
@@ -319,7 +320,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00000020853828, y: 0.059999943, z: 0.6399994}
+  m_LocalPosition: {x: -0.00000020853828, y: 0.059999943, z: 1.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 408704}
@@ -338,17 +339,16 @@ Transform:
   - {fileID: 424730}
   - {fileID: 424836}
   - {fileID: 404706}
-  - {fileID: 434380}
   m_Father: {fileID: 453214}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!4 &485918
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197074}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33.95, y: 1.5, z: 47.161682}
+  m_LocalRotation: {x: -0.085107215, y: -0.7938545, z: -0.20043924, w: 0.5677817}
+  m_LocalPosition: {x: 270.7, y: 9.33, z: 92.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401138}
@@ -365,7 +365,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: fc04024d5b1f3ec49937fb179a8563d8, type: 2}
+  - {fileID: 2100000, guid: 6fa612e63d8d314449cbea7ceeeba3fa, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -391,7 +391,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: fc04024d5b1f3ec49937fb179a8563d8, type: 2}
+  - {fileID: 2100000, guid: 6fa612e63d8d314449cbea7ceeeba3fa, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -417,7 +417,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: fc04024d5b1f3ec49937fb179a8563d8, type: 2}
+  - {fileID: 2100000, guid: 6fa612e63d8d314449cbea7ceeeba3fa, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -443,7 +443,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: fc04024d5b1f3ec49937fb179a8563d8, type: 2}
+  - {fileID: 2100000, guid: 6fa612e63d8d314449cbea7ceeeba3fa, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -469,7 +469,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: fc04024d5b1f3ec49937fb179a8563d8, type: 2}
+  - {fileID: 2100000, guid: 6fa612e63d8d314449cbea7ceeeba3fa, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -563,18 +563,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c89ac6f0332c64283aea161295defe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 0
   itemName: Handheld fan
-  body: {fileID: 5482988}
-  effects: []
   startDisabled: 1
-  icon: {fileID: 21300000, guid: 02fb175cef30acf4d84738e642d7f81c, type: 3}
   targetSlot: 0
-  unlocked: 0
   canBeElectrified: 1
   nearbyVisual: {fileID: 0}
+  body: {fileID: 5482988}
+  slot: 0
+  unlocked: 0
   speed: 5.02
   power: 4
   particles: {fileID: 19806932}
+  rotator: {fileID: 11490212}
 --- !u!114 &11464738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -596,7 +597,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 157404}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c7ba5b0227561e45a2c1b827a0057c9, type: 3}
   m_Name: 

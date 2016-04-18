@@ -28,7 +28,6 @@ GameObject:
   - 4: {fileID: 466900}
   - 33: {fileID: 3358810}
   - 23: {fileID: 2330890}
-  - 114: {fileID: 11442804}
   m_Layer: 0
   m_Name: highlight
   m_TagString: Untagged
@@ -106,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55.38, y: -6.807, z: -34.6}
+  m_LocalPosition: {x: 0.8, y: 0.05, z: 4.73}
   m_LocalScale: {x: 1.2379459, y: 0.75540596, z: 1.2379462}
   m_Children:
   - {fileID: 466900}
@@ -224,7 +223,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109596}
   serializedVersion: 2
-  m_Mass: 1.7
+  m_Mass: 3
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -274,7 +273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: -1
   itemName: Nut
-  startDisabled: 1
+  startDisabled: 0
   targetSlot: -1
   canBeElectrified: 0
   nearbyVisual: {fileID: 2330890}
@@ -291,24 +290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: d9402312-a213-4fcf-98b3-84745951d5c1
+  _id: aaf7ec36-9fdb-4993-a6a1-99003dda7a0f
   classId: aff7634f-13bb-44fc-b067-cfc55988e088
   StoreAllComponents: 1
   Components: []
---- !u!114 &11442804
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efc7f0a036bc94ddf9e7626ffd54921d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: 4585d232-49a4-4cca-bfc4-5f1e83b4d83e
-  classId: 62f480d9-cba7-4bb4-b0f6-721104fca1fc
 --- !u!114 &11487588
 MonoBehaviour:
   m_ObjectHideFlags: 1
