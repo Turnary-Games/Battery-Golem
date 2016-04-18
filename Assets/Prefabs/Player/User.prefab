@@ -1989,6 +1989,7 @@ MonoBehaviour:
   parent: {fileID: 11410162}
   breakDist: 100
   pushSpeed: 4
+  points: []
 --- !u!114 &11434416
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2630,8 +2631,9 @@ MonoBehaviour:
   groundDist: 0.3
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1537
+    m_Bits: 3585
   slopeLimit: 30
+  slopeForce: 1
   outsideMotion: {x: 0, y: 0, z: 0}
   grounded: 0
   platform: {fileID: 0}
@@ -2734,6 +2736,11 @@ MonoBehaviour:
   leavesParent: {fileID: 475520}
   leavesPrefab: {fileID: 113076, guid: 25b546f7d91890247a24978c4554e683, type: 2}
   isOpen: 0
+  leaves:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &11496930
 MonoBehaviour:
   m_ObjectHideFlags: 1

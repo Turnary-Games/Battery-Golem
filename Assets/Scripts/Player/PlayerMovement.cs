@@ -68,7 +68,6 @@ public class PlayerMovement : PlayerSubClass {
 		foreach (ContactPoint contact in col.contacts) {
 			var angle = Vector3.Angle(contact.normal, Vector3.up);
 			if (angle > slopeLimit) {
-				print(angle);
 				body.velocity += contact.normal.SetY(0).normalized * slopeForce * mult * Time.fixedDeltaTime;
 			}
 		}

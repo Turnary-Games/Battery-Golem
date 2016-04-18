@@ -88,7 +88,7 @@ public class PlayerController : SingletonBase<PlayerController> {
 
 		if (exitID >= 0) {
 			exit = SpawnPoint.GetFromID(exitID);
-			exitID = -1;
+			//exitID = -1;
 			if (exit)
 				goto UseSpawnPoint;
 			else

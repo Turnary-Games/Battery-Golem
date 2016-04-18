@@ -37,9 +37,12 @@ public class RoomManager
 			var loader = LevelSerializer.LoadSavedLevel(rooms[name]);
 			loader.showGUI = showGUI;
 			loader.whenCompleted = (obj, list)=>{
-				foreach(var gameObject in list)
-				{
-					gameObject.SendMessage("OnRoomWasLoaded", SendMessageOptions.DontRequireReceiver);
+				//foreach(var gameObject in list)
+				//{
+				//	gameObject.SendMessage("OnRoomWasLoaded", SendMessageOptions.DontRequireReceiver);
+				//}
+				foreach (var go in GameObject.FindObjectsOfType<GameObject>()) {
+					go.SendMessage("OnRoomWasLoaded", SendMessageOptions.DontRequireReceiver);
 				}
 			};
 		}

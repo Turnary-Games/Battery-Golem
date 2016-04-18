@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 417678}
   - 65: {fileID: 6583822}
   - 114: {fileID: 11473820}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: push point 3
   m_TagString: Push point
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 454070}
   - 33: {fileID: 3366228}
   - 23: {fileID: 2371916}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder3 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 434132}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Legs_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - 4: {fileID: 439088}
   - 33: {fileID: 3316726}
   - 23: {fileID: 2342030}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder2 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   - 4: {fileID: 467000}
   - 95: {fileID: 9563364}
   - 114: {fileID: 11467630}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: npc_bug_export_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 458972}
   - 135: {fileID: 13558506}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,9 +109,24 @@ GameObject:
   - 4: {fileID: 493882}
   - 33: {fileID: 3310734}
   - 23: {fileID: 2379388}
-  - 65: {fileID: 6578426}
   m_Layer: 0
   m_Name: body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &129434
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 421314}
+  - 65: {fileID: 6575350}
+  m_Layer: 12
+  m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,7 +142,7 @@ GameObject:
   - 4: {fileID: 407866}
   - 33: {fileID: 3379648}
   - 23: {fileID: 2324520}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +158,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 494284}
   - 65: {fileID: 6597508}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +175,7 @@ GameObject:
   - 4: {fileID: 434296}
   - 65: {fileID: 6525172}
   - 114: {fileID: 11467926}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: push point 2
   m_TagString: Push point
   m_Icon: {fileID: 0}
@@ -177,7 +192,7 @@ GameObject:
   - 4: {fileID: 470810}
   - 65: {fileID: 6501624}
   - 114: {fileID: 11440018}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: push point 1
   m_TagString: Push point
   m_Icon: {fileID: 0}
@@ -196,7 +211,7 @@ GameObject:
   - 114: {fileID: 11417856}
   - 114: {fileID: 11401182}
   - 114: {fileID: 11445410}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Insect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,7 +226,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 475604}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Legs_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +243,7 @@ GameObject:
   - 4: {fileID: 403404}
   - 33: {fileID: 3315688}
   - 23: {fileID: 2346342}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +260,7 @@ GameObject:
   - 4: {fileID: 454906}
   - 119: {fileID: 11994306}
   - 114: {fileID: 11419280}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: BlobShadowProjector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +277,7 @@ GameObject:
   - 4: {fileID: 472916}
   - 65: {fileID: 6511838}
   - 114: {fileID: 11472264}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: push point 4
   m_TagString: Push point
   m_Icon: {fileID: 0}
@@ -279,7 +294,7 @@ GameObject:
   - 4: {fileID: 422326}
   - 33: {fileID: 3342524}
   - 23: {fileID: 2388220}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,7 +311,7 @@ GameObject:
   - 4: {fileID: 401410}
   - 33: {fileID: 3332574}
   - 23: {fileID: 2389706}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: pCylinder3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,6 +366,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 447164}
   m_RootOrder: 5
+--- !u!4 &421314
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 493882}
+  m_RootOrder: 0
 --- !u!4 &422326
 Transform:
   m_ObjectHideFlags: 1
@@ -408,8 +435,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164544}
-  m_LocalRotation: {x: 0, y: -0.9997265, z: 0, w: -0.023388004}
-  m_LocalPosition: {x: 285.36, y: -0.290844, z: 157.18}
+  m_LocalRotation: {x: 0, y: 0.03749626, z: 0, w: 0.9992968}
+  m_LocalPosition: {x: 287.76, y: -0.290844, z: 151.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458972}
@@ -521,7 +548,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00000003393993, y: 0.5611686, z: -0.026753398}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 421314}
   m_Father: {fileID: 467000}
   m_RootOrder: 0
 --- !u!4 &494284
@@ -650,7 +678,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: f34befd69b31d914cbf2b4352271fd7e, type: 2}
+  - {fileID: 2100000, guid: 705175c69c5bad543b6fc48e44f0ba06, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -818,12 +846,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4550786, y: 1.6850681, z: 4.91}
   m_Center: {x: -3.44, y: 0.84253407, z: 0}
---- !u!65 &6578426
+--- !u!65 &6575350
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 129340}
+  m_GameObject: {fileID: 129434}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
@@ -903,7 +931,8 @@ MonoBehaviour:
   - {fileID: 11467926}
   - {fileID: 11473820}
   - {fileID: 11472264}
-  deactivateOnFlip: {fileID: 6578426}
+  deactivateOnFlip: {fileID: 0}
+  slideForce: 25
 --- !u!114 &11419280
 MonoBehaviour:
   m_ObjectHideFlags: 1

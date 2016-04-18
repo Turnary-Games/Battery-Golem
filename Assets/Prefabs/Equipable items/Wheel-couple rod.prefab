@@ -10,7 +10,8 @@ GameObject:
   - 4: {fileID: 428412}
   - 33: {fileID: 3312294}
   - 23: {fileID: 2304834}
-  m_Layer: 0
+  - 65: {fileID: 6526478}
+  m_Layer: 11
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +28,8 @@ GameObject:
   - 4: {fileID: 444852}
   - 33: {fileID: 3389616}
   - 23: {fileID: 2351648}
-  m_Layer: 0
+  - 114: {fileID: 11431706}
+  m_Layer: 11
   m_Name: highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +46,8 @@ GameObject:
   - 4: {fileID: 454206}
   - 54: {fileID: 5421218}
   - 114: {fileID: 11414866}
-  m_Layer: 0
+  - 114: {fileID: 11445430}
+  m_Layer: 11
   m_Name: Wheel-couple rod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,8 +60,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168946}
-  m_LocalRotation: {x: -0.58195865, y: -0.40165183, z: 0.4016521, w: -0.58195835}
-  m_LocalPosition: {x: 0.0016479492, y: 0.27578878, z: -0.0043182373}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 0.0016475553, y: 0.72, z: -0.004321903}
   m_LocalScale: {x: 1, y: 1, z: 0.75126386}
   m_Children:
   - {fileID: 444852}
@@ -82,8 +85,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195636}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 270.88837, y: 7.0042114, z: 150.57433}
+  m_LocalRotation: {x: -0.000001030316, y: -0.21123919, z: 0.00000026919193, w: -0.97743446}
+  m_LocalPosition: {x: -11.189896, y: -0.542727, z: -1.1346893}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428412}
@@ -99,7 +102,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 2360d646b0c380b4786d5357ad8517d1, type: 2}
+  - {fileID: 2100000, guid: feeae4c792996294fadae958b2a5f6ec, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -147,7 +150,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168946}
-  m_Mesh: {fileID: 4300002, guid: 1b853814e25171243a05e7bb4979cea2, type: 3}
+  m_Mesh: {fileID: 4300000, guid: f466f806ef8c20c4bb8ff37ca1ff98f8, type: 3}
 --- !u!33 &3389616
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -162,7 +165,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195636}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 7
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -170,6 +173,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6526478
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.07, y: 0.83, z: 0.66}
+  m_Center: {x: -0.0046199565, y: -0.000015467405, z: 0.000000029845882}
 --- !u!114 &11414866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -183,11 +198,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 12
   itemName: Wheel-couple rod
-  startDisabled: 1
+  startDisabled: 0
   targetSlot: -1
   canBeElectrified: 0
   nearbyVisual: {fileID: 2351648}
   body: {fileID: 0}
+--- !u!114 &11431706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: 629a2756-78b0-4d49-96a1-0d4e49390efc
+  classId: 49d98943-0bf1-4fee-8f45-f8f7b38e9235
+  StoreAllComponents: 1
+  Components: []
+--- !u!114 &11445430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: e71532d2-9dde-435a-9df3-62ab9979698f
+  classId: f3c6759d-e99d-45ba-a2e7-5b71d1408d8c
+  StoreAllComponents: 1
+  Components: []
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
