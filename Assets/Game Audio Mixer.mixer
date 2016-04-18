@@ -21,7 +21,7 @@ AudioMixerController:
   - guid: d6942926d6c7bc24f80e4be82de1b514
     name: Volume_NPC
   - guid: a91052291b642c4499716e8c945b3df4
-    name: Volume_Sound
+    name: Volume_SFX
   m_AudioMixerGroupViews:
   - guids:
     - 90df289bd6a40664283d172fe8b44d90
@@ -92,7 +92,7 @@ AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Sound
+  m_Name: SFX
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 31cdc49908b124949990ce2852810dc7
   m_Children: []
@@ -206,4 +206,5 @@ AudioMixerSnapshotController:
   m_SnapshotID: 71ecdd7fd67df17498818b943a5a05c1
   m_FloatValues:
     e15364b0cfff4274d81be831568405b7: 0.04171297
+    24f07c38d9f73ba47bf4b081579b6815: 0.010628492
   m_TransitionOverrides: {}

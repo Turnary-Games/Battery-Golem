@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using ExtensionMethods;
 using UnityEngine.SceneManagement;
+using System;
+using Serialization;
 
 public class PlayerSubClass : MonoBehaviour {
 	public PlayerController parent;
@@ -17,6 +19,8 @@ public class PlayerSubClass : MonoBehaviour {
 }
 
 public class PlayerController : SingletonBase<PlayerController> {
+
+	public static bool doneLoading = false;
 
 	[Header("Player sub-classes")]
 
@@ -102,7 +106,7 @@ public class PlayerController : SingletonBase<PlayerController> {
 		transform.rotation = exit.transform.rotation;
 		movement.body.velocity = Vector3.zero;
 		movement.body.angularVelocity = Vector3.zero;
-		return;	
+		goto Checkpoint;
 
 	UseDefault:
 		var def = FindObjectOfType<DefaultSpawnPoint>();
@@ -111,5 +115,9 @@ public class PlayerController : SingletonBase<PlayerController> {
 			transform.position = def.transform.position;
 			transform.rotation = def.transform.rotation;
 		}
+		goto Checkpoint;
+
+	Checkpoint:
+		LevelSerializer.Checkpoint();
 	}
 }

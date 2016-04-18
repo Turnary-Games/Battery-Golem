@@ -1219,7 +1219,7 @@ public static class LevelSerializer
     /// </summary>
     /// <param name='data'> The data describing the level to load </param>
     /// <param name="showGUI"> Should the screen fade? </param>
-    public static LevelLoader LoadSavedLevel(string data, bool showGUI = true)
+    public static LevelLoader LoadSavedLevel(string data, bool showGUI = false)
     {
         if(BeginLoad != null) {
             BeginLoad();

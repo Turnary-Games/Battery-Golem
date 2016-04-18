@@ -35,12 +35,14 @@ public class PlayerHealth : PlayerSubClass {
 				hasReset = true;
 				if (LevelSerializer.CanResume) {
 					// Jump back to checkpoint
-					print("PLAYER DIED: RESUME CHECKPOINT");
-					LevelSerializer.Resume();
+					LoadingScreen.LoadRoom(LoadingScreen.RESUME_CHECKPOINT, false);
+					//print("PLAYER DIED: RESUME CHECKPOINT");
+					//LevelSerializer.Resume();
 				} else {
 					// Hardreset level
-					print("PLAYER DIED: HARD RESET ROOM");
-					SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+					LoadingScreen.LoadRoom(SceneManager.GetActiveScene().name, false);
+					//print("PLAYER DIED: HARD RESET ROOM");
+					//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 				}
 			}
 		} else if (hasReset) {

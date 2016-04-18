@@ -23,7 +23,10 @@ public class RoomTransitionPoint : MonoBehaviour {
 			else
 				Destroy(PlayerController.instance.transform.root.gameObject);
 
-			RoomManager.LoadRoom(gotoRoomOnTrigger);
+			// Spawn loading screen
+			LoadingScreen.LoadRoom(gotoRoomOnTrigger);
+
+			//RoomManager.LoadRoom(gotoRoomOnTrigger);
 		}
 	}
 

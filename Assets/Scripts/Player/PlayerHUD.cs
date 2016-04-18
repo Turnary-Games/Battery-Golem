@@ -20,6 +20,9 @@ public class PlayerHUD : PlayerSubClass {
 	public Transform leavesParent;
 	public GameObject leavesPrefab;
 
+	[Header("Loading screen")]
+	public GameObject loadingPrefab;
+
 	private int hoverMouse;
 	private int hoverKey; // hotkeys
 

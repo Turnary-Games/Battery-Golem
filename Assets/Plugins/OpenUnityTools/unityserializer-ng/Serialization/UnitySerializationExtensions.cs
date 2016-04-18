@@ -717,7 +717,7 @@ public class SerializeRigidBody : IComponentSerializer {
             useGravity = source.useGravity;
             freezeRotation = source.freezeRotation;
             detectCollisions = source.detectCollisions;
-            useConeFriction = source.useConeFriction;
+            //useConeFriction = source.useConeFriction;
             velocity = source.velocity;
             position = source.position;
             rotation = source.rotation;
@@ -741,7 +741,7 @@ public class SerializeRigidBody : IComponentSerializer {
             body.freezeRotation = freezeRotation;
             body.useGravity = useGravity;
             body.detectCollisions = detectCollisions;
-            body.useConeFriction = useConeFriction;
+            //body.useConeFriction = useConeFriction;
             if (centerOfMass != Vector3.zero)
                 body.centerOfMass = centerOfMass;
             body.drag = drag;
@@ -760,7 +760,7 @@ public class SerializeRigidBody : IComponentSerializer {
                 body.velocity = velocity;
                 body.useGravity = useGravity;
                 body.angularVelocity = angularVelocity;
-                if (inertiaTensor != Vector3.zero)
+                if (inertiaTensor.x > 0 && inertiaTensor.y > 0 && inertiaTensor.z > 0)
                     body.inertiaTensor = inertiaTensor;
                 if (!inertiaTensorRotation.Equals(zero))
                     body.inertiaTensorRotation = inertiaTensorRotation;
