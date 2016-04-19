@@ -62,6 +62,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 473966}
   - 54: {fileID: 5424858}
+  - 114: {fileID: 11449356}
   m_Layer: 0
   m_Name: Pushable ruler
   m_TagString: Untagged
@@ -129,8 +130,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169146}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 188.53, y: 7.02, z: 153.72}
-  m_LocalScale: {x: 1.6196998, y: 1.8825371, z: 2.2606235}
+  m_LocalPosition: {x: -54.839996, y: 7.18, z: 48.25}
+  m_LocalScale: {x: 1.2325832, y: 1.8825371, z: 2.2606235}
   m_Children:
   - {fileID: 402268}
   - {fileID: 400600}
@@ -266,7 +267,23 @@ MonoBehaviour:
   x: 1
   z: 0
   offset: {x: 0, y: 0, z: 0.1}
-  rotation: 0
+  rotation: -90
+--- !u!114 &11449356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: 9b36333d-5b10-4c04-be4d-701f2496d128
+  classId: fe1baee0-3c19-4707-841e-15289472fd14
+  StoreAllComponents: 1
+  Components: []
 --- !u!114 &11466960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,7 +300,7 @@ MonoBehaviour:
   x: 1
   z: 0
   offset: {x: 0, y: 0, z: 0.1}
-  rotation: 180
+  rotation: -90
 --- !u!119 &11928214
 Projector:
   m_ObjectHideFlags: 1
@@ -295,9 +312,9 @@ Projector:
   m_NearClipPlane: 0.01
   m_FarClipPlane: 30
   m_FieldOfView: 40
-  m_AspectRatio: 3.45
+  m_AspectRatio: 4.3
   m_Orthographic: 1
-  m_OrthographicSize: 3.78
+  m_OrthographicSize: 2.97
   m_Material: {fileID: 2100000, guid: 6a987548908c24845a56f27a144650c5, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2

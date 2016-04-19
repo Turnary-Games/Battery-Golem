@@ -18,6 +18,8 @@ public class RoomTransitionPoint : MonoBehaviour {
 
 		GameObject main = col.GetMainObject();
 		if (main.tag == "Player") {
+			works = false;
+
 			if (bringPlayer)
 				PlayerController.instance.exitID = exitID;
 			else
@@ -35,7 +37,7 @@ public class RoomTransitionPoint : MonoBehaviour {
 		works = true;
 	}
 
-	void OnRoomWasLoaded() {
+	void OnLevelWasLoaded() {
 		StartCoroutine(WAIT());
 	}
 }

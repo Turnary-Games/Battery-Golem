@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 417678}
   - 65: {fileID: 6583822}
   - 114: {fileID: 11473820}
+  - 114: {fileID: 11405368}
   m_Layer: 12
   m_Name: push point 3
   m_TagString: Push point
@@ -76,6 +77,8 @@ GameObject:
   - 4: {fileID: 467000}
   - 95: {fileID: 9563364}
   - 114: {fileID: 11467630}
+  - 114: {fileID: 11499458}
+  - 114: {fileID: 11469016}
   m_Layer: 12
   m_Name: npc_bug_export_01
   m_TagString: Untagged
@@ -125,6 +128,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 421314}
   - 65: {fileID: 6575350}
+  - 114: {fileID: 11456128}
   m_Layer: 12
   m_Name: collider
   m_TagString: Untagged
@@ -175,6 +179,7 @@ GameObject:
   - 4: {fileID: 434296}
   - 65: {fileID: 6525172}
   - 114: {fileID: 11467926}
+  - 114: {fileID: 11432438}
   m_Layer: 12
   m_Name: push point 2
   m_TagString: Push point
@@ -192,6 +197,7 @@ GameObject:
   - 4: {fileID: 470810}
   - 65: {fileID: 6501624}
   - 114: {fileID: 11440018}
+  - 114: {fileID: 11458718}
   m_Layer: 12
   m_Name: push point 1
   m_TagString: Push point
@@ -211,6 +217,7 @@ GameObject:
   - 114: {fileID: 11417856}
   - 114: {fileID: 11401182}
   - 114: {fileID: 11445410}
+  - 114: {fileID: 11461456}
   m_Layer: 12
   m_Name: Insect
   m_TagString: Untagged
@@ -277,6 +284,7 @@ GameObject:
   - 4: {fileID: 472916}
   - 65: {fileID: 6511838}
   - 114: {fileID: 11472264}
+  - 114: {fileID: 11472486}
   m_Layer: 12
   m_Name: push point 4
   m_TagString: Push point
@@ -914,6 +922,22 @@ MonoBehaviour:
   ignoreY: 1
   acceptElectrifying: 1
   acceptInteraction: 1
+--- !u!114 &11405368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 102678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: cf3e3c12-a45c-42c3-a71a-556e0b1628d5
+  classId: 0a6928b3-f90c-48a2-9438-9cea7c8eebb1
+  StoreAllComponents: 1
+  Components: []
 --- !u!114 &11417856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -931,7 +955,7 @@ MonoBehaviour:
   - {fileID: 11467926}
   - {fileID: 11473820}
   - {fileID: 11472264}
-  deactivateOnFlip: {fileID: 0}
+  deactivateOnFlip: {fileID: 6575350}
   slideForce: 25
 --- !u!114 &11419280
 MonoBehaviour:
@@ -945,6 +969,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldRotation: {x: 90, y: 0, z: 0}
+--- !u!114 &11432438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 152256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: c2ad403c-d8c0-41fd-b830-5aaf9005e539
+  classId: a49fe4b8-b1f5-4c61-9f49-7548986da5e9
+  StoreAllComponents: 1
+  Components: []
 --- !u!114 &11440018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -979,6 +1019,54 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1025
   rayLength: 0.3
+--- !u!114 &11456128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: 5f50dd1b-e2fa-4335-8bf5-5fe6eb317b22
+  classId: c514492e-09ae-4002-8597-171cb194f775
+  StoreAllComponents: 1
+  Components: []
+--- !u!114 &11458718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: cea42c87-86c3-4239-b997-024e5a868531
+  classId: 97b3b703-2abf-4bb9-b431-b3732ca98b53
+  StoreAllComponents: 1
+  Components: []
+--- !u!114 &11461456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 164544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ac6d84dca7648fab1a3a905dbc55b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: 295855e9-7b1b-435c-881b-b1cd44351780
+  classId: b5d6d0e6-b1b0-4be8-b180-4b11e5015f83
+  StoreAllComponents: 1
+  Components: []
 --- !u!114 &11467630
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1007,6 +1095,18 @@ MonoBehaviour:
   z: 0
   offset: {x: -0.3, y: 0, z: 0}
   rotation: 0
+--- !u!114 &11469016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c068e2a0146e38b4e93ef48011e34eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingMode: 0
 --- !u!114 &11472264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1024,6 +1124,22 @@ MonoBehaviour:
   z: 1
   offset: {x: -0.3, y: 0, z: 0}
   rotation: 0
+--- !u!114 &11472486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 190756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: d5f89c01-da29-4558-8b41-def6235faa90
+  classId: 2789b88a-0cc9-42f7-afd5-30e0e6df1bff
+  StoreAllComponents: 1
+  Components: []
 --- !u!114 &11473820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1041,6 +1157,22 @@ MonoBehaviour:
   z: 1
   offset: {x: -0.2, y: 0, z: 0}
   rotation: 0
+--- !u!114 &11499458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: 1e0eef41-6173-423e-bc5a-87454b51d648
+  classId: cc54d59a-f2b9-40ae-b8e7-8db8b3b5960e
+  StoreAllComponents: 1
+  Components: []
 --- !u!119 &11994306
 Projector:
   m_ObjectHideFlags: 1

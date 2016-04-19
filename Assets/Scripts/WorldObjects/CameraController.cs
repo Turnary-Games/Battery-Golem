@@ -61,7 +61,14 @@ public class CameraController : MonoBehaviour {
 #endif
 
 	void Start() {
-		player = FindObjectOfType<PlayerController>().transform;
+		if (PlayerController.instance) {
+			player = PlayerController.instance.transform;
+			SnapIntoPlace();
+		}
+	}
+
+	public void SnapIntoPlace() {
+		transform.position = player.transform.position + offset - transform.forward * distance;
 	}
 
 	// Update is called once per frame

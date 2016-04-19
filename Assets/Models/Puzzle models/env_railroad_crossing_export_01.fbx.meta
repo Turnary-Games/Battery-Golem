@@ -22,7 +22,8 @@ ModelImporter:
     4300000: sign
     4300002: comb
     4300004: rope
-    7400000: Take 001
+    7400000: s3bridge@opening
+    7400002: s3bridge@open
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -46,10 +47,46 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: s3bridge@opening
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 40
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: comb
+        weight: 1
+      - path: rope
+        weight: 1
+      - path: sign
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: s3bridge@open
+      takeName: Take 001
+      firstFrame: 29
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

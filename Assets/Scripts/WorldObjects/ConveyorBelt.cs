@@ -10,7 +10,7 @@ public class ConveyorBelt : MonoBehaviour {
 	void OnCollisionStay(Collision col) {
 		if (col.collider.attachedRigidbody != null) {
 			Rigidbody body = col.collider.attachedRigidbody;
-			Vector3[] points = new Vector3[col.contacts.Length];
+			//Vector3[] points = new Vector3[col.contacts.Length];
 
 			//for (int i = 0; i < points.Length; i++) {
 			//body.AddForceAtPosition(force / points.Length, points[i]);

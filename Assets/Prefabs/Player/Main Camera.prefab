@@ -13,7 +13,7 @@ GameObject:
   - 124: {fileID: 12498984}
   - 81: {fileID: 8145494}
   - 114: {fileID: 11407148}
-  - 114: {fileID: 11403702}
+  - 114: {fileID: 11461560}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -47,7 +47,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106276}
   m_LocalRotation: {x: 0.32758173, y: 0, z: 0, w: 0.9448229}
-  m_LocalPosition: {x: 246.24, y: 20.5, z: 84.73}
+  m_LocalPosition: {x: 174.53152, y: 20.103504, z: 91.98855}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 461026}
@@ -166,22 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   silhouetteColor: {r: 1, g: 0.791, b: 1, a: 0.291}
---- !u!114 &11403702
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: 
-  classId: 945d0d73-b3fc-4aba-b4fb-7303319e4a39
-  StoreAllComponents: 1
-  Components: []
 --- !u!114 &11407148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,6 +181,22 @@ MonoBehaviour:
   distance: 26
   offset: {x: 0, y: 4, z: 0}
   player: {fileID: 0}
+--- !u!114 &11461560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5ac6d84dca7648fab1a3a905dbc55b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsDeserializing: 0
+  _id: 68e95f60-ecc6-495d-852a-55735d2a0083
+  classId: e1372a4a-4334-4131-af7d-920114b7836f
+  StoreAllComponents: 1
+  Components: []
 --- !u!124 &12464518
 Behaviour:
   m_ObjectHideFlags: 1

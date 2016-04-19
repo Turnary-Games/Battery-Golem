@@ -6,8 +6,7 @@ public class DefaultSpawnPoint : MonoBehaviour {
 	
 	void Awake() {
 		if (!PlayerController.instance) {
-			GotoRoom.lastRoom = SceneManager.GetActiveScene().name;
-			RoomManager.LoadRoom("InitializingScene");
+			LoadingScreen.FetchPlayer();
 		}
 	}
 

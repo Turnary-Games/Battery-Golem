@@ -1,25 +1,38 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
+[DontStore]
 public class LoadingScreen : SingletonBase<LoadingScreen> {
 
+	public static GameObject loadingPrefab;
 	public const string RESUME_CHECKPOINT = "RESUME_CHECKPOINT";
+	public const string PREFAB_PATH = "Prefabs/Loading_screen";
+	public const string INIT_SCENE = "InitializingScene";
 
 	[SceneDropDown]
 	public string targetRoom = "mane_menu";
 	public Image background;
 	public Text text;
 	public float fadeTime = 1;
+	public bool destroyIfPassthrough = false;
+
+	public System.Action<LoadingScreen> loadedCallback;
 
 	private float start;
 	private State state = State.fadeIn;
 
 	protected override void Awake() {
-		base.Awake();
+		if (instance && destroyIfPassthrough)
+			Destroy(gameObject);
+		else {
+			base.Awake();
 
-		start = Time.time;
-		DontDestroyOnLoad(gameObject);
+			start = Time.time;
+			DontDestroyOnLoad(gameObject);
+		}
+		
 	}
 
 	void Update() {
@@ -70,6 +83,8 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 			text.text = "Loading complete";
 			state = State.fadeOut;
 			start = Time.time;
+			if (loadedCallback != null)
+				loadedCallback(this);
 		}
 	}
 
@@ -78,9 +93,36 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 	}
 
 	public static void LoadRoom(string room, bool fade = true) {
-		var clone = Instantiate(PlayerController.instance.hud.loadingPrefab) as GameObject;
+		UpdatePrefab();
+
+		var clone = Instantiate(loadingPrefab) as GameObject;
 		var script = clone.GetComponent<LoadingScreen>();
 		script.targetRoom = room;
 		if (!fade) script.fadeTime = 0;
+	}
+
+	public static void LoadRoom(string room, System.Action<LoadingScreen> loadedCallback, bool fade = true) {
+		UpdatePrefab();
+
+		var clone = Instantiate(loadingPrefab) as GameObject;
+		var script = clone.GetComponent<LoadingScreen>();
+		script.targetRoom = room;
+		script.loadedCallback = loadedCallback;
+		if (!fade) script.fadeTime = 0;
+	}
+
+	static void UpdatePrefab() {
+		if (loadingPrefab == null) {
+			loadingPrefab = Resources.Load(PREFAB_PATH) as GameObject;
+		}
+	}
+
+	public static void FetchPlayer(bool fade = false) {
+		string lastRoom = SceneManager.GetActiveScene().name;
+		LoadRoom(INIT_SCENE, script => {
+			Destroy(script.gameObject);
+			ResetSaves.Reset();
+			LoadRoom(lastRoom, false);
+		}, fade);
 	}
 }

@@ -11,7 +11,25 @@ public class InsectController : MonoBehaviour {
 	public BoxCollider deactivateOnFlip;
 	public float slideForce = 5;
 
+	[SerializeThis]
 	private States state = States.idle;
+
+	[SerializeThis]
+	private Vector3 startPos;
+	[SerializeThis]
+	private Quaternion startRot;
+	[SerializeThis]
+	private Quaternion startAnimRot;
+	[SerializeThis]
+	private int startLayer;
+
+	void Start() {
+		startPos = transform.position;
+		startRot = transform.rotation;
+		startAnimRot = anim.transform.localRotation;
+
+		startLayer = gameObject.layer;
+	}
 
 	void OnCollisionStay(Collision col) {
 		var main = col.collider.GetMainObject();
@@ -55,6 +73,37 @@ public class InsectController : MonoBehaviour {
 		// Reset to default
 		foreach (var child in GetComponentsInChildren<Transform>())
 			child.gameObject.layer = 0;
+	}
+
+	void OnTriggerEnter(Collider other) {
+		GameObject main = other.GetMainObject();
+
+		if (main.tag == "Water") {
+			Reset();
+		}
+	}
+
+	void Reset() {
+		// Transform
+		transform.position = startPos;
+		transform.rotation = startRot;
+		anim.transform.localRotation = startAnimRot;
+		// State
+		state = States.idle;
+		// Animator
+		anim.Rebind();
+		// Interaction listener
+		GetComponent<_ElectricListener>().acceptInteraction = true;
+		// Collider
+		if (deactivateOnFlip)
+			deactivateOnFlip.enabled = true;
+		// Pushing points
+		points.ForEach(go => go.enabled = false);
+		if (PlayerController.instance && points.Contains(PlayerController.instance.pushing.point))
+			PlayerController.instance.pushing.point = null;
+		// Layer
+		foreach (var child in GetComponentsInChildren<Transform>())
+			child.gameObject.layer = startLayer;
 	}
 
 	enum States {

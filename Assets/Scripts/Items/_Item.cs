@@ -41,8 +41,11 @@ public class _Item : Searchable {
 
 	[HideInInspector]
 	public Rigidbody body;
+	[SerializeThis]
 	private Vector3 startPos;
+	[SerializeThis]
 	private Quaternion startRot;
+	private bool can_reset = false;
 
 	protected virtual void Start() {
 		// disable rigidbody
@@ -50,11 +53,17 @@ public class _Item : Searchable {
 		if (startDisabled)
 	    	body.SetEnabled(false);
 
-		startPos = transform.position;
-		startRot = transform.rotation;
+		if (startPos == Vector3.zero) {
+			startPos = transform.position;
+			startRot = transform.rotation;
+		}
 	}
 
 	protected virtual void OnTriggerEnter(Collider other) {
+		if (LevelSerializer.IsDeserializing) return;
+		if (RoomManager.loadingRoom) return;
+		if (!can_reset) return;
+
 		if (other.tag == "Water") {
 			// In case you drop it into the water
 			Reset();
@@ -62,6 +71,9 @@ public class _Item : Searchable {
 	}
 
 	protected virtual void OnCollisionStay(Collision collision) {
+		if (LevelSerializer.IsDeserializing) return;
+		if (RoomManager.loadingRoom) return;
+
 		GameObject main = collision.collider.attachedRigidbody != null ? collision.collider.attachedRigidbody.gameObject : collision.gameObject;
 		main.SendMessage(TouchMethods.Touch, this, SendMessageOptions.DontRequireReceiver);
 	}
@@ -79,8 +91,18 @@ public class _Item : Searchable {
 	}
 
 	public virtual void Reset() {
+		print("Reset " + name);
 		transform.position = startPos;
 		transform.rotation = startRot;
-		body.SetEnabled(false);
+		body.SetEnabled(!startDisabled);
+	}
+
+	IEnumerator WAIT() {
+		yield return new WaitForFixedUpdate();
+		can_reset = true;
+	}
+
+	void OnLevelWasLoaded() {
+		StartCoroutine(WAIT());
 	}
 }

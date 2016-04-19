@@ -17,7 +17,6 @@ public class Fan : _CoreItem {
 
 	protected override void Start() {
 		base.Start();
-
 		SetParticleEmission(false);
 	}
 

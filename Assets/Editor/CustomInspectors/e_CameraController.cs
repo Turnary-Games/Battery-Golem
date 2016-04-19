@@ -16,7 +16,7 @@ public class e_CameraController : Editor {
 
 		GUI.enabled = script.player;
 		if (GUILayout.Button("Move into place") && script.player) {
-			script.transform.position = script.player.transform.position + script.offset - script.transform.forward * script.distance;
+			script.SnapIntoPlace();
 		}
 		GUI.enabled = true;
 	}
