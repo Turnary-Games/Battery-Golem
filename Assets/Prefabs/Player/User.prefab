@@ -2627,7 +2627,8 @@ MonoBehaviour:
   topSpeedAfter: 0.25
   rotSpeed: 300
   jumpHeight: 5
-  continuousJumping: 1
+  stepSound: {fileID: 0}
+  continuousJumping: 0
   groundDist: 0.3
   groundLayer:
     serializedVersion: 2
