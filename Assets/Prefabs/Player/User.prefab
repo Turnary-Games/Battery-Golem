@@ -1677,7 +1677,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: ac22fcdd-dd23-456f-9bdd-ff0d8b1d6b34
+  _id: 6933ba85-c59b-41dc-be96-6a54849412bf
   classId: 58b73e05-2c61-461f-8ac1-24ff969faf23
   StoreAllComponents: 1
   Components: []
@@ -1717,7 +1717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: f0f5003d-9213-43d7-b8cd-95931d5edf9b
+  _id: 63d617fb-2945-401f-8f2b-506314a10cfc
   classId: ecb4dbe6-4031-4c20-9ae2-6e035396cbb6
   StoreAllComponents: 1
   Components: []
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 123d65cd-955d-43d0-9d72-b3007285cb93
+  _id: 42d76fd4-d243-459f-8e2f-53b2b14caa0f
   classId: 3c03be9d-5d8e-4a49-ae4d-770efc6a87bc
   StoreAllComponents: 1
   Components: []
@@ -1749,7 +1749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 7d26a9af-4467-4590-b784-5e299cfc43fc
+  _id: d488c315-eb31-4ac9-92ac-067f0609d7fc
   classId: 3737b558-a1f8-4fac-8313-ec3a6497522b
   StoreAllComponents: 1
   Components: []
@@ -1765,7 +1765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 61cc0d44-dede-436d-9f8c-544098229656
+  _id: 0f265eea-e04c-4cfd-ae24-83aeb4261d16
   classId: 4f81994f-54de-4511-a516-8d3a199de039
   StoreAllComponents: 1
   Components: []
@@ -1793,7 +1793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 6e707c48-d782-4a98-9f5f-7c5ca42f5e78
+  _id: 145b4013-0472-45c7-94cb-c5ed8a6f509e
   classId: 5e5a8d2a-b430-4c5f-a803-ddb1c397701d
   StoreAllComponents: 1
   Components: []
@@ -1852,7 +1852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: d6215487-14c1-4952-a2bc-6c5ae9b6cede
+  _id: 60bc6993-c2a4-4d9d-81d7-c43a84512f85
   classId: 39aa432c-c4f2-495c-9254-fa327c761748
   StoreAllComponents: 1
   Components: []
@@ -1906,7 +1906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 66c80e9b-1e4d-432c-b543-32e0a5ecc23e
+  _id: 680fc2d6-8725-4b21-82c3-178469cec4d2
   classId: bde6c89f-b36c-4a07-a3fd-39f387fea1e3
   StoreAllComponents: 1
   Components: []
@@ -1922,7 +1922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: ede204cc-1132-4a90-b024-1e87b660eab9
+  _id: 5f488866-f960-4cc2-8155-5adf033a1c9f
   classId: 2a67f529-1d66-482a-9aa3-54586d330877
   StoreAllComponents: 1
   Components: []
@@ -1955,7 +1955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: da48d1cc-9188-429c-b1b8-19bfd2cff38f
+  _id: 888111ec-f870-4f52-a44d-8aa8be1f7916
   classId: 68d6c0ae-cc22-40e3-9c85-db162e29a752
   StoreAllComponents: 1
   Components: []
@@ -1971,7 +1971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: aad97ebd-40e4-401b-b7ba-b0d6b3b544bf
+  _id: 2d3f8465-c622-4cc0-9273-168aeb2912d4
   classId: a17675d7-95f3-4aa3-9ec1-8539c0edca14
   StoreAllComponents: 1
   Components: []
@@ -2016,7 +2016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 9f021270-0390-4372-97c0-3662e00cceeb
+  _id: ddc37572-5551-4f5d-9a82-4c54f0fbd6cc
   classId: dea2fbd4-9f6e-4ea5-b051-f58ffa179099
   StoreAllComponents: 1
   Components: []
@@ -2032,7 +2032,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: d08f82d7-e8c5-4873-9a88-f736405ab78f
+  _id: 3e755d1f-b082-4b21-a7d6-fa56c9742a34
   classId: 02d5082d-4568-43cf-bcac-4ac63de294d9
   StoreAllComponents: 1
   Components: []
@@ -2048,7 +2048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 4406c795-b22c-4dcb-8596-314b81be8226
+  _id: 1578f705-6932-4652-80cd-1364f62d52aa
   classId: b43719f1-fd6f-46e9-8de0-b5cc35b0c376
   StoreAllComponents: 1
   Components: []
@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 27a5973d-e227-475c-ad5f-a5b19d1d3245
+  _id: 73d3c59c-e6ed-448c-9861-a5d48804524b
   classId: a944d375-2ea3-4f69-87f1-8f585d3bd3df
   StoreAllComponents: 1
   Components: []
@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 223e1966-3cc5-42e1-ad1c-c123d4c8d2c2
+  _id: 6bcfb65a-67a0-4f94-9dd1-6024f5842256
   classId: dcbb2a29-0157-4860-ace5-df492e814afa
   StoreAllComponents: 1
   Components: []
@@ -2108,7 +2108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 7598277c-46aa-410b-b05e-8494278efe30
+  _id: 7398edca-78b1-4e03-abbe-27f0fddf2f0a
   classId: 70ecf608-7ca0-4d02-8161-a472a23df33b
   StoreAllComponents: 1
   Components: []
@@ -2124,7 +2124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: bcb68a5e-021e-45f7-a706-68680bde87ea
+  _id: 33065345-f134-464e-8fe4-3d696bc0e52c
   classId: faa5ab5a-d887-4e4c-ada0-ac3f57f2c68b
   StoreAllComponents: 1
   Components: []
@@ -2152,7 +2152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 8f3872a0-a448-4241-9df9-a84447384653
+  _id: 72f0ebbc-7b7e-4cae-9f28-e9ac3a2b47f7
   classId: ca66810f-3b94-4332-969c-68bff6338581
   StoreAllComponents: 1
   Components: []
@@ -2168,7 +2168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 797886d6-5c89-492f-a3fe-8f1c2a9f2b0a
+  _id: 73a63e5a-f7e3-4e48-8e2d-6b6a9ebf505f
   classId: 276b70b2-f7a0-4839-a4a5-ab3730527576
   StoreAllComponents: 1
   Components: []
@@ -2208,7 +2208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: e77dada4-6ea4-4bda-8eae-d2b469574414
+  _id: 2aa75037-3dd7-4cfb-94db-b7c5f2aa9abe
   classId: b6c04868-5400-4a41-87b5-4111832f25a7
   StoreAllComponents: 1
   Components: []
@@ -2248,7 +2248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 005fd137-5e96-4f04-8ef0-1e46ff8545ed
+  _id: 309c9022-72c9-4070-bb01-8ad239b571f4
   classId: af65b5ab-7fa8-4690-af80-3ceb093da826
   StoreAllComponents: 1
   Components: []
@@ -2264,7 +2264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 92e68afa-8305-48fb-a6d8-60788bfbade7
+  _id: dc8cbbff-fb3a-4e2a-9fa1-16097d1c8b5e
   classId: 030a3520-a11c-4b28-b26d-c4123f398945
   StoreAllComponents: 1
   Components: []
@@ -2304,7 +2304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: ace6f6b5-6a52-415d-b9af-3a575a57479b
+  _id: 16af6c62-05d3-4211-a52f-0989fb06dbd0
   classId: 64482da1-2a11-4ab5-8ceb-e0acdff64f2c
   StoreAllComponents: 1
   Components: []
@@ -2332,7 +2332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: b13cf556-6a86-4f48-ac18-58b14511bd34
+  _id: a56848cd-18f8-4488-a05f-04a18a44904d
   classId: 061a4030-a54b-49a6-b429-2b5494581e14
   StoreAllComponents: 1
   Components: []
@@ -2360,7 +2360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 66ea5d1d-676e-4901-a445-c65503ef516b
+  _id: b6137121-ba31-4a95-a96d-9702ba2b12fc
   classId: 06f958ae-7853-4b3d-9b33-1db62bd888fd
   StoreAllComponents: 1
   Components: []
@@ -2400,7 +2400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: fe72450a-911e-418a-bd2d-2c2c4365a710
+  _id: e81a754a-adf6-43ef-ae2f-f95336539e5c
   classId: 261d3a6b-7130-4ca8-a361-bfdbb9281621
   StoreAllComponents: 1
   Components: []
@@ -2440,7 +2440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 83122c46-41f2-40d7-a641-f73c650ded7e
+  _id: 201fb24a-9ba2-4064-bf2f-463021be7cc2
   classId: 105fc0a0-0c64-4c53-8c16-ad5a2cce9b50
   StoreAllComponents: 1
   Components: []
@@ -2456,7 +2456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 8aa65549-bb9b-4068-8842-f8964962461d
+  _id: d14d08ed-e3d9-4097-a4a6-b8dba252954a
   classId: 5e7783b6-6687-4676-84ae-d05edbb45cef
   StoreAllComponents: 1
   Components: []
@@ -2520,7 +2520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: b3fa9ba2-c3c8-42ea-a295-f495f9a63a77
+  _id: 6235c0e6-1e80-401e-b570-fba8b3ad8317
   classId: 1b3c1252-8ee8-4c1a-af92-43e7f6b172b3
   StoreAllComponents: 1
   Components: []
@@ -2560,7 +2560,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 3b0039e3-59bd-4041-a571-c2356fdc6cd2
+  _id: 7c72e0b7-53e4-45f6-abdd-ffacc20a9d09
   classId: 2dc11968-28bd-48aa-8e21-206843a3740e
   StoreAllComponents: 1
   Components: []
@@ -2593,7 +2593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 18b8036b-7f42-4070-9435-c1eea7b3c75a
+  _id: 5f6a99aa-cb3e-4973-a331-9b592923cffb
   classId: 4eb6a338-8581-40c3-86ea-c8aabbe623dc
   StoreAllComponents: 1
   Components: []
@@ -2626,10 +2626,9 @@ MonoBehaviour:
   moveSpeed: 10
   topSpeedAfter: 0.25
   rotSpeed: 300
-  jumpHeight: 5
-  stepSound: {fileID: 0}
+  jumpHeight: 7
   continuousJumping: 0
-  groundDist: 0.3
+  groundDist: 0.05
   groundLayer:
     serializedVersion: 2
     m_Bits: 3585
@@ -2676,7 +2675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 1188dd10-8494-42d7-95b9-0294be471d1b
+  _id: af60bf04-bf6e-4a17-84ec-c20cb31e0aac
   classId: b6f73d47-0459-4377-9b4c-804bfc7b0c83
   StoreAllComponents: 1
   Components: []
@@ -2755,7 +2754,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 149f5470-4ee6-4b8c-bf11-abddf59f1097
+  _id: c452fb72-9f55-4072-b0e2-f861b9ff757c
   classId: bc67ff6d-712e-49b6-a111-d3646ecdc701
   StoreAllComponents: 1
   Components: []
@@ -2783,7 +2782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDeserializing: 0
-  _id: 5239901f-963c-4a0d-a32d-445c4e1540b7
+  _id: f6cf0f5c-ac5e-4055-946d-57b5eefe2db7
   classId: 163c5242-45a7-4de8-a004-bec3bb65b629
   StoreAllComponents: 1
   Components: []
