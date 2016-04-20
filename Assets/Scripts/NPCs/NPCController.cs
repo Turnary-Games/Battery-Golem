@@ -4,9 +4,12 @@ using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using ExtensionMethods;
+using Saving;
+using System;
 
+[RequireComponent(typeof(UniqueId))]
 [RequireComponent(typeof(_ElectricListener))]
-public class NPCController : MonoBehaviour {
+public class NPCController : MonoBehaviour, ISaveable {
 
 	[HideInInspector]
 	public List<Dialog> dialogs = new List<Dialog>();
@@ -29,7 +32,7 @@ public class NPCController : MonoBehaviour {
 	void OnDrawGizmosSelected() {
 		// Gizmos displaying range of the head rotating
 		if (ignoreY) {
-			Vector3 pos = transform.position;
+			Vector3 pos = transform.position.SetY(0);
 			float rad = headRange;
 
 			UnityEditor.Handles.color = Color.red;
@@ -56,6 +59,7 @@ public class NPCController : MonoBehaviour {
 	}
 #endif
 
+	#region Transform algorithms
 	void Update() {
 		Quaternion lookDirection = LockRotation(GetRotation());
 
@@ -102,7 +106,9 @@ public class NPCController : MonoBehaviour {
 
 		return Quaternion.Euler(idleAngle);
 	}
+	#endregion
 
+	#region Dialog algorithms
 	void OnInteractStart(PlayerController source) {
 		if (!source) return;
 
@@ -183,6 +189,19 @@ public class NPCController : MonoBehaviour {
 		// No other conversations
 		return null;
 	}
+	#endregion
+
+	#region Saving
+	public void OnSave(ref Dictionary<string, object> data) {
+		data["npc@dialog_index"] = currentDialog;
+		data["npc@dialog_list"] = new List<Dialog>(dialogs);
+	}
+
+	public void OnLoad(Dictionary<string, object> data) {
+		currentDialog = (int)data["npc@dialog_index"];
+		dialogs = (List<Dialog>)data["npc@dialog_list"];
+	}
+	#endregion
 
 	[System.Serializable]
 	public struct Dialog {

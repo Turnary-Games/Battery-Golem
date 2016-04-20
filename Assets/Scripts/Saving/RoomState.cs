@@ -3,19 +3,15 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using ExtensionMethods;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Saving {
 	public class RoomState {
 		
-		int scene;
-		/// <summary>
-		/// The saved data is stored first in a table keyed by the unique id's,
-		/// then the data table inside contains specific data that's set by the saving scripts.
-		/// </summary>
-		static Dictionary<string, Dictionary<string, object>> allData = new Dictionary<string, Dictionary<string, object>>();
-		
+		// Constructor.
+		// Tell everything to save
 		public RoomState() {
-			scene = SceneManager.GetActiveScene().buildIndex;
+			string log = "";
 
 			foreach(var unique in Object.FindObjectsOfType<UniqueId>()) {
 				// Dont store data to items without unique ids
@@ -26,31 +22,40 @@ namespace Saving {
 					comp.OnSave(ref data);
 				}
 
-				allData[unique.uniqueId] = data;
-			}
-		}
-
-		public void LoadState() {
-			Debug.Log("Start loading scene #" + scene);
-			SceneManager.LoadSceneAsync(scene);
-		}
-
-		void ApplyChanges() {
-			Debug.Log("Loading complete, apply changes for scene #" + scene);
-
-			foreach (var unique in Object.FindObjectsOfType<UniqueId>()) {
-				if (!allData.ContainsKey(unique.uniqueId)) continue;
-				if (unique.uniqueId == "") continue;
-
-				foreach (var comp in unique.GetComponents<ISaveable>()) {
-					comp.OnLoad(allData[unique.uniqueId]);
+				if (data.Count != 0 || GameSaveManager.roomData.ContainsKey(unique.uniqueId)) {
+					GameSaveManager.roomData[unique.uniqueId] = data;
+					log += "Saved \"" + unique.transform.GetPath() + "\" ("+unique.uniqueId+")\n";
 				}
 			}
+
+			if (log.Length == 0)
+				log = "Nothing to save...";
+			else
+				log = "Saved data for " + log.Count(c => c == '\n') + " components\n=======================\n" + log;
+			Debug.Log(log);
 		}
 
-		// Called by GameSaveManager
-		public void OnLoadingComplete() {
-			ApplyChanges();
+		public static void ApplyChanges() {
+			string log = "";
+
+			foreach (var unique in Object.FindObjectsOfType<UniqueId>()) {
+				if (!GameSaveManager.roomData.ContainsKey(unique.uniqueId)) continue;
+				if (unique.uniqueId == "") continue;
+
+				var savables = unique.GetComponents<ISaveable>();
+				foreach (var comp in savables) {
+					comp.OnLoad(GameSaveManager.roomData[unique.uniqueId]);
+				}
+
+				if (savables.Length > 0)
+					log += "Loaded values for \"" + unique.transform.GetPath() + "\" (" + unique.uniqueId + ")\n";
+			}
+
+			if (log.Length == 0)
+				log = "Nothing to load...";
+			else
+				log = "Loaded values for " + log.Count(c => c == '\n') + " components\n=======================\n" + log;
+			Debug.Log(log);
 		}
 	}
 
@@ -64,6 +69,8 @@ namespace Saving {
 		/// The data variable contains the same data you stored earlier.
 		/// So if you say store the position in the key "position",
 		/// then you can grab it here under the key "position".
+		/// <para>You must save something for it to save the first time,
+		/// so it won't store empty data tables</para>
 		/// </summary>
 		void OnLoad(Dictionary<string, object> data);
 	}

@@ -15,4 +15,11 @@ public class SpawnPoint : MonoBehaviour {
 		return null;
 	}
 
+#if UNITY_EDITOR
+	void OnDrawGizmosSelected() {
+		UnityEditor.Handles.color = Color.red;
+		UnityEditor.Handles.ArrowCap(-1, transform.position, transform.rotation, UnityEditor.HandleUtility.GetHandleSize(transform.position));
+	}
+#endif
+
 }

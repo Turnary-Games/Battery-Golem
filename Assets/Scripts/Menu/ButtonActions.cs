@@ -22,9 +22,13 @@ public class ButtonActions : MonoBehaviour {
 
 	public Slider NPCVolume;
 	public Text NPCPercent;
-	
+
 	public void JumpToScene(string name) {
-		GameSaveManager.LoadRoom(name);
+		GameSaveManager.LoadRoom(SceneManager.GetSceneByName(name).buildIndex);
+	}
+
+	public void JumpToScene(int build_index) {
+		GameSaveManager.LoadRoom(build_index);
 	}
 
 	public void ExitGame() {

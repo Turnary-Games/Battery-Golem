@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 452522}
   - 33: {fileID: 3343048}
   - 23: {fileID: 2320446}
-  - 114: {fileID: 11478930}
   m_Layer: 0
   m_Name: highlight
   m_TagString: Untagged
@@ -29,7 +28,6 @@ GameObject:
   - 33: {fileID: 3381946}
   - 23: {fileID: 2396744}
   - 65: {fileID: 6585130}
-  - 114: {fileID: 11465214}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -48,7 +46,7 @@ GameObject:
   - 54: {fileID: 5437304}
   - 114: {fileID: 11480766}
   m_Layer: 0
-  m_Name: Wheel-couple wheel
+  m_Name: Wheel-couple_wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,38 +184,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.78, y: 3.8, z: 1.0204746}
   m_Center: {x: -0.000015372321, y: -0.00000012928217, z: -0.27606082}
---- !u!114 &11465214
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: a7ed6c4a-0367-4de1-9a43-977055b7abd6
-  classId: f1065184-ec08-45c2-94dc-ad95073dec4d
-  StoreAllComponents: 1
-  Components: []
---- !u!114 &11478930
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 119232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: df9d8577-465a-49a1-871b-b4144e33b09f
-  classId: c0ab94a7-b627-4e6e-9aea-83491f050aaa
-  StoreAllComponents: 1
-  Components: []
 --- !u!114 &11480766
 MonoBehaviour:
   m_ObjectHideFlags: 1

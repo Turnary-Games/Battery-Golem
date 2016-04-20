@@ -8,41 +8,32 @@ using Saving;
 [RequireComponent(typeof(UniqueId))]
 public class PlayerSaving : PlayerSubClass, ISaveable {
 
-	public static int exitID = -1;
+	int exitID = -1;
+
+	public static void SetExitID(int exitID) {
+		PlayerController.instance.saving.exitID = exitID;
+	}
 
 	public void OnSave(ref Dictionary<string, object> data) {
-		print("Save player");
+		data["player@exitID"] = exitID;
 	}
 
 	public void OnLoad(Dictionary<string, object> data) {
 		// Goto position
-		GetExitPosition();
+		int exitID = (int)data["player@exitID"];
 
-		print("Load player");
+		
+		SpawnPoint exit = SpawnPoint.GetFromID(exitID);
+		if (exit) {
+			transform.position = exit.transform.position;
+			transform.rotation = exit.transform.rotation;
+			return;
+		}
 	}
 
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Home)) {
 			GameSaveManager.SaveRoom();
-		}
-	}
-
-	void GetExitPosition() {
-		if (exitID >= 0) {
-			SpawnPoint exit = SpawnPoint.GetFromID(exitID);
-			if (exit) {
-				print("TAKE " + exit.name + " (id=" + exit.ID + "): " + exit.transform.position);
-				transform.position = exit.transform.position;
-				transform.rotation = exit.transform.rotation;
-				return;
-			}
-		}
-
-		var def = FindObjectOfType<DefaultSpawnPoint>();
-		if (def) {
-			print("TAKE DEFAULT: " + def.transform.position);
-			transform.position = def.transform.position;
-			transform.rotation = def.transform.rotation;
 		}
 	}
 

@@ -13,7 +13,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 	public const string INIT_SCENE = "InitializingScene";
 
 	[SceneDropDown]
-	public string targetRoom = "mane_menu";
+	public int targetRoom = 0;
 	public Image background;
 	public Text text;
 	public float fadeTime = 1;
@@ -95,7 +95,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 		fadeIn, loading, fadeOut
 	}
 
-	public static void LoadRoom(string room, bool fade = true) {
+	public static void LoadRoom(int room, bool fade = true) {
 		UpdatePrefab();
 
 		var clone = Instantiate(loadingPrefab) as GameObject;
@@ -104,7 +104,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 		if (!fade) script.fadeTime = 0;
 	}
 
-	public static void LoadRoom(string room, System.Action<LoadingScreen> loadedCallback, bool fade = true) {
+	public static void LoadRoom(int room, System.Action<LoadingScreen> loadedCallback, bool fade = true) {
 		UpdatePrefab();
 
 		var clone = Instantiate(loadingPrefab) as GameObject;

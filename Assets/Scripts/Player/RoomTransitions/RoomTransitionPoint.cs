@@ -5,9 +5,8 @@ using ExtensionMethods;
 public class RoomTransitionPoint : MonoBehaviour {
 
 	[SceneDropDown]
-	public string gotoRoomOnTrigger;
+	public int gotoRoomOnTrigger = -1;
 	public int exitID = -1;
-	public bool bringPlayer = true;
 
 	bool works = false;
 
@@ -22,15 +21,10 @@ public class RoomTransitionPoint : MonoBehaviour {
 		if (main.tag == "Player") {
 			works = false;
 
-			if (bringPlayer)
-				PlayerSaving.exitID = exitID;
-			else
-				Destroy(PlayerController.instance.transform.root.gameObject);
+			PlayerSaving.SetExitID(exitID);
 
 			// Spawn loading screen
 			LoadingScreen.LoadRoom(gotoRoomOnTrigger);
-
-			//RoomManager.LoadRoom(gotoRoomOnTrigger);
 		}
 	}
 
