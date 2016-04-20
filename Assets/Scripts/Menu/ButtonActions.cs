@@ -22,20 +22,9 @@ public class ButtonActions : MonoBehaviour {
 
 	public Slider NPCVolume;
 	public Text NPCPercent;
-
-	/// <summary>
-	/// Use UnitySerialization-NG RoomManager to jump to a scene.
-	/// </summary>
-	public void JumpToRoom(string name) {
-		//RoomManager.LoadRoom(name);
-		LoadingScreen.LoadRoom(name);
-	}
-
-	/// <summary>
-	/// Use Unity's built in SceneManager to jump to a scene.
-	/// </summary>
+	
 	public void JumpToScene(string name) {
-		SceneManager.LoadScene(name);
+		GameSaveManager.LoadRoom(name);
 	}
 
 	public void ExitGame() {

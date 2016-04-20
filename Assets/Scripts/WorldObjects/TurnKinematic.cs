@@ -5,7 +5,6 @@ using System.Collections;
 public class TurnKinematic : MonoBehaviour {
 
 	private Rigidbody body;
-	[SerializeThis]
 	private bool done = false;
 
 	void Start() {

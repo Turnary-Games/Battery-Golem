@@ -29,7 +29,6 @@ GameObject:
   - 114: {fileID: 11402032}
   - 114: {fileID: 11415064}
   - 114: {fileID: 11402256}
-  - 114: {fileID: 11478262}
   m_Layer: 5
   m_Name: Loading_screen
   m_TagString: Untagged
@@ -90,6 +89,7 @@ MonoBehaviour:
   background: {fileID: 11408262}
   text: {fileID: 11459448}
   fadeTime: 1
+  destroyIfPassthrough: 0
 --- !u!114 &11408262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,18 +166,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Loading...
---- !u!114 &11478262
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 169612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d17d65ff14be4e0085128cfd4a34e0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preserveThisObjectWhenLoading: 1
 --- !u!222 &22209408
 CanvasRenderer:
   m_ObjectHideFlags: 1

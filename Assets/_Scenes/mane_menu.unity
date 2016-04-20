@@ -5590,7 +5590,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -251.5, y: 450.15808}
+  m_AnchoredPosition: {x: -251.5, y: 450.25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &202308375
@@ -12172,7 +12172,7 @@ Transform:
   - {fileID: 44984131}
   - {fileID: 773898615}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!4 &427832569 stripped
 Transform:
   m_PrefabParentObject: {fileID: 431532, guid: 2d738b664107b274987c84c58babfff6, type: 2}
@@ -19751,7 +19751,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -251.50018, y: 450.15805}
+  m_AnchoredPosition: {x: -251.50018, y: 450.25}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &700073717
@@ -23296,7 +23296,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: InitializingScene
+          m_StringArgument: mane_menu
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -43234,75 +43234,6 @@ Prefab:
     - {fileID: 9500000, guid: 462d5a3f0e11567459c63679520b3dfd, type: 3}
   m_ParentPrefab: {fileID: 100100000, guid: 462d5a3f0e11567459c63679520b3dfd, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &1546256770
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1546256774}
-  - 114: {fileID: 1546256773}
-  - 114: {fileID: 1546256772}
-  - 114: {fileID: 1546256771}
-  m_Layer: 0
-  m_Name: Room Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1546256771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1546256770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510d9a634d2bd4e98bfb44e67370314f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1546256772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1546256770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 299b713a9f46a46deac1f4aec00df5f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  preserveThisObjectWhenLoading: 1
---- !u!114 &1546256773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1546256770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: e8c5d50e-1ddd-4223-b5de-f62dfe03c330
-  classId: cfb03a3d-6e8d-49ee-8747-c4fb92ef9f16
-  StoreAllComponents: 1
-  Components: []
---- !u!4 &1546256774
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1546256770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!4 &1546683934 stripped
 Transform:
   m_PrefabParentObject: {fileID: 414904, guid: b6266f90967d32444931b7fe788abba6, type: 2}
@@ -43452,47 +43383,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b6266f90967d32444931b7fe788abba6, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1553487458
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1553487460}
-  - 114: {fileID: 1553487459}
-  m_Layer: 0
-  m_Name: Save Game Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1553487459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1553487458}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d49efd53907b42149a342aa0ce6e3d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  requiredObjects: []
-  Reference: {fileID: 1592124359}
---- !u!4 &1553487460
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1553487458}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
 --- !u!4 &1555259037 stripped
 Transform:
   m_PrefabParentObject: {fileID: 407410, guid: fc5104dc01a74434a94ff2e82e133a81, type: 2}
@@ -44425,20 +44315,6 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 407410, guid: fc5104dc01a74434a94ff2e82e133a81, type: 2}
   m_PrefabInternal: {fileID: 1420552688}
---- !u!114 &1592124359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7debdd6cf0c58417c8b76cf5f31b1c12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entries:
-  - gameObject: {fileID: 1546256770}
-    Id: e8c5d50e-1ddd-4223-b5de-f62dfe03c330
 --- !u!4 &1593317564 stripped
 Transform:
   m_PrefabParentObject: {fileID: 426868, guid: 5548c8f0c6bfcb543ad6ab04641abac4, type: 2}
@@ -59138,6 +59014,45 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 436380, guid: 833d7677d3332c44686d26830ff54fed, type: 2}
   m_PrefabInternal: {fileID: 642182342}
+--- !u!1 &2117007181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2117007183}
+  - 114: {fileID: 2117007182}
+  m_Layer: 0
+  m_Name: Game Save Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2117007182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2117007181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639e22d005f559843be29a0dc0c3f594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2117007183
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2117007181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!4 &2117231310 stripped
 Transform:
   m_PrefabParentObject: {fileID: 412254, guid: f4ed60751e1064f4ab8d0b680ece1ff8, type: 2}

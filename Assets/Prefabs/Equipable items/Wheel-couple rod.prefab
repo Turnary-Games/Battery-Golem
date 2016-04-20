@@ -46,7 +46,6 @@ GameObject:
   - 4: {fileID: 454206}
   - 54: {fileID: 5421218}
   - 114: {fileID: 11414866}
-  - 114: {fileID: 11482910}
   m_Layer: 11
   m_Name: Wheel-couple rod
   m_TagString: Untagged
@@ -217,22 +216,6 @@ MonoBehaviour:
   IsDeserializing: 0
   _id: 629a2756-78b0-4d49-96a1-0d4e49390efc
   classId: 49d98943-0bf1-4fee-8f45-f8f7b38e9235
-  StoreAllComponents: 1
-  Components: []
---- !u!114 &11482910
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 195636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5ac6d84dca7648fab1a3a905dbc55b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: e71532d2-9dde-435a-9df3-62ab9979698f
-  classId: 86bad0b1-26fe-499e-813f-4e28f35892d1
   StoreAllComponents: 1
   Components: []
 --- !u!1001 &100100000

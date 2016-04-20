@@ -11,9 +11,11 @@ public class RoomTransitionPoint : MonoBehaviour {
 
 	bool works = false;
 
+	void Awake() {
+		StartCoroutine(WAIT());
+	}
+
 	void OnTriggerEnter(Collider col) {
-		if (LevelSerializer.IsDeserializing) return;
-		if (RoomManager.loadingRoom) return;
 		if (!works) return;
 
 		GameObject main = col.GetMainObject();
@@ -21,7 +23,7 @@ public class RoomTransitionPoint : MonoBehaviour {
 			works = false;
 
 			if (bringPlayer)
-				PlayerController.instance.exitID = exitID;
+				PlayerSaving.exitID = exitID;
 			else
 				Destroy(PlayerController.instance.transform.root.gameObject);
 
@@ -36,8 +38,5 @@ public class RoomTransitionPoint : MonoBehaviour {
 		yield return new WaitForFixedUpdate();
 		works = true;
 	}
-
-	void OnLevelWasLoaded() {
-		StartCoroutine(WAIT());
-	}
+	
 }

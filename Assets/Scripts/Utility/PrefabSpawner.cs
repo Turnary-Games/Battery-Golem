@@ -9,7 +9,6 @@ public class PrefabSpawner : MonoBehaviour {
 	[Space]
 	public float minDelay = 2f;
 	public float maxDelay = 2f;
-	[SerializeThis]
 	private float timeLeft = 0f;
 
 	#if UNITY_EDITOR

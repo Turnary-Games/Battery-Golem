@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 497778}
   - 54: {fileID: 5453286}
   - 114: {fileID: 11450012}
-  - 114: {fileID: 11453160}
   m_Layer: 0
   m_Name: S1 Lost cog
   m_TagString: Untagged
@@ -218,22 +217,6 @@ MonoBehaviour:
   IsDeserializing: 0
   _id: 
   classId: 64a74343-2a7e-4b53-be73-5512a756fd8e
-  StoreAllComponents: 1
-  Components: []
---- !u!114 &11453160
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 112034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: 93d077ae-29dc-4894-aaa6-d52a45ee8158
-  classId: 34f994cc-9a9c-4189-8878-1c5406a53492
   StoreAllComponents: 1
   Components: []
 --- !u!1001 &100100000

@@ -13,19 +13,14 @@ public class NPCController : MonoBehaviour {
 	
 	public GameObject dialogPrefab;
 	public Transform headBone;
-	[Space]
 	public float headRange = 12;
 	public bool ignoreY = true;
-	[Space]
 	public bool lookAtWhileIdle = true;
 	public Vector3 idleAngle;
 	public float forwardAngle;
-	[HideInInspector]
 	public AnimationCurve headWeight = new AnimationCurve(new Keyframe(0, 1), new Keyframe(90, 1), new Keyframe(180, .5f));
-
-	[SerializeThis]
+	
 	private NPCDialogBox dialogUI;
-	[SerializeThis]
 	private int currentDialog = -1;
 
 	private bool isTalking { get { return currentDialog != -1; } }

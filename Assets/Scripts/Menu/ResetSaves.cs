@@ -10,7 +10,7 @@ public class ResetSaves : MonoBehaviour {
 	}
 
 	public static void Reset() {
-		LevelSerializer.ClearCheckpoint();
-		RoomManager.rooms = new Dictionary<string, string>();
+		//LevelSerializer.ClearCheckpoint();
+		//RoomManager.rooms = new Dictionary<string, string>();
 	}
 }

@@ -227,4 +227,12 @@ namespace ExtensionMethods {
 			return col.attachedRigidbody ? col.attachedRigidbody.gameObject : col.gameObject;
 		}
 	}
+
+	public static class SaveableExtension {
+		public static string FetchUniqueID(this MonoBehaviour script) {
+			var id = script.GetComponent<UniqueId>();
+			if (id == null) throw new System.Exception("Please add an UniqueId component to " + script.name + " ( \"/" + script.transform.GetPath() + "\" )");
+			return id.uniqueId;
+		}
+	}
 }

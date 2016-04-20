@@ -8,8 +8,7 @@ public class PlayerPushing : PlayerSubClass {
 	
 	public float breakDist = 1f;
 	public float pushSpeed = 2.5f;
-
-	[DoNotSerialize]
+	
 	public List<PushingPoint> points = new List<PushingPoint>();
 	public PushingPoint point {
 		get { return _point; }

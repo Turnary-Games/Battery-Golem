@@ -16,8 +16,7 @@ public class PlayerHealth : PlayerSubClass {
 
 	[HideInInspector]
 	public bool dead;
-
-	[SerializeThis]
+	
 	private bool hasReset = false;
 
 	void Start() {
@@ -33,6 +32,7 @@ public class PlayerHealth : PlayerSubClass {
 			if (Time.time - timeOfDeath > resetDelay && !hasReset) {
 				SetParticles(false);
 				hasReset = true;
+				/*
 				if (LevelSerializer.CanResume) {
 					// Jump back to checkpoint
 					LoadingScreen.LoadRoom(LoadingScreen.RESUME_CHECKPOINT, false);
@@ -43,7 +43,7 @@ public class PlayerHealth : PlayerSubClass {
 					LoadingScreen.LoadRoom(SceneManager.GetActiveScene().name, false);
 					//print("PLAYER DIED: HARD RESET ROOM");
 					//SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-				}
+				}*/
 			}
 		} else if (hasReset) {
 			hasReset = false;
@@ -74,8 +74,6 @@ public class PlayerHealth : PlayerSubClass {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (LevelSerializer.IsDeserializing) return;
-
 		if (other.tag == "Water" && !dead) {
 			OnDeath();
 		}

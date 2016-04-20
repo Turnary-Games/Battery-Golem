@@ -10,17 +10,12 @@ public class InsectController : MonoBehaviour {
 	public List<PushingPoint> points = new List<PushingPoint>();
 	public BoxCollider deactivateOnFlip;
 	public float slideForce = 5;
-
-	[SerializeThis]
+	
 	private States state = States.idle;
-
-	[SerializeThis]
+	
 	private Vector3 startPos;
-	[SerializeThis]
 	private Quaternion startRot;
-	[SerializeThis]
 	private Quaternion startAnimRot;
-	[SerializeThis]
 	private int startLayer;
 
 	void Start() {

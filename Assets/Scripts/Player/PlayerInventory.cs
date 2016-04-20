@@ -73,9 +73,9 @@ public class PlayerInventory : PlayerSubClass {
 		item.OnPickup();
 
 		// Add components
-		foreach(Transform trans in item.GetComponentsInChildren<Transform>(true)) {
-			trans.gameObject.AddComponent<DontStoreObjectInRoom>();
-		}
+		//foreach(Transform trans in item.GetComponentsInChildren<Transform>(true)) {
+		//	trans.gameObject.AddComponent<DontStoreObjectInRoom>();
+		//}
 	}
 
     #endregion
@@ -108,9 +108,9 @@ public class PlayerInventory : PlayerSubClass {
 			(item as _CoreItem).OnUnequip(this);
 
 		// Remove components
-		foreach (DontStoreObjectInRoom comp in item.GetComponentsInChildren<DontStoreObjectInRoom>(true)) {
-			Destroy(comp);
-		}
+		//foreach (DontStoreObjectInRoom comp in item.GetComponentsInChildren<DontStoreObjectInRoom>(true)) {
+		//	Destroy(comp);
+		//}
 	}
 	#endregion
 

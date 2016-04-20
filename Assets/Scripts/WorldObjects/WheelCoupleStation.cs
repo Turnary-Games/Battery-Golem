@@ -12,8 +12,7 @@ public class WheelCoupleStation : MonoBehaviour {
 	[Space]
 	public Renderer wheelRenderer;
 	public int wheelID;
-
-	[SerializeThis]
+	
 	private bool wheelInPlace = false;
 	
 	void OnInteractStart(PlayerController source) {
