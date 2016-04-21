@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using Saving;
 
 public class LoadingScreen : SingletonBase<LoadingScreen> {
 

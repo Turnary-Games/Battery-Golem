@@ -3,10 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using ExtensionMethods;
-using Saving;
 
 [RequireComponent(typeof(UniqueId))]
-public class PlayerSaving : PlayerSubClass, ISaveable {
+public class PlayerSaving : PlayerSubClass, ISavable {
 
 	int exitID = -1;
 

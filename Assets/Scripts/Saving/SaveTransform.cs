@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Saving;
 using System;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(UniqueId))]
-public class SaveTransform : MonoBehaviour, ISaveable {
+public class SaveTransform : MonoBehaviour, ISavable {
 
 	public bool position = true;
 	public bool rotation = true;

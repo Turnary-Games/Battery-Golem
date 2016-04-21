@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5ef2540d0555104fad9bcc3fcf36daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRoom: mane_menu
+  targetRoom: 0
   background: {fileID: 11408262}
   text: {fileID: 11459448}
   fadeTime: 1
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.77647066, g: 0.95294124, b: 0.9686275, a: 1}
+  m_Color: {r: 0.77647066, g: 0.95294124, b: 0.9686275, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

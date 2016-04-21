@@ -4,12 +4,11 @@ using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using ExtensionMethods;
-using Saving;
 using System;
 
 [RequireComponent(typeof(UniqueId))]
 [RequireComponent(typeof(_ElectricListener))]
-public class NPCController : MonoBehaviour, ISaveable {
+public class NPCController : MonoBehaviour, ISavable {
 
 	[HideInInspector]
 	public List<Dialog> dialogs = new List<Dialog>();
