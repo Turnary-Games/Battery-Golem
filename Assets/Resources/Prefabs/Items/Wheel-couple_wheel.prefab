@@ -45,6 +45,7 @@ GameObject:
   - 4: {fileID: 416184}
   - 54: {fileID: 5437304}
   - 114: {fileID: 11480766}
+  - 114: {fileID: 11471046}
   m_Layer: 0
   m_Name: Wheel-couple_wheel
   m_TagString: Untagged
@@ -60,7 +61,7 @@ Transform:
   m_GameObject: {fileID: 183558}
   m_LocalRotation: {x: 0.0000012327594, y: 0.00000047438579, z: -0.000000057252947,
     w: 1}
-  m_LocalPosition: {x: -55.230957, y: -7.381523, z: -34.773933}
+  m_LocalPosition: {x: 184.28, y: -0.30666828, z: 126.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450318}
@@ -184,6 +185,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.78, y: 3.8, z: 1.0204746}
   m_Center: {x: -0.000015372321, y: -0.00000012928217, z: -0.27606082}
+--- !u!114 &11471046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 183558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146dfdf0492bfad40933ccc04b78f397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: 74026044-9f5d-414d-849a-b955bad1860c
 --- !u!114 &11480766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,6 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8e5f8d893fe1942b2d91b4ef8d2f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 183558}
   id: 11
   itemName: Wheel
   startDisabled: 0

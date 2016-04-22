@@ -22,6 +22,10 @@ public static class ItemMethods {
 
 [RequireComponent(typeof(Rigidbody))]
 public class _Item : Searchable {
+	
+	[Header("Reference to self")]
+
+	public GameObject prefab;
 
 	[Header("_Item fields")]
 
@@ -35,9 +39,6 @@ public class _Item : Searchable {
 	[HideInInspector]
 	public bool canBeElectrified = false;
 	public Renderer nearbyVisual;
-
-	protected PlayerInventory inventory;
-	public bool equipped { get { return inventory != null && inventory.equipped == this; } }
 
 	[HideInInspector]
 	public Rigidbody body;

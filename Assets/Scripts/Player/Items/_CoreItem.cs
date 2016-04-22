@@ -11,8 +11,9 @@ using ExtensionMethods;
 
 public class _CoreItem : _Item {
 
-	public int slot;
-	public bool unlocked;
+	[HideInInspector]
+	public PlayerInventory inventory;
+	public bool equipped { get { return inventory != null && inventory.equipped == this; } }
 
 	public virtual void OnEquip(PlayerInventory inventory) {
 		// Item got equipped

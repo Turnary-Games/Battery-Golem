@@ -186,7 +186,7 @@ public class PlayerHUD : PlayerSubClass {
 				Animator anim = clone.GetComponentInChildren<Animator>();
 				_CoreItem item = inventory.coreItems.Get(slot);
 
-				anim.SetBool("Open", item != null && item.unlocked);
+				anim.SetBool("Open", item != null);
 				anim.SetBool("Slow", false);
 
 				leaves[slot] = anim;

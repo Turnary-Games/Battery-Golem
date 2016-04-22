@@ -12,6 +12,8 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	/// then the data table inside contains specific data that's set by the saving scripts.
 	/// </summary>
 	public static Dictionary<string, Dictionary<string, object>> roomData = new Dictionary<string, Dictionary<string, object>>();
+	public static int currentRoom { get { return _currentRoom; } }
+	private static int _currentRoom = -1;
 
 	protected override void Awake() {
 		if (instance != null)
@@ -21,6 +23,7 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 			if (transform.parent != null)
 				transform.SetParent(null);
 			DontDestroyOnLoad(gameObject);
+			_currentRoom = SceneManager.GetActiveScene().buildIndex;
 			SaveRoom();
 		}
 	}
@@ -82,9 +85,9 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	void OnLevelWasLoaded(int index) {
 		// This actually runs before Awake
 		if (instance != this) return;
-		
-		ApplyChanges();
 
+		_currentRoom = index;
+		ApplyChanges();
 		SaveRoom();
 	}
 	#endregion

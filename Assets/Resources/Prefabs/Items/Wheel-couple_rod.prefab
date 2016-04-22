@@ -45,6 +45,7 @@ GameObject:
   - 4: {fileID: 454206}
   - 54: {fileID: 5421218}
   - 114: {fileID: 11414866}
+  - 114: {fileID: 11459580}
   m_Layer: 11
   m_Name: Wheel-couple_rod
   m_TagString: Untagged
@@ -84,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 195636}
   m_LocalRotation: {x: -0.000001030316, y: -0.21123919, z: 0.00000026919193, w: -0.97743446}
-  m_LocalPosition: {x: -11.189896, y: -0.542727, z: -1.1346893}
+  m_LocalPosition: {x: 229.16, y: 6.53, z: 159.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 428412}
@@ -194,6 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8e5f8d893fe1942b2d91b4ef8d2f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefab: {fileID: 195636}
   id: 12
   itemName: Wheel-couple rod
   startDisabled: 0
@@ -201,6 +203,18 @@ MonoBehaviour:
   canBeElectrified: 0
   nearbyVisual: {fileID: 2351648}
   body: {fileID: 0}
+--- !u!114 &11459580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146dfdf0492bfad40933ccc04b78f397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueId: f016f689-c177-44be-bb82-6b17d13ac790
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
