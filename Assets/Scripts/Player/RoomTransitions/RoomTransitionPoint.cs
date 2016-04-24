@@ -24,6 +24,7 @@ public class RoomTransitionPoint : MonoBehaviour {
 			PlayerSaving.SetExitID(exitID);
 
 			// Spawn loading screen
+			GameSaveManager.SaveRoom();
 			LoadingScreen.LoadRoom(gotoRoomOnTrigger);
 		}
 	}

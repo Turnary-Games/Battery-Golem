@@ -13,7 +13,10 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	/// </summary>
 	public static Dictionary<string, Dictionary<string, object>> roomData = new Dictionary<string, Dictionary<string, object>>();
 	public static int currentRoom { get { return _currentRoom; } }
+	public static bool freshLoad { get { return roomLoads[_currentRoom] == 1; } }
+	
 	private static int _currentRoom = -1;
+	private static int[] roomLoads = new int[SceneManager.sceneCountInBuildSettings];
 
 	protected override void Awake() {
 		if (instance != null)
@@ -24,6 +27,7 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 				transform.SetParent(null);
 			DontDestroyOnLoad(gameObject);
 			_currentRoom = SceneManager.GetActiveScene().buildIndex;
+			roomLoads[_currentRoom]++;
 			SaveRoom();
 		}
 	}
@@ -55,7 +59,6 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	}
 
 	public static void LoadRoom(int room) {
-		SaveRoom();
 		SceneManager.LoadSceneAsync(room);
 	}
 
@@ -81,12 +84,15 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 			log = "Loaded values for " + log.Count(c => c == '\n') + " components\n=======================\n" + log;
 		Debug.Log(log);
 	}
-
+	
 	void OnLevelWasLoaded(int index) {
 		// This actually runs before Awake
 		if (instance != this) return;
-
+		roomLoads[index]++;
 		_currentRoom = index;
+
+		print("freshload=" + freshLoad);
+
 		ApplyChanges();
 		SaveRoom();
 	}

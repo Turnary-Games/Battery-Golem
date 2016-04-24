@@ -30,8 +30,11 @@ public class PlayerHealth : PlayerSubClass {
 			model.transform.localPosition = Vector3.one * Random.value * deathShake;
 
 			if (Time.time - timeOfDeath > resetDelay && !hasReset) {
-				SetParticles(false);
+				//SetParticles(false);
 				hasReset = true;
+
+				//GameSaveManager.SaveRoom();
+				LoadingScreen.LoadRoom(GameSaveManager.currentRoom);
 				/*
 				if (LevelSerializer.CanResume) {
 					// Jump back to checkpoint

@@ -15,11 +15,18 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 
 	public void OnSave(ref Dictionary<string, object> data) {
 		data["player@exitID"] = exitID;
-		data["player@equipped"] = inventory.equipped ? inventory.equipped.prefab : null;
+
+		data["player@equipped"] = new ItemData {
+			prefab = inventory.equipped ? ItemDataBase.GetPrefab(inventory.equipped.prefab) : null,
+			uuid = inventory.equipped ? inventory.equipped.FetchUniqueID() : null,
+		};
 
 		for (int i=0; i<inventory.coreItems.Length; i++) {
 			var item = inventory.coreItems[i];
-			data["player@coreItem#" + i] = item ? item.prefab : null;
+			data["player@coreItem#" + i] = new ItemData {
+				prefab = item ? ItemDataBase.GetPrefab(item.prefab) : null,
+				uuid = item ? item.FetchUniqueID() : null,
+			};
 		}
 	}
 
@@ -35,10 +42,44 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 		}
 
 		// Load coreitems
+		PlayerInventory inventory = FindObjectOfType<PlayerInventory>();
+		ItemData equippedData = (ItemData)data["player@equipped"];
+
 		for (int i = 0; i < inventory.coreItems.Length; i++) {
-			GameObject prefab = (GameObject)data["player@coreItem#" + i];
+			ItemData itemData = (ItemData)data["player@coreItem#" + i];
+			if (itemData.prefab == null) continue;
+
+			GameObject clone = Instantiate(itemData.prefab) as GameObject;
+			_CoreItem item = clone.GetComponent<_CoreItem>();
+
+			if (equippedData.uuid == itemData.uuid) {
+				// Send to equipped
+				inventory.coreItems[item.targetSlot] = item;
+				inventory.MoveToEquipped(item);
+				item.OnPickup();
+				equippedData.prefab = null;
+			} else {
+				// Send to inventory
+				inventory.coreItems[item.targetSlot] = item;
+				inventory.MoveToInventory(item);
+				item.OnPickup();
+			}
 		}
-		GameObject equipped = (GameObject)data["player@equipped"];
+
+		if (equippedData.prefab != null) {
+			// Spawn as equipped
+			GameObject clone = Instantiate(equippedData.prefab) as GameObject;
+			_Item item = clone.GetComponent<_Item>();
+
+			inventory.MoveToEquipped(item);
+			item.OnPickup();
+		}
+		
+	}
+
+	struct ItemData {
+		public GameObject prefab;
+		public string uuid;
 	}
 
 	void Update() {

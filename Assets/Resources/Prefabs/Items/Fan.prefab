@@ -576,14 +576,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c89ac6f0332c64283aea161295defe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 197074}
+  prefab: Prefabs/Items/Fan
   id: 0
   itemName: Handheld fan
   startDisabled: 1
   targetSlot: 0
   canBeElectrified: 1
   nearbyVisual: {fileID: 0}
-  body: {fileID: 5482988}
   inventory: {fileID: 0}
   speed: 5.02
   power: 4

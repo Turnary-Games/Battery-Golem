@@ -2,21 +2,12 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using ExtensionMethods;
 
 [RequireComponent(typeof(UniqueId))]
 public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
-	
-	public const string PATH_FAN = "Prefabs/Items/Fan";
-	public const string PATH_S1NUT = "Prefabs/Items/Nut";
-	public const string PATH_S1COG = "Prefabs/Items/S1_Lost_cog";
-	public const string PATH_S3ROD = "Prefabs/Items/Wheel-couple_rod";
-	public const string PATH_S3WHEEL = "Prefabs/Items/Wheel-couple-wheel";
 
-	public static GameObject prefabFan;
-	public static GameObject prefabS1Nut;
-	public static GameObject prefabS1Cog;
-	public static GameObject prefabS3Rod;
-	public static GameObject prefabS3Wheel;
+	static Dictionary<string, GameObject> prefabs = new Dictionary<string, GameObject>();
 
 	protected override void Awake() {
 		if (instance == null)
@@ -24,29 +15,31 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 	}
 
 	public void OnLoad(Dictionary<string, object> data) {
-		if (instance != this) return;
+		if (instance != this && instance != null) return;
 
+		// Skip if first time loading a scene
+		if (GameSaveManager.freshLoad) return;
+
+		// Destory all existing items
 		foreach (UniqueId id in FindObjectsOfType<UniqueId>()) {
 			if (id.uniqueId == "") continue;
 			_Item item = id.GetComponent<_Item>();
-			if (!item || item.prefab == null) continue;
+			if (!item || item.prefab == "") continue;
 
 			Destroy(item.gameObject);
 		}
 		
 		// Recreate all items for this room
 		foreach (string key in data.Keys) {
-			print("data[" + key + "]=" + data[key]);
 			if (key.StartsWith("itemdb@")) {
 				string id = key.Substring(7);
-				ItemData item = (ItemData)data[key];
+				ItemData itemData = (ItemData)data[key];
 
 				// Skip if not for this room
-				if (item.scene != GameSaveManager.currentRoom) continue;
+				if (itemData.scene != GameSaveManager.currentRoom) continue;
 
 				// Create a clone ^^
-				print("Create item \"" + item.prefab.name + "\" at " + item.position);
-				GameObject clone = Instantiate(item.prefab, item.position, item.rotation) as GameObject;
+				GameObject clone = Instantiate(itemData.prefab, itemData.position, itemData.rotation) as GameObject;
 
 				//_Item script = clone.GetComponent<_Item>();
 
@@ -54,56 +47,57 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 				unique.uniqueId = id;
 
 				Rigidbody body = clone.GetComponent<Rigidbody>();
-				body.velocity = item.velocity;
-				body.angularVelocity = item.angularVelocity;
+				body.velocity = itemData.velocity;
+				body.angularVelocity = itemData.angularVelocity;
 			}
 		}
 
 	}
 
 	public void OnSave(ref Dictionary<string, object> data) {
-		if (instance != this) return;
-
-		// In case an item is removed and should no longer be stored
-		// Mark it...
-		List<string> killUs = new List<string>();
-		foreach (string key in data.Keys) {
-			if (key.StartsWith("itemdb@")) {
-				ItemData item = (ItemData)data[key];
-				if (item.scene == GameSaveManager.currentRoom) {
-					killUs.Add(key);
-					print("Remove " + key);
-				}
-			}
-		}
-
-		// ...to be removed from the data list
-		foreach (string key in killUs)
-			data.Remove(key);
+		if (instance != this && instance != null) return;
 
 		// Save the ones in this room
 		foreach (UniqueId id in FindObjectsOfType<UniqueId>()) {
 			if (id.uniqueId == "") continue;
 			_Item item = id.GetComponent<_Item>();
 			// Skip if not item
-			if (!item || item.prefab == null) continue;
+			if (!item || item.prefab == "") continue;
 
 			// Skip inventory and held items
 			if (item is _CoreItem && (item as _CoreItem).inventory) continue;
 			if (PlayerController.instance.inventory.equipped == item) continue;
 
-
 			data["itemdb@" + id.uniqueId] = new ItemData {
-				prefab = item.prefab,
+				prefab = GetPrefab(item.prefab),
 				scene =  GameSaveManager.currentRoom,
 				position = item.transform.position,
 				rotation = item.transform.rotation,
 				velocity = item.body ? item.body.velocity : Vector3.zero,
 				angularVelocity = item.body ? item.body.angularVelocity : Vector3.zero,
 			};
-
-			print("Save \"" + item.name + "\"");
 		}
+		
+	}
+
+	public static GameObject GetPrefab(string path) {
+		if (prefabs.ContainsKey(path)) {
+			return prefabs[path];
+		} else {
+			GameObject prefab = Resources.Load<GameObject>(path);
+			if (prefab == null)
+				Debug.LogError("Unable to load prefab at \"" + path + "\"!");
+			prefabs[path] = prefab;
+			return prefab;
+		}
+	}
+
+	public static void RemoveFromWorld(string uuid) {
+		string myUUID = instance.FetchUniqueID();
+
+		var data = GameSaveManager.roomData[myUUID];
+		data.Remove("itemdb@" + uuid);
+		GameSaveManager.roomData[myUUID] = data;
 	}
 
 	struct ItemData {

@@ -25,7 +25,8 @@ public class _Item : Searchable {
 	
 	[Header("Reference to self")]
 
-	public GameObject prefab;
+	[PrefabOptions]
+	public string prefab;
 
 	[Header("_Item fields")]
 
@@ -39,16 +40,17 @@ public class _Item : Searchable {
 	[HideInInspector]
 	public bool canBeElectrified = false;
 	public Renderer nearbyVisual;
-
-	[HideInInspector]
-	public Rigidbody body;
+	
+	private Rigidbody _body;
+	public Rigidbody body {
+		get { if (_body == null) _body = GetComponent<Rigidbody>(); return _body; }
+	}
 	private Vector3 startPos;
 	private Quaternion startRot;
 	private bool can_reset = false;
 
 	protected virtual void Start() {
 		// disable rigidbody
-		body = GetComponent<Rigidbody>();
 		if (startDisabled)
 	    	body.SetEnabled(false);
 
