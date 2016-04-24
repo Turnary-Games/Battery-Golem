@@ -31,6 +31,13 @@ public class PlayerInteraction : PlayerSubClass {
 		get { return (electricTransform ?? transform).position; }
 	}
 
+	public bool armsUp {
+		get { return inventory == null ? false : inventory.equippedParent.position.y - electricPoint.y > 0; }
+	}
+
+	public System.Action<PlayerInteraction> onArmsUp;
+	public System.Action<PlayerInteraction> onArmsDown;
+
 #if UNITY_EDITOR
 	void OnDrawGizmos() {
 		if (pickupPoint == null)
@@ -68,6 +75,7 @@ public class PlayerInteraction : PlayerSubClass {
 	}
 #endif
 
+	private bool _armsUp;
 	void Update() {
 		// Visualization
 		_Item hover = GetItemInRange();
@@ -79,12 +87,19 @@ public class PlayerInteraction : PlayerSubClass {
 		}
 		lastHover = hover;
 
+		// Check armsUp
+		if (armsUp != _armsUp) {
+			if (armsUp && onArmsUp != null) onArmsUp.Invoke(this);
+			if (!armsUp && onArmsDown != null) onArmsDown.Invoke(this);
+		}
+		_armsUp = armsUp;
+
 		// Read input
 		if (!inteDown && Input.GetButtonDown("Interact")) inteDown = true;
 	}
 	
-	void FixedUpdate() { 
-
+	void FixedUpdate() {
+		
 		if (inteDown) {
 			inteDown = false;
 			// Interacting priority order:
@@ -124,9 +139,9 @@ public class PlayerInteraction : PlayerSubClass {
 		isElectrifying = Input.GetAxis("Electrify") != 0;
 		foreach(ParticleSystem ps in electricParticles.GetComponentsInChildren<ParticleSystem>()) {
 			var em = ps.emission;
-			em.enabled = isElectrifying;
+			em.enabled = isElectrifying && armsUp;
 		}
-		if (isElectrifying) {
+		if (isElectrifying && armsUp) {
 			// Electrifying priority order:
 			// - electrify held item
 			// - electrify grabbed object
@@ -152,6 +167,7 @@ public class PlayerInteraction : PlayerSubClass {
 	}
 
 	public _Item GetItemInRange() {
+		if (inventory.equipped) return null;
 		return Searchable.GetClosest<_Item>(pickupPoint.position, pickupRadius, controller.characterCenter, ignoreYAxis).obj;
 	}
 

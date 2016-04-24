@@ -11,7 +11,7 @@ GameObject:
   - 54: {fileID: 5488086}
   - 114: {fileID: 11408878}
   - 114: {fileID: 11476240}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Nut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 4: {fileID: 466900}
   - 33: {fileID: 3358810}
   - 23: {fileID: 2330890}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 4: {fileID: 456230}
   - 119: {fileID: 11926720}
   - 114: {fileID: 11487588}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: BlobShadowProjector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 412676}
   - 64: {fileID: 6434912}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - 33: {fileID: 3340592}
   - 23: {fileID: 2359604}
   - 95: {fileID: 9526834}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,6 @@ MonoBehaviour:
   prefab: Prefabs/Items/Nut
   id: -1
   itemName: Nut
-  startDisabled: 0
   targetSlot: -1
   canBeElectrified: 0
   nearbyVisual: {fileID: 2330890}

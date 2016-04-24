@@ -32,7 +32,6 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 			start = Time.time;
 			DontDestroyOnLoad(gameObject);
 		}
-		
 	}
 
 	void Update() {
@@ -76,10 +75,6 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 		}
 	}
 
-	public static void LoadRoomRaw(string room) {
-		
-	}
-
 	void OnLevelWasLoaded() {
 		if (state == State.loading) {
 			state = State.fadeOut;
@@ -87,6 +82,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 			anim.SetBool("Loaded", true);
 			if (loadedCallback != null)
 				loadedCallback(this);
+			loadedCallback = null;
 		}
 	}
 
@@ -117,15 +113,6 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 		if (loadingPrefab == null) {
 			loadingPrefab = Resources.Load(PREFAB_PATH) as GameObject;
 		}
-	}
-
-	public static void FetchPlayer(bool fade = false) {
-		//string lastRoom = SceneManager.GetActiveScene().name;
-		//LoadRoom(INIT_SCENE, script => {
-		//	Destroy(script.gameObject);
-		//	ResetSaves.Reset();
-		//	LoadRoom(lastRoom, false);
-		//}, fade);
 	}
 }
 

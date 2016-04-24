@@ -26,8 +26,11 @@ public class PlayerInventory : PlayerSubClass {
 			MoveToInventory(equipped);
 		} else {
 			_Item item = equipped;
-			MoveToWorld(equipped);
-			item.OnDropped();
+			interaction.onArmsDown = i => {
+				MoveToWorld(item);
+				item.OnDropped();
+				i.onArmsDown = null;
+			};
 		}
 
 		equipped = null;
@@ -83,6 +86,9 @@ public class PlayerInventory : PlayerSubClass {
 
 		if (item is _CoreItem)
 			(item as _CoreItem).OnEquip(this);
+
+		if (sound)
+			sound.OnItemEquipped();
 	}
 
 	public void MoveToInventory(_Item item) {
@@ -92,6 +98,9 @@ public class PlayerInventory : PlayerSubClass {
 
 		if (item is _CoreItem)
 			(item as _CoreItem).OnUnequip(this);
+
+		if (sound)
+			sound.OnItemUnequipped();
 	}
 
 	public void MoveToWorld(_Item item) {
@@ -100,10 +109,8 @@ public class PlayerInventory : PlayerSubClass {
 		if (item is _CoreItem)
 			(item as _CoreItem).OnUnequip(this);
 
-		// Remove components
-		//foreach (DontStoreObjectInRoom comp in item.GetComponentsInChildren<DontStoreObjectInRoom>(true)) {
-		//	Destroy(comp);
-		//}
+		if (sound)
+			sound.OnItemUnequipped();
 	}
 	#endregion
 

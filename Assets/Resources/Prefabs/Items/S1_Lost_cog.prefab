@@ -11,7 +11,7 @@ GameObject:
   - 54: {fileID: 5453286}
   - 114: {fileID: 11450012}
   - 114: {fileID: 11411352}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: S1_Lost_cog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 4: {fileID: 433044}
   - 33: {fileID: 3335462}
   - 23: {fileID: 2375336}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Highlighted
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - 33: {fileID: 3399894}
   - 23: {fileID: 2341788}
   - 65: {fileID: 6586034}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

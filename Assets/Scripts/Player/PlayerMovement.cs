@@ -52,12 +52,19 @@ public class PlayerMovement : PlayerSubClass {
 	}
 #endif
 
-	void Update() {
+	void FixedUpdate() {
 		if (health.dead)
 			// Stop movement when dead
 			return;
 
 		RaycastGround();
+	}
+
+	void Update() {
+		if (health.dead)
+			// Stop movement when dead
+			return;
+
 		Move();
 		Rotate();
 	}
@@ -75,6 +82,7 @@ public class PlayerMovement : PlayerSubClass {
 
 	void RaycastGround() {
 		RaycastHit hit;
+		bool old_grounded = grounded;
 
 		if (Physics.Raycast(transform.position + Vector3.up * groundDist, Vector3.down, out hit, groundDist*2, groundLayer)) {
 			grounded = Vector3.Angle(hit.normal, Vector3.up) <= slopeLimit;
@@ -97,6 +105,11 @@ public class PlayerMovement : PlayerSubClass {
 			grounded = false;
 			platform = null;
 			lastHit = null;
+		}
+
+		// /grounded/ changed
+		if (old_grounded != grounded) {
+			if (grounded && sound) sound.OnGrounded();
 		}
 	}
 

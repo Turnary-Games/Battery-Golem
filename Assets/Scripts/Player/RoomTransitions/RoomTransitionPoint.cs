@@ -7,6 +7,8 @@ public class RoomTransitionPoint : MonoBehaviour {
 	[SceneDropDown]
 	public int gotoRoomOnTrigger = -1;
 	public int exitID = -1;
+	[HideInInspector]
+	public bool openCredits;
 
 	bool works = false;
 
@@ -25,7 +27,18 @@ public class RoomTransitionPoint : MonoBehaviour {
 
 			// Spawn loading screen
 			GameSaveManager.SaveRoom();
-			LoadingScreen.LoadRoom(gotoRoomOnTrigger);
+			if (openCredits) {
+				// Load with a delegate callback
+				LoadingScreen.LoadRoom(gotoRoomOnTrigger, ls => {
+					// Loaded callback
+					var buttonActions = FindObjectOfType<ButtonActions>();
+					if (buttonActions)
+						buttonActions.OpenCreditsMenu();
+				});
+			} else {
+				// Load normally
+				LoadingScreen.LoadRoom(gotoRoomOnTrigger);
+			}
 		}
 	}
 

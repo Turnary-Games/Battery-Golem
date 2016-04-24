@@ -104,7 +104,7 @@ ModelImporter:
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -207,7 +207,23 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.32911408
+        functionName: OnFootstep
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: da97e7f1de322434d83eb19a65dd10f4,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8312238
+        functionName: OnFootstep
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: da97e7f1de322434d83eb19a65dd10f4,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

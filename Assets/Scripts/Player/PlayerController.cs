@@ -16,6 +16,7 @@ public class PlayerSubClass : MonoBehaviour {
 	public PlayerHUD hud { get { return parent != null ? parent.hud : null; } }
 	public PlayerAnimation anim { get { return parent != null ? parent.anim : null; } }
 	public PlayerSaving saving { get { return parent != null ? parent.saving : null; } }
+	public PlayerSound sound { get { return parent != null ? parent.sound : null; } }
 }
 
 public class PlayerController : SingletonBase<PlayerController> {
@@ -32,6 +33,7 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public PlayerHUD hud;
 	public PlayerAnimation anim;
 	public PlayerSaving saving;
+	public PlayerSound sound;
 
 	public Vector3 characterCenter {
 		get { return transform.position + (movement && movement.capsule ? movement.transform.TransformVector(movement.capsule.center) : Vector3.zero); }

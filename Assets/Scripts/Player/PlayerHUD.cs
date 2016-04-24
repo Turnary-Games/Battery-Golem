@@ -131,6 +131,8 @@ public class PlayerHUD : PlayerSubClass {
 				SetHUDVisable(false);
 				if (hoverKey != -1)
 					inventory.Equip(hoverKey);
+				else if (inventory.equipped != null && inventory.equipped is _CoreItem)
+					inventory.Unequip();
             }
 		}
 	}

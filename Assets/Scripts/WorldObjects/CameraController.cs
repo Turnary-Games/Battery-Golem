@@ -14,15 +14,9 @@ public class CameraController : MonoBehaviour {
 
 #if UNITY_EDITOR
 	void OnDrawGizmosSelected() {
-		PlayerController pc;
-		DefaultSpawnPoint ds;
-
-		pc = FindObjectOfType<PlayerController>();
-		if (pc == null) {
-			ds = FindObjectOfType<DefaultSpawnPoint>();
-			if (ds == null) return;
-			else player = ds.transform;
-		} else player = pc.transform;
+		PlayerController pc = FindObjectOfType<PlayerController>();
+		if (pc == null) return;
+		player = pc.transform;
 
 		Gizmos.color = Color.red;
 		Vector3 p = player.position + offset - transform.forward * distance;
