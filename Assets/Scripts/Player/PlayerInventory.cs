@@ -58,10 +58,8 @@ public class PlayerInventory : PlayerSubClass {
 		// If theres already an item equipped
 		Unequip();
 
-
 		if (item is _CoreItem) {
 			var core = item as _CoreItem;
-			core.unlocked = true;
 			coreItems[item.targetSlot] = core;
 			hud.UnlockItem(GetItemSlot(core));
 			MoveToInventory(item);
@@ -71,17 +69,12 @@ public class PlayerInventory : PlayerSubClass {
 		}
 
 		item.OnPickup();
-
-		// Add components
-		foreach(Transform trans in item.GetComponentsInChildren<Transform>(true)) {
-			trans.gameObject.AddComponent<DontStoreObjectInRoom>();
-		}
 	}
 
     #endregion
 
     #region Parenting
-	void MoveToEquipped(_Item item) {
+	public void MoveToEquipped(_Item item) {
 		equipped = item;
 
 		item.transform.parent = equippedParent;
@@ -92,7 +85,7 @@ public class PlayerInventory : PlayerSubClass {
 			(item as _CoreItem).OnEquip(this);
 	}
 
-	void MoveToInventory(_Item item) {
+	public void MoveToInventory(_Item item) {
 		item.transform.parent = transform;
 		item.transform.localPosition = Vector3.zero;
 		item.transform.localEulerAngles = Vector3.zero;
@@ -101,16 +94,16 @@ public class PlayerInventory : PlayerSubClass {
 			(item as _CoreItem).OnUnequip(this);
 	}
 
-	void MoveToWorld(_Item item) {
+	public void MoveToWorld(_Item item) {
 		item.transform.parent = null;
 
 		if (item is _CoreItem)
 			(item as _CoreItem).OnUnequip(this);
 
 		// Remove components
-		foreach (DontStoreObjectInRoom comp in item.GetComponentsInChildren<DontStoreObjectInRoom>(true)) {
-			Destroy(comp);
-		}
+		//foreach (DontStoreObjectInRoom comp in item.GetComponentsInChildren<DontStoreObjectInRoom>(true)) {
+		//	Destroy(comp);
+		//}
 	}
 	#endregion
 

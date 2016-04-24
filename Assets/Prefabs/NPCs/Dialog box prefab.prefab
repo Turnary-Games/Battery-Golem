@@ -10,7 +10,6 @@ GameObject:
   - 224: {fileID: 22468382}
   - 222: {fileID: 22235854}
   - 114: {fileID: 11454046}
-  - 114: {fileID: 11408716}
   m_Layer: 5
   m_Name: Dialog text
   m_TagString: Untagged
@@ -28,7 +27,6 @@ GameObject:
   - 224: {fileID: 22487256}
   - 222: {fileID: 22257922}
   - 114: {fileID: 11457878}
-  - 114: {fileID: 11426786}
   m_Layer: 5
   m_Name: Dialog box prefab
   m_TagString: Untagged
@@ -114,22 +112,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11408716
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 112476}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: fae2ce25-c0b3-452c-a934-b8bdd0cec921
-  classId: ca154618-ce47-4221-bf9f-e2aef6f03e1c
-  StoreAllComponents: 1
-  Components: []
 --- !u!114 &11410004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,22 +139,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11426786
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5ac6d84dca7648fab1a3a905dbc55b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: 0454c397-7c39-4f59-86d4-e9e2f2c353f2
-  classId: 5c76fc80-0a57-4a41-9fd0-d7dddef5e1ca
-  StoreAllComponents: 1
-  Components: []
 --- !u!114 &11454046
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,15 +9,12 @@ public class NPCDialogBox : MonoBehaviour {
     public Image continueIcon;
 	public float wordPerSecond = 1;
 	public float flashPeriod = 1;
-
-	[HideInInspector]
+	
 	public string dialog;
-	[HideInInspector]
 	public Transform target;
 
 	public bool done { get { return dialogText.text.Length == dialog.Length; } }
-
-	[SerializeThis]
+	
 	private float timePassed = 0;
 
 	void Update() {

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using ExtensionMethods;
 using UnityEngine.SceneManagement;
 using System;
-using Serialization;
 
 public class PlayerSubClass : MonoBehaviour {
 	public PlayerController parent;
@@ -16,6 +15,7 @@ public class PlayerSubClass : MonoBehaviour {
 	public PlayerInteraction interaction { get { return parent != null ? parent.interaction : null; } }
 	public PlayerHUD hud { get { return parent != null ? parent.hud : null; } }
 	public PlayerAnimation anim { get { return parent != null ? parent.anim : null; } }
+	public PlayerSaving saving { get { return parent != null ? parent.saving : null; } }
 }
 
 public class PlayerController : SingletonBase<PlayerController> {
@@ -31,6 +31,7 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public PlayerInteraction interaction;
 	public PlayerHUD hud;
 	public PlayerAnimation anim;
+	public PlayerSaving saving;
 
 	public Vector3 characterCenter {
 		get { return transform.position + (movement && movement.capsule ? movement.transform.TransformVector(movement.capsule.center) : Vector3.zero); }
@@ -39,9 +40,6 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public Vector3 characterTop {
 		get { return transform.position + (movement && movement.capsule ? movement.transform.TransformVector(movement.capsule.center + Vector3.up * movement.capsule.height / 2) : Vector3.zero); }
 	}
-	
-	[HideInInspector]
-	public int exitID;
 
 #if UNITY_EDITOR
 	void OnValidate() {
@@ -80,44 +78,5 @@ public class PlayerController : SingletonBase<PlayerController> {
 	public List<_TouchListener> GetListeners() {
 		return _TouchListener.FindListeners(this);
 	}
-	
-	
-	protected override void Awake() {
-		base.Awake();
-		DontDestroyOnLoad(transform.root.gameObject);
-	}
 
-	void OnRoomWasLoaded() {
-		SpawnPoint exit = null;
-
-		if (exitID >= 0) {
-			exit = SpawnPoint.GetFromID(exitID);
-			//exitID = -1;
-			if (exit)
-				goto UseSpawnPoint;
-			else
-				goto UseDefault;
-
-		} else goto UseDefault;
-
-	UseSpawnPoint:
-		print("TAKE " + exit.name + " (id=" + exit.ID + "): " + exit.transform.position);
-		transform.position = exit.transform.position;
-		transform.rotation = exit.transform.rotation;
-		movement.body.velocity = Vector3.zero;
-		movement.body.angularVelocity = Vector3.zero;
-		goto Checkpoint;
-
-	UseDefault:
-		var def = FindObjectOfType<DefaultSpawnPoint>();
-		if (def) {
-			print("TAKE DEFAULT: " + def.transform.position);
-			transform.position = def.transform.position;
-			transform.rotation = def.transform.rotation;
-		}
-		goto Checkpoint;
-
-	Checkpoint:
-		LevelSerializer.Checkpoint();
-	}
 }

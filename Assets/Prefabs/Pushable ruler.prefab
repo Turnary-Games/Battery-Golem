@@ -62,7 +62,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 473966}
   - 54: {fileID: 5424858}
-  - 114: {fileID: 11449356}
   m_Layer: 0
   m_Name: Pushable ruler
   m_TagString: Untagged
@@ -268,22 +267,6 @@ MonoBehaviour:
   z: 0
   offset: {x: 0, y: 0, z: 0.1}
   rotation: -90
---- !u!114 &11449356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 169146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: 9b36333d-5b10-4c04-be4d-701f2496d128
-  classId: fe1baee0-3c19-4707-841e-15289472fd14
-  StoreAllComponents: 1
-  Components: []
 --- !u!114 &11466960
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -134,7 +134,6 @@ GameObject:
   - 135: {fileID: 13534592}
   - 114: {fileID: 11443674}
   - 114: {fileID: 11478052}
-  - 114: {fileID: 11475866}
   m_Layer: 0
   m_Name: NPC template
   m_TagString: Untagged
@@ -1730,22 +1729,6 @@ MonoBehaviour:
   ignoreY: 1
   acceptElectrifying: 0
   acceptInteraction: 1
---- !u!114 &11475866
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 116806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd6fd92df3c974ed690d61989eb183ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IsDeserializing: 0
-  _id: 74eaa4c8-1f57-489d-9558-6900218cfe00
-  classId: 4ce40a61-a054-40bc-9ace-0323c6c9749f
-  StoreAllComponents: 1
-  Components: []
 --- !u!114 &11478052
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1791,7 +1774,7 @@ MonoBehaviour:
   headRange: 9.34
   ignoreY: 1
   lookAtWhileIdle: 0
-  idleAngle: -80
+  idleAngle: {x: 0, y: 0, z: 0}
   forwardAngle: 210
   headWeight:
     serializedVersion: 2

@@ -5,30 +5,27 @@ using ExtensionMethods;
 public class RoomTransitionPoint : MonoBehaviour {
 
 	[SceneDropDown]
-	public string gotoRoomOnTrigger;
+	public int gotoRoomOnTrigger = -1;
 	public int exitID = -1;
-	public bool bringPlayer = true;
 
 	bool works = false;
 
+	void Awake() {
+		StartCoroutine(WAIT());
+	}
+
 	void OnTriggerEnter(Collider col) {
-		if (LevelSerializer.IsDeserializing) return;
-		if (RoomManager.loadingRoom) return;
 		if (!works) return;
 
 		GameObject main = col.GetMainObject();
 		if (main.tag == "Player") {
 			works = false;
 
-			if (bringPlayer)
-				PlayerController.instance.exitID = exitID;
-			else
-				Destroy(PlayerController.instance.transform.root.gameObject);
+			PlayerSaving.SetExitID(exitID);
 
 			// Spawn loading screen
+			GameSaveManager.SaveRoom();
 			LoadingScreen.LoadRoom(gotoRoomOnTrigger);
-
-			//RoomManager.LoadRoom(gotoRoomOnTrigger);
 		}
 	}
 
@@ -36,8 +33,5 @@ public class RoomTransitionPoint : MonoBehaviour {
 		yield return new WaitForFixedUpdate();
 		works = true;
 	}
-
-	void OnLevelWasLoaded() {
-		StartCoroutine(WAIT());
-	}
+	
 }

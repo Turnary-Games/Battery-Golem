@@ -19,8 +19,7 @@ public class PlayerInteraction : PlayerSubClass {
 
 	[HideInInspector]
 	public NPCController talkingTo;
-
-	[SerializeThis]
+	
 	private _Item lastHover;
 	private bool elecDown;
 	private bool inteDown;

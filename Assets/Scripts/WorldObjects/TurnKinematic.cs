@@ -5,7 +5,6 @@ using System.Collections;
 public class TurnKinematic : MonoBehaviour {
 
 	private Rigidbody body;
-	[SerializeThis]
 	private bool done = false;
 
 	void Start() {
@@ -26,7 +25,7 @@ public class TurnKinematic : MonoBehaviour {
 				body.velocity = Vector3.zero;
 				body.isKinematic = true;
 				body.constraints += (int)RigidbodyConstraints.FreezeRotationZ + (int)RigidbodyConstraints.FreezePositionY;
-				transform.rotation = Quaternion.identity;
+				//transform.rotation = Quaternion.identity;
 			}
 		}
 	}
