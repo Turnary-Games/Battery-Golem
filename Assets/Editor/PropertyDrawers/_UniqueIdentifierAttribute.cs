@@ -56,7 +56,7 @@ public class UniqueIdentifierDrawer : PropertyDrawer {
 		} else {
 			// Generate a unique ID, defaults to an empty string if nothing has been serialized yet
 
-			if (GUI.Button(button, "Set a new unique ID!") || prop.stringValue == "") {
+			if (GUI.Button(button, "Set a new unique ID!") || (prop.stringValue == "" && !Application.isPlaying)) {
 				Guid guid = Guid.NewGuid();
 				prop.stringValue = guid.ToString();
 			}

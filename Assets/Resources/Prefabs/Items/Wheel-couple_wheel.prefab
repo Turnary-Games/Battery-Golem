@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146dfdf0492bfad40933ccc04b78f397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueId: 74026044-9f5d-414d-849a-b955bad1860c
+  uniqueId: 
 --- !u!114 &11480766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,7 +211,6 @@ MonoBehaviour:
   prefab: Prefabs/Items/Wheel-couple_wheel
   id: 11
   itemName: Wheel
-  startDisabled: 0
   targetSlot: -1
   canBeElectrified: 0
   nearbyVisual: {fileID: 2320446}

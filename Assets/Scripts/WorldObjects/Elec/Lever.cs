@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
-public class Lever : MonoBehaviour {
+[RequireComponent(typeof(UniqueId))]
+public class Lever : MonoBehaviour, ISavable {
 
 	public Animator anim;
 	public string parameter = "Flipped";
@@ -34,4 +37,13 @@ public class Lever : MonoBehaviour {
 		idle = true;
 	}
 
+	public void OnSave(ref Dictionary<string, object> data) {
+		data["lever@on"] = on;
+		data["lever@idle"] = idle;
+	}
+
+	public void OnLoad(Dictionary<string, object> data) {
+		on = (bool)data["lever@on"];
+		idle = (bool)data["lever@idle"];
+	}
 }

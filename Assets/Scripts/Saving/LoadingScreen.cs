@@ -13,8 +13,8 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 
 	[SceneDropDown]
 	public int targetRoom = 0;
-	public Image background;
-	public Text text;
+	public Animator anim;
+	public Image[] fadeUs;
 	public float fadeTime = 1;
 	public bool destroyIfPassthrough = false;
 
@@ -45,8 +45,8 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 				else
 					fade = Mathf.InverseLerp(0, fadeTime, Time.time - start);
 
-				background.color = new Color(background.color.r, background.color.g, background.color.b, fade);
-				text.color = new Color(text.color.r, text.color.g, text.color.b, fade);
+				foreach(var img in fadeUs)
+					img.color = new Color(img.color.r, img.color.g, img.color.b, fade);
 
 				if (Mathf.Approximately(fade, 1f)) {
 					state = State.loading;
@@ -65,8 +65,8 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 				else
 					fade = Mathf.InverseLerp(0, fadeTime, Time.time - start);
 
-				background.color = new Color(background.color.r, background.color.g, background.color.b, 1 - fade);
-				text.color = new Color(text.color.r, text.color.g, text.color.b, 1 - fade);
+				foreach (var img in fadeUs)
+					img.color = new Color(img.color.r, img.color.g, img.color.b, 1 - fade);
 
 				if (Mathf.Approximately(fade, 1f)) {
 					instance = null;
@@ -82,9 +82,9 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 
 	void OnLevelWasLoaded() {
 		if (state == State.loading) {
-			text.text = "Loading complete";
 			state = State.fadeOut;
 			start = Time.time;
+			anim.SetBool("Loaded", true);
 			if (loadedCallback != null)
 				loadedCallback(this);
 		}

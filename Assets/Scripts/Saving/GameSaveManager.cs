@@ -40,11 +40,18 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 			// Dont store data to items without unique ids
 			if (unique.uniqueId == "") continue;
 
-			var data = new Dictionary<string, object>();
+			// Fetch the appropiet data
+			Dictionary<string, object> data;
+			if (roomData.ContainsKey(unique.uniqueId))
+				 data = roomData[unique.uniqueId];
+			else data = new Dictionary<string, object>();
+
+			// Let all components write onto it
 			foreach (var comp in unique.GetComponents<ISavable>()) {
 				comp.OnSave(ref data);
 			}
 
+			// Save it
 			if (data.Count != 0 || GameSaveManager.roomData.ContainsKey(unique.uniqueId)) {
 				GameSaveManager.roomData[unique.uniqueId] = data;
 				log += "Saved \"" + unique.transform.GetPath() + "\" (" + unique.uniqueId + ")\n";
@@ -66,12 +73,12 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 		string log = "";
 
 		foreach (var unique in Object.FindObjectsOfType<UniqueId>()) {
-			if (!GameSaveManager.roomData.ContainsKey(unique.uniqueId)) continue;
+			if (!roomData.ContainsKey(unique.uniqueId)) continue;
 			if (unique.uniqueId == "") continue;
 
 			var savables = unique.GetComponents<ISavable>();
 			foreach (var comp in savables) {
-				comp.OnLoad(GameSaveManager.roomData[unique.uniqueId]);
+				comp.OnLoad(roomData[unique.uniqueId]);
 			}
 
 			if (savables.Length > 0)
@@ -90,8 +97,6 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 		if (instance != this) return;
 		roomLoads[index]++;
 		_currentRoom = index;
-
-		print("freshload=" + freshLoad);
 
 		ApplyChanges();
 		SaveRoom();

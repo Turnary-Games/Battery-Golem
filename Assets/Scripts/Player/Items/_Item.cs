@@ -32,7 +32,7 @@ public class _Item : Searchable {
 
 	public int id = -1;
 	public string itemName = "Unnamned";
-    public bool startDisabled = true;
+    //public bool startDisabled = true;
 
 	[Header("_Equipable fields")]
 	
@@ -45,18 +45,22 @@ public class _Item : Searchable {
 	public Rigidbody body {
 		get { if (_body == null) _body = GetComponent<Rigidbody>(); return _body; }
 	}
-	private Vector3 startPos;
-	private Quaternion startRot;
-	private bool can_reset = false;
+	[System.NonSerialized]
+	public Vector3 startPos;
+	[System.NonSerialized]
+	public Quaternion startRot;
+	[System.NonSerialized]
+	public bool can_reset = false;
 
 	protected virtual void Start() {
 		// disable rigidbody
-		if (startDisabled)
-	    	body.SetEnabled(false);
+		//if (startDisabled)
+		//   body.SetEnabled(false);
 
-		if (startPos == Vector3.zero) {
+		if (startPos == Vector3.zero && !can_reset) {
 			startPos = transform.position;
 			startRot = transform.rotation;
+			can_reset = true;
 		}
 	}
 
@@ -87,18 +91,10 @@ public class _Item : Searchable {
 	}
 
 	public virtual void Reset() {
-		print("Reset " + name);
+		//print("Reset " + name);
 		transform.position = startPos;
 		transform.rotation = startRot;
-		body.SetEnabled(!startDisabled);
-	}
-
-	IEnumerator WAIT() {
-		yield return new WaitForFixedUpdate();
-		can_reset = true;
-	}
-
-	void OnLevelWasLoaded() {
-		StartCoroutine(WAIT());
+		body.velocity = Vector3.zero;
+		body.angularVelocity = Vector3.zero;
 	}
 }

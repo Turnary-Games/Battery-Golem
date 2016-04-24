@@ -49763,6 +49763,48 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 407410, guid: fc5104dc01a74434a94ff2e82e133a81, type: 2}
   m_PrefabInternal: {fileID: 555229519}
+--- !u!1001 &1743708915
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 450282, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450282, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450282, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450282, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450282, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450282, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 450282, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 450282, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d15ea26f01638d84babebb30a3f1844f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1744072678
 GameObject:
   m_ObjectHideFlags: 0
@@ -49869,7 +49911,7 @@ MonoBehaviour:
     Lead programmer
 
 
-    <size=50>Ludvig "smeknamn" efternamn</size>
+    <size=50>Ludvig "Luthen" Parment</size>
 
     Music'
 --- !u!222 &1744072682
@@ -60468,45 +60510,6 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 436380, guid: 833d7677d3332c44686d26830ff54fed, type: 2}
   m_PrefabInternal: {fileID: 642182342}
---- !u!1 &2117007181
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2117007183}
-  - 114: {fileID: 2117007182}
-  m_Layer: 0
-  m_Name: Game Save Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2117007182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2117007181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 639e22d005f559843be29a0dc0c3f594, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2117007183
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2117007181}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
 --- !u!4 &2117231310 stripped
 Transform:
   m_PrefabParentObject: {fileID: 412254, guid: f4ed60751e1064f4ab8d0b680ece1ff8, type: 2}

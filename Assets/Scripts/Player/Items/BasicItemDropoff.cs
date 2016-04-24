@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(UniqueId))]
 [RequireComponent(typeof(_ElectricListener))]
-public class BasicItemDropoff : MonoBehaviour {
+public class BasicItemDropoff : MonoBehaviour, ISavable {
 
 	public int filterID = -1;
 	public Renderer activate;
@@ -29,4 +32,17 @@ public class BasicItemDropoff : MonoBehaviour {
 		}
 	}
 
+	public void OnSave(ref Dictionary<string, object> data) {
+		data["dropoff@activated"] = activated;
+	}
+
+	public void OnLoad(Dictionary<string, object> data) {
+		activated = (bool)data["dropoff@activated"];
+
+		if (activate != null)
+			activate.enabled = activated;
+
+		if (sendMessageTo != null && activated)
+			sendMessageTo.SendMessage(message, SendMessageOptions.DontRequireReceiver);
+	}
 }

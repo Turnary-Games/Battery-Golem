@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146dfdf0492bfad40933ccc04b78f397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueId: d8ee91d7-66c0-4347-8b90-db63179c47c2
+  uniqueId: 
 --- !u!114 &11424718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -579,7 +579,6 @@ MonoBehaviour:
   prefab: Prefabs/Items/Fan
   id: 0
   itemName: Handheld fan
-  startDisabled: 1
   targetSlot: 0
   canBeElectrified: 1
   nearbyVisual: {fileID: 0}

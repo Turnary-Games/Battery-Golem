@@ -16,15 +16,19 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 	public void OnSave(ref Dictionary<string, object> data) {
 		data["player@exitID"] = exitID;
 
-		data["player@equipped"] = new ItemData {
-			prefab = inventory.equipped ? ItemDataBase.GetPrefab(inventory.equipped.prefab) : null,
+		var itemData = new ItemData {
+			prefab = inventory.equipped ? inventory.equipped.prefab : null,
 			uuid = inventory.equipped ? inventory.equipped.FetchUniqueID() : null,
 		};
+		if (itemData.prefab != null)
+			print("SAVE EQUIPPED ITEM AS \"" + itemData.prefab + "\"");
+
+		data["player@equipped"] = itemData;
 
 		for (int i=0; i<inventory.coreItems.Length; i++) {
 			var item = inventory.coreItems[i];
 			data["player@coreItem#" + i] = new ItemData {
-				prefab = item ? ItemDataBase.GetPrefab(item.prefab) : null,
+				prefab = item ? item.prefab : null,
 				uuid = item ? item.FetchUniqueID() : null,
 			};
 		}
@@ -38,7 +42,6 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 		if (exit) {
 			transform.position = exit.transform.position;
 			transform.rotation = exit.transform.rotation;
-			return;
 		}
 
 		// Load coreitems
@@ -49,7 +52,11 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 			ItemData itemData = (ItemData)data["player@coreItem#" + i];
 			if (itemData.prefab == null) continue;
 
-			GameObject clone = Instantiate(itemData.prefab) as GameObject;
+			GameObject clone = Instantiate(ItemDataBase.GetPrefab(itemData.prefab)) as GameObject;
+			
+			UniqueId uuid = clone.GetComponent<UniqueId>();
+			uuid.uniqueId = itemData.uuid;
+
 			_CoreItem item = clone.GetComponent<_CoreItem>();
 
 			if (equippedData.uuid == itemData.uuid) {
@@ -68,7 +75,11 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 
 		if (equippedData.prefab != null) {
 			// Spawn as equipped
-			GameObject clone = Instantiate(equippedData.prefab) as GameObject;
+			GameObject clone = Instantiate(ItemDataBase.GetPrefab(equippedData.prefab)) as GameObject;
+			
+			UniqueId uuid = clone.GetComponent<UniqueId>();
+			uuid.uniqueId = equippedData.uuid;
+
 			_Item item = clone.GetComponent<_Item>();
 
 			inventory.MoveToEquipped(item);
@@ -78,14 +89,15 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 	}
 
 	struct ItemData {
-		public GameObject prefab;
+		public string prefab;
 		public string uuid;
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.Home)) {
+		if (Input.GetKeyDown(KeyCode.Home))
 			GameSaveManager.SaveRoom();
-		}
+		if (Input.GetKeyDown(KeyCode.End))
+			LoadingScreen.LoadRoom(GameSaveManager.currentRoom);
 	}
 
 }

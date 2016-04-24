@@ -198,7 +198,6 @@ MonoBehaviour:
   prefab: Prefabs/Items/Wheel-couple_rod
   id: 12
   itemName: Wheel-couple rod
-  startDisabled: 0
   targetSlot: -1
   canBeElectrified: 0
   nearbyVisual: {fileID: 2351648}
@@ -213,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146dfdf0492bfad40933ccc04b78f397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueId: f016f689-c177-44be-bb82-6b17d13ac790
+  uniqueId: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

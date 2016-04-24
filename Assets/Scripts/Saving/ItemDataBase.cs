@@ -26,7 +26,7 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 			_Item item = id.GetComponent<_Item>();
 			if (!item || item.prefab == "") continue;
 
-			Destroy(item.gameObject);
+			DestroyImmediate(item.gameObject);
 		}
 		
 		// Recreate all items for this room
@@ -39,9 +39,13 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 				if (itemData.scene != GameSaveManager.currentRoom) continue;
 
 				// Create a clone ^^
-				GameObject clone = Instantiate(itemData.prefab, itemData.position, itemData.rotation) as GameObject;
+				print("Spawn in " + itemData.prefab);
+				GameObject clone = Instantiate(GetPrefab(itemData.prefab), itemData.position, itemData.rotation) as GameObject;
 
-				//_Item script = clone.GetComponent<_Item>();
+				_Item script = clone.GetComponent<_Item>();
+				script.startPos = itemData.startPos;
+				script.startRot = itemData.startRot;
+				script.can_reset = true;
 
 				UniqueId unique = clone.GetComponent<UniqueId>();
 				unique.uniqueId = id;
@@ -57,6 +61,8 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 	public void OnSave(ref Dictionary<string, object> data) {
 		if (instance != this && instance != null) return;
 
+		List<string> saved = new List<string>();
+
 		// Save the ones in this room
 		foreach (UniqueId id in FindObjectsOfType<UniqueId>()) {
 			if (id.uniqueId == "") continue;
@@ -69,15 +75,37 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 			if (PlayerController.instance.inventory.equipped == item) continue;
 
 			data["itemdb@" + id.uniqueId] = new ItemData {
-				prefab = GetPrefab(item.prefab),
-				scene =  GameSaveManager.currentRoom,
+				prefab = item.prefab,
+				scene = GameSaveManager.currentRoom,
 				position = item.transform.position,
 				rotation = item.transform.rotation,
 				velocity = item.body ? item.body.velocity : Vector3.zero,
 				angularVelocity = item.body ? item.body.angularVelocity : Vector3.zero,
+				startPos = item.startPos,
+				startRot = item.startRot,
 			};
+
+			// Remember that we saved this one
+			saved.Add(id.uniqueId);
 		}
-		
+
+		List<string> killUs = new List<string>();
+
+		foreach (string key in data.Keys) {
+			if (key.StartsWith("itemdb@")) {
+				string id = key.Substring(7);
+				ItemData itemData = (ItemData)data[key];
+
+				if (itemData.scene == GameSaveManager.currentRoom && !saved.Contains(id)) {
+					// Is saved to be in this room, but was not here this time, which means it got removed
+					// If it jumped to different scene then the itemData.scene should be different
+					killUs.Add(key);
+				}
+			}
+		}
+
+		foreach (string key in killUs)
+			data.Remove(key);
 	}
 
 	public static GameObject GetPrefab(string path) {
@@ -100,8 +128,8 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 		GameSaveManager.roomData[myUUID] = data;
 	}
 
-	struct ItemData {
-		public GameObject prefab;
+	public struct ItemData {
+		public string prefab;
 
 		public int scene;
 		public Vector3 position;
@@ -109,6 +137,9 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 
 		public Vector3 velocity;
 		public Vector3 angularVelocity;
+
+		public Vector3 startPos;
+		public Quaternion startRot;
 	}
 
 }
