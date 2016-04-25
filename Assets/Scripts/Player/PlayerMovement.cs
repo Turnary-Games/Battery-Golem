@@ -31,6 +31,11 @@ public class PlayerMovement : PlayerSubClass {
 	
 	[HideInInspector]
 	public Vector3 outsideMotion;
+
+	[System.NonSerialized]
+	public Vector3? autoMoveTowards;
+	[System.NonSerialized]
+	public int autoMoveID = -1;
 	
 	[HideInInspector]
 	public bool grounded;
@@ -71,13 +76,13 @@ public class PlayerMovement : PlayerSubClass {
 
 	#region Movement algorithms
 	void OnCollisionStay(Collision col) {
-		float mult = 1 / col.contacts.Length;
-		foreach (ContactPoint contact in col.contacts) {
-			var angle = Vector3.Angle(contact.normal, Vector3.up);
-			if (angle > slopeLimit) {
-				body.velocity += contact.normal.SetY(0).normalized * slopeForce * mult * Time.fixedDeltaTime;
-			}
-		}
+		//float mult = 1 / col.contacts.Length;
+		//foreach (ContactPoint contact in col.contacts) {
+		//	var angle = Vector3.Angle(contact.normal, Vector3.up);
+		//	if (angle > slopeLimit) {
+		//		body.velocity += contact.normal.SetY(0).normalized * slopeForce * mult * Time.fixedDeltaTime;
+		//	}
+		//}
 	}
 
 	void RaycastGround() {
@@ -127,6 +132,8 @@ public class PlayerMovement : PlayerSubClass {
 		else if (interaction && interaction.talkingTo)
 			// Dont move if talking to a NPC
 			motion = Vector3.zero;
+		else if (autoMoveTowards.HasValue)
+			motion = (autoMoveTowards.Value - transform.position).SetY(0).normalized * moveSpeed;
 		else
 			// Use the players input for moving
 			motion = GetAxis() * moveSpeed;
@@ -166,7 +173,9 @@ public class PlayerMovement : PlayerSubClass {
 		else if (interaction && interaction.talkingTo != null)
 			// Turn towards NPC
 			rawAxis = interaction.talkingTo.GetAxis(from:transform.position);
-		else {
+		else if (autoMoveTowards.HasValue) {
+			rawAxis = (autoMoveTowards.Value - transform.position).SetY(0).normalized;
+		} else {
 			// Listen to users input
 			rawAxis = new Vector3(Input.GetAxisRaw("HorizontalLook"), 0, Input.GetAxisRaw("VerticalLook"));
 
