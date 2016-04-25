@@ -36,7 +36,7 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 
 	public void OnLoad(Dictionary<string, object> data) {
 		// Goto position
-		int exitID = (int)data["player@exitID"];
+		exitID = (int)data["player@exitID"];
 		
 		SpawnPoint exit = SpawnPoint.GetFromID(exitID);
 		if (exit) {

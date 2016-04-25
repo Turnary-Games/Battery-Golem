@@ -15,6 +15,7 @@ public class PlayerPushing : PlayerSubClass {
 		set { var old = _point; _point = value; if (_point != old) OnPointChange(old); }
 	}
 	private PushingPoint _point;
+	private PushingHighlight lastHover;
 
 	public bool hasPoint { get { return point != null; } }
 	public bool pointBreak { get { return hasPoint ? Mathf.Abs(point.playerPos.y - transform.position.y) > breakDist : false; } }
@@ -24,6 +25,17 @@ public class PlayerPushing : PlayerSubClass {
 		if (pointBreak) {
 			point = null;
 		}
+
+		// Visualization
+		var pushingPoint = GetClosestPoint();
+		PushingHighlight hover = pushingPoint ? pushingPoint.highlight : null;
+
+		if (hover != lastHover) {
+			// Hover changed
+			if (hover) hover.SetHighlightActive(true);
+			if (lastHover) lastHover.SetHighlightActive(false);
+		}
+		lastHover = hover;
 	}
 
 	/// <summary>
@@ -35,14 +47,21 @@ public class PlayerPushing : PlayerSubClass {
 		if (hasPoint) return;
 		if (!movement.grounded) return;
 
+		// Find the closest one
+		PushingPoint closest = GetClosestPoint();
+
+		if (closest)
+			point = closest;
+	}
+
+	PushingPoint GetClosestPoint() {
 		// Remove all invalid points. If for some reason they occur.
 		points.RemoveAll(p => p == null);
 
 		// Find the closest one
 		Closest<PushingPoint> closest = PushingPoint.GetClosest(points, controller.characterCenter, interaction.ignoreYAxis);
 
-		if (closest.valid)
-			point = closest.obj;
+		return closest.obj;
 	}
 
 	public Vector3 GetMovement() {

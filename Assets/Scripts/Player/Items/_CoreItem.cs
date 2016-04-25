@@ -5,12 +5,13 @@ using ExtensionMethods;
 
 /*
 
-	Equippable just means that it's equippable by the player
+	CoreItems can be stored in the players inventory.
 
 */
 
 public class _CoreItem : _Item {
 
+	public int targetSlot = -1;
 	[HideInInspector]
 	public PlayerInventory inventory;
 	public bool equipped { get { return inventory != null && inventory.equipped == this; } }

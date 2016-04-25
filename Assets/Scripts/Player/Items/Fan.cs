@@ -14,10 +14,21 @@ public class Fan : _CoreItem {
 
 	public ParticleSystem particles;
 	public RotateEffect rotator;
+	public Renderer[] nearbyVisuals;
 
 	protected override void Start() {
 		base.Start();
 		SetParticleEmission(false);
+	}
+
+	void Update() {
+		if (nearbyVisual) {
+			foreach (var ren in nearbyVisuals) {
+				if (ren) {
+					ren.enabled = nearbyVisual.enabled;
+				}
+			}
+		}
 	}
 
 	void OnElectrify() {

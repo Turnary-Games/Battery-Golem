@@ -36,7 +36,6 @@ public class _Item : Searchable {
 
 	[Header("_Equipable fields")]
 	
-	public int targetSlot = -1;
 	[HideInInspector]
 	public bool canBeElectrified = false;
 	public Renderer nearbyVisual;

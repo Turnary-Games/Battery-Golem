@@ -18,6 +18,17 @@ public class PushingPoint : Searchable {
 
 	public override bool valid { get { return isActiveAndEnabled; } }
 
+	[HideInInspector]
+	public PushingHighlight highlight; 
+
+	protected override void Awake() {
+		// Searchable awake function
+		base.Awake();
+
+		// Get the parent pushing highlight, if any
+		highlight = body.GetComponent<PushingHighlight>();
+	}
+
 	void Start() {}
 
 #if UNITY_EDITOR

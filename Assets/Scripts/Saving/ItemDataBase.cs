@@ -39,7 +39,6 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 				if (itemData.scene != GameSaveManager.currentRoom) continue;
 
 				// Create a clone ^^
-				print("Spawn in " + itemData.prefab);
 				GameObject clone = Instantiate(GetPrefab(itemData.prefab), itemData.position, itemData.rotation) as GameObject;
 
 				_Item script = clone.GetComponent<_Item>();

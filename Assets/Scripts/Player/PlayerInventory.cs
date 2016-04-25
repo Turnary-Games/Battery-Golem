@@ -63,7 +63,7 @@ public class PlayerInventory : PlayerSubClass {
 
 		if (item is _CoreItem) {
 			var core = item as _CoreItem;
-			coreItems[item.targetSlot] = core;
+			coreItems[core.targetSlot] = core;
 			hud.UnlockItem(GetItemSlot(core));
 			MoveToInventory(item);
 		} else {
