@@ -315,7 +315,7 @@ GameObject:
   - 114: {fileID: 11445410}
   - 114: {fileID: 11487826}
   m_Layer: 12
-  m_Name: Insect
+  m_Name: Insect 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
