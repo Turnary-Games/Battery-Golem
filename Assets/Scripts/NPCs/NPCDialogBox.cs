@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 public class NPCDialogBox : MonoBehaviour {
 
@@ -10,10 +11,19 @@ public class NPCDialogBox : MonoBehaviour {
 	public float wordPerSecond = 1;
 	public float flashPeriod = 1;
 	
+	[System.NonSerialized]
 	public string dialog;
+	[HideInInspector]
 	public Transform target;
 
-	public bool done { get { return dialogText.text.Length == dialog.Length; } }
+	[Header("Audio")]
+	public AudioSource playOnLetter;
+	[HideInInspector]
+	public float randomPitchMin = 1;
+	[HideInInspector]
+	public float randomPitchMax = 1;
+
+	public bool done { get { return dialogText != null && dialog != null && dialogText.text.Length == dialog.Length; } }
 	
 	private float timePassed = 0;
 
@@ -22,8 +32,49 @@ public class NPCDialogBox : MonoBehaviour {
 			if (wordPerSecond <= 0) {
 				dialogText.text = dialog;
 			} else {
+				// Next letter
 				timePassed += Time.deltaTime;
-				dialogText.text = dialog.Substring(0, Mathf.Min(Mathf.FloorToInt(timePassed * wordPerSecond), dialog.Length));
+
+				int oldLength = dialogText.text.Length;
+				int end = Mathf.Min(Mathf.FloorToInt(timePassed * wordPerSecond), dialog.Length);
+				dialogText.text = dialog.Substring(0, end);
+
+				if (oldLength < dialog.Length) {
+					string newText = dialog.Substring(oldLength, end - oldLength);
+
+					if (newText.Length > 0 && Regex.IsMatch(newText, "\\w") && playOnLetter && playOnLetter.clip) {
+						GameObject clone = new GameObject(name + " audio");
+						clone.transform.SetParent(playOnLetter.transform);
+						clone.transform.position = Vector3.zero;
+						clone.transform.rotation = Quaternion.identity;
+						clone.transform.localScale = Vector3.one;
+
+						AudioSource aud = clone.AddComponent<AudioSource>();
+
+						aud.outputAudioMixerGroup = playOnLetter.outputAudioMixerGroup;
+						aud.playOnAwake = false;
+						aud.loop = false;
+						aud.clip = playOnLetter.clip;
+						aud.volume = playOnLetter.volume;
+						aud.priority = playOnLetter.priority;
+						aud.panStereo = playOnLetter.panStereo;
+						aud.spatialBlend = playOnLetter.spatialBlend;
+						aud.reverbZoneMix = playOnLetter.reverbZoneMix;
+						aud.pitch = Random.Range(randomPitchMin, randomPitchMax);
+						aud.bypassReverbZones = playOnLetter.bypassReverbZones;
+						aud.bypassEffects = playOnLetter.bypassEffects;
+						aud.bypassListenerEffects = playOnLetter.bypassListenerEffects;
+						// 3D sound settings
+						aud.dopplerLevel = playOnLetter.dopplerLevel;
+						aud.spread = playOnLetter.spread;
+						aud.rolloffMode = playOnLetter.rolloffMode;
+						aud.minDistance = playOnLetter.minDistance;
+						aud.maxDistance = playOnLetter.maxDistance;
+
+						aud.Play();
+						Destroy(clone, aud.clip.length);
+					}
+				}
 			}
 		}
 
@@ -48,6 +99,7 @@ public class NPCDialogBox : MonoBehaviour {
 	public void NewDialog(string dialog) {
 		this.dialog = dialog;
 		timePassed = 0;
+		dialogText.text = "";
 	}
 
 	public void SkipAnimation() {

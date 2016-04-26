@@ -10,9 +10,12 @@ public class BasicItemDropoff : MonoBehaviour, ISavable {
 	public int filterID = -1;
 	public Renderer activate;
 	public bool activated;
-	[Space]
+	[Header("Send message")]
 	public GameObject sendMessageTo;
 	public string message = "OnDropoff";
+
+	[Header("Audio")]
+	public AudioSource audioSource;
 
 	void OnInteractStart(PlayerController source) {
 		if (activated) return;
@@ -29,6 +32,9 @@ public class BasicItemDropoff : MonoBehaviour, ISavable {
 
 			if (sendMessageTo != null)
 				sendMessageTo.SendMessage(message, SendMessageOptions.DontRequireReceiver);
+
+			if (audioSource != null)
+				audioSource.Play();
 		}
 	}
 

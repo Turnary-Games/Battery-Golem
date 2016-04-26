@@ -24,7 +24,7 @@ public class AudioSourceSwitch : MonoBehaviour {
 		SetAudioState(inverted);
 	}
 
-	void SetAudioState(bool on) {
+	public virtual void SetAudioState(bool on) {
 		if (first == null) return;
 		
 		if (mode == Mode.playAndStop) {

@@ -9,6 +9,9 @@ public class Lever : MonoBehaviour, ISavable {
 	public Animator anim;
 	public string parameter = "Flipped";
 
+	[Header("Audio")]
+	public AudioSource audioSource;
+
 	[HideInInspector]
 	public bool on = false;
 	private bool idle = true;
@@ -35,6 +38,8 @@ public class Lever : MonoBehaviour, ISavable {
 	// Called by the animation
 	void AnimationIdle() {
 		idle = true;
+		if (audioSource)
+			audioSource.Play();
 	}
 
 	public void OnSave(ref Dictionary<string, object> data) {

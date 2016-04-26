@@ -19,7 +19,7 @@ public class PushingPoint : Searchable {
 	public override bool valid { get { return isActiveAndEnabled; } }
 
 	[HideInInspector]
-	public PushingHighlight highlight; 
+	public PushingHighlight highlight;
 
 	protected override void Awake() {
 		// Searchable awake function
