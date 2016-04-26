@@ -9,6 +9,7 @@ public class PlayerSound : PlayerSubClass {
 	public AudioSource electrify;
 	public AudioSource itemEquipped;
 	public AudioSource itemUnequipped;
+	public AudioSource death;
 
 	// Called by the walking animation
 	public void OnFootstep() {
@@ -35,6 +36,11 @@ public class PlayerSound : PlayerSubClass {
 	// Called by PlayerMovement
 	public void OnGrounded() {
 		grounded.Play();
+	}
+
+	// Called by PlayerHealth
+	public void OnDeath() {
+		death.Play();
 	}
 
 }

@@ -19,7 +19,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 	public bool destroyIfPassthrough = false;
 
 	public System.Action<LoadingScreen> loadedCallback;
-
+	
 	private float start;
 	private State state = State.fadeIn;
 
@@ -44,6 +44,9 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 				else
 					fade = Mathf.InverseLerp(0, fadeTime, Time.time - start);
 
+				if (BackgroundMusic.instance)
+					BackgroundMusic.instance.SetAudioFading(1f - fade);
+				
 				foreach(var img in fadeUs)
 					img.color = new Color(img.color.r, img.color.g, img.color.b, fade);
 
@@ -63,6 +66,9 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 					fade = 1;
 				else
 					fade = Mathf.InverseLerp(0, fadeTime, Time.time - start);
+
+				if (BackgroundMusic.instance)
+					BackgroundMusic.instance.SetAudioFading(fade);
 
 				foreach (var img in fadeUs)
 					img.color = new Color(img.color.r, img.color.g, img.color.b, 1 - fade);

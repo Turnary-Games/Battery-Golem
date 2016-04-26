@@ -63,7 +63,6 @@ public class PlayerHealth : PlayerSubClass {
 	}
 
 	void OnDeath() {
-		print("DIED!");
 		dead = true;
 
 		//deathParticles.SetActive(true);
@@ -74,6 +73,9 @@ public class PlayerHealth : PlayerSubClass {
 		// Disable electrifying just in case
 		var em = interaction.electricParticles.emission;
 		em.enabled = false;
+
+		if (sound)
+			sound.OnDeath();
 	}
 
 	void OnTriggerEnter(Collider other) {
