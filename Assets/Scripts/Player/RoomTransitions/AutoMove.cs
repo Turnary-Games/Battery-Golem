@@ -3,7 +3,7 @@ using System.Collections;
 using ExtensionMethods;
 
 public class AutoMove : MonoBehaviour {
-
+	
 	public Action mode;
 	[HideInInspector]
 	public Vector3 vector;
@@ -16,6 +16,9 @@ public class AutoMove : MonoBehaviour {
 	public int idMustBe = -1;
 	[HideInInspector]
 	public int setIDTo = -1;
+
+	public Collider disableOnEnter;
+	public Collider enableOnEnter;
 
 	Vector3 target { get { return relativeTo == Space.Self ? transform.TransformPoint(vector) : vector; } }
 
@@ -49,6 +52,11 @@ public class AutoMove : MonoBehaviour {
 				PlayerController.instance.movement.autoMoveTowards = null;
 				PlayerController.instance.movement.autoMoveID = -1;
 			}
+
+			if (disableOnEnter)
+				disableOnEnter.enabled = false;
+			if (enableOnEnter)
+				enableOnEnter.enabled = true;
 		}
 	}
 

@@ -688,7 +688,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 249.07, y: -0.2908437, z: 96.34}
+  m_LocalPosition: {x: -21.358734, y: 0.009155273, z: 38.112724}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 476006}
@@ -1810,8 +1810,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9edb3d3dfc749494d8869b0fea4f257a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.4
+  m_Pitch: 0.95
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -1885,8 +1885,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: f301ab2219cd86449a6b9085a34d55b0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.8
+  m_Pitch: 0.9
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -2035,8 +2035,8 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9edb3d3dfc749494d8869b0fea4f257a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.4
+  m_Pitch: 0.9
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2180,11 +2180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObj: {fileID: 476006}
-  speed: 0
-  actionIfInvalid: 0
-  mode: 1
-  inverse: 0
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: 2.5, z: 0}
 --- !u!114 &11433548
 MonoBehaviour:
   m_ObjectHideFlags: 1

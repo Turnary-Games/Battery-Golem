@@ -125,10 +125,10 @@ public class PlayerInteraction : PlayerSubClass {
 					// Try to interact
 					if (!_ElectricListener.InteractAt(controller, electricPoint)) {
 						// Didn't interact with anything
-						if (inventory.equipped)
+						if (inventory.equipped && !(inventory.equipped is _CoreItem))
 							// Drop equipped item
 							inventory.Unequip();
-						else
+						else if (inventory.equipped == null)
 							// Grab an object
 							pushing.TryToGrab();
 					}

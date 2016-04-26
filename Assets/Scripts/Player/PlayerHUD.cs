@@ -27,7 +27,8 @@ public class PlayerHUD : PlayerSubClass {
 	private int hoverKey; // hotkeys
 
 	private Vector3 mouseDelta = Vector3.zero;
-	
+	private Vector3 mouseStartDelta = Vector3.zero;
+
 	[HideInInspector]
 	public bool isOpen;
 	[HideInInspector] // serialize it, but don't show it in the inspector
@@ -149,6 +150,7 @@ public class PlayerHUD : PlayerSubClass {
 	int CalcSelected(Vector2 delta) {
 		float dist = delta.magnitude;
 		if (dist < minDist || dist > maxDist) return -1;
+		if (delta == mouseStartDelta.ToVector2()) return -1;
 
 		float angle = VectorHelper.ToDegrees(delta) + angleOffset;
 		return (Mathf.FloorToInt((angle+360)%360 / 90) * (clockwise ? -1 : 1) + intOffset + leaves.Length) % leaves.Length;
@@ -200,6 +202,7 @@ public class PlayerHUD : PlayerSubClass {
 		}
 
 		isOpen = state;
+		mouseStartDelta = CalcMouseDelta();
 	}
 	
 }

@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(_ElectricListener))]
 public class AudioSourceSwitch : MonoBehaviour {
 
-	public AudioSource audioSource;
+	public List<AudioSource> audioSource = new List<AudioSource>();
 	public Mode mode = Mode.playAndStop;
 	public bool inverted = false;
 	private bool isPaused;
 	
+	public AudioSource first { get { return audioSource.Find(x => x != null); } }
+
 	void Start() {
 		SetAudioState(inverted);
 	}
@@ -22,27 +25,29 @@ public class AudioSourceSwitch : MonoBehaviour {
 	}
 
 	void SetAudioState(bool on) {
+		if (first == null) return;
+		
 		if (mode == Mode.playAndStop) {
 
-			if (on && !audioSource.isPlaying)
-				audioSource.Play();
+			if (on && !first.isPlaying)
+				audioSource.ForEach(x => x.Play());
 
-			if (!on && audioSource.isPlaying)
-				audioSource.Stop();
+			if (!on && first.isPlaying)
+				audioSource.ForEach(x => x.Stop());
 			
 		} else if (mode == Mode.pauseAndResume) {
 
-			if (on && !audioSource.isPlaying) {
+			if (on && !first.isPlaying) {
 				if (isPaused) {
-					audioSource.UnPause();
+					audioSource.ForEach(x => x.UnPause());
 					isPaused = false;
 				} else {
-					audioSource.Play();
+					audioSource.ForEach(x => x.Play());
 				}
 			}
 				
-			if (!on && audioSource.isPlaying) {
-				audioSource.Pause();
+			if (!on && first.isPlaying) {
+				audioSource.ForEach(x => x.Pause());
 				isPaused = true;
 			}
 				
