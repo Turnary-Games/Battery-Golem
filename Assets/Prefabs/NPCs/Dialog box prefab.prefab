@@ -281,8 +281,8 @@ MonoBehaviour:
   flashPeriod: 1
   target: {fileID: 0}
   playOnLetter: {fileID: 8218752}
-  randomPitchMin: 0.69142854
-  randomPitchMax: 1.48
+  randomPitchMin: 0.87892854
+  randomPitchMax: 1.105
 --- !u!114 &11472384
 MonoBehaviour:
   m_ObjectHideFlags: 1
