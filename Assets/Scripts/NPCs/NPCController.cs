@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using ExtensionMethods;
 using System;
 
+[DisallowMultipleComponent]
 [RequireComponent(typeof(UniqueId))]
 [RequireComponent(typeof(_ElectricListener))]
 public class NPCController : MonoBehaviour, ISavable {
@@ -20,12 +21,13 @@ public class NPCController : MonoBehaviour, ISavable {
 	public bool lookAtWhileIdle = true;
 	public Vector3 idleAngle;
 	public float forwardAngle;
+	[HideInInspector]
 	public AnimationCurve headWeight = new AnimationCurve(new Keyframe(0, 1), new Keyframe(90, 1), new Keyframe(180, .5f));
 	
 	private NPCDialogBox dialogUI;
 	private int currentDialog = -1;
 
-	private bool isTalking { get { return currentDialog != -1; } }
+	public bool isTalking { get { return currentDialog != -1; } }
 
 #if UNITY_EDITOR
 	void OnDrawGizmosSelected() {
@@ -201,6 +203,24 @@ public class NPCController : MonoBehaviour, ISavable {
 		dialogs = (List<Dialog>)data["npc@dialog_list"];
 	}
 	#endregion
+
+	public void Override(List<Dialog> newDialog) {
+		this.dialogs = CopyDialog(newDialog);
+		currentDialog = -1;
+	}
+
+	public static List<Dialog> CopyDialog(List<Dialog> list) {
+		var copy = new List<Dialog>();
+		for (int i = 0; i < list.Count; i++) {
+			var dialog = list[i];
+
+			copy.Add(new Dialog {
+				messages = new List<Dialog.Message>(dialog.messages),
+				playOnce = dialog.playOnce,
+			});
+		}
+		return copy;
+	}
 
 	[System.Serializable]
 	public struct Dialog {
