@@ -12,6 +12,10 @@ public class WaterDrop : MonoBehaviour {
 		particles.Play();
 		Destroy(particles.gameObject, particles.startLifetime);
 
+		var aud = particles.GetComponentInChildren<AudioSource>();
+		if (aud)
+			aud.Play();
+
         Destroy(gameObject, 0.1f);
     }
 }

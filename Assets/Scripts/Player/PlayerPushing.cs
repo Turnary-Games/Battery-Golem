@@ -27,7 +27,7 @@ public class PlayerPushing : PlayerSubClass {
 		}
 
 		// Visualization
-		var pushingPoint = GetClosestPoint();
+		var pushingPoint = hasPoint ? null : GetClosestPoint();
 		PushingHighlight hover = pushingPoint ? pushingPoint.highlight : null;
 
 		if (hover != lastHover) {
