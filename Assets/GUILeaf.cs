@@ -10,7 +10,7 @@ public class GUILeaf : MonoBehaviour {
 	public void SpawnPreviewModel() {
 		if (previewPrefab == null) return;
 		
-		GameObject clone = Instantiate(previewPrefab);
+		GameObject clone = Instantiate(previewPrefab) as GameObject;
 		clone.transform.SetParent(spawnPreviewAt);
 		clone.transform.localPosition = previewPrefab.transform.localPosition;
 		clone.transform.localRotation = previewPrefab.transform.localRotation;
