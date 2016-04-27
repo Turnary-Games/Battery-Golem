@@ -489,6 +489,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 2389388}
+  audioSource: {fileID: 0}
+  moveThreshold: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
