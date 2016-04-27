@@ -9,6 +9,11 @@ public class RoomTransitionPoint : MonoBehaviour {
 	public int exitID = -1;
 	public bool openCredits;
 
+	[HideInInspector]
+	public bool filter;
+	[HideInInspector]
+	public int idMustBe = -1;
+
 	bool works = false;
 
 	void Awake() {
@@ -20,6 +25,8 @@ public class RoomTransitionPoint : MonoBehaviour {
 
 		GameObject main = col.GetMainObject();
 		if (main.tag == "Player") {
+			if (filter && PlayerController.instance.movement.autoMoveID != idMustBe) return;
+			
 			works = false;
 
 			PlayerSaving.SetExitID(exitID);
