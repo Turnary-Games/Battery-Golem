@@ -8,7 +8,8 @@ public class SplashScreen : MonoBehaviour {
 	public int maneMenu;
 	
 	public void JumpToManeMenu() {
-		SceneManager.LoadScene(maneMenu);
+		LoadingScreen.LoadRoom(maneMenu);
+		//SceneManager.LoadScene(maneMenu);
 	}	
 
 }
