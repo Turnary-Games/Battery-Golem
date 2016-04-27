@@ -1018,7 +1018,7 @@ MonoBehaviour:
   nearbyVisual: {fileID: 2317644}
   targetSlot: 0
   inventory: {fileID: 0}
-  speed: 5.02
+  speed: 10
   power: 4
   particles: {fileID: 19806932}
   rotator: {fileID: 11490212}
