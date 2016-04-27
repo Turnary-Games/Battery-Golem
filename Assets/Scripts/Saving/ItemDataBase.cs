@@ -25,6 +25,18 @@ public class ItemDataBase : SingletonBase<ItemDataBase>, ISavable {
 			if (id.uniqueId == "") continue;
 			_Item item = id.GetComponent<_Item>();
 			if (!item || item.prefab == "") continue;
+			
+			// Check if player holds this item
+			if (PlayerController.instance && PlayerController.instance.inventory) {
+				bool skip = false;
+				foreach (_CoreItem c in PlayerController.instance.inventory.coreItems) {
+					if (c == item) {
+						skip = true;
+						break;
+					}
+				}
+				if (skip) continue;
+			}
 
 			DestroyImmediate(item.gameObject);
 		}

@@ -53,7 +53,7 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 			if (itemData.prefab == null) continue;
 
 			GameObject clone = Instantiate(ItemDataBase.GetPrefab(itemData.prefab)) as GameObject;
-			
+
 			UniqueId uuid = clone.GetComponent<UniqueId>();
 			uuid.uniqueId = itemData.uuid;
 

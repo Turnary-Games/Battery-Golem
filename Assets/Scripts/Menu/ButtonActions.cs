@@ -9,6 +9,7 @@ public class ButtonActions : MonoBehaviour {
 	public GameObject mainMenu;
 	public GameObject optionsMenu;
 	public GameObject creditsMenu;
+
 	[Header("Volume options")]
 	public AudioMixer mixer;
 	
@@ -26,6 +27,16 @@ public class ButtonActions : MonoBehaviour {
 
 	public Slider ambientVolume;
 	public Text ambientPercent;
+
+	[Header("Audio")]
+	public AudioSource buttonClicked;
+
+	void Start() {
+		// Add PlayClickSound to ALL buttons
+		foreach (var btn in GetComponentsInChildren<Button>(true)) {
+			btn.onClick.AddListener(PlayClickSound);
+		}
+	}
 
 	public void JumpToScene(string name) {
 		LoadingScreen.LoadRoom(SceneManager.GetSceneByName(name).buildIndex);
@@ -77,5 +88,11 @@ public class ButtonActions : MonoBehaviour {
 
 	string ToPercent(Slider slider) {
 		return Mathf.FloorToInt(slider.normalizedValue * 100).ToString() + "%";
-	} 
+	}
+
+	public void PlayClickSound() {
+		if (buttonClicked)
+			buttonClicked.Play();
+	}
+
 }
