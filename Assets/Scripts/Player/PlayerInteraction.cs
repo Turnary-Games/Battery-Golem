@@ -19,8 +19,11 @@ public class PlayerInteraction : PlayerSubClass {
 
 	[HideInInspector]
 	public NPCController talkingTo;
-	
-	private _Item lastHover;
+
+	[System.NonSerialized]
+	public _Item hover;
+	[System.NonSerialized]
+	public _Item lastHover;
 	private bool elecDown;
 	private bool inteDown;
 
@@ -78,7 +81,7 @@ public class PlayerInteraction : PlayerSubClass {
 	private bool _armsUp;
 	void Update() {
 		// Visualization
-		_Item hover = GetItemInRange();
+		hover = GetItemInRange();
 
 		if (hover != lastHover) {
 			// Hover changed
@@ -168,6 +171,7 @@ public class PlayerInteraction : PlayerSubClass {
 
 	public _Item GetItemInRange() {
 		if (inventory.equipped) return null;
+		if (pushing && pushing.hasPoint) return null;
 		return Searchable.GetClosest<_Item>(pickupPoint.position, pickupRadius, controller.characterCenter, ignoreYAxis).obj;
 	}
 

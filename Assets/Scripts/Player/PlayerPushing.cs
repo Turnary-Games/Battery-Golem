@@ -27,7 +27,7 @@ public class PlayerPushing : PlayerSubClass {
 		}
 
 		// Visualization
-		var pushingPoint = hasPoint ? null : GetClosestPoint();
+		var pushingPoint = GetClosestPoint();
 		PushingHighlight hover = pushingPoint ? pushingPoint.highlight : null;
 
 		if (hover != lastHover) {
@@ -55,9 +55,12 @@ public class PlayerPushing : PlayerSubClass {
 	}
 
 	PushingPoint GetClosestPoint() {
+		if (hasPoint) return null;
+		if (inventory && inventory.equipped) return null;
+		if (interaction && interaction.hover) return null;
+
 		// Remove all invalid points. If for some reason they occur.
 		points.RemoveAll(p => p == null);
-
 		// Find the closest one
 		Closest<PushingPoint> closest = PushingPoint.GetClosest(points, controller.characterCenter, interaction.ignoreYAxis);
 
