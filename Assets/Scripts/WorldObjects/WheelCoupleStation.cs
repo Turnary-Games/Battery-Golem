@@ -50,7 +50,6 @@ public class WheelCoupleStation : MonoBehaviour, ISavable {
 	// Since acceptElectrifying is false on this go it wont trigger by mistake
 	// But these will invoke via the FunctionRelay thats attatched to the electricspot
 	void OnElectrify() {
-		print("APAELWHAE"+Time.time);
 		if (rodInPlace) {
 			if (noWheelNorRod && noWheelNorRod.isPlaying) noWheelNorRod.Stop();
 			if (wheelButNoRod && wheelButNoRod.isPlaying) wheelButNoRod.Stop();
