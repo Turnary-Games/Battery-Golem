@@ -193,6 +193,11 @@ public class PlayerHUD : PlayerSubClass {
 				anim.SetBool("Open", item != null);
 				anim.SetBool("Slow", false);
 
+				if (item != null) {
+					GUILeaf leaf = anim.GetComponentInChildren<GUILeaf>();
+					leaf.previewPrefab = item.preview;
+				}
+
 				leaves[slot] = anim;
             } else {
 				// Remove leaves

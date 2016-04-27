@@ -12,6 +12,7 @@ using ExtensionMethods;
 public class _CoreItem : _Item {
 
 	public int targetSlot = -1;
+	public GameObject preview;
 	[HideInInspector]
 	public PlayerInventory inventory;
 	public bool equipped { get { return inventory != null && inventory.equipped == this; } }

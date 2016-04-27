@@ -1017,6 +1017,7 @@ MonoBehaviour:
   canBeElectrified: 1
   nearbyVisual: {fileID: 2317644}
   targetSlot: 0
+  preview: {fileID: 174460, guid: 835a19fb82f466e4991f9bdf3037decc, type: 2}
   inventory: {fileID: 0}
   speed: 10
   power: 4

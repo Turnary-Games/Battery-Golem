@@ -130,6 +130,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 472164}
   - 95: {fileID: 9566168}
+  - 114: {fileID: 11490492}
   m_Layer: 5
   m_Name: model
   m_TagString: Untagged
@@ -270,8 +271,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113076}
-  m_LocalRotation: {x: 0.00000001186962, y: 5.709462e-10, z: -0.00000023841858, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.27059817, y: -0.27059802, z: 0.6532813, w: 0.65328175}
+  m_LocalPosition: {x: 173.9, y: 2.5091553, z: 110.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472164}
@@ -410,6 +411,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11490492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 134632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c872d2bb7759c2d47a8ced7c2890d74f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPreviewAt: {fileID: 461612}
+  previewPrefab: {fileID: 0}
 --- !u!137 &13759950
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
