@@ -277,12 +277,12 @@ MonoBehaviour:
   dialogText: {fileID: 11454046}
   continueText: {fileID: 11472384}
   continueIcon: {fileID: 11410004}
-  wordPerSecond: 20
+  wordPerSecond: 15
   flashPeriod: 1
   target: {fileID: 0}
   playOnLetter: {fileID: 8218752}
-  randomPitchMin: 0.87892854
-  randomPitchMax: 1.105
+  randomPitchMin: 0.9997339
+  randomPitchMax: 1.1452684
 --- !u!114 &11472384
 MonoBehaviour:
   m_ObjectHideFlags: 1
