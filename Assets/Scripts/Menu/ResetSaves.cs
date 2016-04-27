@@ -6,11 +6,10 @@ using System.IO;
 public class ResetSaves : MonoBehaviour {
 	
 	void Awake () {
-		Reset();
+		ResetAllRooms();
 	}
 
-	public static void Reset() {
-		//LevelSerializer.ClearCheckpoint();
-		//RoomManager.rooms = new Dictionary<string, string>();
+	public static void ResetAllRooms() {
+		GameSaveManager.roomData = new Dictionary<string, Dictionary<string, object>>();
 	}
 }
