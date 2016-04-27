@@ -7,7 +7,6 @@ public class RoomTransitionPoint : MonoBehaviour {
 	[SceneDropDown]
 	public int gotoRoomOnTrigger = -1;
 	public int exitID = -1;
-	[HideInInspector]
 	public bool openCredits;
 
 	bool works = false;

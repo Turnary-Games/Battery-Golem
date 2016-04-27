@@ -6,6 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Scenes/splash.unity
+  - enabled: 1
     path: Assets/_Scenes/mane_menu.unity
   - enabled: 1
     path: Assets/_Scenes/Section1.unity

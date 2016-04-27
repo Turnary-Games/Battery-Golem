@@ -15,8 +15,14 @@ public class WheelCoupleStation : MonoBehaviour, ISavable {
 	[Space]
 	public Renderer wheelRenderer;
 	public int wheelID;
+
+	[Header("Audio")]
+	public AudioSource noWheelNorRod;
+	public AudioSource wheelButNoRod;
+	public AudioSource wheelAndRod;
 	
 	private bool wheelInPlace { get { return wheelRenderer ? wheelRenderer.enabled : false; } }
+	private bool rodInPlace { get { return rodRenderer ? rodRenderer.enabled : false; } }
 	
 	void OnInteractStart(PlayerController source) {
 		_Item item = source.inventory.equipped;
@@ -39,6 +45,30 @@ public class WheelCoupleStation : MonoBehaviour, ISavable {
 
 			wheelRenderer.enabled = true;
 		}
+	}
+
+	// Since acceptElectrifying is false on this go it wont trigger by mistake
+	// But these will invoke via the FunctionRelay thats attatched to the electricspot
+	void OnElectrify() {
+		if (rodInPlace) {
+			if (noWheelNorRod && noWheelNorRod.isPlaying) noWheelNorRod.Stop();
+			if (wheelButNoRod && wheelButNoRod.isPlaying) wheelButNoRod.Stop();
+			if (wheelAndRod && !wheelAndRod.isPlaying) wheelAndRod.Play();
+		} else if (wheelInPlace) {
+			if (noWheelNorRod && noWheelNorRod.isPlaying) noWheelNorRod.Stop();
+			if (wheelButNoRod && !wheelButNoRod.isPlaying) wheelButNoRod.Play();
+			if (wheelAndRod && wheelAndRod.isPlaying) wheelAndRod.Stop();
+		} else {
+			if (noWheelNorRod && !noWheelNorRod.isPlaying) noWheelNorRod.Play();
+			if (wheelButNoRod && wheelButNoRod.isPlaying) wheelButNoRod.Stop();
+			if (wheelAndRod && wheelAndRod.isPlaying) wheelAndRod.Stop();
+		}
+	}
+
+	void OnElectrifyEnd() {
+		if (noWheelNorRod && noWheelNorRod.isPlaying) noWheelNorRod.Stop();
+		if (wheelButNoRod && wheelButNoRod.isPlaying) wheelButNoRod.Stop();
+		if (wheelAndRod && wheelAndRod.isPlaying) wheelAndRod.Stop();
 	}
 
 	public void OnSave(ref Dictionary<string, object> data) {
