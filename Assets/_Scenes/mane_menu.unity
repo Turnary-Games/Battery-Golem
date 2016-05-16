@@ -7245,10 +7245,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 374168017}
   m_HandleRect: {fileID: 183309697}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -17548,10 +17548,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 46911821}
   m_HandleRect: {fileID: 109778251}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -18029,10 +18029,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 2089706385}
   m_HandleRect: {fileID: 1167588550}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -22734,6 +22734,8 @@ MonoBehaviour:
   ambientVolume: {fileID: 696233649}
   ambientPercent: {fileID: 193135513}
   buttonClicked: {fileID: 190898633}
+  minDb: -40
+  maxDb: 0
 --- !u!1 &879617533
 GameObject:
   m_ObjectHideFlags: 0
@@ -29390,10 +29392,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1993151378}
   m_HandleRect: {fileID: 943115500}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -46172,10 +46174,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1261747632}
   m_HandleRect: {fileID: 1331584856}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

@@ -30,6 +30,8 @@ public class ButtonActions : MonoBehaviour {
 
 	[Header("Audio")]
 	public AudioSource buttonClicked;
+	public float minDb = -40;
+	public float maxDb = 0;
 
 	void Start() {
 		// Add PlayClickSound to ALL buttons
@@ -73,11 +75,11 @@ public class ButtonActions : MonoBehaviour {
 	}
 
 	public void UpdateVolume() {
-		mixer.SetFloat("Volume_Master", masterVolume.value);
-		mixer.SetFloat("Volume_Music", musicVolume.value);
-		mixer.SetFloat("Volume_SFX", SFXVolume.value);
-		mixer.SetFloat("Volume_NPC", NPCVolume.value);
-		mixer.SetFloat("Volume_Ambient", ambientVolume.value);
+		mixer.SetFloat("Volume_Master", GetVolume(masterVolume));
+		mixer.SetFloat("Volume_Music", GetVolume(musicVolume));
+		mixer.SetFloat("Volume_SFX", GetVolume(SFXVolume));
+		mixer.SetFloat("Volume_NPC", GetVolume(NPCVolume));
+		mixer.SetFloat("Volume_Ambient", GetVolume(ambientVolume));
 
 		masterPercent.text = ToPercent(masterVolume);
 		musicPercent.text = ToPercent(musicVolume);
@@ -88,6 +90,11 @@ public class ButtonActions : MonoBehaviour {
 
 	string ToPercent(Slider slider) {
 		return Mathf.FloorToInt(slider.normalizedValue * 100).ToString() + "%";
+	}
+
+	float GetVolume(Slider slider) {
+		if (slider.normalizedValue == 0) return -80;
+		return minDb + (maxDb - minDb) * slider.normalizedValue;
 	}
 
 	public void PlayClickSound() {
