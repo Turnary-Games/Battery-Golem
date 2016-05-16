@@ -24,8 +24,14 @@ public class BatteryGolemVersion : MonoBehaviour {
 			// Wait for HTTP request
 			yield return www;
 
+			// Error checking
+			if (string.IsNullOrEmpty(www.text)) goto Failed;  // Got data
+			if (!string.IsNullOrEmpty(www.error)) goto Failed; // Some error
+
 			// Parse JSON data
 			ReleaseData data = (ReleaseData)JsonUtility.FromJson(www.text, typeof(ReleaseData));
+			if (data == null) goto Failed; // Failed to parse data
+			
 			// Trim away everything but numbers and dots
 			string tag = Regex.Replace(data.tag_name, "[^0-9.^\\.]", "");
 			// Parse into version object
@@ -37,6 +43,12 @@ public class BatteryGolemVersion : MonoBehaviour {
 				latestText.text = latestText.text.Replace("%VERSION%", FormatVersion(latest));
 				downloadPage = data.html_url;
 			}
+			goto End;
+
+		Failed:
+			print("FAILED TO CHECK LATEST VERSION!");
+
+		End:;
 		}
 	}
 
