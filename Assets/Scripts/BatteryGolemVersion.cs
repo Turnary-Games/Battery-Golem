@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class BatteryGolemVersion : MonoBehaviour {
 
-	public static readonly Version CURRENT = new Version(1, 0, 5);
+	public static readonly Version CURRENT = new Version(1, 0, 6);
 	public static readonly string LATEST_URL = "https://api.github.com/repos/Turnary-Games/Battery-Golem/releases/latest";
 
 	public Text currentText;
