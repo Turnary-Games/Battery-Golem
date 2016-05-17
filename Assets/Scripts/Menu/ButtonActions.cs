@@ -102,4 +102,8 @@ public class ButtonActions : MonoBehaviour {
 			buttonClicked.Play();
 	}
 
+	public void Unpause() {
+		Destroy(transform.root.gameObject);
+	}
+
 }

@@ -7,31 +7,28 @@ using System.Collections.Generic;
 public class LoadingScreen : SingletonBase<LoadingScreen> {
 
 	public static GameObject loadingPrefab;
-	public const string RESUME_CHECKPOINT = "RESUME_CHECKPOINT";
-	public const string PREFAB_PATH = "Prefabs/Loading_screen";
-	public const string INIT_SCENE = "InitializingScene";
+	public static GameObject pausePrefab;
+	public const string PREFAB_LOADING_PATH = "Prefabs/Loading_screen";
+	public const string PREFAB_PAUSE_PATH = "Prefabs/Pause_menu";
 
 	[SceneDropDown]
 	public int targetRoom = 0;
 	public Animator anim;
 	public Image[] fadeUs;
 	public float fadeTime = 1;
-	public bool destroyIfPassthrough = false;
+	public bool useUnscaledTime = false;
 
 	public System.Action<LoadingScreen> loadedCallback;
-	
+
+	private float time { get { return useUnscaledTime ? Time.unscaledTime : Time.time; } }
 	private float start;
 	private State state = State.fadeIn;
 
 	protected override void Awake() {
-		if (instance && destroyIfPassthrough)
-			Destroy(gameObject);
-		else {
-			base.Awake();
+		base.Awake();
 
-			start = Time.time;
-			DontDestroyOnLoad(gameObject);
-		}
+		start = time;
+		DontDestroyOnLoad(gameObject);
 	}
 
 	void Update() {
@@ -42,7 +39,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 				if (fadeTime <= 0)
 					fade = 1;
 				else
-					fade = Mathf.InverseLerp(0, fadeTime, Time.time - start);
+					fade = Mathf.InverseLerp(0, fadeTime, time - start);
 
 				if (BackgroundMusic.instance)
 					BackgroundMusic.instance.SetAudioFading(1f - fade);
@@ -65,7 +62,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 				if (fadeTime <= 0)
 					fade = 1;
 				else
-					fade = Mathf.InverseLerp(0, fadeTime, Time.time - start);
+					fade = Mathf.InverseLerp(0, fadeTime, time - start);
 
 				if (BackgroundMusic.instance)
 					BackgroundMusic.instance.SetAudioFading(fade);
@@ -84,7 +81,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 	void OnLevelWasLoaded() {
 		if (state == State.loading) {
 			state = State.fadeOut;
-			start = Time.time;
+			start = time;
 			anim.SetBool("Loaded", true);
 			if (loadedCallback != null)
 				loadedCallback(this);
@@ -117,7 +114,20 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 
 	static void UpdatePrefab() {
 		if (loadingPrefab == null) {
-			loadingPrefab = Resources.Load(PREFAB_PATH) as GameObject;
+			loadingPrefab = Resources.Load(PREFAB_LOADING_PATH) as GameObject;
+		}
+	}
+
+	public static void PauseGame() {
+		if (Mathf.Approximately(Time.timeScale, 0)) return; // Already paused
+
+		// Load if needed
+		if (pausePrefab == null) {
+			pausePrefab = Resources.Load(PREFAB_PAUSE_PATH) as GameObject;
+		}
+		// Pause teh gejm
+		if (pausePrefab != null) {
+			Instantiate(pausePrefab);
 		}
 	}
 }
