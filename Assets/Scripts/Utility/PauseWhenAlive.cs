@@ -11,4 +11,10 @@ public class PauseWhenAlive : MonoBehaviour {
 		Time.timeScale = 1;
 	}
 
+	public static void Unpause() {
+		foreach (var x in FindObjectsOfType<PauseWhenAlive>()) {
+			Destroy(x.gameObject);
+		}
+	}
+
 }

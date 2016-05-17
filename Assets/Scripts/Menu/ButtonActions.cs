@@ -103,7 +103,7 @@ public class ButtonActions : MonoBehaviour {
 	}
 
 	public void Unpause() {
-		Destroy(transform.root.gameObject);
+		PauseWhenAlive.Unpause();
 	}
 
 }
