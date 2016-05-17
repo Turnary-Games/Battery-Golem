@@ -65,6 +65,12 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 		Debug.Log(log);
 	}
 
+	public static IEnumerator SaveRoomWait() {
+		yield return new WaitForFixedUpdate();
+		yield return new WaitForFixedUpdate();
+		SaveRoom();
+	}
+
 	public static void LoadRoom(int room) {
 		SceneManager.LoadSceneAsync(room);
 	}
@@ -99,7 +105,8 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 		_currentRoom = index;
 
 		ApplyChanges();
-		SaveRoom();
+		//SaveRoom();
+		StartCoroutine(SaveRoomWait());
 	}
 	#endregion
 
