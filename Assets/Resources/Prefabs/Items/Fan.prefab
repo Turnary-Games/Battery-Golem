@@ -1028,6 +1028,7 @@ MonoBehaviour:
   - {fileID: 2354544}
   - {fileID: 2302542}
   - {fileID: 2326418}
+  changeSpawnPoint: 4
 --- !u!114 &11464738
 MonoBehaviour:
   m_ObjectHideFlags: 1

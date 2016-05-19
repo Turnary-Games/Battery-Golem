@@ -28,7 +28,7 @@ GameObject:
   - 4: {fileID: 466900}
   - 33: {fileID: 3358810}
   - 23: {fileID: 2330890}
-  m_Layer: 13
+  m_Layer: 11
   m_Name: highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 280.1, y: -0.02, z: 108.49}
+  m_LocalPosition: {x: 1.44, y: 1.76, z: 15.78}
   m_LocalScale: {x: 1.2379459, y: 0.75540596, z: 1.2379462}
   m_Children:
   - {fileID: 466900}
@@ -237,7 +237,7 @@ MeshCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187928}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b59a712766ab61d49bc3fdb2a528d61b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -274,7 +274,6 @@ MonoBehaviour:
   prefab: Prefabs/Items/Nut
   id: -1
   itemName: Nut
-  targetSlot: -1
   canBeElectrified: 0
   nearbyVisual: {fileID: 2330890}
 --- !u!114 &11476240
@@ -288,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 146dfdf0492bfad40933ccc04b78f397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueId: 
+  uniqueId: be2240b0-82e5-436f-ac01-2da3f47b34f5
 --- !u!114 &11487588
 MonoBehaviour:
   m_ObjectHideFlags: 1

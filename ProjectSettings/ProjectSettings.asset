@@ -87,7 +87,7 @@ PlayerSettings:
     4:3: 0
     5:4: 0
     16:10: 0
-    16:9: 0
+    16:9: 1
     Others: 0
   bundleIdentifier: com.Company.ProductName
   bundleVersion: 1.0

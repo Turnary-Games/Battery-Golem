@@ -56,12 +56,12 @@ ModelImporter:
     4300012: axle_B
     4300014: wheel_B_R
     4300016: wheel_B_L
-    7400000: Take 001
+    7400000: truck@rolling
     9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -78,7 +78,59 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: truck@rolling
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bil
+        weight: 1
+      - path: last
+        weight: 1
+      - path: last1
+        weight: 1
+      - path: wheels_B
+        weight: 1
+      - path: wheels_B/axle_B
+        weight: 1
+      - path: wheels_B/wheel_B_L
+        weight: 1
+      - path: wheels_B/wheel_B_R
+        weight: 1
+      - path: wheels_F
+        weight: 1
+      - path: wheels_F/axle_F
+        weight: 1
+      - path: wheels_F/wheel_F_L
+        weight: 1
+      - path: wheels_F/wheel_F_R
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []

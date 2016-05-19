@@ -23,9 +23,11 @@ public class NPCController : MonoBehaviour, ISavable {
 	public float forwardAngle;
 	[HideInInspector]
 	public AnimationCurve headWeight = new AnimationCurve(new Keyframe(0, 1), new Keyframe(90, 1), new Keyframe(180, .5f));
-	
+
+	public int dialogID = 0;
 	private NPCDialogBox dialogUI;
 	private int currentDialog = -1;
+	private List<int> shufflelist = new List<int>();
 
 	public bool isTalking { get { return currentDialog != -1; } }
 
@@ -174,8 +176,20 @@ public class NPCController : MonoBehaviour, ISavable {
 			currentDialog = dialogs.FindIndex(d => d.playOnce && d.nextIndex != -1);
 
 		// No more playonces left
-		if (currentDialog == -1)
-			currentDialog = dialogs.GetRandomIndex(d => !d.playOnce);
+		if (currentDialog == -1) {
+			if (shufflelist.Count == 0) {
+				// Make a new random list
+				for (int index = 0; index < dialogs.Count; index++) {
+					if (!dialogs[index].playOnce)
+						shufflelist.Add(index);
+				}
+				shufflelist.Shuffle();
+			}
+
+			if (shufflelist.Count != 0)
+				// Pop a dialog from the list
+				currentDialog = shufflelist.Pop();
+		}
 
 		// Get it's string
 		if (currentDialog != -1) {
@@ -194,19 +208,31 @@ public class NPCController : MonoBehaviour, ISavable {
 
 	#region Saving
 	public void OnSave(ref Dictionary<string, object> data) {
-		data["npc@dialog_index"] = currentDialog;
-		data["npc@dialog_list"] = new List<Dialog>(dialogs);
+		data["npc@dialog_list"] = dialogs;
+		data["npc@dialog_shuffle"] = shufflelist;
+		data["npc@dialog_id"] = dialogID;
+		print("saving currentdialog for " + name + " that is " + currentDialog);
 	}
 
 	public void OnLoad(Dictionary<string, object> data) {
-		currentDialog = (int)data["npc@dialog_index"];
 		dialogs = (List<Dialog>)data["npc@dialog_list"];
+		shufflelist = (List<int>)data["npc@dialog_shuffle"];
+		dialogID = (int)data["npc@dialog_id"];
+		print("loading currentdialog for " + name + " that is " + currentDialog);
 	}
 	#endregion
 
-	public void Override(List<Dialog> newDialog) {
+	public void Override(List<Dialog> newDialog, int id) {
+		if (id == dialogID) {
+			print("dont override for " + name);
+			return;
+		}
+		print("override for " + name);
+
 		this.dialogs = CopyDialog(newDialog);
 		currentDialog = -1;
+		shufflelist.Clear();
+		dialogID = id;
 	}
 
 	public static List<Dialog> CopyDialog(List<Dialog> list) {

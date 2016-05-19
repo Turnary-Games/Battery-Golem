@@ -1459,7 +1459,7 @@ MonoBehaviour:
   body: {fileID: 5448752}
   col: {fileID: 6511500}
   x: 1
-  z: 0
+  z: 1
   offset: {x: -0.3, y: 0, z: 0}
   rotation: 0
   highlight: {fileID: 0}
@@ -1498,7 +1498,7 @@ MonoBehaviour:
   body: {fileID: 5448752}
   col: {fileID: 6531014}
   x: 1
-  z: 0
+  z: 1
   offset: {x: -0.3, y: 0, z: 0}
   rotation: 0
   highlight: {fileID: 0}
@@ -1589,7 +1589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 5448752}
   col: {fileID: 6585554}
-  x: 0
+  x: 1
   z: 1
   offset: {x: -0.2, y: 0, z: 0}
   rotation: 0
@@ -1607,7 +1607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 5448752}
   col: {fileID: 6562534}
-  x: 0
+  x: 1
   z: 1
   offset: {x: -0.3, y: 0, z: 0}
   rotation: 0

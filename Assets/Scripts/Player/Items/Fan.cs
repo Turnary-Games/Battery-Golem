@@ -16,6 +16,9 @@ public class Fan : _CoreItem {
 	public RotateEffect rotator;
 	public Renderer[] nearbyVisuals;
 
+	[Space]
+	public int changeSpawnPoint = -1;
+
 	protected override void Start() {
 		base.Start();
 		SetParticleEmission(false);
@@ -61,6 +64,15 @@ public class Fan : _CoreItem {
 			var em = ps.emission;
 			em.enabled = state;
 			if (state && !ps.isPlaying) ps.Play();
+		}
+	}
+
+	public override void OnPickup() {
+		base.OnPickup();
+
+		if (changeSpawnPoint >= 0 && !GameSaveManager.isLoading) {
+			PlayerSaving.SetExitID(changeSpawnPoint);
+			GameSaveManager.SaveRoom();
 		}
 	}
 

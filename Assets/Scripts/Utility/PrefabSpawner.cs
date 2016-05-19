@@ -7,14 +7,13 @@ public class PrefabSpawner : MonoBehaviour {
 	public Vector3 spawnOffset;
 	public Space offsetRelativeTo = Space.World; 
 	[Space]
-	public float minDelay = 2f;
-	public float maxDelay = 2f;
+	public float delay = 2f;
+	public bool randomStartDelay = true;
 	private float timeLeft = 0f;
 
 	#if UNITY_EDITOR
 	void OnValidate() {
-		maxDelay = Mathf.Max(maxDelay, 0);
-		minDelay = Mathf.Clamp(minDelay, 0, maxDelay);
+		delay = Mathf.Max(delay, 0.001f);
 	}
 
 	void OnDrawGizmosSelected() {
@@ -27,7 +26,8 @@ public class PrefabSpawner : MonoBehaviour {
 #endif
 
 	void Start() {
-		timeLeft += Random.Range(minDelay, maxDelay);
+		if (randomStartDelay)
+			timeLeft += Random.Range(0, delay);
 	}
 
 	void Update() {
@@ -35,7 +35,7 @@ public class PrefabSpawner : MonoBehaviour {
 			timeLeft = Mathf.Max(timeLeft - Time.deltaTime, 0);
 
 			if (timeLeft <= 0) {
-				timeLeft += Random.Range(minDelay, maxDelay);
+				timeLeft += delay;
 
 				Vector3 pos = transform.position;
 				if (offsetRelativeTo == Space.World) pos += spawnOffset;

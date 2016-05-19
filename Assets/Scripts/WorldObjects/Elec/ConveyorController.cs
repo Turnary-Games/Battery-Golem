@@ -25,9 +25,14 @@ public class ConveyorController : MonoBehaviour {
 		for (int i = 0; i < belts.Length; i++) {
 			Object obj = belts[i];
 
-			if (obj is ConveyorBelt) (obj as ConveyorBelt).motion = beltMotion * t;
+			if (obj is ConveyorBelt) (obj as ConveyorBelt).motion = beltMotion * ApproxSign(t);
 			else if (obj is ScrollTexture) (obj as ScrollTexture).motion = scrollMotion * t;
 		}
+	}
+
+	float ApproxSign(float value) {
+		if (Mathf.Approximately(value, 0)) return 0;
+		return Mathf.Sign(value);
 	}
 
 	void OnElectrifyStart() {

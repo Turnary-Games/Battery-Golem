@@ -150,7 +150,10 @@ public class PlayerHUD : PlayerSubClass {
 	int CalcSelected(Vector2 delta) {
 		float dist = delta.magnitude;
 		if (dist < minDist || dist > maxDist) return -1;
-		if (delta == mouseStartDelta.ToVector2()) return -1;
+		
+		var startDelta = mouseStartDelta.ToVector2();
+		if (Mathf.Approximately(delta.x, startDelta.x) && Mathf.Approximately(delta.y, startDelta.y)) return -1;
+		else mouseStartDelta = Vector3.zero;
 
 		float angle = VectorHelper.ToDegrees(delta) + angleOffset;
 		return (Mathf.FloorToInt((angle+360)%360 / 90) * (clockwise ? -1 : 1) + intOffset + leaves.Length) % leaves.Length;
@@ -173,7 +176,17 @@ public class PlayerHUD : PlayerSubClass {
 	}
 
 	void SetHUDVisable(bool state) {
+		// Don't allow inventory when holding point
+		if (pushing && pushing.hasPoint) state = false;
+		// Don't allow inventory when talking to NPC
+		if (interaction && interaction.talkingTo != null) state = false;
+		// Ignore if set to same state
 		if (isOpen == state) return;
+
+		// Unequip core item on open
+		if (state && inventory && inventory.equipped is _CoreItem) {
+			inventory.Unequip();
+		}
 
 		// Loop each slot
 		for (int slot = 0; slot < inventory.coreItems.Length; slot++) {

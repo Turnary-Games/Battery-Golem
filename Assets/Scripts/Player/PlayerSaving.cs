@@ -20,8 +20,6 @@ public class PlayerSaving : PlayerSubClass, ISavable {
 			prefab = inventory.equipped ? inventory.equipped.prefab : null,
 			uuid = inventory.equipped ? inventory.equipped.FetchUniqueID() : null,
 		};
-		if (itemData.prefab != null)
-			print("SAVE EQUIPPED ITEM AS \"" + itemData.prefab + "\"");
 
 		data["player@equipped"] = itemData;
 

@@ -225,6 +225,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 413320}
   - 95: {fileID: 9593046}
+  - 114: {fileID: 11449186}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -1420,7 +1421,7 @@ Animator:
   m_GameObject: {fileID: 148716}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 37a74b55ac50c024ca91118f8f266b16, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8896811fc1157b44ca657e32e4e6b62a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1498,6 +1499,20 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: -0.2}
   rotation: -90
   highlight: {fileID: 0}
+--- !u!114 &11449186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d43398820483a4c4cb0cb560cdae9f04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedParameter: Speed
+  speedScale: 2.5
+  relativeTo: 1
 --- !u!114 &11476120
 MonoBehaviour:
   m_ObjectHideFlags: 1
