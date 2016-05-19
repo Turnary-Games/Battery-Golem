@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class PlayerPushing : PlayerSubClass {
 
@@ -9,6 +10,7 @@ public class PlayerPushing : PlayerSubClass {
 	public float breakDist = 1f;
 	public float pushSpeed = 2.5f;
 	
+	[HideInInspector]
 	public List<PushingPoint> points = new List<PushingPoint>();
 	public PushingPoint point {
 		get { return _point; }
@@ -18,17 +20,16 @@ public class PlayerPushing : PlayerSubClass {
 	private PushingHighlight lastHover;
 
 	public bool hasPoint { get { return point != null; } }
-	public bool pointBreak { get { return hasPoint ? Mathf.Abs(point.playerPos.y - transform.position.y) > breakDist : false; } }
 
 	void Update() {
 		// Check if outside breaking distance (on the Y axis)
-		if (pointBreak) {
+		if (!IsPointInRange(point)) {
 			point = null;
 		}
 
 		// Visualization
-		var pushingPoint = GetClosestPoint();
-		PushingHighlight hover = pushingPoint ? pushingPoint.highlight : null;
+		var closest = GetClosestPoint();
+		PushingHighlight hover = IsPointInRange(closest) ? closest.highlight : null;
 
 		if (hover != lastHover) {
 			// Hover changed
@@ -36,6 +37,11 @@ public class PlayerPushing : PlayerSubClass {
 			if (lastHover) lastHover.SetHighlightActive(false);
 		}
 		lastHover = hover;
+	}
+
+	public bool IsPointInRange(PushingPoint point) {
+		if (point == null) return false;
+		return (point.playerPos - transform.position).magnitude < breakDist;
 	}
 
 	/// <summary>
@@ -50,7 +56,7 @@ public class PlayerPushing : PlayerSubClass {
 		// Find the closest one
 		PushingPoint closest = GetClosestPoint();
 
-		if (closest)
+		if (IsPointInRange(closest))
 			point = closest;
 	}
 
@@ -62,7 +68,7 @@ public class PlayerPushing : PlayerSubClass {
 		// Remove all invalid points. If for some reason they occur.
 		points.RemoveAll(p => p == null);
 		// Find the closest one
-		Closest<PushingPoint> closest = PushingPoint.GetClosest(points, controller.characterCenter, interaction.ignoreYAxis);
+		Closest<PushingPoint> closest = PushingPoint.GetClosest(points, transform.position, interaction.ignoreYAxis);
 
 		return closest.obj;
 	}
