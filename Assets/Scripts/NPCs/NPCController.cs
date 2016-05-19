@@ -26,6 +26,7 @@ public class NPCController : MonoBehaviour, ISavable {
 	
 	private NPCDialogBox dialogUI;
 	private int currentDialog = -1;
+	private List<int> shufflelist = new List<int>();
 
 	public bool isTalking { get { return currentDialog != -1; } }
 
@@ -174,8 +175,20 @@ public class NPCController : MonoBehaviour, ISavable {
 			currentDialog = dialogs.FindIndex(d => d.playOnce && d.nextIndex != -1);
 
 		// No more playonces left
-		if (currentDialog == -1)
-			currentDialog = dialogs.GetRandomIndex(d => !d.playOnce);
+		if (currentDialog == -1) {
+			if (shufflelist.Count == 0) {
+				// Make a new random list
+				for (int index = 0; index < dialogs.Count; index++) {
+					if (!dialogs[index].playOnce)
+						shufflelist.Add(index);
+				}
+				shufflelist.Shuffle();
+			}
+
+			if (shufflelist.Count != 0)
+				// Pop a dialog from the list
+				currentDialog = shufflelist.Pop();
+		}
 
 		// Get it's string
 		if (currentDialog != -1) {
@@ -196,11 +209,13 @@ public class NPCController : MonoBehaviour, ISavable {
 	public void OnSave(ref Dictionary<string, object> data) {
 		data["npc@dialog_index"] = currentDialog;
 		data["npc@dialog_list"] = new List<Dialog>(dialogs);
+		data["npc@dialog_shuffle"] = shufflelist;
 	}
 
 	public void OnLoad(Dictionary<string, object> data) {
 		currentDialog = (int)data["npc@dialog_index"];
 		dialogs = (List<Dialog>)data["npc@dialog_list"];
+		shufflelist = (List<int>)data["npc@dialog_shuffle"];
 	}
 	#endregion
 
