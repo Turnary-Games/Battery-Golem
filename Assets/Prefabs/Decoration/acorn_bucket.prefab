@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 407960}
   - 33: {fileID: 3373518}
   - 23: {fileID: 2376366}
+  - 135: {fileID: 13547976}
   m_Layer: 0
   m_Name: acorn_bucket
   m_TagString: Untagged
@@ -41,7 +42,7 @@ Transform:
   m_GameObject: {fileID: 108282}
   m_LocalRotation: {x: 0.13469823, y: 0.5665819, z: 0.18802209, w: 0.7908787}
   m_LocalPosition: {x: 288.74, y: -0.43537885, z: 125.64}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 1.0999999, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 436764}
   m_Father: {fileID: 0}
@@ -109,6 +110,18 @@ Projector:
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 256
+--- !u!135 &13547976
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108282}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0487792
+  m_Center: {x: 0.4689249, y: 0.83895624, z: 0.000030480074}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

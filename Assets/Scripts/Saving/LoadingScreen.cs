@@ -26,7 +26,7 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 
 	protected override void Awake() {
 		base.Awake();
-
+		
 		start = time;
 		DontDestroyOnLoad(gameObject);
 	}

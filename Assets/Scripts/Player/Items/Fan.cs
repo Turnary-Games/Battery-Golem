@@ -70,7 +70,7 @@ public class Fan : _CoreItem {
 	public override void OnPickup() {
 		base.OnPickup();
 
-		if (changeSpawnPoint >= 0) {
+		if (changeSpawnPoint >= 0 && !GameSaveManager.isLoading) {
 			PlayerSaving.SetExitID(changeSpawnPoint);
 			GameSaveManager.SaveRoom();
 		}

@@ -20,6 +20,10 @@ public class WheelCoupleStation : MonoBehaviour, ISavable {
 	public AudioSource noWheelNorRod;
 	public AudioSource wheelButNoRod;
 	public AudioSource wheelAndRod;
+
+	[Header("Saving")]
+	public bool saveAfterItemAdded;
+	public int spawnPoint = -1;
 	
 	private bool wheelInPlace { get { return wheelRenderer ? wheelRenderer.enabled : false; } }
 	private bool rodInPlace { get { return rodRenderer ? rodRenderer.enabled : false; } }
@@ -38,12 +42,22 @@ public class WheelCoupleStation : MonoBehaviour, ISavable {
 			rodRenderer.enabled = true;
 			anim.SetBool("RodInPlace", true);
 			electricPlayer.enabled = true;
+
+			if (saveAfterItemAdded) {
+				PlayerSaving.SetExitID(spawnPoint);
+				GameSaveManager.SaveRoom();
+			}
 		} else if (item.id == wheelID && !wheelInPlace) {
 			// Place wheel
 			item.SendMessage(ItemMethods.OnItemDroppedOff, this, SendMessageOptions.DontRequireReceiver);
 			Destroy(item.gameObject);
 
 			wheelRenderer.enabled = true;
+
+			if (saveAfterItemAdded) {
+				PlayerSaving.SetExitID(spawnPoint);
+				GameSaveManager.SaveRoom();
+			}
 		}
 	}
 

@@ -14,7 +14,8 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	public static Dictionary<string, Dictionary<string, object>> roomData = new Dictionary<string, Dictionary<string, object>>();
 	public static int currentRoom { get { return _currentRoom; } }
 	public static bool freshLoad { get { return roomLoads[_currentRoom] == 1; } }
-	
+	public static bool isLoading;
+
 	private static int _currentRoom = -1;
 	private static int[] roomLoads = new int[SceneManager.sceneCountInBuildSettings];
 
@@ -34,6 +35,7 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 
 	#region Saving algorithms
 	public static void SaveRoom() {
+		print("start save");
 		string log = "";
 
 		foreach (var unique in Object.FindObjectsOfType<UniqueId>()) {
@@ -66,16 +68,18 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	}
 
 	public static IEnumerator SaveRoomWait() {
-		yield return new WaitForFixedUpdate();
-		yield return new WaitForFixedUpdate();
+		yield return new WaitForEndOfFrame();
+
 		SaveRoom();
 	}
 
 	public static void LoadRoom(int room) {
+		isLoading = true;
 		SceneManager.LoadSceneAsync(room);
 	}
 
 	public static void ApplyChanges() {
+		print("start load");
 		string log = "";
 
 		foreach (var unique in Object.FindObjectsOfType<UniqueId>()) {
@@ -103,10 +107,11 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 		if (instance != this) return;
 		roomLoads[index]++;
 		_currentRoom = index;
-
+		
 		ApplyChanges();
 		//SaveRoom();
 		StartCoroutine(SaveRoomWait());
+		isLoading = false;
 	}
 	#endregion
 
