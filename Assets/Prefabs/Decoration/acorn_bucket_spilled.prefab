@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &146922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 449320}
+  - 119: {fileID: 11968818}
+  m_Layer: 8
+  m_Name: BlobShadowProjector (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &193294
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,11 +39,24 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193294}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.96183944, z: 0, w: 0.2736146}
+  m_LocalPosition: {x: 288.55, y: -0.29084396, z: 123.28}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 449320}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &449320
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146922}
+  m_LocalRotation: {x: 0.19430456, y: -0.6771933, z: 0.68304056, w: 0.19264127}
+  m_LocalPosition: {x: 0.48, y: 0.45, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 439672}
   m_RootOrder: 0
 --- !u!23 &2341156
 MeshRenderer:
@@ -62,6 +91,24 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193294}
   m_Mesh: {fileID: 4300000, guid: 95b5dab16e746f84485fcd9567ba165c, type: 3}
+--- !u!119 &11968818
+Projector:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146922}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: 0.01
+  m_FarClipPlane: 17.5
+  m_FieldOfView: 40
+  m_AspectRatio: 1
+  m_Orthographic: 1
+  m_OrthographicSize: 1.2
+  m_Material: {fileID: 2100000, guid: e30ff3588e719f34bbf0c66f22d97487, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
