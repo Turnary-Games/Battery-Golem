@@ -35,7 +35,6 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 
 	#region Saving algorithms
 	public static void SaveRoom() {
-		print("start save");
 		string log = "";
 
 		foreach (var unique in Object.FindObjectsOfType<UniqueId>()) {
@@ -79,7 +78,6 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	}
 
 	public static void ApplyChanges() {
-		print("start load");
 		string log = "";
 
 		foreach (var unique in Object.FindObjectsOfType<UniqueId>()) {
