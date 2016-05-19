@@ -143,22 +143,29 @@ public class PlayerInteraction : PlayerSubClass {
 		}
 
 		isElectrifying = Input.GetAxis("Electrify") != 0;
-		foreach(ParticleSystem ps in electricParticles.GetComponentsInChildren<ParticleSystem>()) {
+		
+		// Don't electrify when talking to NPC
+		if (talkingTo != null) isElectrifying = false;
+
+		// Electric particles
+		var particlesOn = isElectrifying && armsUp;
+		foreach (ParticleSystem ps in electricParticles.GetComponentsInChildren<ParticleSystem>()) {
 			var em = ps.emission;
-			em.enabled = isElectrifying && armsUp;
+			em.enabled = particlesOn;
 		}
-		if (isElectrifying && armsUp) {
+
+		if (particlesOn) {
 			// Electrifying priority order:
 			// - electrify held item
 			// - electrify grabbed object
 			// - electrify point in world
-			
+
 			if (inventory.equipped) {
 				// Electrify the held item
 				inventory.equipped.SendMessage(ElectricMethods.Electrify, controller, SendMessageOptions.DontRequireReceiver);
-			} else if (pushing.hasPoint) {
-				// Try to electrify grabbed object
-				throw new System.NotImplementedException();
+			} else if (pushing && pushing.hasPoint) {
+				// Try to electrify grabbed object, if there's any listeners anyways
+				pushing.point.body.SendMessage(ElectricMethods.Electrify, controller, SendMessageOptions.DontRequireReceiver);
 			} else {
 				// Try to electrify at your fingertips
 				_ElectricListener.ElectrifyAllAt(controller, electricPoint);

@@ -16,7 +16,7 @@ public class PushingPoint : Searchable {
 	public Vector3 playerPos { get { return transform.TransformPoint(offset + (col ? col.center - Vector3.up * col.size.y / 2 : Vector3.zero)); } }
 	public Vector3 playerRot { get { var vec = VectorHelper.FromDegrees(rotation); return transform.TransformVector(new Vector3(vec.x, 0, vec.y)).normalized; } }
 
-	public override bool valid { get { return isActiveAndEnabled; } }
+	public override bool valid { get { return isActiveAndEnabled && body != null; } }
 
 	[HideInInspector]
 	public PushingHighlight highlight;
