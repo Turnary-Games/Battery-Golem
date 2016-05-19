@@ -125,15 +125,18 @@ public class PlayerInteraction : PlayerSubClass {
 				if (!inventory.equipped && item != null)
 					inventory.Equip(item);
 				else {
-					// Try to interact
-					if (!_ElectricListener.InteractAt(controller, electricPoint)) {
-						// Didn't interact with anything
-						if (inventory.equipped && !(inventory.equipped is _CoreItem))
-							// Drop equipped item
-							inventory.Unequip();
-						else if (inventory.equipped == null)
-							// Grab an object
-							pushing.TryToGrab();
+					// Inventory HUD gotta be closed
+					if (hud == null || !hud.isOpen) {
+						// Try to interact
+						if (!_ElectricListener.InteractAt(controller, electricPoint)) {
+							// Didn't interact with anything
+							if (inventory.equipped && !(inventory.equipped is _CoreItem))
+								// Drop equipped item
+								inventory.Unequip();
+							else if (inventory.equipped == null)
+								// Grab an object
+								pushing.TryToGrab();
+						}
 					}
 				}
 			}

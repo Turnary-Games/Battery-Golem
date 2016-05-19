@@ -176,6 +176,11 @@ public class PlayerHUD : PlayerSubClass {
 	}
 
 	void SetHUDVisable(bool state) {
+		// Don't allow inventory when holding point
+		if (pushing && pushing.hasPoint) state = false;
+		// Don't allow inventory when talking to NPC
+		if (interaction && interaction.talkingTo != null) state = false;
+		// Ignore if set to same state
 		if (isOpen == state) return;
 
 		// Unequip core item on open
