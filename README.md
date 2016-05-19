@@ -1,32 +1,42 @@
 
+<img src="https://github.com/Turnary-Games/Battery-Golem/blob/master/SITE-ASSETS/battery-golem-logo.png?raw=true" width=512>
+
+## About the game
 Battery Golem is a top down 2D puzzler were your explore your way through mysterious lands using your electric powers. Travel through abandoned structures, small towns and meet new faces or strange creatures, see what the world has to offer.
 
+<a href="http://gameawards.se/game/2016/Battery+Golem"><img src="https://github.com/Turnary-Games/Battery-Golem/blob/master/SITE-ASSETS/sga-logo.png?raw=true"></a><br>
+The game has been submitted to Swedish Game Awards '16 as a part of the competition. We hope for the best but are happy with just the statement of competing and maybe even getting nominated.<br>
+**Game can be found here:** [Swedish Game Awards - Battery Golem](http://gameawards.se/game/2016/Battery+Golem)
+
+## Screenshots
+<img src="https://raw.githubusercontent.com/Turnary-Games/Battery-Golem/master/SITE-ASSETS/screenshot_1.png" width=512>
+<img src="https://raw.githubusercontent.com/Turnary-Games/Battery-Golem/master/SITE-ASSETS/screenshot_2.png" width=512>
+<img src="https://raw.githubusercontent.com/Turnary-Games/Battery-Golem/master/SITE-ASSETS/screenshot_3.png" width=512>
+<img src="https://raw.githubusercontent.com/Turnary-Games/Battery-Golem/master/SITE-ASSETS/screenshot_4.png" width=512>
+<img src="https://raw.githubusercontent.com/Turnary-Games/Battery-Golem/master/SITE-ASSETS/screenshot_5.png" width=512>
+
+## Trailer
+<a href="https://www.youtube.com/watch?v=5ZYgMVYmHp8"><img src="https://github.com/Turnary-Games/Battery-Golem/blob/master/SITE-ASSETS/trailer-screenshot.png?raw=true"></a>
+
 ## Credits
+The team is composed of the 3 members of Turnary Games with the addition of Parment who contributed with game music.
 
-<table><tr>
-<th>Fabian</th>
-<th>Knut</th>
-<th>Kalle</th>
-<th>Ludvig</th>
-</tr><tr>
-<td>Project manager
-Lead designer
-World builder
-Sound effects</td>
-<td>Art director
-3D modelling</td>
-<td>Lead programmer</td>
-<td>Music</td>
-</tr><tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr><tr>
-</tr></table>
-
-<hr>
+**Fabian "Bejno" Falk**<br>
+Project manager<br>
+Lead designer<br>
+World builder<br>
+Sound effects<br>
+<br>
+**Knut B. Hindersson**<br>
+Art director<br>
+3D modelling<br>
+Texturing<br>
+<br>
+**Kalle "Jag" Jillheden**<br>
+Lead programmer<br>
+<br>
+**Ludvig "Luthen" Parment**<br>
+Music
 
 ## Download
 ### Latest (v1.1.0)
