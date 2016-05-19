@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 407960}
   - 33: {fileID: 3373518}
   - 23: {fileID: 2376366}
+  - 135: {fileID: 13559046}
   m_Layer: 0
   m_Name: acorn_bucket
   m_TagString: Untagged
@@ -62,6 +63,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108282}
   m_Mesh: {fileID: 4300002, guid: 95b5dab16e746f84485fcd9567ba165c, type: 3}
+--- !u!135 &13559046
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 108282}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.0487791
+  m_Center: {x: 0.46892685, y: 0.83895147, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
