@@ -8,6 +8,15 @@ Battery Golem is a top down 3D puzzle game were your explore your way through my
 The game has been submitted to Swedish Game Awards '16 as a part of the competition. We hope for the best but are happy with just the statement of competing and maybe even getting nominated.<br>
 **Game can be found here:** [Swedish Game Awards - Battery Golem](http://gameawards.se/game/2016/Battery+Golem)
 
+## Download
+### Latest (v1.1.0)
+Windows - [32-bit](https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.0/Battery-Golem_v1.1.0_win_x86.zip)	 [64-bit](https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.0/Battery-Golem_v1.1.0_win_x86_64.zip)
+
+### Older versions
+All versions can be found at the releases tab:<br>
+[Battery Golem - Releases](https://github.com/Turnary-Games/Battery-Golem/releases)
+
+
 ## Screenshots
 <img src="https://raw.githubusercontent.com/Turnary-Games/Battery-Golem/master/SITE-ASSETS/screenshot_1.png">
 <img src="https://raw.githubusercontent.com/Turnary-Games/Battery-Golem/master/SITE-ASSETS/screenshot_2.png">
@@ -37,11 +46,3 @@ Lead programmer<br>
 <br>
 **Ludvig _"Luthen"_ Parment**<br>
 Music
-
-## Download
-### Latest (v1.1.0)
-Windows - [32-bit](https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.0/Battery-Golem_v1.1.0_win_x86.zip)	 [64-bit](https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.0/Battery-Golem_v1.1.0_win_x86_64.zip)
-
-### Older versions
-All versions can be found at the releases tab:<br>
-[Battery Golem - Releases](https://github.com/Turnary-Games/Battery-Golem/releases)
