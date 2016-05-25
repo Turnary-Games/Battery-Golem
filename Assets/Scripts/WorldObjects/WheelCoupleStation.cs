@@ -45,7 +45,7 @@ public class WheelCoupleStation : MonoBehaviour, ISavable {
 
 			if (saveAfterItemAdded) {
 				PlayerSaving.SetExitID(spawnPoint);
-				GameSaveManager.SaveRoom();
+				StartCoroutine(GameSaveManager.SaveRoomWait());
 			}
 		} else if (item.id == wheelID && !wheelInPlace) {
 			// Place wheel
@@ -56,7 +56,7 @@ public class WheelCoupleStation : MonoBehaviour, ISavable {
 
 			if (saveAfterItemAdded) {
 				PlayerSaving.SetExitID(spawnPoint);
-				GameSaveManager.SaveRoom();
+				StartCoroutine(GameSaveManager.SaveRoomWait());
 			}
 		}
 	}

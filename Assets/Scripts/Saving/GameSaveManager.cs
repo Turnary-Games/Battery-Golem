@@ -30,6 +30,9 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 			_currentRoom = SceneManager.GetActiveScene().buildIndex;
 			roomLoads[_currentRoom]++;
 			SaveRoom();
+			UnityEngine.Analytics.Analytics.CustomEvent("usingVersion", new Dictionary<string, object> {
+				{ "version", BatteryGolemVersion.FormatVersion(BatteryGolemVersion.CURRENT) }
+			});
 		}
 	}
 

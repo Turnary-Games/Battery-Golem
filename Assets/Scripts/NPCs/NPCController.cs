@@ -211,14 +211,12 @@ public class NPCController : MonoBehaviour, ISavable {
 		data["npc@dialog_list"] = dialogs;
 		data["npc@dialog_shuffle"] = shufflelist;
 		data["npc@dialog_id"] = dialogID;
-		print("saving currentdialog for " + name + " that is " + currentDialog);
 	}
 
 	public void OnLoad(Dictionary<string, object> data) {
 		dialogs = (List<Dialog>)data["npc@dialog_list"];
 		shufflelist = (List<int>)data["npc@dialog_shuffle"];
 		dialogID = (int)data["npc@dialog_id"];
-		print("loading currentdialog for " + name + " that is " + currentDialog);
 	}
 	#endregion
 
