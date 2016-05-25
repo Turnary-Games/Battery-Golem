@@ -2,6 +2,7 @@
 using System.Collections;
 using ExtensionMethods;
 using System.Collections.Generic;
+using UnityEngine.Analytics;
 
 public class RoomTransitionPoint : MonoBehaviour {
 
@@ -42,10 +43,7 @@ public class RoomTransitionPoint : MonoBehaviour {
 					if (buttonActions)
 						buttonActions.OpenCreditsMenu();
 				});
-				UnityEngine.Analytics.Analytics.CustomEvent("completeGame", new Dictionary<string, object> {
-					{ "playTime", Time.time },
-					{ "version", BatteryGolemVersion.FormatVersion(BatteryGolemVersion.CURRENT) }
-				});
+				BatteryGolemAnalytics.SendGameCompletedEvent();
 			} else {
 				// Load normally
 				LoadingScreen.LoadRoom(gotoRoomOnTrigger);

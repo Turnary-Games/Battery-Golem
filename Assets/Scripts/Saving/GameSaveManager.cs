@@ -13,7 +13,7 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	/// </summary>
 	public static Dictionary<string, Dictionary<string, object>> roomData = new Dictionary<string, Dictionary<string, object>>();
 	public static int currentRoom { get { return _currentRoom; } }
-	public static bool freshLoad { get { return roomLoads[_currentRoom] == 1; } }
+	public static bool freshLoad { get { return _currentRoom >= 0 && _currentRoom < roomLoads.Length ? roomLoads[_currentRoom] == 1 : true; } }
 	public static bool isLoading;
 
 	private static int _currentRoom = -1;
@@ -30,9 +30,6 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 			_currentRoom = SceneManager.GetActiveScene().buildIndex;
 			roomLoads[_currentRoom]++;
 			SaveRoom();
-			UnityEngine.Analytics.Analytics.CustomEvent("usingVersion", new Dictionary<string, object> {
-				{ "version", BatteryGolemVersion.FormatVersion(BatteryGolemVersion.CURRENT) }
-			});
 		}
 	}
 

@@ -41,14 +41,16 @@ public class ButtonActions : MonoBehaviour {
 	}
 
 	public void JumpToScene(string name) {
-		LoadingScreen.LoadRoom(SceneManager.GetSceneByName(name).buildIndex);
+		JumpToScene(SceneManager.GetSceneByName(name).buildIndex);
 	}
 
 	public void JumpToScene(int build_index) {
+		if (build_index == 2) BatteryGolemAnalytics.SendGameStartedEvent();
 		LoadingScreen.LoadRoom(build_index);
 	}
 
 	public void ExitGame() {
+		BatteryGolemAnalytics.SendGameQuitEvent();
 #if UNITY_EDITOR
 		UnityEditor.EditorApplication.isPlaying = false;
 #else
