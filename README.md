@@ -9,8 +9,12 @@ The game has been submitted to Swedish Game Awards '16 as a part of the competit
 **Game can be found here:** [Swedish Game Awards - Battery Golem](http://gameawards.se/game/2016/Battery+Golem)
 
 ## Download
-### Latest (v1.1.0)
-Windows - [32-bit](https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.0/Battery-Golem_v1.1.0_win_x86.zip)	 [64-bit](https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.0/Battery-Golem_v1.1.0_win_x86_64.zip)
+### Latest (v1.1.2)
+<table border="0px">
+<tr><td>Windows</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_Windows_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_Windows_64bit.zip">64bit</a></td></tr>
+<tr><td>OS X</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_OSX_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_OSX_64bit.zip">64bit</a></td></tr>
+<tr><td>Linux</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_Linux_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_Linux_64bit.zip">64bit</a></td></tr>
+</table>
 
 ### Older versions
 All versions can be found at the releases tab:<br>
