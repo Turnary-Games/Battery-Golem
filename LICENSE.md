@@ -1,11 +1,11 @@
 Copyright 2015 by Turnary Games and Mediagymnasiet
 ---
 
-###Permitted
+### Permitted
 - Commercial Use 
 - Private Use 
 
-###Forbidden
+### Forbidden
 - Distribution
 - Modification
 - Sublicensing
