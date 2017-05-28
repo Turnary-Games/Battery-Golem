@@ -1,4 +1,8 @@
-﻿// Copyright (c) <2015> <Playdead>
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: commented out 'float4x4 _CameraToWorld', a built-in variable
+
+// Copyright (c) <2015> <Playdead>
 // This file is subject to the MIT License as seen in the root of this folder structure (LICENSE.TXT)
 // AUTHOR: Lasse Jon Fuglsang Pedersen <lasse@playdead.com>
 
@@ -28,7 +32,7 @@ Shader "Playdead/Post/TemporalReprojection"
 
 	static const float FLT_EPS = 0.00000001f;
 
-	uniform float4x4 _CameraToWorld;
+	// uniform float4x4 _CameraToWorld;
 	uniform sampler2D _CameraDepthTexture;
 	uniform float4 _CameraDepthTexture_TexelSize;
 
@@ -57,7 +61,7 @@ Shader "Playdead/Post/TemporalReprojection"
 	{
 		v2f OUT;
 
-		OUT.cs_pos = mul(UNITY_MATRIX_MVP, IN.vertex);
+		OUT.cs_pos = UnityObjectToClipPos(IN.vertex);
 		OUT.ss_txc = IN.texcoord.xy;
 		OUT.vs_ray = (2.0 * IN.texcoord.xy - 1.0) * _Corner.xy;
 		

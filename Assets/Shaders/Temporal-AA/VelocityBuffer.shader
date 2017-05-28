@@ -1,4 +1,9 @@
-﻿// Copyright (c) <2015> <Playdead>
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: commented out 'float4x4 _CameraToWorld', a built-in variable
+// Upgrade NOTE: replaced '_CameraToWorld' with 'unity_CameraToWorld'
+
+// Copyright (c) <2015> <Playdead>
 // This file is subject to the MIT License as seen in the root of this folder structure (LICENSE.TXT)
 // AUTHOR: Lasse Jon Fuglsang Pedersen <lasse@playdead.com>
 
@@ -11,7 +16,7 @@ Shader "Playdead/Post/VelocityBuffer"
 
 	#include "UnityCG.cginc"
 
-	uniform float4x4 _CameraToWorld;
+	// uniform float4x4 _CameraToWorld;
 	uniform sampler2D _CameraDepthTexture;
 	uniform float4 _CameraDepthTexture_TexelSize;
 
@@ -38,7 +43,7 @@ Shader "Playdead/Post/VelocityBuffer"
 	{
 		blit_v2f OUT;
 
-		OUT.cs_pos = mul(UNITY_MATRIX_MVP, IN.vertex);
+		OUT.cs_pos = UnityObjectToClipPos(IN.vertex);
 		OUT.ss_txc = IN.texcoord.xy;
 		OUT.vs_ray = (2.0 * IN.texcoord.xy - 1.0) * _Corner.xy + _Corner.zw;
 
@@ -50,7 +55,7 @@ Shader "Playdead/Post/VelocityBuffer"
 		// reconstruct world position
 		float vs_dist = LinearEyeDepth(tex2D(_CameraDepthTexture, IN.ss_txc).x);
 		float3 vs_pos = float3(IN.vs_ray, 1.0) * vs_dist;
-		float4 ws_pos = mul(_CameraToWorld, float4(vs_pos, 1.0));
+		float4 ws_pos = mul(unity_CameraToWorld, float4(vs_pos, 1.0));
 
 		//// NOTE: world space debug at 3D crane
 		//return 0.1 * float4(ws_pos.xy - float2(595.0, -215.0), 0.0, 0.0);

@@ -1,3 +1,8 @@
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced '_Projector' with 'unity_Projector'
+// Upgrade NOTE: replaced '_ProjectorClip' with 'unity_ProjectorClip'
+
 Shader "Projector/Texture" {
 	Properties {
 		_Tex ("Cookie", 2D) = "gray" {}
@@ -22,15 +27,15 @@ Shader "Projector/Texture" {
 				float4 pos : SV_POSITION;
 			};
 			
-			float4x4 _Projector;
-			float4x4 _ProjectorClip;
+			float4x4 unity_Projector;
+			float4x4 unity_ProjectorClip;
 			
 			v2f vert (float4 vertex : POSITION)
 			{
 				v2f o;
-				o.pos = mul (UNITY_MATRIX_MVP, vertex);
-				o.uvTex = mul (_Projector, vertex);
-				o.uvFalloff = mul(_ProjectorClip, vertex);
+				o.pos = UnityObjectToClipPos (vertex);
+				o.uvTex = mul (unity_Projector, vertex);
+				o.uvFalloff = mul(unity_ProjectorClip, vertex);
 				return o;
 			}
 			

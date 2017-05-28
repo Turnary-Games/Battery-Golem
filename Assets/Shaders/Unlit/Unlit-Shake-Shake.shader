@@ -1,4 +1,6 @@
-﻿// Credits to the creator, GambinoInd
+﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+// Credits to the creator, GambinoInd
 // http://forum.unity3d.com/threads/shader-moving-trees-grass-in-wind-outside-of-terrain.230911/
 
 Shader "Unlit/Shake/Shake" {
@@ -84,7 +86,7 @@ void vert (inout appdata_full v) {
     float3 waveMove = float3 (0,0,0);
     waveMove.x = dot (s, _waveXmove);
     waveMove.z = dot (s, _waveZmove);
-    v.vertex.xz -= mul ((float3x3)_World2Object, waveMove).xz;
+    v.vertex.xz -= mul ((float3x3)unity_WorldToObject, waveMove).xz;
    
 }
  
