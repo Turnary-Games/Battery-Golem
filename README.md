@@ -4,10 +4,6 @@
 ## About the game
 Battery Golem is a top down 3D puzzle game were your explore your way through mysterious lands using your electric powers. Travel through abandoned structures, small towns and meet new faces or strange creatures, see what the world has to offer.
 
-<a href="http://gameawards.se/game/2016/Battery+Golem"><img src="https://github.com/Turnary-Games/Battery-Golem/blob/master/SITE-ASSETS/sga-logo.png?raw=true"></a><br>
-The game has been submitted to Swedish Game Awards '16 as a part of the competition. We hope for the best but are happy with just the statement of competing and maybe even getting nominated.<br>
-**Game can be found here:** [Swedish Game Awards - Battery Golem](http://gameawards.se/game/2016/Battery+Golem)
-
 ## Download
 ### Latest (v1.1.2)
 <table border="0px">
