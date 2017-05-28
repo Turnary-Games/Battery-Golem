@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 public class BatteryGolemVersion : MonoBehaviour {
 
-	public static readonly Version CURRENT = new Version(1, 1, 2);
+	public static readonly Version CURRENT = new Version(1, 1, 3);
 	public static readonly string LATEST_URL = "https://api.github.com/repos/Turnary-Games/Battery-Golem/releases/latest";
 
 	public Text currentText;

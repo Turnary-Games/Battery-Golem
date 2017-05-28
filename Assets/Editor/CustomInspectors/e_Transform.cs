@@ -93,8 +93,8 @@ public class e_Transform : Editor {
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit, Camera.current.farClipPlane, LayerMask.GetMask("Default", "Terrain"))) {
 				Handles.color = new Color(0, 1, 1);
-				Handles.ArrowCap(controlID, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), 1);
-				Handles.CircleCap(controlID, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), 1);
+				Handles.ArrowHandleCap(controlID, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), 1, EventType.ignore);
+				Handles.CircleHandleCap(controlID, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal), 1, EventType.ignore);
 
 				#region Draw meshes
 				foreach (var filter in hit.collider.GetComponentsInChildren<MeshFilter>()) {
@@ -164,7 +164,7 @@ public class e_Transform : Editor {
 				Vector3 newpos = lastHit.point + t.position - center;
 
 				Handles.color = new Color(1, 1, 0, .5f);
-				Handles.CircleCap(controlID, newpos, Quaternion.FromToRotation(Vector3.forward, Vector3.up), 1);
+				Handles.CircleHandleCap(controlID, newpos, Quaternion.FromToRotation(Vector3.forward, Vector3.up), 1, EventType.ignore);
 				foreach(var filter in t.GetComponentsInChildren<MeshFilter>()) {
 					Vector3 offset = filter.transform.position - t.position;
 					mat.SetPass(0);

@@ -1,4 +1,6 @@
-﻿// Unlit shader. Simplest possible colored shader.
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Unlit shader. Simplest possible colored shader.
 // - no lighting
 // - no lightmap support
 // - no texture
@@ -35,7 +37,7 @@ SubShader {
 			v2f vert (appdata_t v)
 			{
 				v2f o;
-				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.vertex = UnityObjectToClipPos(v.vertex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
 			}

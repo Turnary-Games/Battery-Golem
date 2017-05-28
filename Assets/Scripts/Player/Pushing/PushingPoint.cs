@@ -47,11 +47,11 @@ public class PushingPoint : Searchable {
 
 		if (z) {
 			UnityEditor.Handles.color = Color.blue;
-			UnityEditor.Handles.ArrowCap(-1, playerPos, Quaternion.LookRotation(Vector3.forward), 0.5f);
+			UnityEditor.Handles.ArrowHandleCap(-1, playerPos, Quaternion.LookRotation(Vector3.forward), 0.5f, EventType.ignore);
 		}
 		if (x) {
 			UnityEditor.Handles.color = Color.red;
-			UnityEditor.Handles.ArrowCap(-1, playerPos, Quaternion.LookRotation(Vector3.right), 0.5f);
+			UnityEditor.Handles.ArrowHandleCap(-1, playerPos, Quaternion.LookRotation(Vector3.right), 0.5f, EventType.ignore);
 		}
 	}
 #endif

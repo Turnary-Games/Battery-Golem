@@ -54,10 +54,10 @@ public class NPCController : MonoBehaviour, ISavable {
 		if (headBone != null) {
 			// Arrow for idle angle
 			UnityEditor.Handles.color = Color.green;
-			UnityEditor.Handles.ArrowCap(-1, headBone.position, Quaternion.Euler(idleAngle), 1.5f);
+			UnityEditor.Handles.ArrowHandleCap(-1, headBone.position, Quaternion.Euler(idleAngle), 1.5f, EventType.ignore);
 			// Arrow for forward angle
 			UnityEditor.Handles.color = Color.blue;
-			UnityEditor.Handles.ArrowCap(-1, headBone.position, Quaternion.Euler(0, forwardAngle, 0), 1);
+			UnityEditor.Handles.ArrowHandleCap(-1, headBone.position, Quaternion.Euler(0, forwardAngle, 0), 1, EventType.ignore);
 		}
 	}
 #endif

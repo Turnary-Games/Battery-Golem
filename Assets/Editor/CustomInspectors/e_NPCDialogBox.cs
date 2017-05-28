@@ -20,7 +20,7 @@ public class e_NPCDialogBox : Editor {
 		Rect pitchRect = EditorGUILayout.GetControlRect();
 		EditorGUI.BeginProperty(pitchRect, new GUIContent(min.displayName), min);
 		EditorGUI.BeginProperty(pitchRect, new GUIContent(max.displayName), max);
-		EditorGUI.MinMaxSlider(new GUIContent("Random Pitch"), pitchRect, ref minValue, ref maxValue, -3, 3);
+		EditorGUI.MinMaxSlider(pitchRect, new GUIContent("Random Pitch"), ref minValue, ref maxValue, -3, 3);
 		EditorGUI.EndProperty();
 		EditorGUI.EndProperty();
 		

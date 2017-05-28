@@ -78,7 +78,15 @@ public class LoadingScreen : SingletonBase<LoadingScreen> {
 		}
 	}
 
-	void OnLevelWasLoaded() {
+	private void OnEnable() {
+		SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+	}
+
+	private void OnDisable() {
+		SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
+	}
+
+	private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode) {
 		if (state == State.loading) {
 			state = State.fadeOut;
 			start = time;

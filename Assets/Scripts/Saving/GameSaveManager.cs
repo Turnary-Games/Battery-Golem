@@ -17,12 +17,13 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 	public static bool isLoading;
 
 	private static int _currentRoom = -1;
-	private static int[] roomLoads = new int[SceneManager.sceneCountInBuildSettings];
+	private static int[] roomLoads;
 
 	protected override void Awake() {
 		if (instance != null)
 			Destroy(gameObject);
 		else {
+			roomLoads = new int[SceneManager.sceneCountInBuildSettings];
 			base.Awake();
 			if (transform.parent != null)
 				transform.SetParent(null);
@@ -32,6 +33,7 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 			SaveRoom();
 		}
 	}
+
 
 	#region Saving algorithms
 	public static void SaveRoom() {
@@ -74,6 +76,7 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 
 	public static void LoadRoom(int room) {
 		isLoading = true;
+		//SceneManager.UnloadSceneAsync(currentRoom);
 		SceneManager.LoadSceneAsync(room);
 	}
 
@@ -99,13 +102,23 @@ public class GameSaveManager : SingletonBase<GameSaveManager> {
 			log = "Loaded values for " + log.Count(c => c == '\n') + " components\n=======================\n" + log;
 		Debug.Log(log);
 	}
-	
-	void OnLevelWasLoaded(int index) {
+
+	private void OnEnable() {
+		SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+	}
+
+	private void OnDisable() {
+		SceneManager.sceneLoaded -= SceneManager_sceneLoaded;
+	}
+
+	private void SceneManager_sceneLoaded(Scene scene, LoadSceneMode mode) {
+		int index = scene.buildIndex;
+
 		// This actually runs before Awake
 		if (instance != this) return;
 		roomLoads[index]++;
 		_currentRoom = index;
-		
+
 		ApplyChanges();
 		//SaveRoom();
 		StartCoroutine(SaveRoomWait());

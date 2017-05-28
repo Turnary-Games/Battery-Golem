@@ -180,6 +180,8 @@ public class PlayerHUD : PlayerSubClass {
 		if (pushing && pushing.hasPoint) state = false;
 		// Don't allow inventory when talking to NPC
 		if (interaction && interaction.talkingTo != null) state = false;
+		// Don't allow inventory when auto-moving
+		if (movement && movement.autoMoveTowards.HasValue) state = false;
 		// Ignore if set to same state
 		if (isOpen == state) return;
 

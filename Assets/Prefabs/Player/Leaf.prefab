@@ -5,9 +5,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 478190}
+  - component: {fileID: 478190}
   m_Layer: 5
   m_Name: joint11
   m_TagString: Untagged
@@ -20,9 +20,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 461612}
+  - component: {fileID: 461612}
   m_Layer: 5
   m_Name: joint7
   m_TagString: Untagged
@@ -35,9 +35,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 461426}
+  - component: {fileID: 461426}
   m_Layer: 5
   m_Name: Leaf
   m_TagString: Untagged
@@ -50,9 +50,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 426638}
+  - component: {fileID: 426638}
   m_Layer: 5
   m_Name: joint5
   m_TagString: Untagged
@@ -65,9 +65,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 483430}
+  - component: {fileID: 483430}
   m_Layer: 5
   m_Name: joint6
   m_TagString: Untagged
@@ -80,10 +80,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 486918}
-  - 137: {fileID: 13759950}
+  - component: {fileID: 486918}
+  - component: {fileID: 13759950}
   m_Layer: 5
   m_Name: pPlane2
   m_TagString: Untagged
@@ -96,9 +96,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 489678}
+  - component: {fileID: 489678}
   m_Layer: 5
   m_Name: joint3
   m_TagString: Untagged
@@ -111,9 +111,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 408692}
+  - component: {fileID: 408692}
   m_Layer: 5
   m_Name: joint4
   m_TagString: Untagged
@@ -126,11 +126,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 472164}
-  - 95: {fileID: 9566168}
-  - 114: {fileID: 11490492}
+  - component: {fileID: 472164}
+  - component: {fileID: 9566168}
+  - component: {fileID: 11490492}
   m_Layer: 5
   m_Name: model
   m_TagString: Untagged
@@ -143,9 +143,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 451652}
+  - component: {fileID: 451652}
   m_Layer: 5
   m_Name: joint2
   m_TagString: Untagged
@@ -158,9 +158,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 474432}
+  - component: {fileID: 474432}
   m_Layer: 5
   m_Name: joint9
   m_TagString: Untagged
@@ -173,9 +173,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 483106}
+  - component: {fileID: 483106}
   m_Layer: 5
   m_Name: joint8
   m_TagString: Untagged
@@ -188,9 +188,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 479822}
+  - component: {fileID: 479822}
   m_Layer: 5
   m_Name: joint1
   m_TagString: Untagged
@@ -203,9 +203,9 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 444486}
+  - component: {fileID: 444486}
   m_Layer: 5
   m_Name: joint10
   m_TagString: Untagged
@@ -226,6 +226,7 @@ Transform:
   - {fileID: 426638}
   m_Father: {fileID: 489678}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &426638
 Transform:
   m_ObjectHideFlags: 1
@@ -239,6 +240,7 @@ Transform:
   - {fileID: 483430}
   m_Father: {fileID: 408692}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &444486
 Transform:
   m_ObjectHideFlags: 1
@@ -252,6 +254,7 @@ Transform:
   - {fileID: 478190}
   m_Father: {fileID: 474432}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &451652
 Transform:
   m_ObjectHideFlags: 1
@@ -265,6 +268,7 @@ Transform:
   - {fileID: 489678}
   m_Father: {fileID: 479822}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &461426
 Transform:
   m_ObjectHideFlags: 1
@@ -278,6 +282,7 @@ Transform:
   - {fileID: 472164}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &461612
 Transform:
   m_ObjectHideFlags: 1
@@ -291,6 +296,7 @@ Transform:
   - {fileID: 483106}
   m_Father: {fileID: 483430}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &472164
 Transform:
   m_ObjectHideFlags: 1
@@ -305,6 +311,7 @@ Transform:
   - {fileID: 486918}
   m_Father: {fileID: 461426}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &474432
 Transform:
   m_ObjectHideFlags: 1
@@ -318,6 +325,7 @@ Transform:
   - {fileID: 444486}
   m_Father: {fileID: 483106}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &478190
 Transform:
   m_ObjectHideFlags: 1
@@ -330,6 +338,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 444486}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &479822
 Transform:
   m_ObjectHideFlags: 1
@@ -343,6 +352,7 @@ Transform:
   - {fileID: 451652}
   m_Father: {fileID: 472164}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &483106
 Transform:
   m_ObjectHideFlags: 1
@@ -356,6 +366,7 @@ Transform:
   - {fileID: 474432}
   m_Father: {fileID: 461612}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &483430
 Transform:
   m_ObjectHideFlags: 1
@@ -369,6 +380,7 @@ Transform:
   - {fileID: 461612}
   m_Father: {fileID: 426638}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &486918
 Transform:
   m_ObjectHideFlags: 1
@@ -381,6 +393,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 472164}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &489678
 Transform:
   m_ObjectHideFlags: 1
@@ -394,6 +407,7 @@ Transform:
   - {fileID: 408692}
   m_Father: {fileID: 451652}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9566168
 Animator:
   serializedVersion: 3
@@ -404,7 +418,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1ae1a56942a49014188cab81631f825e, type: 3}
   m_Controller: {fileID: 9100000, guid: 517459cbaea899e4cbd304a2b1bcd461, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -433,26 +447,33 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 8c039ed9ba9dbba448ce3f4ae409e5cc, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
   m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300000, guid: 1ae1a56942a49014188cab81631f825e, type: 3}
   m_Bones:
   - {fileID: 479822}

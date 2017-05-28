@@ -12,11 +12,11 @@ public class ConveyorBelt : MonoBehaviour {
 		var rot = Quaternion.LookRotation(transform.TransformVector(motion));
 
 		UnityEditor.Handles.color = new Color(1, .6f, 0);
-		UnityEditor.Handles.ArrowCap(-1, transform.position, rot, 2f);
+		UnityEditor.Handles.ArrowHandleCap(-1, transform.position, rot, 2f, EventType.ignore);
 		UnityEditor.Handles.color = new Color(1, .3f,0);
-		UnityEditor.Handles.ArrowCap(-1, transform.position, rot, 2.2f);
+		UnityEditor.Handles.ArrowHandleCap(-1, transform.position, rot, 2.2f, EventType.ignore);
 		UnityEditor.Handles.color = new Color(1, 0, 0);
-		UnityEditor.Handles.ArrowCap(-1, transform.position, rot, 2.4f);
+		UnityEditor.Handles.ArrowHandleCap(-1, transform.position, rot, 2.4f, EventType.ignore);
 	}
 #endif
 
