@@ -5,11 +5,12 @@
 Battery Golem is a top down 3D puzzle game were your explore your way through mysterious lands using your electric powers. Travel through abandoned structures, small towns and meet new faces or strange creatures, see what the world has to offer.
 
 ## Download
-### Latest (v1.1.2)
+### Latest (v1.1.3)
 <table border="0px">
-<tr><td>Windows</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_Windows_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_Windows_64bit.zip">64bit</a></td></tr>
-<tr><td>OS X</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_OSX_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_OSX_64bit.zip">64bit</a></td></tr>
-<tr><td>Linux</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_Linux_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.2/Battery-Golem_v1.1.2_Linux_64bit.zip">64bit</a></td></tr>
+<tr><td>Windows</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.3/Battery-Golem_v1.1.3_Windows_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.3/Battery-Golem_v1.1.3_Windows_64bit.zip">64bit</a></td></tr>
+<tr><td>OS X</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.3/Battery-Golem_v1.1.3_OSX_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.3/Battery-Golem_v1.1.3_OSX_64bit.zip">64bit</a></td></tr>
+<tr><td>Linux</td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.3/Battery-Golem_v1.1.3_Linux_32bit.zip">32bit</a></td><td><a href="https://github.com/Turnary-Games/Battery-Golem/releases/download/v1.1.3/Battery-Golem_v1.1.3_Linux_64bit.zip">64bit</a></td></tr>
+<tr><td>Play in browser</td><td colspan="2"><a href="https://developer.cloud.unity3d.com/share/WJtopawXIf/webgl/">Unity Online Services</a></td></tr>
 </table>
 
 ### Older versions
